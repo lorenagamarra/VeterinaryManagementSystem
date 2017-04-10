@@ -1,0 +1,29 @@
+-----------------------------------------------------------------------------------------------------------------------------
+*** April 10 Nedis ***
+DID SINCE LAST SCRUM:
+	1. I created the preliminary database diagram with 4 tables (owner, animal, employee and consult)
+	2. I and my teammate created the Project Purpose description
+	3. I joined the GitHub and Trello that was created by Lorena
+	4. Sign UP to azure cloud system
+WILL DO IN THE NEXT 24 HOURS
+	1. To prepare all the plan of the project into Trello (Analysis of the project, define user stories and break them down)
+WHERE I NEED HELP IS...
+	1. Connect the Program with Azure (teacher)
+
+*** April 10 Lorena ***
+DID BEFORE CREATING THE SCRUM:
+	1. Created GitHub account and repository
+	2. Created Trello account and board
+	3. Created the project on Visual Studio
+	4. Sign up to Microsoft Imagine and Azure
+	5. Started the implementation of preliminary windows (UI) for:
+		5.1 Main Window
+		5.2 Animal Registry
+		5.3 Client Registry
+WILL DO IN THE NEXT 24 HOURS
+	1. Colaborate with my teammate to define/analysis the project stories and ToDo List
+	2. Fix on Animal Registry window the language (english) problems
+	3. Set the name attribute for each element created on UI until now
+WHERE I NEED HELP IS...
+	1. Connect Azure with Visual Studio Project (teacher/internet)
+-----------------------------------------------------------------------------------------------------------------------------
