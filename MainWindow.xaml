@@ -77,7 +77,15 @@
 
                 <!-- Ribbon Tab #1: Home -->
                 <RibbonTab Header="Registry" KeyTip="H" >
-                    <!-- Registry  group-->
+                    <!-- Client group-->
+                    <RibbonGroup x:Name="ClientRegistryGroup" Header="Client">
+                        <RibbonMenuButton LargeImageSource="Images\file_blanc_plus.png" Label="Client Registry" KeyTip="R">
+                            <RibbonMenuItem Click="RibbonMenuItem_ClientRegistry_Click" ImageSource="Images\add.png" Header="Add..." KeyTip="T"/>
+                        </RibbonMenuButton>
+                        <RibbonButton SmallImageSource="Images\save.png" Label="Save" KeyTip="X" />
+                        <RibbonButton SmallImageSource="Images\add.png" Label="Add" KeyTip="C" />
+                    </RibbonGroup>
+                    <!-- Animal  group-->
                     <RibbonGroup x:Name="AnimalRegistryGroup" Header="Animal">
                         <RibbonMenuButton LargeImageSource="Images\file_blanc_plus.png" Label="Animal Registry" KeyTip="R">
 
@@ -92,14 +100,7 @@
                         <RibbonButton SmallImageSource="Images\copy.png" Label="Copy" KeyTip="C" />
                         -->
                     </RibbonGroup>
-                    <!-- Client group-->
-                    <RibbonGroup x:Name="ClientRegistryGroup" Header="Client">
-                        <RibbonMenuButton LargeImageSource="Images\file_blanc_plus.png" Label="Client Registry" KeyTip="R">
-                            <RibbonMenuItem Click="RibbonMenuItem_ClientRegistry_Click" ImageSource="Images\add.png" Header="Add..." KeyTip="T"/>
-                        </RibbonMenuButton>
-                        <RibbonButton SmallImageSource="Images\save.png" Label="Save" KeyTip="X" />
-                        <RibbonButton SmallImageSource="Images\add.png" Label="Add" KeyTip="C" />
-                    </RibbonGroup>
+                    
                     <!-- Employee group-->
                     <RibbonGroup x:Name="VeterinarianRegistryGroup" Header="Veterinarian">
                         <RibbonMenuButton LargeImageSource="Images\veterinarian.png" Label="Veterinarian Registry" KeyTip="V">
