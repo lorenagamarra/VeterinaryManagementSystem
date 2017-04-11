@@ -36,5 +36,18 @@ namespace VeterinaryManagementSystem
             ClientRegistryForm newWindow = new ClientRegistryForm();
             newWindow.Show();
         }
+
+        private void RibbonMenuItem_EmployeeRegistry_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void RibbonMenuItem_ServiceAppointment_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void RibbonMenuItem_SetCalendar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

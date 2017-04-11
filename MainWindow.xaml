@@ -8,35 +8,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="768" Width="1024">
     <DockPanel>
-        <!--   
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_Registry">
-                <MenuItem Header="_1 - Animal Registry"/>
-                <MenuItem Header="_2 - Client Registry"/>
-                <Separator/>
-                <MenuItem Header="_3 - Veterinarian Registry"/>
-            </MenuItem>
-            <MenuItem Header="_Scheduling">
-                <MenuItem Header="_1 - Service Scheduling"/>
-                <MenuItem Header="_2 - Set Calendar Schedules"/>
-            </MenuItem>
-            <MenuItem Header="S_ervice">
-                <MenuItem Header="_1 - Service Menu"/>
-                <MenuItem Header="_2 - Print Prescription"/>
-                <MenuItem Header="_3 - Search Service"/>
-            </MenuItem>
-            <MenuItem Header="_Tables">
-                <MenuItem Header="_1 - Register Species"/>
-                <MenuItem Header="_2 - Register Breeds"/>
-                <Separator/>
-                <MenuItem Header="_3 - Register Vaccinations"/>
-                <Separator/>
-                <MenuItem Header="_4 - Registration of Procedures"/>
-                <Separator/>
-                <MenuItem Header="_5 - Registration of Service Status"/>
-            </MenuItem>
-        </Menu>
-        -->
         <StatusBar Height="24" DockPanel.Dock="Bottom">
             <StatusBarItem>
                 <TextBlock x:Name="lblOpenFilePath" />
@@ -55,13 +26,13 @@
                 <!-- Quick Access Toolbar - located at the upper-left corner -->
                 <Ribbon.QuickAccessToolBar>
                     <RibbonQuickAccessToolBar>
-                        <RibbonButton x:Name ="Save" SmallImageSource="Images\save.png" />
-                        <RibbonSplitButton x:Name ="Undo" SmallImageSource="Images\undo.png">
+                        <RibbonButton x:Name ="RibbonQuickSave" SmallImageSource="Images\save.png" />
+                        <RibbonSplitButton x:Name ="RibbonQuickUndo" SmallImageSource="Images\undo.png">
                             <RibbonSplitMenuItem Header="Undo 1" />
                             <RibbonSplitMenuItem Header="Undo 2" />
                             <RibbonSplitMenuItem Header="Undo 3" />
                         </RibbonSplitButton>
-                        <RibbonSplitButton x:Name="Redo" SmallImageSource="Images\redo.png" >
+                        <RibbonSplitButton x:Name="RibbonQuickRedo" SmallImageSource="Images\redo.png" >
                             <RibbonSplitMenuItem Header="Redo 1" />
                             <RibbonSplitMenuItem Header="Redo 2" />
                         </RibbonSplitButton>
@@ -70,99 +41,93 @@
                 <!-- Application Menu, located at the left-hand side (down arrow) -->
                 <Ribbon.ApplicationMenu>
                     <RibbonApplicationMenu KeyTip="F">
-                        <RibbonApplicationMenuItem Header="Options" ImageSource="Images\options.png" />
-                        <RibbonApplicationMenuItem Header="Exit" ImageSource="Images\quit.png" />
+                        <RibbonApplicationMenuItem Name="RibbonAppMenuOptions" Header="Options" ImageSource="Images\options.png" />
+                        <RibbonApplicationMenuItem Name="RibbonAppMenuExit" Header="Exit" ImageSource="Images\quit.png" />
                     </RibbonApplicationMenu>
                 </Ribbon.ApplicationMenu>
 
-                <!-- Ribbon Tab #1: Home -->
+                <!-- Ribbon Tab #1: REGISTRY -->
                 <RibbonTab Header="Registry" KeyTip="H" >
                     <!-- Client group-->
                     <RibbonGroup x:Name="ClientRegistryGroup" Header="Client">
-                        <RibbonMenuButton LargeImageSource="Images\file_blanc_plus.png" Label="Client Registry" KeyTip="R">
+                        <RibbonMenuButton LargeImageSource="Images\client2.png" Label="Client Registry" KeyTip="R">
                             <RibbonMenuItem Click="RibbonMenuItem_ClientRegistry_Click" ImageSource="Images\add.png" Header="Add..." KeyTip="T"/>
                         </RibbonMenuButton>
-                        <RibbonButton SmallImageSource="Images\save.png" Label="Save" KeyTip="X" />
-                        <RibbonButton SmallImageSource="Images\add.png" Label="Add" KeyTip="C" />
+                        <RibbonButton Name="rbClientUpdate" SmallImageSource="Images\update2.png" Label="Update" KeyTip="X" />
+                        <RibbonButton Name="rbClientSearch" SmallImageSource="Images\magnifying-glass_16px.png" Label="Search" KeyTip="C" />
                     </RibbonGroup>
-                    <!-- Animal  group-->
+                    <!-- Animal group-->
                     <RibbonGroup x:Name="AnimalRegistryGroup" Header="Animal">
-                        <RibbonMenuButton LargeImageSource="Images\file_blanc_plus.png" Label="Animal Registry" KeyTip="R">
-
+                        <RibbonMenuButton LargeImageSource="Images\pawprint2.png" Label="Animal Registry" KeyTip="R">
                             <RibbonMenuItem Click="RibbonMenuItem_AnimalRegistry_Click" ImageSource="Images\add.png" Header="Add..." KeyTip="T"/>
-                            <RibbonMenuItem ImageSource="Images\paste.png" Header="Paste Special..." KeyTip="S"/>
-
                         </RibbonMenuButton>
-                        <RibbonButton SmallImageSource="Images\save.png" Label="Save" KeyTip="X" />
-                        <RibbonButton SmallImageSource="Images\add.png" Label="Add" KeyTip="C" />
-                        <!--
-                        <RibbonButton SmallImageSource="Images\cut.png" Label="Cut" KeyTip="X" />
-                        <RibbonButton SmallImageSource="Images\copy.png" Label="Copy" KeyTip="C" />
-                        -->
+                        <RibbonButton Name="rbAnimalUpdate" SmallImageSource="Images\update2.png" Label="Update" KeyTip="X" />
+                        <RibbonButton Name="rbAnimalSearch" SmallImageSource="Images\magnifying-glass_16px.png" Label="Search" KeyTip="C" />
                     </RibbonGroup>
-                    
                     <!-- Employee group-->
-                    <RibbonGroup x:Name="VeterinarianRegistryGroup" Header="Veterinarian">
-                        <RibbonMenuButton LargeImageSource="Images\veterinarian.png" Label="Veterinarian Registry" KeyTip="V">
-                            <RibbonMenuItem ImageSource="Images\paste.png" Header="Keep Text Only" KeyTip="T"/>
-                            <RibbonMenuItem ImageSource="Images\paste.png" Header="Paste Special..." KeyTip="S"/>
+                    <RibbonGroup x:Name="EmployeeRegistryGroup" Header="Employee">
+                        <RibbonMenuButton LargeImageSource="Images\veterinarian2_2.png" Label="Employee Registry" KeyTip="V">
+                            <RibbonMenuItem Click="RibbonMenuItem_EmployeeRegistry_Click" ImageSource="Images\add.png" Header="Add..." KeyTip="T"/>
                         </RibbonMenuButton>
-                        <RibbonButton SmallImageSource="Images\save.png" Label="Save" KeyTip="X" />
-                        <RibbonButton SmallImageSource="Images\add.png" Label="Add" KeyTip="C" />
+                        <RibbonButton Name="rbEmployeeUpdate" SmallImageSource="Images\update2.png" Label="Update" KeyTip="X" />
+                        <RibbonButton Name="rbEmployeeSearch" SmallImageSource="Images\magnifying-glass_16px.png" Label="Search" KeyTip="C" />
                     </RibbonGroup>
                 </RibbonTab>
 
-                <!-- Ribbon Tab #2: SCHEDULING-->
-                <RibbonTab Header="Scheduling" KeyTip="I">
-                    <RibbonGroup x:Name="ServiceSchedulingGroup" Header="Scheduling">
-                        <RibbonMenuButton LargeImageSource="Images\file_blanc_plus.png" Label="Service Scheduling" KeyTip="R">
+                <!-- Ribbon Tab #2: SCHEDULER-->
+                <RibbonTab Header="Scheduler" KeyTip="I">
+                    <RibbonGroup x:Name="ServiceAppointmentGroup" Header="Appointments">
+                        <RibbonMenuButton LargeImageSource="Images\calendar.png" Label="Appointments Scheduler" KeyTip="R">
+                            <RibbonMenuItem Click="RibbonMenuItem_ServiceAppointment_Click" ImageSource="Images\add.png" Header="Add..." KeyTip="T"/>
                         </RibbonMenuButton>
-                        <RibbonButton SmallImageSource="Images\save.png" Label="Save" KeyTip="X" />
-                        <RibbonButton SmallImageSource="Images\add.png" Label="Add" KeyTip="C" />
+                        <RibbonButton Name="rbServiceAppointmentUpdate" SmallImageSource="Images\update2.png" Label="Update" KeyTip="X" />
+                        <RibbonButton Name="rbServiceAppointmentSearch" SmallImageSource="Images\magnifying-glass_16px.png" Label="Search" KeyTip="C" />
                     </RibbonGroup>
-                    <RibbonGroup x:Name="SetCalendarSchedulesGroup" Header="Set Calendar">
-                        <RibbonMenuButton LargeImageSource="Images\file_blanc_plus.png" Label="Set Calendar Schedules" KeyTip="R">
+                    <RibbonGroup x:Name="SetCalendarAppointmentGroup" Header="Set Calendar">
+                        <RibbonMenuButton LargeImageSource="Images\wall-calendar.png" Label="Set Calendar" KeyTip="R">
+                            <RibbonMenuItem Click="RibbonMenuItem_SetCalendar_Click" ImageSource="Images\add.png" Header="Add..." KeyTip="T"/>
                         </RibbonMenuButton>
-                        <RibbonButton SmallImageSource="Images\save.png" Label="Save" KeyTip="X" />
-                        <RibbonButton SmallImageSource="Images\add.png" Label="Add" KeyTip="C" />
+                        <RibbonButton Name="rbSetCalendarUpdate" SmallImageSource="Images\update2.png" Label="Update" KeyTip="X" />
+                        <RibbonButton Name="rbSetCalendarSearch" SmallImageSource="Images\magnifying-glass_16px.png" Label="Search" KeyTip="C" />
                     </RibbonGroup>
                 </RibbonTab>
 
-                <!-- Ribbon Tab #3: SERVICE-->
-                <RibbonTab Header="Service" KeyTip="L">
-                    <RibbonGroup x:Name="ServiceMenuGroup" Header="Service">
-                        <RibbonMenuButton LargeImageSource="Images\hospital-1.png" Label="Service Menu" KeyTip="R">
+                <!-- Ribbon Tab #3: Procedure-->
+                <RibbonTab Header="Procedure" KeyTip="L">
+                    <RibbonGroup x:Name="ProcedureMenuGroup" Header="Procedure">
+                        <RibbonMenuButton LargeImageSource="Images\hospital.png" Label="Procedures Menu" KeyTip="R">
                         </RibbonMenuButton>
                         <RibbonButton SmallImageSource="Images\save.png" Label="Save" KeyTip="X" />
                         <RibbonButton SmallImageSource="Images\add.png" Label="Add" KeyTip="C" />
                     </RibbonGroup>
                     <RibbonGroup x:Name="PrintPrescriptionGroup" Header="Prescription">
-                        <RibbonMenuButton LargeImageSource="Images\print.png" Label="Print Prescription" KeyTip="R">
+                        <RibbonMenuButton LargeImageSource="Images\medicine.png" Label="Print Prescription" KeyTip="R">
                         </RibbonMenuButton>
                         <RibbonButton SmallImageSource="Images\save.png" Label="Save" KeyTip="X" />
                         <RibbonButton SmallImageSource="Images\add.png" Label="Add" KeyTip="C" />
                     </RibbonGroup>
                     <RibbonGroup x:Name="SearchServiceGroup" Header="Search">
                         <RibbonMenuButton LargeImageSource="Images\search.png" Label="Search Service" KeyTip="R">
-                            <RibbonMenuItem ImageSource="Images\search.png" Header="All" KeyTip="T"/>
-                            <RibbonMenuItem ImageSource="Images\search.png" Header="Pending" KeyTip="S"/>
-                            <RibbonMenuItem ImageSource="Images\search.png" Header="Canceled" KeyTip="S"/>
-                            <RibbonMenuItem ImageSource="Images\search.png" Header="Ended" KeyTip="S"/>
+                            <RibbonMenuItem ImageSource="Images\magnifying-glass_16px.png" Header="All" KeyTip="T"/>
+                            <RibbonMenuItem ImageSource="Images\magnifying-glass_16px.png" Header="Pending" KeyTip="S"/>
+                            <RibbonMenuItem ImageSource="Images\magnifying-glass_16px.png" Header="Canceled" KeyTip="S"/>
+                            <RibbonMenuItem ImageSource="Images\magnifying-glass_16px.png" Header="Ended" KeyTip="S"/>
                         </RibbonMenuButton>
                         <RibbonButton SmallImageSource="Images\save.png" Label="Save" KeyTip="X" />
                         <RibbonButton SmallImageSource="Images\add.png" Label="Add" KeyTip="C" />
                     </RibbonGroup>
                 </RibbonTab>
+                
                 <!-- Ribbon Tab #4: TABLES-->
                 <RibbonTab Header="Tables" KeyTip="L">
                     <RibbonGroup x:Name="RegisterSpeciesGroup" Header="Species">
-                        <RibbonMenuButton LargeImageSource="Images\file_blanc_plus.png" Label="Register Species" KeyTip="R">
+                        <RibbonMenuButton LargeImageSource="Images\document.png" Label="Register Species" KeyTip="R">
                         </RibbonMenuButton>
                         <RibbonButton SmallImageSource="Images\save.png" Label="Save" KeyTip="X" />
                         <RibbonButton SmallImageSource="Images\add.png" Label="Add" KeyTip="C" />
                     </RibbonGroup>
                     <RibbonGroup x:Name="RegisterBreedsGroup" Header="Breeds">
-                        <RibbonMenuButton LargeImageSource="Images\file_blanc_plus.png" Label="Register Breeds" KeyTip="R">
+                        <RibbonMenuButton LargeImageSource="Images\document.png" Label="Register Breeds" KeyTip="R">
                         </RibbonMenuButton>
                         <RibbonButton SmallImageSource="Images\save.png" Label="Save" KeyTip="X" />
                         <RibbonButton SmallImageSource="Images\add.png" Label="Add" KeyTip="C" />

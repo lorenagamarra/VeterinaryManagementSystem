@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>petshop.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="RibbonControlsLibrary, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -118,7 +121,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\add.png" />
     <Resource Include="Images\arrow2_left.png" />
@@ -132,12 +134,10 @@
     <Resource Include="Images\file_blanc_plus.png" />
     <Resource Include="Images\folder.png" />
     <Resource Include="Images\help.png" />
-    <Resource Include="Images\hospital-1.png" />
     <Resource Include="Images\message_out.png" />
     <Resource Include="Images\open.png" />
     <Resource Include="Images\options.png" />
     <Resource Include="Images\paste.png" />
-    <Resource Include="Images\placeholder.png" />
     <Resource Include="Images\print.png" />
     <Resource Include="Images\quit.png" />
     <Resource Include="Images\redo.png" />
@@ -147,10 +147,46 @@
     <Resource Include="Images\search.png" />
     <Resource Include="Images\sort_az.png" />
     <Resource Include="Images\syringe.png" />
-    <Resource Include="Images\tablets.png" />
     <Resource Include="Images\test-tube.png" />
     <Resource Include="Images\undo.png" />
-    <Resource Include="Images\veterinarian.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="petshop.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\magnifying-glass_24px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\magnifying-glass_128px.png" />
+    <Resource Include="Images\magnifying-glass_16px.png" />
+    <Resource Include="Images\magnifying-glass_32px.png" />
+    <Resource Include="Images\magnifying-glass_64px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\client2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\pawprint2.png" />
+    <Resource Include="Images\veterinarian2_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\update2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\calendar.png" />
+    <Resource Include="Images\wall-calendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\medicine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\document.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\hospital.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
