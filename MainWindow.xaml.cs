@@ -39,7 +39,8 @@ namespace VeterinaryManagementSystem
 
         private void RibbonMenuItem_EmployeeRegistry_Click(object sender, RoutedEventArgs e)
         {
-
+            EmployeeRegistryForm newWindow = new EmployeeRegistryForm();
+            newWindow.Show();
         }
         private void RibbonMenuItem_ServiceAppointment_Click(object sender, RoutedEventArgs e)
         {

@@ -39,12 +39,14 @@
             this.label12 = new System.Windows.Forms.Label();
             this.tbRegistryClientObs = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.tbRegistryClientLName = new System.Windows.Forms.TextBox();
+            this.tbRegistryClientMName = new System.Windows.Forms.TextBox();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.textBox16 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.textBox17 = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.tbRegistryClientPhone = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.tbRegistryClientPostalCode = new System.Windows.Forms.TextBox();
@@ -61,10 +63,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.tbRegistryClientFName = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.tbRegistryClientMName = new System.Windows.Forms.TextBox();
-            this.tbRegistryClientLName = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -72,10 +70,7 @@
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.tbRegistryClientEmail = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.tbRegistryClientOtherNumbre = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.tbRegistryClientCellphone = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
             this.textBox22 = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.textBox23 = new System.Windows.Forms.TextBox();
@@ -88,12 +83,11 @@
             this.label27 = new System.Windows.Forms.Label();
             this.textBox26 = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
-            this.textBox27 = new System.Windows.Forms.TextBox();
-            this.label29 = new System.Windows.Forms.Label();
             this.textBox28 = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.textBox29 = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
+            this.tbRegistryClientOtherNumbre = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -201,8 +195,6 @@
             this.groupBox2.Controls.Add(this.label15);
             this.groupBox2.Controls.Add(this.textBox16);
             this.groupBox2.Controls.Add(this.label14);
-            this.groupBox2.Controls.Add(this.textBox17);
-            this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.tbRegistryClientPhone);
             this.groupBox2.Controls.Add(this.label17);
             this.groupBox2.Controls.Add(this.tbRegistryClientPostalCode);
@@ -226,6 +218,38 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Principal Owner";
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(422, 17);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(58, 13);
+            this.label20.TabIndex = 73;
+            this.label20.Text = "Last Name";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(228, 17);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(69, 13);
+            this.label19.TabIndex = 72;
+            this.label19.Text = "Middle Name";
+            // 
+            // tbRegistryClientLName
+            // 
+            this.tbRegistryClientLName.Location = new System.Drawing.Point(425, 32);
+            this.tbRegistryClientLName.Name = "tbRegistryClientLName";
+            this.tbRegistryClientLName.Size = new System.Drawing.Size(218, 20);
+            this.tbRegistryClientLName.TabIndex = 71;
+            // 
+            // tbRegistryClientMName
+            // 
+            this.tbRegistryClientMName.Location = new System.Drawing.Point(231, 32);
+            this.tbRegistryClientMName.Name = "tbRegistryClientMName";
+            this.tbRegistryClientMName.Size = new System.Drawing.Size(188, 20);
+            this.tbRegistryClientMName.TabIndex = 70;
+            // 
             // textBox10
             // 
             this.textBox10.Location = new System.Drawing.Point(337, 150);
@@ -244,41 +268,25 @@
             // 
             // textBox16
             // 
-            this.textBox16.Location = new System.Drawing.Point(232, 150);
+            this.textBox16.Location = new System.Drawing.Point(167, 150);
             this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(100, 20);
+            this.textBox16.Size = new System.Drawing.Size(165, 20);
             this.textBox16.TabIndex = 61;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(229, 134);
+            this.label14.Location = new System.Drawing.Point(167, 135);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(73, 13);
             this.label14.TabIndex = 60;
             this.label14.Text = "Other Number";
             // 
-            // textBox17
-            // 
-            this.textBox17.Location = new System.Drawing.Point(120, 150);
-            this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new System.Drawing.Size(106, 20);
-            this.textBox17.TabIndex = 59;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(117, 134);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(54, 13);
-            this.label16.TabIndex = 58;
-            this.label16.Text = "Cellphone";
-            // 
             // tbRegistryClientPhone
             // 
             this.tbRegistryClientPhone.Location = new System.Drawing.Point(7, 150);
             this.tbRegistryClientPhone.Name = "tbRegistryClientPhone";
-            this.tbRegistryClientPhone.Size = new System.Drawing.Size(107, 20);
+            this.tbRegistryClientPhone.Size = new System.Drawing.Size(154, 20);
             this.tbRegistryClientPhone.TabIndex = 57;
             // 
             // label17
@@ -403,38 +411,6 @@
             this.label7.TabIndex = 40;
             this.label7.Text = "First Name";
             // 
-            // tbRegistryClientMName
-            // 
-            this.tbRegistryClientMName.Location = new System.Drawing.Point(231, 32);
-            this.tbRegistryClientMName.Name = "tbRegistryClientMName";
-            this.tbRegistryClientMName.Size = new System.Drawing.Size(188, 20);
-            this.tbRegistryClientMName.TabIndex = 70;
-            // 
-            // tbRegistryClientLName
-            // 
-            this.tbRegistryClientLName.Location = new System.Drawing.Point(425, 32);
-            this.tbRegistryClientLName.Name = "tbRegistryClientLName";
-            this.tbRegistryClientLName.Size = new System.Drawing.Size(218, 20);
-            this.tbRegistryClientLName.TabIndex = 71;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(228, 17);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(69, 13);
-            this.label19.TabIndex = 72;
-            this.label19.Text = "Middle Name";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(422, 17);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(58, 13);
-            this.label20.TabIndex = 73;
-            this.label20.Text = "Last Name";
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.label10);
@@ -445,8 +421,6 @@
             this.groupBox3.Controls.Add(this.label18);
             this.groupBox3.Controls.Add(this.tbRegistryClientOtherNumbre);
             this.groupBox3.Controls.Add(this.label21);
-            this.groupBox3.Controls.Add(this.tbRegistryClientCellphone);
-            this.groupBox3.Controls.Add(this.label22);
             this.groupBox3.Controls.Add(this.textBox22);
             this.groupBox3.Controls.Add(this.label23);
             this.groupBox3.Controls.Add(this.textBox23);
@@ -459,8 +433,6 @@
             this.groupBox3.Controls.Add(this.label27);
             this.groupBox3.Controls.Add(this.textBox26);
             this.groupBox3.Controls.Add(this.label28);
-            this.groupBox3.Controls.Add(this.textBox27);
-            this.groupBox3.Controls.Add(this.label29);
             this.groupBox3.Controls.Add(this.textBox28);
             this.groupBox3.Controls.Add(this.label30);
             this.groupBox3.Controls.Add(this.textBox29);
@@ -520,43 +492,20 @@
             this.label18.TabIndex = 62;
             this.label18.Text = "Email";
             // 
-            // tbRegistryClientOtherNumbre
-            // 
-            this.tbRegistryClientOtherNumbre.Location = new System.Drawing.Point(232, 150);
-            this.tbRegistryClientOtherNumbre.Name = "tbRegistryClientOtherNumbre";
-            this.tbRegistryClientOtherNumbre.Size = new System.Drawing.Size(100, 20);
-            this.tbRegistryClientOtherNumbre.TabIndex = 61;
-            // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(229, 134);
+            this.label21.Location = new System.Drawing.Point(164, 134);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(73, 13);
             this.label21.TabIndex = 60;
             this.label21.Text = "Other Number";
             // 
-            // tbRegistryClientCellphone
-            // 
-            this.tbRegistryClientCellphone.Location = new System.Drawing.Point(120, 150);
-            this.tbRegistryClientCellphone.Name = "tbRegistryClientCellphone";
-            this.tbRegistryClientCellphone.Size = new System.Drawing.Size(106, 20);
-            this.tbRegistryClientCellphone.TabIndex = 59;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(117, 134);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(54, 13);
-            this.label22.TabIndex = 58;
-            this.label22.Text = "Cellphone";
-            // 
             // textBox22
             // 
             this.textBox22.Location = new System.Drawing.Point(7, 150);
             this.textBox22.Name = "textBox22";
-            this.textBox22.Size = new System.Drawing.Size(107, 20);
+            this.textBox22.Size = new System.Drawing.Size(154, 20);
             this.textBox22.TabIndex = 57;
             // 
             // label23
@@ -649,22 +598,6 @@
             this.label28.TabIndex = 46;
             this.label28.Text = "Address";
             // 
-            // textBox27
-            // 
-            this.textBox27.Location = new System.Drawing.Point(519, 71);
-            this.textBox27.Name = "textBox27";
-            this.textBox27.Size = new System.Drawing.Size(124, 20);
-            this.textBox27.TabIndex = 45;
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(516, 55);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(84, 13);
-            this.label29.TabIndex = 44;
-            this.label29.Text = "Borough/District";
-            // 
             // textBox28
             // 
             this.textBox28.Location = new System.Drawing.Point(7, 72);
@@ -696,6 +629,13 @@
             this.label31.Size = new System.Drawing.Size(57, 13);
             this.label31.TabIndex = 40;
             this.label31.Text = "First Name";
+            // 
+            // tbRegistryClientOtherNumbre
+            // 
+            this.tbRegistryClientOtherNumbre.Location = new System.Drawing.Point(167, 150);
+            this.tbRegistryClientOtherNumbre.Name = "tbRegistryClientOtherNumbre";
+            this.tbRegistryClientOtherNumbre.Size = new System.Drawing.Size(165, 20);
+            this.tbRegistryClientOtherNumbre.TabIndex = 61;
             // 
             // ClientRegistryForm
             // 
@@ -744,8 +684,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox textBox16;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox17;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox tbRegistryClientPhone;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox tbRegistryClientPostalCode;
@@ -769,10 +707,7 @@
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.TextBox tbRegistryClientEmail;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox tbRegistryClientOtherNumbre;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox tbRegistryClientCellphone;
-        private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox textBox22;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox textBox23;
@@ -785,11 +720,10 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.TextBox textBox26;
         private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.TextBox textBox27;
-        private System.Windows.Forms.Label label29;
         private System.Windows.Forms.TextBox textBox28;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.TextBox textBox29;
         private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.TextBox tbRegistryClientOtherNumbre;
     }
 }

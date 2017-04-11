@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>petshop.ico</ApplicationIcon>
+    <ApplicationIcon>bones.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -84,6 +84,12 @@
     <Compile Include="ClientRegistryForm.Designer.cs">
       <DependentUpon>ClientRegistryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeRegistryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmployeeRegistryForm.Designer.cs">
+      <DependentUpon>EmployeeRegistryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -108,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ClientRegistryForm.resx">
       <DependentUpon>ClientRegistryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EmployeeRegistryForm.resx">
+      <DependentUpon>EmployeeRegistryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -187,6 +196,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\hospital.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bones.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
