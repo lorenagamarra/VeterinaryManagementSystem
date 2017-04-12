@@ -52,3 +52,31 @@ WILL DO IN THE NEXT 24 HOURS
 WHERE I NEED HELP IS...
 	1. Constructors, classes, getters and setters  
 -----------------------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------------
+*** April 12 Nedis ***
+DID SINCE LAST SCRUM:
+	1. Connect the Azure (add home`s IP) and create the DB with tables (owner, employee, position and province)
+	2. Installed Visual Studio 2017
+WILL DO IN THE NEXT 24 HOURS
+	1. Finish to create all tables (vaccines, services, examination, etc...) and add constraints
+	2. If the tables are done, initialize to create the Classes, Constructors, getters and setters.
+WHERE I NEED HELP IS...
+	1. Find how to use BLOB (storage images)
+	2. Ask the teacher about search function (how/where to implement properly)
+
+*** April 12 Lorena ***
+DID SINCE LAST SCRUM:
+	1. Connect Azure with Visual Studio Project
+	2. Created table Animals
+	3. Started to create the UI for Examination.
+WILL DO IN THE NEXT 24 HOURS
+	1. Put on day all TODO list for all the things I made before
+	2. Complete the UI for Examination
+	3. Start to create the constructors, setters and getters
+WHERE I NEED HELP IS...
+	1. Constructors, classes, getters and setters
+	2. How to save on database a photo
+	3. Conection with webcam.... (internet, teacher)
+	4. Ask to teacher opnions about better way to implement the search in our case
+-----------------------------------------------------------------------------------------------------------------------------
