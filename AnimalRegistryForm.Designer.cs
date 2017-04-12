@@ -35,6 +35,8 @@
             this.tbAnimalDateRegistration = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rbRegistryAnimalFemale = new System.Windows.Forms.RadioButton();
+            this.rbRegistryAnimalMale = new System.Windows.Forms.RadioButton();
             this.nudRegistryAnimalWeight = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.dtpRegistryAnimalBirthday = new System.Windows.Forms.DateTimePicker();
@@ -43,6 +45,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.cbRegistryAnimalRace = new System.Windows.Forms.ComboBox();
+            this.cbRegistryAnimalSpecies = new System.Windows.Forms.ComboBox();
             this.tbRegistryAnimalPhobias = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.tbRegistryAnimalFood = new System.Windows.Forms.TextBox();
@@ -54,9 +58,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tbRegistryAnimalVaccineRemarks = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.dgvbtRegistryAnimalVaccinesList = new System.Windows.Forms.DataGridView();
             this.btRegistryAnimalVaccinesDelete = new System.Windows.Forms.Button();
             this.btRegistryAnimalVaccinesUpdate = new System.Windows.Forms.Button();
             this.btRegistryAnimalVaccinesAdd = new System.Windows.Forms.Button();
@@ -78,10 +79,10 @@
             this.btRegistryAnimalSave = new System.Windows.Forms.Button();
             this.btRegistryAnimalExit = new System.Windows.Forms.Button();
             this.btRegistryAnimalReporting = new System.Windows.Forms.Button();
-            this.cbRegistryAnimalSpecies = new System.Windows.Forms.ComboBox();
-            this.cbRegistryAnimalRace = new System.Windows.Forms.ComboBox();
-            this.rbRegistryAnimalMale = new System.Windows.Forms.RadioButton();
-            this.rbRegistryAnimalFemale = new System.Windows.Forms.RadioButton();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Vaccine = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Details = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudRegistryAnimalWeight)).BeginInit();
@@ -89,10 +90,10 @@
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbRegistryAnimalPhoto)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvbtRegistryAnimalVaccinesList)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -164,6 +165,28 @@
             this.groupBox2.Size = new System.Drawing.Size(654, 58);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
+            // 
+            // rbRegistryAnimalFemale
+            // 
+            this.rbRegistryAnimalFemale.AutoSize = true;
+            this.rbRegistryAnimalFemale.Location = new System.Drawing.Point(375, 30);
+            this.rbRegistryAnimalFemale.Name = "rbRegistryAnimalFemale";
+            this.rbRegistryAnimalFemale.Size = new System.Drawing.Size(59, 17);
+            this.rbRegistryAnimalFemale.TabIndex = 12;
+            this.rbRegistryAnimalFemale.TabStop = true;
+            this.rbRegistryAnimalFemale.Text = "Female";
+            this.rbRegistryAnimalFemale.UseVisualStyleBackColor = true;
+            // 
+            // rbRegistryAnimalMale
+            // 
+            this.rbRegistryAnimalMale.AutoSize = true;
+            this.rbRegistryAnimalMale.Location = new System.Drawing.Point(321, 31);
+            this.rbRegistryAnimalMale.Name = "rbRegistryAnimalMale";
+            this.rbRegistryAnimalMale.Size = new System.Drawing.Size(48, 17);
+            this.rbRegistryAnimalMale.TabIndex = 11;
+            this.rbRegistryAnimalMale.TabStop = true;
+            this.rbRegistryAnimalMale.Text = "Male";
+            this.rbRegistryAnimalMale.UseVisualStyleBackColor = true;
             // 
             // nudRegistryAnimalWeight
             // 
@@ -249,6 +272,22 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Animal Information";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // cbRegistryAnimalRace
+            // 
+            this.cbRegistryAnimalRace.FormattingEnabled = true;
+            this.cbRegistryAnimalRace.Location = new System.Drawing.Point(6, 70);
+            this.cbRegistryAnimalRace.Name = "cbRegistryAnimalRace";
+            this.cbRegistryAnimalRace.Size = new System.Drawing.Size(375, 21);
+            this.cbRegistryAnimalRace.TabIndex = 15;
+            // 
+            // cbRegistryAnimalSpecies
+            // 
+            this.cbRegistryAnimalSpecies.FormattingEnabled = true;
+            this.cbRegistryAnimalSpecies.Location = new System.Drawing.Point(7, 24);
+            this.cbRegistryAnimalSpecies.Name = "cbRegistryAnimalSpecies";
+            this.cbRegistryAnimalSpecies.Size = new System.Drawing.Size(375, 21);
+            this.cbRegistryAnimalSpecies.TabIndex = 14;
             // 
             // tbRegistryAnimalPhobias
             // 
@@ -337,9 +376,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.tbRegistryAnimalVaccineRemarks);
-            this.tabPage2.Controls.Add(this.label12);
-            this.tabPage2.Controls.Add(this.dgvbtRegistryAnimalVaccinesList);
+            this.tabPage2.Controls.Add(this.dataGridView1);
             this.tabPage2.Controls.Add(this.btRegistryAnimalVaccinesDelete);
             this.tabPage2.Controls.Add(this.btRegistryAnimalVaccinesUpdate);
             this.tabPage2.Controls.Add(this.btRegistryAnimalVaccinesAdd);
@@ -351,34 +388,9 @@
             this.tabPage2.Text = "Vaccines";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tbRegistryAnimalVaccineRemarks
-            // 
-            this.tbRegistryAnimalVaccineRemarks.Location = new System.Drawing.Point(5, 299);
-            this.tbRegistryAnimalVaccineRemarks.Name = "tbRegistryAnimalVaccineRemarks";
-            this.tbRegistryAnimalVaccineRemarks.Size = new System.Drawing.Size(633, 20);
-            this.tbRegistryAnimalVaccineRemarks.TabIndex = 5;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(3, 283);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(91, 13);
-            this.label12.TabIndex = 4;
-            this.label12.Text = "Vaccine Remarks";
-            // 
-            // dgvbtRegistryAnimalVaccinesList
-            // 
-            this.dgvbtRegistryAnimalVaccinesList.AllowUserToOrderColumns = true;
-            this.dgvbtRegistryAnimalVaccinesList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvbtRegistryAnimalVaccinesList.Location = new System.Drawing.Point(89, 7);
-            this.dgvbtRegistryAnimalVaccinesList.Name = "dgvbtRegistryAnimalVaccinesList";
-            this.dgvbtRegistryAnimalVaccinesList.Size = new System.Drawing.Size(550, 255);
-            this.dgvbtRegistryAnimalVaccinesList.TabIndex = 3;
-            // 
             // btRegistryAnimalVaccinesDelete
             // 
-            this.btRegistryAnimalVaccinesDelete.Location = new System.Drawing.Point(6, 66);
+            this.btRegistryAnimalVaccinesDelete.Location = new System.Drawing.Point(2, 66);
             this.btRegistryAnimalVaccinesDelete.Name = "btRegistryAnimalVaccinesDelete";
             this.btRegistryAnimalVaccinesDelete.Size = new System.Drawing.Size(75, 23);
             this.btRegistryAnimalVaccinesDelete.TabIndex = 2;
@@ -387,7 +399,7 @@
             // 
             // btRegistryAnimalVaccinesUpdate
             // 
-            this.btRegistryAnimalVaccinesUpdate.Location = new System.Drawing.Point(7, 37);
+            this.btRegistryAnimalVaccinesUpdate.Location = new System.Drawing.Point(3, 37);
             this.btRegistryAnimalVaccinesUpdate.Name = "btRegistryAnimalVaccinesUpdate";
             this.btRegistryAnimalVaccinesUpdate.Size = new System.Drawing.Size(75, 23);
             this.btRegistryAnimalVaccinesUpdate.TabIndex = 1;
@@ -396,7 +408,7 @@
             // 
             // btRegistryAnimalVaccinesAdd
             // 
-            this.btRegistryAnimalVaccinesAdd.Location = new System.Drawing.Point(7, 7);
+            this.btRegistryAnimalVaccinesAdd.Location = new System.Drawing.Point(3, 7);
             this.btRegistryAnimalVaccinesAdd.Name = "btRegistryAnimalVaccinesAdd";
             this.btRegistryAnimalVaccinesAdd.Size = new System.Drawing.Size(75, 23);
             this.btRegistryAnimalVaccinesAdd.TabIndex = 0;
@@ -576,43 +588,35 @@
             this.btRegistryAnimalReporting.Text = "Reporting Care";
             this.btRegistryAnimalReporting.UseVisualStyleBackColor = true;
             // 
-            // cbRegistryAnimalSpecies
+            // dataGridView1
             // 
-            this.cbRegistryAnimalSpecies.FormattingEnabled = true;
-            this.cbRegistryAnimalSpecies.Location = new System.Drawing.Point(7, 24);
-            this.cbRegistryAnimalSpecies.Name = "cbRegistryAnimalSpecies";
-            this.cbRegistryAnimalSpecies.Size = new System.Drawing.Size(375, 21);
-            this.cbRegistryAnimalSpecies.TabIndex = 14;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Date,
+            this.Vaccine,
+            this.Details});
+            this.dataGridView1.Location = new System.Drawing.Point(83, 7);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(554, 313);
+            this.dataGridView1.TabIndex = 6;
             // 
-            // cbRegistryAnimalRace
+            // Date
             // 
-            this.cbRegistryAnimalRace.FormattingEnabled = true;
-            this.cbRegistryAnimalRace.Location = new System.Drawing.Point(6, 70);
-            this.cbRegistryAnimalRace.Name = "cbRegistryAnimalRace";
-            this.cbRegistryAnimalRace.Size = new System.Drawing.Size(375, 21);
-            this.cbRegistryAnimalRace.TabIndex = 15;
+            this.Date.HeaderText = "Date";
+            this.Date.Name = "Date";
+            this.Date.Width = 70;
             // 
-            // rbRegistryAnimalMale
+            // Vaccine
             // 
-            this.rbRegistryAnimalMale.AutoSize = true;
-            this.rbRegistryAnimalMale.Location = new System.Drawing.Point(321, 31);
-            this.rbRegistryAnimalMale.Name = "rbRegistryAnimalMale";
-            this.rbRegistryAnimalMale.Size = new System.Drawing.Size(48, 17);
-            this.rbRegistryAnimalMale.TabIndex = 11;
-            this.rbRegistryAnimalMale.TabStop = true;
-            this.rbRegistryAnimalMale.Text = "Male";
-            this.rbRegistryAnimalMale.UseVisualStyleBackColor = true;
+            this.Vaccine.HeaderText = "Vaccine";
+            this.Vaccine.Name = "Vaccine";
+            this.Vaccine.Width = 200;
             // 
-            // rbRegistryAnimalFemale
+            // Details
             // 
-            this.rbRegistryAnimalFemale.AutoSize = true;
-            this.rbRegistryAnimalFemale.Location = new System.Drawing.Point(375, 30);
-            this.rbRegistryAnimalFemale.Name = "rbRegistryAnimalFemale";
-            this.rbRegistryAnimalFemale.Size = new System.Drawing.Size(59, 17);
-            this.rbRegistryAnimalFemale.TabIndex = 12;
-            this.rbRegistryAnimalFemale.TabStop = true;
-            this.rbRegistryAnimalFemale.Text = "Female";
-            this.rbRegistryAnimalFemale.UseVisualStyleBackColor = true;
+            this.Details.HeaderText = "Details";
+            this.Details.Name = "Details";
+            this.Details.Width = 300;
             // 
             // AnimalRegistryForm
             // 
@@ -644,14 +648,13 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbRegistryAnimalPhoto)).EndInit();
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvbtRegistryAnimalVaccinesList)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -701,9 +704,6 @@
         private System.Windows.Forms.Button btRegistryAnimalSave;
         private System.Windows.Forms.Button btRegistryAnimalExit;
         private System.Windows.Forms.Button btRegistryAnimalReporting;
-        private System.Windows.Forms.TextBox tbRegistryAnimalVaccineRemarks;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.DataGridView dgvbtRegistryAnimalVaccinesList;
         private System.Windows.Forms.Button btRegistryAnimalVaccinesDelete;
         private System.Windows.Forms.Button btRegistryAnimalVaccinesUpdate;
         private System.Windows.Forms.Button btRegistryAnimalVaccinesAdd;
@@ -714,5 +714,9 @@
         private System.Windows.Forms.ComboBox cbRegistryAnimalSpecies;
         private System.Windows.Forms.RadioButton rbRegistryAnimalFemale;
         private System.Windows.Forms.RadioButton rbRegistryAnimalMale;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Vaccine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Details;
     }
 }

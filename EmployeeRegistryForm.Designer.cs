@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -64,14 +66,16 @@
             this.label12 = new System.Windows.Forms.Label();
             this.btRegistryClientExit = new System.Windows.Forms.Button();
             this.btRegistryClientSave = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.textBox2);
+            this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.textBox1);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label9);
@@ -110,6 +114,22 @@
             this.groupBox2.Size = new System.Drawing.Size(654, 262);
             this.groupBox2.TabIndex = 40;
             this.groupBox2.TabStop = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(216, 232);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(77, 20);
+            this.textBox1.TabIndex = 82;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(216, 216);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(29, 13);
+            this.label10.TabIndex = 81;
+            this.label10.Text = "SSN";
             // 
             // label9
             // 
@@ -317,15 +337,15 @@
             // 
             // tbRegistryClientAddress
             // 
-            this.tbRegistryClientAddress.Location = new System.Drawing.Point(7, 114);
+            this.tbRegistryClientAddress.Location = new System.Drawing.Point(67, 114);
             this.tbRegistryClientAddress.Name = "tbRegistryClientAddress";
-            this.tbRegistryClientAddress.Size = new System.Drawing.Size(286, 20);
+            this.tbRegistryClientAddress.Size = new System.Drawing.Size(226, 20);
             this.tbRegistryClientAddress.TabIndex = 47;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 99);
+            this.label1.Location = new System.Drawing.Point(66, 98);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 13);
             this.label1.TabIndex = 46;
@@ -399,21 +419,21 @@
             this.btRegistryClientSave.Text = "Save Record";
             this.btRegistryClientSave.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // textBox2
             // 
-            this.textBox1.Location = new System.Drawing.Point(216, 232);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(77, 20);
-            this.textBox1.TabIndex = 82;
+            this.textBox2.Location = new System.Drawing.Point(7, 114);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(54, 20);
+            this.textBox2.TabIndex = 84;
             // 
-            // label10
+            // label11
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(216, 216);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(29, 13);
-            this.label10.TabIndex = 81;
-            this.label10.Text = "SSN";
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(5, 98);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(44, 13);
+            this.label11.TabIndex = 83;
+            this.label11.Text = "Number";
             // 
             // EmployeeRegistryForm
             // 
@@ -475,5 +495,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label11;
     }
 }

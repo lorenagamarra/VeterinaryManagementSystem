@@ -97,7 +97,6 @@
                     <RibbonGroup x:Name="ProcedureMenuGroup" Header="Procedure">
                         <RibbonMenuButton LargeImageSource="Images\hospital.png" Label="Procedures Menu" KeyTip="R">
                         </RibbonMenuButton>
-                        <RibbonButton SmallImageSource="Images\save.png" Label="Save" KeyTip="X" />
                         <RibbonButton SmallImageSource="Images\add.png" Label="Add" KeyTip="C" />
                     </RibbonGroup>
                     <RibbonGroup x:Name="PrintPrescriptionGroup" Header="Prescription">
