@@ -1,0 +1,104 @@
+-----------------------------------------------------------------------------------------------------------------------------
+*** April 10 Nedis ***
+DID SINCE LAST SCRUM:
+	1. I created the preliminary database diagram with 4 tables (owner, animal, employee and consult)
+	2. I and my teammate created the Project Purpose description
+	3. I joined the GitHub and Trello that was created by Lorena
+	4. Sign UP to azure cloud system
+WILL DO IN THE NEXT 24 HOURS
+	1. To prepare all the plan of the project into Trello (Analysis of the project, define user stories and break them down)
+WHERE I NEED HELP IS...
+	1. Connect the Program with Azure (teacher)
+
+*** April 10 Lorena ***
+DID BEFORE CREATING THE SCRUM:
+	1. Created GitHub account and repository
+	2. Created Trello account and board
+	3. Created the project on Visual Studio
+	4. Sign up to Microsoft Imagine and Azure
+	5. Started the implementation of preliminary windows (UI) for:
+		5.1 Main Window
+		5.2 Animal Registry
+		5.3 Client Registry
+WILL DO IN THE NEXT 24 HOURS
+	1. Colaborate with my teammate to define/analysis the project stories and ToDo List
+	2. Fix on Animal Registry window the language (english) problems
+	3. Set the name attribute for each element created on UI until now
+WHERE I NEED HELP IS...
+	1. Connect Azure with Visual Studio Project (teacher/internet)
+-----------------------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------------
+*** April 11 Nedis ***
+DID SINCE LAST SCRUM:
+	1. Created the plan of the project into Trello (Analysis of the project, define user stories and break them down)
+WILL DO IN THE NEXT 24 HOURS
+	1. Connect the Program with Azure (teacher) and create the DB with tables
+	2. SetUP Virtual Machine Win10 and Visual Studio Community 2017
+WHERE I NEED HELP IS...
+	1. To find a tutorial where show us how to register win 10
+
+*** April 11 Lorena ***
+DID SINCE LAST SCRUM:
+	1. Fixed language (english) problems at Animal Registry Form
+	2. Changed the layout in the window Client Registry Form as decided with Nedis
+	3. Setted the atribute Name in all necessary items on the already existent screens
+	4. Added icon to main window
+	5. Changed the resolution to all pictures
+WILL DO IN THE NEXT 24 HOURS
+	1. Connect Azure with Visual Studio Project
+	2. Work with database (Tables Owner, Animals)
+	3. Start to create the constructors, setters and getters
+WHERE I NEED HELP IS...
+	1. Constructors, classes, getters and setters  
+-----------------------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------------
+*** April 12 Nedis ***
+DID SINCE LAST SCRUM:
+	1. Connect the Azure (add home`s IP) and create the DB with tables (owner, employee, position and province)
+	2. Installed Visual Studio 2017
+WILL DO IN THE NEXT 24 HOURS
+	1. Finish to create all tables (vaccines, services, examination, etc...) and add constraints
+	2. If the tables are done, initialize to create the Classes, Constructors, getters and setters.
+WHERE I NEED HELP IS...
+	1. Find how to use BLOB (storage images)
+	2. Ask the teacher about search function (how/where to implement properly)
+
+*** April 12 Lorena ***
+DID SINCE LAST SCRUM:
+	1. Connect Azure with Visual Studio Project
+	2. Created table Animals
+	3. Started to create the UI for Examination.
+WILL DO IN THE NEXT 24 HOURS
+	1. Put on day all TODO list for all the things I made before
+	2. Complete the UI for Examination
+	3. Start to create the constructors, setters and getters
+WHERE I NEED HELP IS...
+	1. Constructors, classes, getters and setters
+	2. How to save on database a photo
+	3. Conection with webcam.... (internet, teacher)
+	4. Ask to teacher opnions about better way to implement the search in our case
+-----------------------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------------
+*** April 13 Nedis ***
+DID SINCE LAST SCRUM:
+	1. All tables were created in Database (Animal, Breed, Consultation, Employee, Owner, Services&Products, Vaccine, VaccineHistoric)
+	2. Initialized Class Owner (50% done - Constructor, Getters and Setters)
+WILL DO IN THE NEXT 24 HOURS
+	1. Work on Classes, Constructors, getters and setters.
+	2. Define with Lorena new UI layout/desing
+WHERE I NEED HELP IS...
+	1. Nothing for today
+
+
+*** April 13 Lorena ***
+DID SINCE LAST SCRUM:
+1. Because a misunderstood, I have to start again with UI Layout/Design for the project from 0(zero)
+WILL DO IN THE NEXT 24 HOURS
+1. I will still work on the UI (tabControl or an alternative)
+WHERE I NEED HELP IS...
+1. TabControl, create a form layout inside the TabControl
+
+-----------------------------------------------------------------------------------------------------------------------------
