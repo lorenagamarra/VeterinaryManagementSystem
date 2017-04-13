@@ -78,6 +78,8 @@
     <Compile Include="AnimalRegistryForm.Designer.cs">
       <DependentUpon>AnimalRegistryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Owner.cs" />
+    <Compile Include="Database.cs" />
     <Compile Include="ClientRegistryForm.cs">
       <SubType>Form</SubType>
     </Compile>
