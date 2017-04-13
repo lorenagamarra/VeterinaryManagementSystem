@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{81EC7A62-51E4-4195-8FA8-AE7A51CA82DB}</ProjectGuid>
+    <ProjectGuid>{52F3322C-58EE-4990-BAE3-B4CB4DA62FF9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>VeterinaryManagementSystem</RootNamespace>
     <AssemblyName>VeterinaryManagementSystem</AssemblyName>
@@ -33,17 +33,19 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>bones.ico</ApplicationIcon>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Windows.Shell, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="RibbonControlsLibrary, Version=3.5.41019.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Controls.Ribbon" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -53,8 +55,6 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="UIAutomationProvider" />
-    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -72,38 +72,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AnimalRegistryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AnimalRegistryForm.Designer.cs">
-      <DependentUpon>AnimalRegistryForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Owner.cs" />
-    <Compile Include="Database.cs" />
-    <Compile Include="ClientRegistryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ClientRegistryForm.Designer.cs">
-      <DependentUpon>ClientRegistryForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EmployeeRegistryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EmployeeRegistryForm.Designer.cs">
-      <DependentUpon>EmployeeRegistryForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Procedure.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Procedure.Designer.cs">
-      <DependentUpon>Procedure.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -117,22 +91,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="AnimalRegistryForm.resx">
-      <DependentUpon>AnimalRegistryForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientRegistryForm.resx">
-      <DependentUpon>ClientRegistryForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EmployeeRegistryForm.resx">
-      <DependentUpon>EmployeeRegistryForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Procedure.resx">
-      <DependentUpon>Procedure.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -140,76 +103,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\add.png" />
-    <Resource Include="Images\arrow2_left.png" />
-    <Resource Include="Images\arrow2_right.png" />
-    <Resource Include="Images\book.png" />
-    <Resource Include="Images\camera.png" />
-    <Resource Include="Images\copy.png" />
-    <Resource Include="Images\copyright.png" />
-    <Resource Include="Images\cut.png" />
-    <Resource Include="Images\dollar.png" />
-    <Resource Include="Images\file_blanc_plus.png" />
-    <Resource Include="Images\folder.png" />
-    <Resource Include="Images\help.png" />
-    <Resource Include="Images\message_out.png" />
-    <Resource Include="Images\open.png" />
-    <Resource Include="Images\options.png" />
-    <Resource Include="Images\paste.png" />
-    <Resource Include="Images\print.png" />
-    <Resource Include="Images\quit.png" />
-    <Resource Include="Images\redo.png" />
-    <Resource Include="Images\report-1.png" />
-    <Resource Include="Images\rotate.png" />
-    <Resource Include="Images\save.png" />
-    <Resource Include="Images\search.png" />
-    <Resource Include="Images\sort_az.png" />
-    <Resource Include="Images\syringe.png" />
-    <Resource Include="Images\test-tube.png" />
-    <Resource Include="Images\undo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="petshop.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\magnifying-glass_24px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\magnifying-glass_128px.png" />
-    <Resource Include="Images\magnifying-glass_16px.png" />
-    <Resource Include="Images\magnifying-glass_32px.png" />
-    <Resource Include="Images\magnifying-glass_64px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\update.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\client2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\pawprint2.png" />
-    <Resource Include="Images\veterinarian2_2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\update2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\calendar.png" />
-    <Resource Include="Images\wall-calendar.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\medicine.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\document.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\hospital.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="bones.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
