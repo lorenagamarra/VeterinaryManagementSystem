@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VeterinaryManagementSystem"
         mc:Ignorable="d"
-        Title="MainWindow" Height="760" Width="1024">
+        Title="Veterinary Management System" Height="730" Width="1024"
+        WindowStartupLocation="Manual"
+        Left="0" Top="0">
     <Grid>
         <TabControl TabStripPlacement="Left">
             <TabItem Header="Consultation">
