@@ -71,10 +71,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Classes\Animal.cs" />
+    <Compile Include="Classes\Breed.cs" />
+    <Compile Include="Classes\Consultation.cs" />
+    <Compile Include="Classes\Employee.cs" />
+    <Compile Include="Classes\Owner.cs" />
+    <Compile Include="Classes\OwnerDetails.cs" />
+    <Compile Include="Classes\ServicesProducts.cs" />
+    <Compile Include="Classes\Vaccine.cs" />
+    <Compile Include="Classes\VaccineHistoric.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DataAccess\BreedDataAccess.cs" />
+    <Compile Include="DataAccess\EmployeeDataAccess.cs" />
+    <Compile Include="DataAccess\OwnerDataAccess.cs" />
+    <Compile Include="DataAccess\OwnerDetailsDataAccess.cs" />
+    <Compile Include="DataAccess\ServicesProductsDataAccess.cs" />
+    <Compile Include="DataAccess\VaccineDataAccess.cs" />
+    <Compile Include="DataAccess\VaccineHistoricDataAccess.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -109,6 +125,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="bones.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="1 - UI\" />
+    <Folder Include="5 - UnitTests\" />
+    <Folder Include="Business\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
