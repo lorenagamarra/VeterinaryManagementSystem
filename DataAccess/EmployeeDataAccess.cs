@@ -95,7 +95,7 @@ namespace VeterinaryManagementSystem.DataAccess
             connection.Close();
         }
 
-        public List<Employee> GetAllOwnerDetails()
+        public List<Employee> GetAllEmployees()
         {
             List<Employee> result = new List<Employee>();
             using (SqlCommand command = new SqlCommand("SELECT * FROM TBLEMPLOYEE", connection))

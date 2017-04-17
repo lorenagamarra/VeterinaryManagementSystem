@@ -16,7 +16,7 @@ namespace VeterinaryManagementSystem.Classes
 
         public int VaccineID { get; set; }
 
-        public int ServicesProducts { get; set; }
+        public int ServProdID { get; set; }
 
         public DateTime Date { get; set; }
 

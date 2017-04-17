@@ -14,7 +14,7 @@ namespace VeterinaryManagementSystem.Classes
 
         public String FirstName { get; set; }
 
-        public String MiddletName { get; set; }
+        public String MiddleName { get; set; }
 
         public String LastName { get; set; }
 

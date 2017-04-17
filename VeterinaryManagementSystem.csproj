@@ -71,6 +71,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Business\OwnerBusiness.cs" />
+    <Compile Include="Business\OwnerDetailsBusiness.cs" />
+    <Compile Include="Business\ServicesProductsBusiness.cs" />
+    <Compile Include="Business\VaccineBusiness.cs" />
+    <Compile Include="Business\VaccineHistoricBusiness.cs" />
     <Compile Include="Classes\Animal.cs" />
     <Compile Include="Classes\Breed.cs" />
     <Compile Include="Classes\Consultation.cs" />
@@ -84,7 +89,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DataAccess\AnimalDataAccess.cs" />
     <Compile Include="DataAccess\BreedDataAccess.cs" />
+    <Compile Include="DataAccess\ConsultationDataAccess.cs" />
     <Compile Include="DataAccess\EmployeeDataAccess.cs" />
     <Compile Include="DataAccess\OwnerDataAccess.cs" />
     <Compile Include="DataAccess\OwnerDetailsDataAccess.cs" />
@@ -127,9 +134,8 @@
     <Resource Include="bones.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="1 - UI\" />
-    <Folder Include="5 - UnitTests\" />
-    <Folder Include="Business\" />
+    <Folder Include="UI\" />
+    <Folder Include="UnitTests\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

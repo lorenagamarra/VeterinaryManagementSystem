@@ -10,19 +10,21 @@ namespace VeterinaryManagementSystem.Classes
     {
         public int Id { get; set; }
 
-        public int OwnerId { get; set; }
+        public Byte[] Picture { get; set; }
 
-        public int BreedId { get; set; }
+        public int OwnerID { get; set; }
 
-        public int VaccineHistoricId { get; set; }
+        public int BreedID { get; set; }
 
-        public DateTime RegistrationDate { get; set; }
+        public int VachistID { get; set; }
+
+        public DateTime Datereg { get; set; }
 
         public string Name { get; set; }
         
         public string Gender { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public DateTime Dateofbirth { get; set; }
 
         public decimal Weight { get; set; }
 
@@ -34,8 +36,8 @@ namespace VeterinaryManagementSystem.Classes
 
         public string Phobia { get; set; }
 
-        public string FlagSet { get; set; }
+        public string Flagset { get; set; }
 
-        public string VetHistoric { get; set; }
+        public string Vethistoric { get; set; }
     }
 }

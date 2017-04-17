@@ -24,12 +24,12 @@ namespace VeterinaryManagementSystem.DataAccess
             connection = new SqlConnection(connectionString);
             connection.Open();
             var sql = "INSERT INTO TBLOWNERDETAILS (PICTURE, FIRSTNAME, MIDDLETNAME, LASTNAME, NUMBER, ADDRESS, COMPLEMENT, CITY, PROVINCE, POSTALCODE, PHONENUMBER, OTHERPHONENUMBER, EMAIL)" +
-                " VALUES (@Picture, @FirstName, @MiddletName, @LastName, @Number, @Address, @Complement, @City, @Province, @PostalCode, @PhoneNumber, @OtherPhoneNumber, @Email)";
+                " VALUES (@Picture, @FirstName, @MiddleName, @LastName, @Number, @Address, @Complement, @City, @Province, @PostalCode, @PhoneNumber, @OtherPhoneNumber, @Email)";
 
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.Add(new SqlParameter("@Picture", ownerdetails.Picture));
             command.Parameters.Add(new SqlParameter("@FirstName", ownerdetails.FirstName));
-            command.Parameters.Add(new SqlParameter("@MiddletName", ownerdetails.MiddletName));
+            command.Parameters.Add(new SqlParameter("@MiddletName", ownerdetails.MiddleName));
             command.Parameters.Add(new SqlParameter("@LastName", ownerdetails.LastName));
             command.Parameters.Add(new SqlParameter("@Number", ownerdetails.Number));
             command.Parameters.Add(new SqlParameter("@Address", ownerdetails.Address));
@@ -50,12 +50,12 @@ namespace VeterinaryManagementSystem.DataAccess
             connection = new SqlConnection(connectionString);
             connection.Open();
             var sql = "UPDATE TBLOWNERDETAILS (PICTURE, FIRSTNAME, MIDDLETNAME, LASTNAME, NUMBER, ADDRESS, COMPLEMENT, CITY, PROVINCE, POSTALCODE, PHONENUMBER, OTHERPHONENUMBER, EMAIL)" +
-                            " VALUES (@Picture, @FirstName, @MiddletName, @LastName, @Number, @Address, @Complement, @City, @Province, @PostalCode, @PhoneNumber, @OtherPhoneNumber, @Email)";
+                            " VALUES (@Picture, @FirstName, @MiddleName, @LastName, @Number, @Address, @Complement, @City, @Province, @PostalCode, @PhoneNumber, @OtherPhoneNumber, @Email)";
 
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.Add(new SqlParameter("@Picture", ownerdetails.Picture));
             command.Parameters.Add(new SqlParameter("@FirstName", ownerdetails.FirstName));
-            command.Parameters.Add(new SqlParameter("@MiddletName", ownerdetails.MiddletName));
+            command.Parameters.Add(new SqlParameter("@MiddletName", ownerdetails.MiddleName));
             command.Parameters.Add(new SqlParameter("@LastName", ownerdetails.LastName));
             command.Parameters.Add(new SqlParameter("@Number", ownerdetails.Number));
             command.Parameters.Add(new SqlParameter("@Address", ownerdetails.Address));
@@ -95,7 +95,7 @@ namespace VeterinaryManagementSystem.DataAccess
                     int id = (int)reader["Id"];
                     Byte[] picture = (Byte[])reader["Picture"];
                     string firstName = (string)reader["FirstName"];
-                    string middletName = (string)reader["MiddletName"];
+                    string middleName = (string)reader["MiddleName"];
                     string lastName = (string)reader["LastName"];
                     string number = (string)reader["Number"];
                     string address = (string)reader["Address"];
@@ -112,7 +112,7 @@ namespace VeterinaryManagementSystem.DataAccess
                         Id = id,
                         Picture = picture,
                         FirstName = firstName,
-                        MiddletName = middletName,
+                        MiddleName = middleName,
                         LastName = lastName,
                         Number = number,
                         Address = address,
