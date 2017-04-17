@@ -46,7 +46,7 @@ namespace VeterinaryManagementSystem.Business
 
             if (String.IsNullOrEmpty(ownerdetails.LastName) || ownerdetails.LastName.Length < 2 || ownerdetails.LastName.Length > 20)
             {
-                throw new Exception("Owner Details last name can be empty or be 2-20 characters long");
+                throw new Exception("Owner Details must be 2-20 characters long");
             }
 
             if (String.IsNullOrEmpty(ownerdetails.Number) || ownerdetails.Number.Length < 2 || ownerdetails.Number.Length > 10)
@@ -69,7 +69,7 @@ namespace VeterinaryManagementSystem.Business
 
             if (String.IsNullOrEmpty(ownerdetails.City) || ownerdetails.City.Length < 2 || ownerdetails.City.Length > 15)
             {
-                throw new Exception("Owner Details City must be 2-50 characters long");
+                throw new Exception("Owner Details City must be 2-15 characters long");
             }
 
             if (ownerdetails.Province.Length != 2)
@@ -77,10 +77,10 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Owner Details Province must be 2 characters long");
             }
 
-            Regex pc = new Regex (@"^([ABCEGHJKLMNPRSTVXY]\d){ 1}([A-Z]\d){ 2}$");
+            Regex pc = new Regex (@"^([abceghjklmnprstvxyABCEGHJKLMNPRSTVXY]\d){ 1}[ ]?(a-zA-Z]\d){ 2}$");
             if (!(pc.Match(ownerdetails.PostalCode).Success))
             {
-                throw new Exception("Owner Details Postal Code invalid (i.e. X9X9X9");
+                throw new Exception("Owner Details Postal Code invalid");
             }
 
             Regex phone = new Regex(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$");

@@ -80,5 +80,15 @@ namespace VeterinaryManagementSystem.DataAccess
             }
             return result;
         }
+
+        internal void Delete(Consultation consultation)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void Update(Consultation consultation)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -49,6 +49,15 @@ namespace VeterinaryManagementSystem.Business
                     throw new Exception("Owner Observation name can be empty or be 2-500 characters long");
                 }
             }
+
+            if (owner.Id == 0)
+            {
+                Insert(owner);
+            }
+            else
+            {
+                Update(owner);
+            }
         }
 
         public void Insert(Owner owner)

@@ -75,6 +75,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Business\AnimalBusiness.cs" />
+    <Compile Include="Business\BreedBusiness.cs" />
+    <Compile Include="Business\ConsultationBusiness.cs" />
+    <Compile Include="Business\EmployeeBusiness.cs" />
     <Compile Include="Business\OwnerBusiness.cs" />
     <Compile Include="Business\OwnerDetailsBusiness.cs" />
     <Compile Include="Business\ServicesProductsBusiness.cs" />
