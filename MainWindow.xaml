@@ -1,15 +1,25 @@
-﻿<Window x:Class="VeterinaryManagementSystem.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VeterinaryManagementSystem"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="VeterinaryManagementSystem.MainWindow"
         mc:Ignorable="d"
         Title="Veterinary Management System" Height="730" Width="1024"
         WindowStartupLocation="Manual"
         Left="0" Top="0">
-    <Grid>
-        <TabControl TabStripPlacement="Left">
+
+    <Window.Resources>
+        <DataTemplate x:Key="HeaderTemplate" DataType="{x:Type s:String}">
+            <TextBlock Text="{Binding}" Width="70" TextWrapping="Wrap" TextAlignment="Center" />
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid Margin="0,0,0,0">
+        <TabControl Margin="0,0,0,10" TabStripPlacement="Left" HorizontalAlignment="Left" Width="1006">
             <TabItem Header="Consultation">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -20,35 +30,193 @@
                     </Grid.ColumnDefinitions>
                     <!-- Column 0, Row 0, Cell 1-->
                     <StackPanel Grid.Column="0">
-                        <Label Content="Aba1 - Coluna 0"/>
+                        <Grid Height="680">
+                            <Label Content="Search for Owner's Name, Phone or Animal Name" Margin="10,10,0,642" HorizontalAlignment="Left" Width="281"/>
+                            <TextBox Height="23" TextWrapping="Wrap" Text="TextBox" Margin="10,43,95,614"/>
+                            <Button Content="Search" Margin="271,43,10,614"/>
+                            <ListView Margin="10,71,10,44" Name="lvSearchResult">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="130" Header="Name"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Phone}" Width="70" Header="Phone"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Animal}" Width="130" Header="Animal"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <Button Content="Consult" HorizontalAlignment="Left" Margin="136,650,0,0" VerticalAlignment="Top" Width="75"/>
+                        </Grid>
                     </StackPanel>
                     <!-- Column 1, Row 0, Cell 1-->
-                    <StackPanel Grid.Column="1">
-                        <Label Content="Aba1 - Coluna 1"/>
+                    <StackPanel Grid.Column="1" Margin="1,0,-164,0" HorizontalAlignment="Left" Width="566">
+                        <Grid Margin="10" Height="664">
+                            <TabControl Height="664" VerticalAlignment="Top" HorizontalAlignment="Left" Width="546">
+                                <TabItem Header="Animal" HeaderTemplate="{StaticResource HeaderTemplate}">
+                                    <Grid Background="#FFE5E5E5" Margin="0,0,-2,2" HorizontalAlignment="Left" Width="542">
+                                        <Label Content="Animal Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                                        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="137"/>
+                                        <RadioButton Content="Male" Margin="0,41,343,554" HorizontalAlignment="Right" Width="51"/>
+                                        <RadioButton Content="Female" Margin="0,41,278,554" HorizontalAlignment="Right" Width="60" RenderTransformOrigin="1.45,-0.778"/>
+                                        <DatePicker Margin="273,41,127,554" IsTodayHighlighted="True" />
+                                        <Label Content="Gender" HorizontalAlignment="Left" Margin="152,10,0,0" VerticalAlignment="Top"/>
+                                        <Label Content="Birthday" HorizontalAlignment="Left" Margin="273,10,0,0" VerticalAlignment="Top"/>
+                                        <Label Content="Current Weight (kg)" HorizontalAlignment="Left" Margin="424,10,0,0" VerticalAlignment="Top"/>
+                                        <xctk:DecimalUpDown HorizontalAlignment="Left" Margin="424,41,0,0" VerticalAlignment="Top" FormatString="N3" Width="107" CultureInfo="en-CA" Height="23"/>
+                                        <Label Content="SPECIES" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top"/>
+                                        <ComboBox Margin="10,100,363,493"/>
+                                        <Label Content="BREEDS" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"/>
+                                        <ComboBox Margin="10,161,363,432"/>
+                                        <Label Content="Identification, Color or Coat" Margin="10,191,363,0" VerticalAlignment="Top" />
+                                        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,222,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="271"/>
+                                        <Button Content="Take a Picture" HorizontalAlignment="Left" Margin="10,279,0,0" VerticalAlignment="Top" Width="271" Height="40"/>
+                                        <Image HorizontalAlignment="Left" Height="250" Margin="286,69,0,0" VerticalAlignment="Top" Width="250"/>
+                                        <Label Content="Food - Brand - Quantity - Schedules (morning, afternoon, evening, free)" HorizontalAlignment="Left" Margin="10,324,0,0" VerticalAlignment="Top"/>
+                                        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,355,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="526"/>
+                                        <Label Content="Food - Brand - Quantity - Schedules (morning, afternoon, evening, free)" HorizontalAlignment="Left" Margin="10,383,0,0" VerticalAlignment="Top"/>
+                                        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,414,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="526"/>
+                                        <CheckBox Content="Available for Gromming" HorizontalAlignment="Left" Margin="10,523,0,0" VerticalAlignment="Top"/>
+                                        <CheckBox Content="Has a Pedigree" HorizontalAlignment="Left" Margin="10,543,0,0" VerticalAlignment="Top"/>
+                                        <CheckBox Content="Restrictions / Problems" HorizontalAlignment="Left" Margin="10,563,0,40"/>
+                                        <CheckBox Content="Dead / Deceased" HorizontalAlignment="Left" Margin="10,583,0,0" VerticalAlignment="Top"/>
+                                        <CheckBox Content="Agressive" HorizontalAlignment="Left" Margin="206,523,0,0" VerticalAlignment="Top"/>
+                                        <CheckBox Content="Hyperactive" HorizontalAlignment="Left" Margin="206,543,0,0" VerticalAlignment="Top"/>
+                                        <CheckBox Content="Anti Social" HorizontalAlignment="Left" Margin="206,563,0,0" VerticalAlignment="Top"/>
+                                        <CheckBox Content="Obsessive" HorizontalAlignment="Left" Margin="206,583,0,0" VerticalAlignment="Top"/>
+                                        <Button Content="Print Registry" HorizontalAlignment="Left" Margin="427,543,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
+                                        <Button Content="Update" HorizontalAlignment="Left" Margin="317,543,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
+                                        <Button Content="Exit" HorizontalAlignment="Left" Margin="427,578,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
+                                        <Button Content="Send an Email" HorizontalAlignment="Left" Margin="317,578,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
+
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Header="Consult &amp; Prescription" HeaderTemplate="{StaticResource HeaderTemplate}">
+                                    <Grid Background="#FFE5E5E5">
+                                        <Label Content="Consult Register" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                                        <TextBox HorizontalAlignment="Left" Height="225" Margin="10,41,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="520" VerticalScrollBarVisibility="Visible"/>
+                                        <Label Content="Prescription" HorizontalAlignment="Left" Margin="10,271,0,0" VerticalAlignment="Top"/>
+                                        <TextBox HorizontalAlignment="Left" Height="225" Margin="10,302,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="520" VerticalScrollBarVisibility="Visible"/>
+                                        <Button Content="Print Registry" HorizontalAlignment="Left" Margin="427,543,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
+                                        <Button Content="Update" HorizontalAlignment="Left" Margin="317,543,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
+                                        <Button Content="Exit" HorizontalAlignment="Left" Margin="427,578,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
+                                        <Button Content="Send an Email" HorizontalAlignment="Left" Margin="317,578,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Header="Vaccines" HeaderTemplate="{StaticResource HeaderTemplate}">
+                                    <Grid Background="#FFE5E5E5">
+                                        <Button Content="Add" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="86"/>
+                                        <Button Content="Update" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="86"/>
+                                        <Button Content="Delete" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="86"/>
+                                        <ListView Margin="101,10,10,10" Name="lvConsultVaccinesHistory">
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="100" Header="Vaccine Name"/>
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Date}" Width="80" Header="Date"/>
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Details}" Width="100" Header="Details"/>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Header="Cost ($)" HeaderTemplate="{StaticResource HeaderTemplate}">
+                                    <Grid Background="#FFE5E5E5">
+                                        <ListView Margin="10,45,133,10" Name="lvCost">
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="250" Header="Service / Product"/>
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Date}" Width="80" Header="Indiv. Value"/>
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Details}" Width="60" Header="Quantitie"/>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                        <Button Content="Add..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
+                                        <Button Content="Remove..." HorizontalAlignment="Left" Margin="170,10,0,0" VerticalAlignment="Top" Width="75"/>
+                                        <Label Content="Total Parcial" HorizontalAlignment="Left" Margin="412,45,0,0" VerticalAlignment="Top"/>
+                                        <Button Content="Update..." HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="75"/>
+                                        <TextBox HorizontalAlignment="Left" Height="23" Margin="490,47,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="40" IsEnabled="False"/>
+                                        <Label Content="Type of Discount" HorizontalAlignment="Left" Margin="412,73,0,0" VerticalAlignment="Top"/>
+                                        <Label Content="Discount" HorizontalAlignment="Left" Margin="412,125,0,0" VerticalAlignment="Top"/>
+                                        <TextBox HorizontalAlignment="Left" Height="23" Margin="490,127,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="40"/>
+                                        <Label Content="GST (5%)" HorizontalAlignment="Left" Margin="412,153,0,0" VerticalAlignment="Top"/>
+                                        <TextBox HorizontalAlignment="Left" Height="23" Margin="490,155,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="40" IsEnabled="False"/>
+                                        <Label Content="QST (9.975%)" HorizontalAlignment="Left" Margin="412,181,0,0" VerticalAlignment="Top"/>
+                                        <TextBox HorizontalAlignment="Left" Height="23" Margin="490,183,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="40" IsEnabled="False"/>
+                                        <Label Content="Total Parcial" HorizontalAlignment="Left" Margin="412,226,0,0" VerticalAlignment="Top"/>
+                                        <TextBox HorizontalAlignment="Left" Height="23" Margin="490,228,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="40" IsEnabled="False"/>
+                                        <Separator HorizontalAlignment="Left" Height="16" Margin="412,212,0,0" VerticalAlignment="Top" Width="118"/>
+                                        <RadioButton Content="%" HorizontalAlignment="Left" Margin="429,104,0,0" VerticalAlignment="Top"/>
+                                        <RadioButton Content="$" HorizontalAlignment="Left" Margin="468,104,0,0" VerticalAlignment="Top"/>
+                                    </Grid>
+                                </TabItem>
+                            </TabControl>
+                        </Grid>
                     </StackPanel>
                     <GridSplitter Grid.Column="1" Background="Gray" HorizontalAlignment="Left" Width="2" />
                 </Grid>
             </TabItem>
             <TabItem Header="Registry">
-                <Grid>
+                <Grid Margin="0,0,0,0">
                     <Grid.ColumnDefinitions>
                         <!--Defining column 0-->
                         <ColumnDefinition MinWidth="300" Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <!-- Column 0, Row 0, Cell 1-->
-                    <StackPanel Grid.Column="0" Margin="0,0,-625,0">
-                        <TabControl TabStripPlacement="Left" Height="724">
+                    <StackPanel Grid.Column="0" Margin="0,0,10,0" HorizontalAlignment="Left" Width="919">
+                        <TabControl Margin="0,0,10,10" TabStripPlacement="Left" Height="673" >
                             <TabItem Header="Owner Registry">
-                                <Grid>
+                                <Grid Margin="0,0,10,10">
                                     <Label Content="Date of Registration" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                                     <TextBox HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                                    <Label Content="Date of Registration" HorizontalAlignment="Left" Margin="240,10,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="ID" HorizontalAlignment="Left" Margin="240,10,0,0" VerticalAlignment="Top"/>
                                     <TextBox HorizontalAlignment="Left" Height="23" Margin="240,41,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                                    <Expander IsExpanded="True" HorizontalAlignment="Left" Height="277" Margin="10,82,0,0" VerticalAlignment="Top" Width="789">
+                                    <Expander IsExpanded="True" HorizontalAlignment="Left" Height="277" Margin="10,69,0,0" VerticalAlignment="Top" Width="749">
                                         <Expander.Header>
-                                            <TextBlock>First Owner (Required)</TextBlock>
+                                            <TextBlock><Run Text="First Owner (Required)"/></TextBlock>
                                         </Expander.Header>
-                                        <Grid Background="#FFE5E5E5">
+                                        <Grid Background="#FFE5E5E5" Margin="10,0">
+                                            <Label Content="First Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                            <Label Content="Middle Name" HorizontalAlignment="Left" Margin="156,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.737,1.038"/>
+                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="156,36,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                            <Label Content="Last Name" HorizontalAlignment="Left" Margin="302,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.737,1.038"/>
+                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="302,36,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                            <Label Content="Number" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
+                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="10,90,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                            <Label Content="Address" HorizontalAlignment="Left" Margin="156,64,0,0" VerticalAlignment="Top"/>
+                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="156,90,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                            <Label Content="Complement" HorizontalAlignment="Left" Margin="302,64,0,0" VerticalAlignment="Top"/>
+                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="302,90,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                            <Label Content="City" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top"/>
+                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="10,144,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                            <Label Content="Province" HorizontalAlignment="Left" Margin="156,118,0,0" VerticalAlignment="Top"/>
+                                            <ComboBox HorizontalAlignment="Left" Margin="156,145,0,0" VerticalAlignment="Top" Width="53">
+                                                <ComboBoxItem Content="AB" IsSelected="True"/>
+                                                <ComboBoxItem Content="BC"/>
+                                                <ComboBoxItem Content="MB"/>
+                                                <ComboBoxItem Content="NB"/>
+                                                <ComboBoxItem Content="NL"/>
+                                                <ComboBoxItem Content="NT"/>
+                                                <ComboBoxItem Content="NS"/>
+                                                <ComboBoxItem Content="NU"/>
+                                                <ComboBoxItem Content="ON"/>
+                                                <ComboBoxItem Content="PE"/>
+                                                <ComboBoxItem Content="QC"/>
+                                                <ComboBoxItem Content="SK"/>
+                                                <ComboBoxItem Content="YT"/>
+                                            </ComboBox>
+                                            <Label Content="Province" HorizontalAlignment="Left" Margin="302,118,0,0" VerticalAlignment="Top"/>
+                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="302,144,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                            <Label Content="Phone Number" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top"/>
+                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="10,203,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                            <Image HorizontalAlignment="Left" Height="200" Margin="517,10,0,0" VerticalAlignment="Top" Width="200" MaxWidth="200" MaxHeight="200" UseLayoutRounding="False"/>
+                                            <Button Content="Take a Picture" HorizontalAlignment="Left" Margin="427,204,0,0" VerticalAlignment="Top" Width="87"/>
+                                            <Label Content="Email" HorizontalAlignment="Left" Margin="302,172,0,0" VerticalAlignment="Top"/>
+                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="302,203,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                            <Label Content="Other Number" HorizontalAlignment="Left" Margin="156,172,0,0" VerticalAlignment="Top"/>
+                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="156,203,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+
+                                        </Grid>
+                                    </Expander>
+                                    <Expander IsExpanded="False"  Header="Second Owner (Optional)" HorizontalAlignment="Left" Height="278" Margin="10,346,0,0" VerticalAlignment="Top" Width="749">
+                                        <Grid  Background="#FFE5E5E5" Margin="10,10,10,10">
                                             <Label Content="First Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                                             <TextBox HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
                                             <Label Content="Middle Name" HorizontalAlignment="Left" Margin="156,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.737,1.038"/>
@@ -81,58 +249,164 @@
                                             </ComboBox>
                                             <Label Content="Province" HorizontalAlignment="Left" Margin="302,118,0,0" VerticalAlignment="Top"/>
                                             <TextBox HorizontalAlignment="Left" Height="23" Margin="302,144,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                                            <Label Content="Email" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top"/>
-                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="10,198,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                                            <Image HorizontalAlignment="Left" Height="200" Margin="562,21,0,0" VerticalAlignment="Top" Width="200"/>
-                                            <Button Content="Take a Picture" HorizontalAlignment="Left" Margin="347,201,0,0" VerticalAlignment="Top" Width="75"/>
+                                            <Label Content="Email" HorizontalAlignment="Left" Margin="302,172,0,0" VerticalAlignment="Top"/>
+                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="302,198,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                            <Image HorizontalAlignment="Left" Height="200" Margin="517,10,0,0" VerticalAlignment="Top" Width="200"/>
+                                            <Button Content="Take a Picture" HorizontalAlignment="Left" Margin="517,205,0,0" VerticalAlignment="Top" Width="75"/>
+                                            <Label Content="Phone Number" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top"/>
+                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="10,202,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                            <Label Content="Other Number" HorizontalAlignment="Left" Margin="156,176,0,0" VerticalAlignment="Top"/>
+                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="156,202,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
 
                                         </Grid>
                                     </Expander>
-                                    <Expander IsExpanded="False"  Header="Second Owner (Optional)" HorizontalAlignment="Left" Height="278" Margin="10,359,0,0" VerticalAlignment="Top" Width="789">
-                                        <Grid  Background="#FFE5E5E5">
-                                            <Label Content="First Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                                            <Label Content="Middle Name" HorizontalAlignment="Left" Margin="156,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.737,1.038"/>
-                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="156,36,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                                            <Label Content="Last Name" HorizontalAlignment="Left" Margin="302,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.737,1.038"/>
-                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="302,36,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                                            <Label Content="Number" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
-                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="10,90,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                                            <Label Content="Address" HorizontalAlignment="Left" Margin="156,64,0,0" VerticalAlignment="Top"/>
-                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="156,90,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                                            <Label Content="Complement" HorizontalAlignment="Left" Margin="302,64,0,0" VerticalAlignment="Top"/>
-                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="302,90,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                                            <Label Content="City" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top"/>
-                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="10,144,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                                            <Label Content="Province" HorizontalAlignment="Left" Margin="156,118,0,0" VerticalAlignment="Top"/>
-                                            <ComboBox HorizontalAlignment="Left" Margin="156,145,0,0" VerticalAlignment="Top" Width="120">
-                                                <ComboBoxItem Content="AB" IsSelected="True"/>
-                                                <ComboBoxItem Content="BC"/>
-                                                <ComboBoxItem Content="MB"/>
-                                                <ComboBoxItem Content="NB"/>
-                                                <ComboBoxItem Content="NL"/>
-                                                <ComboBoxItem Content="NT"/>
-                                                <ComboBoxItem Content="NS"/>
-                                                <ComboBoxItem Content="NU"/>
-                                                <ComboBoxItem Content="ON"/>
-                                                <ComboBoxItem Content="PE"/>
-                                                <ComboBoxItem Content="QC"/>
-                                                <ComboBoxItem Content="SK"/>
-                                                <ComboBoxItem Content="YT"/>
-                                            </ComboBox>
-                                            <Label Content="Province" HorizontalAlignment="Left" Margin="302,118,0,0" VerticalAlignment="Top"/>
-                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="302,144,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                                            <Label Content="Email" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top"/>
-                                            <TextBox HorizontalAlignment="Left" Height="23" Margin="10,198,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                                            <Image HorizontalAlignment="Left" Height="200" Margin="562,21,0,0" VerticalAlignment="Top" Width="200"/>
-                                            <Button Content="Take a Picture" HorizontalAlignment="Left" Margin="347,201,0,0" VerticalAlignment="Top" Width="75"/>
-
-                                        </Grid>
-                                    </Expander>
+                                    <Button Content="Save Record" HorizontalAlignment="Left" Margin="445,582,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
+                                    <Button Content="Print Registry" HorizontalAlignment="Left" Margin="611,582,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
+                                    <Button Content="Reporting Care" HorizontalAlignment="Left" Margin="445,617,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
+                                    <Button Content="Exit" HorizontalAlignment="Left" Margin="611,617,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
                                 </Grid>
                             </TabItem>
-                            <TabItem Header="Animal Registry"/>
-                            <TabItem Header="Employee Registry"/>
+                            <TabItem Header="Animal Registry">
+                                <Grid Margin="0,0,0,0">
+                                    <Label Content="Date of Registration" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="131"/>
+                                    <Label Content="Owner Name/Phone" HorizontalAlignment="Left" Margin="148,10,0,0" VerticalAlignment="Top"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="148,41,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="375"/>
+                                    <Button Content="Search" HorizontalAlignment="Left" Margin="561,40,0,0" VerticalAlignment="Top" Width="126" RenderTransformOrigin="3,0.6"/>
+                                    <Label Content="Animal Name" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="10,100,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="347"/>
+                                    <RadioButton Content="Male" Margin="0,105,377,544" HorizontalAlignment="Right" Width="51"/>
+                                    <RadioButton Content="Female" Margin="0,105,309,544" HorizontalAlignment="Right" Width="60"/>
+                                    <DatePicker Margin="502,100,129,539" />
+                                    <Label Content="Gender" HorizontalAlignment="Left" Margin="364,69,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="Birthday" HorizontalAlignment="Left" Margin="502,69,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="Current Weight (kg)" HorizontalAlignment="Left" Margin="668,69,0,0" VerticalAlignment="Top"/>
+                                    <xctk:DecimalUpDown HorizontalAlignment="Left" Margin="668,100,0,0" VerticalAlignment="Top" FormatString="N3" Width="114" CultureInfo="en-CA" Height="23"/>
+                                    <TabControl Margin="10,130,10,147" BorderThickness="2">
+                                        <TabItem Header="Animal Information">
+                                            <Grid Margin="0,0,0,0">
+                                                <Label Content="SPECIES" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                                                <ComboBox Margin="10,41,363,294"/>
+                                                <Label Content="BREEDS" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top"/>
+                                                <ComboBox Margin="10,102,363,233"/>
+                                                <Label Content="Identification, Color or Coat" Margin="10,132,363,0" VerticalAlignment="Top" />
+                                                <TextBox HorizontalAlignment="Left" Height="23" Margin="10,163,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="391"/>
+                                                <Button Content="Take a Picture" HorizontalAlignment="Left" Margin="10,191,0,0" VerticalAlignment="Top" Width="391" Height="40"/>
+                                                <Image HorizontalAlignment="Left" Height="250" Margin="504,10,0,0" VerticalAlignment="Top" Width="250"/>
+                                                <Label Content="Food - Brand - Quantity - Schedules (morning, afternoon, evening, free)" HorizontalAlignment="Left" Margin="10,236,0,0" VerticalAlignment="Top"/>
+                                                <TextBox HorizontalAlignment="Left" Height="23" Margin="10,267,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="744"/>
+                                                <Label Content="Food - Brand - Quantity - Schedules (morning, afternoon, evening, free)" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top"/>
+                                                <TextBox HorizontalAlignment="Left" Height="23" Margin="10,326,0,-11" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="744"/>
+                                            </Grid>
+                                        </TabItem>
+
+
+
+                                        <TabItem Header="Vaccines">
+                                            <Grid>
+                                                <Button Content="Add" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="86"/>
+                                                <Button Content="Update" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="86"/>
+                                                <Button Content="Delete" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="86"/>
+                                                <ListView Margin="110,10,10,10" Name="lvVaccinesHistory">
+                                                    <ListView.View>
+                                                        <GridView>
+                                                            <GridViewColumn DisplayMemberBinding="{Binding Id}" Width="20" Header="Id"/>
+                                                            <GridViewColumn DisplayMemberBinding="{Binding Author}" Width="250" Header="Name"/>
+                                                            <GridViewColumn DisplayMemberBinding="{Binding Title}" Width="80" Header="Date"/>
+                                                            <GridViewColumn DisplayMemberBinding="{Binding Title}" Width="285" Header="Details"/>
+                                                        </GridView>
+                                                    </ListView.View>
+                                                </ListView>
+                                            </Grid>
+                                        </TabItem>
+                                        <TabItem Header="Veterinary History">
+                                            <Grid>
+                                                <TextBox HorizontalAlignment="Left" Height="340" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="744" VerticalScrollBarVisibility="Visible"/>
+
+                                            </Grid>
+                                        </TabItem>
+
+                                    </TabControl>
+                                    <CheckBox Content="Available for Gromming" HorizontalAlignment="Left" Margin="10,523,0,0" VerticalAlignment="Top"/>
+                                    <CheckBox Content="Has a Pedigree" HorizontalAlignment="Left" Margin="10,543,0,0" VerticalAlignment="Top"/>
+                                    <CheckBox Content="Restrictions / Problems" HorizontalAlignment="Left" Margin="10,563,0,49"/>
+                                    <CheckBox Content="Dead / Deceased" HorizontalAlignment="Left" Margin="10,583,0,0" VerticalAlignment="Top"/>
+                                    <CheckBox Content="Agressive" HorizontalAlignment="Left" Margin="206,523,0,0" VerticalAlignment="Top"/>
+                                    <CheckBox Content="Hyperactive" HorizontalAlignment="Left" Margin="206,543,0,0" VerticalAlignment="Top"/>
+                                    <CheckBox Content="Anti Social" HorizontalAlignment="Left" Margin="206,563,0,0" VerticalAlignment="Top"/>
+                                    <CheckBox Content="Obsessive" HorizontalAlignment="Left" Margin="206,583,0,0" VerticalAlignment="Top"/>
+                                    <Button Content="Save Record" HorizontalAlignment="Left" Margin="423,523,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
+                                    <Button Content="Print Registry" HorizontalAlignment="Left" Margin="589,523,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
+                                    <Button Content="Reporting Care" HorizontalAlignment="Left" Margin="423,559,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
+                                    <Button Content="Exit" HorizontalAlignment="Left" Margin="589,559,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
+                                </Grid>
+                            </TabItem>
+                            <TabItem Header="Employee Registry">
+                                <Grid>
+                                    <Label Content="ID" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                    <Label Content="First Name" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="10,100,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                    <Label Content="Middle Name" HorizontalAlignment="Left" Margin="158,69,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.737,1.038"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="158,100,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                    <Label Content="Last Name" HorizontalAlignment="Left" Margin="304,69,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.737,1.038"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="304,100,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                    <Label Content="Number" HorizontalAlignment="Left" Margin="12,128,0,0" VerticalAlignment="Top"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="12,159,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                    <Label Content="Address" HorizontalAlignment="Left" Margin="158,128,0,0" VerticalAlignment="Top"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="158,159,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                    <Label Content="Complement" HorizontalAlignment="Left" Margin="304,128,0,0" VerticalAlignment="Top"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="304,159,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                    <Label Content="City" HorizontalAlignment="Left" Margin="12,187,0,0" VerticalAlignment="Top"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="12,218,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                    <Label Content="Province" HorizontalAlignment="Left" Margin="158,187,0,0" VerticalAlignment="Top"/>
+                                    <ComboBox HorizontalAlignment="Left" Margin="158,218,0,0" VerticalAlignment="Top" Width="120">
+                                        <ComboBoxItem Content="AB" IsSelected="True"/>
+                                        <ComboBoxItem Content="BC"/>
+                                        <ComboBoxItem Content="MB"/>
+                                        <ComboBoxItem Content="NB"/>
+                                        <ComboBoxItem Content="NL"/>
+                                        <ComboBoxItem Content="NT"/>
+                                        <ComboBoxItem Content="NS"/>
+                                        <ComboBoxItem Content="NU"/>
+                                        <ComboBoxItem Content="ON"/>
+                                        <ComboBoxItem Content="PE"/>
+                                        <ComboBoxItem Content="QC"/>
+                                        <ComboBoxItem Content="SK"/>
+                                        <ComboBoxItem Content="YT"/>
+                                    </ComboBox>
+                                    <Label Content="Province" HorizontalAlignment="Left" Margin="304,187,0,0" VerticalAlignment="Top"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="304,218,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                    <Label Content="Phone Number" HorizontalAlignment="Left" Margin="10,246,0,0" VerticalAlignment="Top"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="12,277,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                    <Image HorizontalAlignment="Left" Height="200" Margin="491,100,0,0" VerticalAlignment="Top" Width="200" MaxWidth="200" MaxHeight="200" UseLayoutRounding="False"/>
+                                    <Button Content="Take a Picture" HorizontalAlignment="Left" Margin="550,305,0,0" VerticalAlignment="Top" Width="98"/>
+                                    <Label Content="Email" HorizontalAlignment="Left" Margin="304,246,0,0" VerticalAlignment="Top"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="304,277,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                    <Label Content="Other Number" HorizontalAlignment="Left" Margin="158,246,0,0" VerticalAlignment="Top"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="158,277,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                    <Label Content="Hire Date" HorizontalAlignment="Left" Margin="12,305,0,0" VerticalAlignment="Top"/>
+                                    <DatePicker HorizontalAlignment="Left" Margin="10,336,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="Term. Date" HorizontalAlignment="Left" Margin="158,305,0,0" VerticalAlignment="Top"/>
+                                    <DatePicker HorizontalAlignment="Left" Margin="158,336,0,0" VerticalAlignment="Top"/>
+                                    <Label Content="SIN" HorizontalAlignment="Left" Margin="304,305,0,0" VerticalAlignment="Top"/>
+                                    <TextBox HorizontalAlignment="Left" Height="23" Margin="304,336,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                    <Label Content="Positions" HorizontalAlignment="Left" Margin="12,365,0,0" VerticalAlignment="Top"/>
+                                    <TextBox HorizontalAlignment="Left" Height="202" Margin="12,455,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="412"/>
+                                    <Label Content="Positions" HorizontalAlignment="Left" Margin="12,424,0,0" VerticalAlignment="Top"/>
+                                    <ComboBox HorizontalAlignment="Left" Margin="12,396,0,0" VerticalAlignment="Top" Width="120"/>
+                                    <Button Content="Save Record" HorizontalAlignment="Left" Margin="455,591,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
+                                    <Button Content="Print Registry" HorizontalAlignment="Left" Margin="621,591,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
+                                    <Button Content="Exit" HorizontalAlignment="Left" Margin="621,627,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
+                                </Grid>
+                            </TabItem>
+
+
+
+
+
+
+
                         </TabControl>
                     </StackPanel>
                 </Grid>
@@ -144,9 +418,7 @@
                         <ColumnDefinition MinWidth="300" Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <!-- Column 0, Row 0, Cell 1-->
-                    <StackPanel Grid.Column="0" Margin="0,0,-625,0">
-
-                    </StackPanel>
+                    <StackPanel Grid.Column="0" Margin="0,0,-625,0"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Tables">
@@ -156,9 +428,7 @@
                         <ColumnDefinition MinWidth="300" Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <!-- Column 0, Row 0, Cell 1-->
-                    <StackPanel Grid.Column="0" Margin="0,0,-625,0">
-
-                    </StackPanel>
+                    <StackPanel Grid.Column="0" Margin="0,0,-625,0"/>
                 </Grid>
             </TabItem>
         </TabControl>
