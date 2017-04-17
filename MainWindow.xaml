@@ -2,8 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:s="clr-namespace:System;assembly=mscorlib"
-    
+        xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VeterinaryManagementSystem"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="VeterinaryManagementSystem.MainWindow"
@@ -286,7 +285,10 @@
                                         <TabItem Header="Animal Information">
                                             <Grid Margin="0,0,0,0">
                                                 <Label Content="SPECIES" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                                                <ComboBox Margin="10,41,363,294"/>
+                                                <ComboBox Margin="10,41,363,294">
+                                                    <ComboBoxItem Content="Cat" IsSelected="True"/>
+                                                    <ComboBoxItem Content="Dog"/>
+                                                </ComboBox>
                                                 <Label Content="BREEDS" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top"/>
                                                 <ComboBox Margin="10,102,363,233"/>
                                                 <Label Content="Identification, Color or Coat" Margin="10,132,363,0" VerticalAlignment="Top" />
@@ -400,13 +402,6 @@
                                     <Button Content="Exit" HorizontalAlignment="Left" Margin="621,627,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
                                 </Grid>
                             </TabItem>
-
-
-
-
-
-
-
                         </TabControl>
                     </StackPanel>
                 </Grid>
@@ -423,12 +418,78 @@
             </TabItem>
             <TabItem Header="Tables">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <!--Defining column 0-->
-                        <ColumnDefinition MinWidth="300" Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <!-- Column 0, Row 0, Cell 1-->
-                    <StackPanel Grid.Column="0" Margin="0,0,-625,0"/>
+                    <TabControl HorizontalAlignment="Left" Height="683" VerticalAlignment="Top" Width="919" TabStripPlacement="Left">
+                        <TabItem Header="Register of Breeds">
+                            <Grid Background="#FFE5E5E5">
+                                <ListView Margin="10,10,314,10" Name="lvRegisterBreeds">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="60" Header="ID"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Specie}" Width="70" Header="Specie"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="320" Header="Name"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <Label Content="ID" HorizontalAlignment="Left" Margin="471,10,0,0" VerticalAlignment="Top"/>
+                                <TextBox HorizontalAlignment="Left" Height="23" Margin="471,41,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="54"/>
+                                <Label Content="Specie" HorizontalAlignment="Left" Margin="530,10,0,0" VerticalAlignment="Top"/>
+                                <ComboBox HorizontalAlignment="Left" Margin="530,41,0,0" VerticalAlignment="Top" Width="120">
+                                    <ComboBoxItem Content="Cat" IsSelected="True"/>
+                                    <ComboBoxItem Content="Dog"/>
+                                </ComboBox>
+                                <Label Content="Name" HorizontalAlignment="Left" Margin="471,69,0,0" VerticalAlignment="Top"/>
+                                <TextBox HorizontalAlignment="Left" Height="23" Margin="471,100,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="292"/>
+                                <Button Content="Add" HorizontalAlignment="Left" Margin="471,140,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button Content="Update" HorizontalAlignment="Left" Margin="583,140,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button Content="Delete" HorizontalAlignment="Left" Margin="688,140,0,0" VerticalAlignment="Top" Width="75"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Register of Vaccines">
+                            <Grid Background="#FFE5E5E5">
+                                <ListView Margin="10,10,314,10" Name="lvRegisterVaccines">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="60" Header="ID"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="320" Header="Name"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="70" Header="Price"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <Label Content="ID" HorizontalAlignment="Left" Margin="471,10,0,0" VerticalAlignment="Top"/>
+                                <TextBox HorizontalAlignment="Left" Height="23" Margin="471,41,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="54"/>
+                                <Label Content="Price (CAD$)" HorizontalAlignment="Left" Margin="530,10,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Name" HorizontalAlignment="Left" Margin="471,69,0,0" VerticalAlignment="Top"/>
+                                <TextBox HorizontalAlignment="Left" Height="23" Margin="471,100,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="292"/>
+                                <Button Content="Add" HorizontalAlignment="Left" Margin="471,140,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button Content="Update" HorizontalAlignment="Left" Margin="583,140,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button Content="Delete" HorizontalAlignment="Left" Margin="688,140,0,0" VerticalAlignment="Top" Width="75"/>
+                                <TextBox HorizontalAlignment="Left" Height="23" Margin="530,41,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="76"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Register of Serv &amp; Prod">
+                            <Grid Background="#FFE5E5E5">
+                                <ListView Margin="10,10,314,10" Name="lvRegisterServicesProducts">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="60" Header="ID"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="320" Header="Name"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="70" Header="Price"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <Label Content="ID" HorizontalAlignment="Left" Margin="471,10,0,0" VerticalAlignment="Top"/>
+                                <TextBox HorizontalAlignment="Left" Height="23" Margin="471,41,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="54"/>
+                                <Label Content="Price (CAD$)" HorizontalAlignment="Left" Margin="530,10,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Name" HorizontalAlignment="Left" Margin="471,69,0,0" VerticalAlignment="Top"/>
+                                <TextBox HorizontalAlignment="Left" Height="23" Margin="471,100,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="292"/>
+                                <Button Content="Add" HorizontalAlignment="Left" Margin="471,140,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button Content="Update" HorizontalAlignment="Left" Margin="583,140,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button Content="Delete" HorizontalAlignment="Left" Margin="688,140,0,0" VerticalAlignment="Top" Width="75"/>
+                                <TextBox HorizontalAlignment="Left" Height="23" Margin="530,41,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="76"/>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+
                 </Grid>
             </TabItem>
         </TabControl>

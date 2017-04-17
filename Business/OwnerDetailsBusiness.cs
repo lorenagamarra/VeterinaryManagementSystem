@@ -83,7 +83,7 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Owner Details Postal Code invalid (i.e. X9X9X9");
             }
 
-            Regex phone = new Regex(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";
+            Regex phone = new Regex(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$");
             if (!(phone.Match(ownerdetails.PhoneNumber.ToString()).Success))
             {
                 throw new Exception("Owner Details Phone Number invalid");
