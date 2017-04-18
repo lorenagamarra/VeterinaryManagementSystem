@@ -28,7 +28,7 @@ namespace VeterinaryManagementSystem.DataAccess
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.Add(new SqlParameter("@Picture", employee.Picture));
             command.Parameters.Add(new SqlParameter("@FirstName", employee.FirstName));
-            command.Parameters.Add(new SqlParameter("@MiddletName", employee.MiddletName));
+            command.Parameters.Add(new SqlParameter("@MiddleName", employee.MiddleName));
             command.Parameters.Add(new SqlParameter("@LastName", employee.LastName));
             command.Parameters.Add(new SqlParameter("@Number", employee.Number));
             command.Parameters.Add(new SqlParameter("@Address", employee.Address));
@@ -60,7 +60,7 @@ namespace VeterinaryManagementSystem.DataAccess
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.Add(new SqlParameter("@Picture", employee.Picture));
             command.Parameters.Add(new SqlParameter("@FirstName", employee.FirstName));
-            command.Parameters.Add(new SqlParameter("@MiddletName", employee.MiddletName));
+            command.Parameters.Add(new SqlParameter("@MiddleName", employee.MiddleName));
             command.Parameters.Add(new SqlParameter("@LastName", employee.LastName));
             command.Parameters.Add(new SqlParameter("@Number", employee.Number));
             command.Parameters.Add(new SqlParameter("@Address", employee.Address));
@@ -106,7 +106,7 @@ namespace VeterinaryManagementSystem.DataAccess
                     int id = (int)reader["Id"];
                     Byte[] picture = (Byte[])reader["Picture"];
                     string firstName = (string)reader["FirstName"];
-                    string middletName = (string)reader["MiddletName"];
+                    string middleName = (string)reader["MiddleName"];
                     string lastName = (string)reader["LastName"];
                     string number = (string)reader["Number"];
                     string address = (string)reader["Address"];
@@ -128,7 +128,7 @@ namespace VeterinaryManagementSystem.DataAccess
                         Id = id,
                         Picture = picture,
                         FirstName = firstName,
-                        MiddletName = middletName,
+                        MiddleName = middleName,
                         LastName = lastName,
                         Number = number,
                         Address = address,
