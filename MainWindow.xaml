@@ -91,6 +91,19 @@
 
                                     </Grid>
                                 </TabItem>
+                                <TabItem Header="Vet Historic" HeaderTemplate="{StaticResource HeaderTemplate}">
+                                    <Grid Background="#FFE5E5E5">
+                                        <ListView Margin="10,10,295,10" x:Name="lvConsultationVetHistoric">
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Date}" Width="100" Header="Date"/>
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Employee}" Width="130" Header="Employee"/>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                        <TextBox x:Name="tbConsultVetHistory" HorizontalAlignment="Left" Height="559" Margin="250,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" IsEnabled="False"/>
+                                    </Grid>
+                                </TabItem>
                                 <TabItem Header="Consult &amp; Prescription" HeaderTemplate="{StaticResource HeaderTemplate}">
                                     <Grid Background="#FFE5E5E5">
                                         <Label Content="Consult Register" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
