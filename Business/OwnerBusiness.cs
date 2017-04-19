@@ -29,16 +29,16 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Owner Registration Date must be the current day");
             }
 
-            if (owner.OwnerDetails1 == 0)
+            if (owner.Person1Id == 0)
             {
-                throw new Exception("Owner Details 1 must have an ID");
+                throw new Exception("Owner Person 1 must have an ID");
             }
 
-            if (owner.OwnerDetails2 != 0)
+            if (owner.Person2Id != 0)
             {
-                if (owner.OwnerDetails2 == owner.OwnerDetails1)
+                if (owner.Person2Id == owner.Person1Id)
                 {
-                    throw new Exception("Owner Details 2 must have a diferent ID");
+                    throw new Exception("Owner Person 2 must have a diferent ID");
                 }
             }
 
@@ -46,8 +46,13 @@ namespace VeterinaryManagementSystem.Business
             {
                 if (owner.Observation.Length < 2 || owner.Observation.Length > 500)
                 {
-                    throw new Exception("Owner Observation name can be empty or be 2-500 characters long");
+                    throw new Exception("Owner Observation can be empty or be 2-500 characters long");
                 }
+            }
+            
+            if (String.IsNullOrEmpty(owner.Status))
+            {
+                throw new Exception("Owner has null Status");
             }
 
             if (owner.Id == 0)

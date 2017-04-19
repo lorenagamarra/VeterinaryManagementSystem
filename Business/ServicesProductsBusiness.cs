@@ -34,6 +34,11 @@ namespace VeterinaryManagementSystem.Business
             {
                 throw new Exception("Services & Products must have price greater than zero");
             }
+            
+            if (String.IsNullOrEmpty(servicesproducts.Status))
+            {
+                throw new Exception("Services & Products has null Status");
+            }
 
             if (servicesproducts.Id == 0)
             {

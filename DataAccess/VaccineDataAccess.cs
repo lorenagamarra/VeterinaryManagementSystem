@@ -38,12 +38,12 @@ namespace VeterinaryManagementSystem.DataAccess
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
-            var sql = "UPDATE TBLVACCINE SET NAME=@Name, PRICE=@Price WHERE ID=@Id";
+            var sql = "UPDATE TBLVACCINE SET NAME=@Name, PRICE=@Price, STATUS=@Status WHERE ID=@Id";
 
             SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.Add(new SqlParameter("@Id", vaccine.Id));
             command.Parameters.Add(new SqlParameter("@Name", vaccine.Name));
             command.Parameters.Add(new SqlParameter("@Price", vaccine.Price));
+            command.Parameters.Add(new SqlParameter("@Status", vaccine.Status));
 
             command.ExecuteNonQuery();
             connection.Close();
@@ -53,7 +53,7 @@ namespace VeterinaryManagementSystem.DataAccess
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
-            var sql = "DELETE FROM TBLVACCINE WHERE ID=@Id";
+            var sql = "DELETE FROM TBLVACCINE WHERE ID=@Id NOT IN (SELECT VACCINEID FROM TBLCONSULTATION)";
 
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.Add(new SqlParameter("@Id", vaccine.Id));
@@ -62,10 +62,10 @@ namespace VeterinaryManagementSystem.DataAccess
             connection.Close();
         }
 
-        public List<Vaccine> GetAllVaccines()
+        public List<Vaccine> GetAllVaccinesActives()
         {
             List<Vaccine> result = new List<Vaccine>();
-            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLVACCINE", connection))
+            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLVACCINE WHERE STATUS='Active'", connection))
             using (SqlDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
@@ -84,5 +84,32 @@ namespace VeterinaryManagementSystem.DataAccess
             }
             return result;
         }
+
+        public List<Vaccine> GetAllVaccines()
+        {
+            List<Vaccine> result = new List<Vaccine>();
+            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLVACCINE", connection))
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    int id = (int)reader["Id"];
+                    string name = (string)reader["Name"];
+                    decimal price = (decimal)reader["Price"];
+                    string status = (string)reader["Status"];
+                    var vaccine = new Vaccine
+                    {
+                        Id = id,
+                        Name = name,
+                        Price = price,
+                        Status = status
+                    };
+                    result.Add(vaccine);
+                }
+            }
+            return result;
+        }
+
+
     }
 }

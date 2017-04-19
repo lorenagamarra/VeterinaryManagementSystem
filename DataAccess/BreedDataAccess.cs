@@ -41,7 +41,6 @@ namespace VeterinaryManagementSystem.DataAccess
             var sql = "UPDATE TBLBREED SET SPECIE=@Specie, NAME=@Name WHERE ID=@Id";
 
             SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.Add(new SqlParameter("@Id", breed.Id));
             command.Parameters.Add(new SqlParameter("@Specie", breed.Specie));
             command.Parameters.Add(new SqlParameter("@Name", breed.Name));
 
@@ -49,11 +48,12 @@ namespace VeterinaryManagementSystem.DataAccess
             connection.Close();
         }
 
+
         public void Delete(Breed breed)
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
-            var sql = "DELETE FROM TBLBREED WHERE ID=@Id";
+            var sql = "DELETE FROM TBLBREED WHERE ID=@Id NOT IN (SELECT BREEDID FROM TBLANIMAL)";
 
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.Add(new SqlParameter("@Id", breed.Id));

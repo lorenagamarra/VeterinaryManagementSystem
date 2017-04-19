@@ -24,8 +24,6 @@ namespace VeterinaryManagementSystem.Classes
 
         public String Prescription { get; set; }
 
-        public int Quantity { get; set; }
-
         public decimal Cost { get; set; }
     }
 }

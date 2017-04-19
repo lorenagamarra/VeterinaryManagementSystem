@@ -117,6 +117,11 @@ namespace VeterinaryManagementSystem.Business
                     throw new Exception("Animal VetHistoric can be empty or be 2-500 characters long");
                 }
             }
+            
+            if (String.IsNullOrEmpty(animal.Status))
+            {
+                throw new Exception("Animal has null Status");
+            }
 
             if (animal.Id == 0)
             {

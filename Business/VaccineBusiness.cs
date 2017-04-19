@@ -35,6 +35,11 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Vaccine must have price greater than zero");
             }
 
+            if (String.IsNullOrEmpty(vaccine.Status))
+            {
+                throw new Exception("Vaccine has null Status");
+            }
+
             if (vaccine.Id == 0)
             {
                 Insert(vaccine);

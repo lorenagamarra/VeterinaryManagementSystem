@@ -37,12 +37,12 @@ namespace VeterinaryManagementSystem.DataAccess
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
-            var sql = "UPDATE TBLSERVICES&PRODUCTS SET NAME=@Name, PRICE=@Price WHERE ID=@Id";
+            var sql = "UPDATE TBLSERVICES&PRODUCTS SET NAME=@Name, PRICE=@Price, STATUS=@Status WHERE ID=@Id";
 
             SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.Add(new SqlParameter("@Id", servicesproducts.Id));
             command.Parameters.Add(new SqlParameter("@Name", servicesproducts.Name));
             command.Parameters.Add(new SqlParameter("@Price", servicesproducts.Price));
+            command.Parameters.Add(new SqlParameter("@Status", servicesproducts.Status));
 
             command.ExecuteNonQuery();
             connection.Close();
@@ -52,13 +52,38 @@ namespace VeterinaryManagementSystem.DataAccess
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
-            var sql = "DELETE FROM TBLSERVICES&PRODUCTS WHERE ID=@Id";
+            var sql = "DELETE FROM TBLSERVICES&PRODUCTS WHERE ID=@Id NOT IN (SELECT SERVPRODID FROM TBLCONSULTATION)";
 
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.Add(new SqlParameter("@Id", servicesproducts.Id));
 
             command.ExecuteNonQuery();
             connection.Close();
+        }
+
+        public List<ServicesProducts> GetAllServicesProductsActives()
+        {
+            List<ServicesProducts> result = new List<ServicesProducts>();
+            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLSERVICES&PRODUCTS", connection))
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    int id = (int)reader["Id"];
+                    string name = (string)reader["Name"];
+                    decimal price = (decimal)reader["Price"];
+                    string status = (string)reader["Status"];
+                    var servicesproducts = new ServicesProducts
+                    {
+                        Id = id,
+                        Name = name,
+                        Price = price,
+                        Status = status
+                    };
+                    result.Add(servicesproducts);
+                }
+            }
+            return result;
         }
 
         public List<ServicesProducts> GetAllServicesProducts()

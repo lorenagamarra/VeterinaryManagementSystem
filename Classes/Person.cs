@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VeterinaryManagementSystem.Classes
 {
-    public class OwnerDetails
+    public class Person
     {
         public int Id { get; set; }
 

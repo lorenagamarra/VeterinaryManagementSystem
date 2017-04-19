@@ -8,85 +8,85 @@ using VeterinaryManagementSystem.Classes;
 
 namespace VeterinaryManagementSystem.DataAccess
 {
-    class OwnerDetailsDataAccess
+    class PersonDataAccess
     {
         private string connectionString;
         private SqlConnection connection;
 
-        public OwnerDetailsDataAccess()
+        public PersonDataAccess()
         {
             connectionString = "Server=tcp:nedis-abbott.database.windows.net,1433;Initial Catalog=VeterinaryDB;Persist Security Info=False;User ID=dbadmin;Password=DBveterinary2017;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         }
 
 
-        public void Add(OwnerDetails ownerdetails)
+        public void Add(Person person)
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
-            var sql = "INSERT INTO TBLOWNERDETAILS (PICTURE, FIRSTNAME, MIDDLETNAME, LASTNAME, NUMBER, ADDRESS, COMPLEMENT, CITY, PROVINCE, POSTALCODE, PHONENUMBER, OTHERPHONENUMBER, EMAIL)" +
+            var sql = "INSERT INTO TBLPERSON (PICTURE, FIRSTNAME, MIDDLETNAME, LASTNAME, NUMBER, ADDRESS, COMPLEMENT, CITY, PROVINCE, POSTALCODE, PHONENUMBER, OTHERPHONENUMBER, EMAIL)" +
                 " VALUES (@Picture, @FirstName, @MiddleName, @LastName, @Number, @Address, @Complement, @City, @Province, @PostalCode, @PhoneNumber, @OtherPhoneNumber, @Email)";
 
             SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.Add(new SqlParameter("@Picture", ownerdetails.Picture));
-            command.Parameters.Add(new SqlParameter("@FirstName", ownerdetails.FirstName));
-            command.Parameters.Add(new SqlParameter("@MiddletName", ownerdetails.MiddleName));
-            command.Parameters.Add(new SqlParameter("@LastName", ownerdetails.LastName));
-            command.Parameters.Add(new SqlParameter("@Number", ownerdetails.Number));
-            command.Parameters.Add(new SqlParameter("@Address", ownerdetails.Address));
-            command.Parameters.Add(new SqlParameter("@Complement", ownerdetails.Complement));
-            command.Parameters.Add(new SqlParameter("@City", ownerdetails.City));
-            command.Parameters.Add(new SqlParameter("@Province", ownerdetails.Province));
-            command.Parameters.Add(new SqlParameter("@PostalCode", ownerdetails.PostalCode));
-            command.Parameters.Add(new SqlParameter("@PhoneNumber", ownerdetails.PhoneNumber));
-            command.Parameters.Add(new SqlParameter("@OtherPhoneNumber", ownerdetails.OtherPhoneNumber));
-            command.Parameters.Add(new SqlParameter("@Email", ownerdetails.Email));
+            command.Parameters.Add(new SqlParameter("@Picture", person.Picture));
+            command.Parameters.Add(new SqlParameter("@FirstName", person.FirstName));
+            command.Parameters.Add(new SqlParameter("@MiddletName", person.MiddleName));
+            command.Parameters.Add(new SqlParameter("@LastName", person.LastName));
+            command.Parameters.Add(new SqlParameter("@Number", person.Number));
+            command.Parameters.Add(new SqlParameter("@Address", person.Address));
+            command.Parameters.Add(new SqlParameter("@Complement", person.Complement));
+            command.Parameters.Add(new SqlParameter("@City", person.City));
+            command.Parameters.Add(new SqlParameter("@Province", person.Province));
+            command.Parameters.Add(new SqlParameter("@PostalCode", person.PostalCode));
+            command.Parameters.Add(new SqlParameter("@PhoneNumber", person.PhoneNumber));
+            command.Parameters.Add(new SqlParameter("@OtherPhoneNumber", person.OtherPhoneNumber));
+            command.Parameters.Add(new SqlParameter("@Email", person.Email));
 
             command.ExecuteNonQuery();
             connection.Close();
         }
 
-        public void Update(OwnerDetails ownerdetails)
+        public void Update(Person person)
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
-            var sql = "UPDATE TBLOWNERDETAILS (PICTURE, FIRSTNAME, MIDDLETNAME, LASTNAME, NUMBER, ADDRESS, COMPLEMENT, CITY, PROVINCE, POSTALCODE, PHONENUMBER, OTHERPHONENUMBER, EMAIL)" +
+            var sql = "UPDATE TBLPERSON (PICTURE, FIRSTNAME, MIDDLETNAME, LASTNAME, NUMBER, ADDRESS, COMPLEMENT, CITY, PROVINCE, POSTALCODE, PHONENUMBER, OTHERPHONENUMBER, EMAIL)" +
                             " VALUES (@Picture, @FirstName, @MiddleName, @LastName, @Number, @Address, @Complement, @City, @Province, @PostalCode, @PhoneNumber, @OtherPhoneNumber, @Email)";
 
             SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.Add(new SqlParameter("@Picture", ownerdetails.Picture));
-            command.Parameters.Add(new SqlParameter("@FirstName", ownerdetails.FirstName));
-            command.Parameters.Add(new SqlParameter("@MiddletName", ownerdetails.MiddleName));
-            command.Parameters.Add(new SqlParameter("@LastName", ownerdetails.LastName));
-            command.Parameters.Add(new SqlParameter("@Number", ownerdetails.Number));
-            command.Parameters.Add(new SqlParameter("@Address", ownerdetails.Address));
-            command.Parameters.Add(new SqlParameter("@Complement", ownerdetails.Complement));
-            command.Parameters.Add(new SqlParameter("@City", ownerdetails.City));
-            command.Parameters.Add(new SqlParameter("@Province", ownerdetails.Province));
-            command.Parameters.Add(new SqlParameter("@PostalCode", ownerdetails.PostalCode));
-            command.Parameters.Add(new SqlParameter("@PhoneNumber", ownerdetails.PhoneNumber));
-            command.Parameters.Add(new SqlParameter("@OtherPhoneNumber", ownerdetails.OtherPhoneNumber));
-            command.Parameters.Add(new SqlParameter("@Email", ownerdetails.Email));
+            command.Parameters.Add(new SqlParameter("@Picture", person.Picture));
+            command.Parameters.Add(new SqlParameter("@FirstName", person.FirstName));
+            command.Parameters.Add(new SqlParameter("@MiddletName", person.MiddleName));
+            command.Parameters.Add(new SqlParameter("@LastName", person.LastName));
+            command.Parameters.Add(new SqlParameter("@Number", person.Number));
+            command.Parameters.Add(new SqlParameter("@Address", person.Address));
+            command.Parameters.Add(new SqlParameter("@Complement", person.Complement));
+            command.Parameters.Add(new SqlParameter("@City", person.City));
+            command.Parameters.Add(new SqlParameter("@Province", person.Province));
+            command.Parameters.Add(new SqlParameter("@PostalCode", person.PostalCode));
+            command.Parameters.Add(new SqlParameter("@PhoneNumber", person.PhoneNumber));
+            command.Parameters.Add(new SqlParameter("@OtherPhoneNumber", person.OtherPhoneNumber));
+            command.Parameters.Add(new SqlParameter("@Email", person.Email));
 
             command.ExecuteNonQuery();
             connection.Close();
         }
-
-        public void Delete(OwnerDetails ownerdetails)
+/*
+        public void Delete(Person person)
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
-            var sql = "DELETE FROM TBLOWNERDETAILS WHERE ID=@Id";
+            var sql = "DELETE FROM TBLPERSON WHERE ID=@Id";
 
             SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.Add(new SqlParameter("@Id", ownerdetails.Id));
+            command.Parameters.Add(new SqlParameter("@Id", person.Id));
 
             command.ExecuteNonQuery();
             connection.Close();
         }
-
-        public List<OwnerDetails> GetAllOwnerDetails()
+*/
+        public List<Person> GetAllPeople()
         {
-            List<OwnerDetails> result = new List<OwnerDetails>();
+            List<Person> result = new List<Person>();
             using (SqlCommand command = new SqlCommand("SELECT * FROM TBLOWNERDETAILS", connection))
             using (SqlDataReader reader = command.ExecuteReader())
             {
@@ -107,7 +107,7 @@ namespace VeterinaryManagementSystem.DataAccess
                     int otherPhoneNumber = (int)reader["OtherPhoneNumber"];
                     string email = (string)reader["Email"];
 
-                    var ownerdetails = new OwnerDetails
+                    var person = new Person
                     {
                         Id = id,
                         Picture = picture,
@@ -124,7 +124,7 @@ namespace VeterinaryManagementSystem.DataAccess
                         OtherPhoneNumber = otherPhoneNumber,
                         Email = email
                     };
-                    result.Add(ownerdetails);
+                    result.Add(person);
                 }
             }
             return result;

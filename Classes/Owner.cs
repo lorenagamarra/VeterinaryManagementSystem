@@ -12,11 +12,13 @@ namespace VeterinaryManagementSystem.Classes
 
         public DateTime RegistrationDate { get; set; }
 
-        public int OwnerDetails1 { get; set; }
+        public int Person1Id { get; set; }
 
-        public int OwnerDetails2 { get; set; }
+        public int Person2Id { get; set; }
 
         public string Observation { get; set; }
+        
+        public string Status { get; set; }
 
     }
 }

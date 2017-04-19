@@ -48,7 +48,7 @@ namespace VeterinaryManagementSystem.DataAccess
             command.ExecuteNonQuery();
             connection.Close();
         }
-
+/*
         public void Delete(VaccineHistoric vaccinehistoric)
         {
             connection = new SqlConnection(connectionString);
@@ -61,7 +61,7 @@ namespace VeterinaryManagementSystem.DataAccess
             command.ExecuteNonQuery();
             connection.Close();
         }
-
+*/
         public List<VaccineHistoric> GetAllVaccineHistorics()
         {
             List<VaccineHistoric> result = new List<VaccineHistoric>();

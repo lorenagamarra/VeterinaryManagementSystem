@@ -22,13 +22,13 @@ namespace VeterinaryManagementSystem.DataAccess
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
-            var sql = "INSERT INTO TBLOWNER (REGISTRATIONDATE, OWNERDETAILS1, OWNERDETAILS2, OBSERVATION)" +
-                " VALUES (@RegistrationDate, @OwnerDetails1, @OwnerDetails2, @Observation)";
+            var sql = "INSERT INTO TBLOWNER (REGISTRATIONDATE, PERSON1ID, PERSON2ID, OBSERVATION)" +
+                " VALUES (@RegistrationDate, @Person1Id, @Person2Id, @Observation)";
 
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.Add(new SqlParameter("@RegistrationDate", owner.RegistrationDate));
-            command.Parameters.Add(new SqlParameter("@OwnerDetails1", owner.OwnerDetails1));
-            command.Parameters.Add(new SqlParameter("@OwnerDetails2", owner.OwnerDetails2));
+            command.Parameters.Add(new SqlParameter("@OwnerDetails1", owner.Person1Id));
+            command.Parameters.Add(new SqlParameter("@OwnerDetails2", owner.Person2Id));
             command.Parameters.Add(new SqlParameter("@Observation", owner.Observation));
             
             command.ExecuteNonQuery();
@@ -39,24 +39,25 @@ namespace VeterinaryManagementSystem.DataAccess
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
-            var sql = "UPDATE TBLOWNER (REGISTRATIONDATE, OWNERDETAILS1, OWNERDETAILS2, OBSERVATION)" +
-                            " VALUES (@RegistrationDate, @OwnerDetails1, @OwnerDetails2, @Observation)";
+            var sql = "UPDATE TBLOWNER (REGISTRATIONDATE, OWNERDETAILS1, OWNERDETAILS2, OBSERVATION, STATUS)" +
+                            " VALUES (@RegistrationDate, @OwnerDetails1, @OwnerDetails2, @Observation, @Status)";
 
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.Add(new SqlParameter("@RegistrationDate", owner.RegistrationDate));
-            command.Parameters.Add(new SqlParameter("@OwnerDetails1", owner.OwnerDetails1));
-            command.Parameters.Add(new SqlParameter("@OwnerDetails2", owner.OwnerDetails2));
+            command.Parameters.Add(new SqlParameter("@OwnerDetails1", owner.Person1Id));
+            command.Parameters.Add(new SqlParameter("@OwnerDetails2", owner.Person2Id));
             command.Parameters.Add(new SqlParameter("@Observation", owner.Observation));
+            command.Parameters.Add(new SqlParameter("@Status", owner.Status));
 
             command.ExecuteNonQuery();
             connection.Close();
         }
-
+        
         public void Delete(Owner owner)
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
-            var sql = "DELETE FROM TBLOWNER WHERE ID=@Id";
+            var sql = "DELETE FROM TBLOWNER WHERE ID=@Id" NOT IN (SELECT OWNERID FROM TBLANIMAL);
 
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.Add(new SqlParameter("@Id", owner.Id));
@@ -64,6 +65,35 @@ namespace VeterinaryManagementSystem.DataAccess
             command.ExecuteNonQuery();
             connection.Close();
         }
+        
+        public List<Owner> GetAllOwnersActives()
+        {
+            List<Owner> result = new List<Owner>();
+            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLOWNER WHERE STATUS='Active'", connection))
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    int id = (int)reader["Id"];
+                    DateTime registrationDate = (DateTime)reader["RegistrationDate"];
+                    int person1Id = (int)reader["Person1Id"];
+                    int person2Id = (int)reader["Person2Id"];
+                    string observation = (string)reader["Observation"];
+                    
+                    var owner = new Owner
+                    {
+                        Id = id,
+                        RegistrationDate = registrationDate,
+                        Person1Id = person1Id,
+                        Person2Id = person2Id,
+                        Observation = observation
+                    };
+                    result.Add(owner);
+                }
+            }
+            return result;
+        }
+
 
         public List<Owner> GetAllOwners()
         {
@@ -75,22 +105,25 @@ namespace VeterinaryManagementSystem.DataAccess
                 {
                     int id = (int)reader["Id"];
                     DateTime registrationDate = (DateTime)reader["RegistrationDate"];
-                    int ownerDetails1 = (int)reader["OwnerDetails1"];
-                    int ownerDetails2 = (int)reader["OwnerDetails2"];
+                    int person1Id = (int)reader["Person1Id"];
+                    int person2Id = (int)reader["Person2Id"];
                     string observation = (string)reader["Observation"];
-                    
+                    string status = (string)reader["Status"];
+
                     var owner = new Owner
                     {
                         Id = id,
                         RegistrationDate = registrationDate,
-                        OwnerDetails1 = ownerDetails1,
-                        OwnerDetails2 = ownerDetails2,
-                        Observation = observation
+                        Person1Id = person1Id,
+                        Person2Id = person2Id,
+                        Observation = observation,
+                        Status = status
                     };
                     result.Add(owner);
                 }
             }
             return result;
         }
+
     }
 }

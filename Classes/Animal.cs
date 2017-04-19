@@ -39,5 +39,7 @@ namespace VeterinaryManagementSystem.Classes
         public string Flagset { get; set; }
 
         public string Vethistoric { get; set; }
+
+        public string Status { get; set; }
     }
 }

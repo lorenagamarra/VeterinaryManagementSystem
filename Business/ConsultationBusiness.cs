@@ -34,45 +34,34 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Consultation must have an Employee ID");
             }
             
-            if (consultation.VaccineID != 0)
-            {
-                if (consultation.VaccineID == consultation.VaccineID)
-                {
-                    throw new Exception("Owner Details 2 must have a diferent ID");
-                }
-            }
+            //if(consultation.VaccineID != 0) - null allowed
             
             if (consultation.ServProdID == 0)
             {
-                throw new Exception("Owner Details 1 must have an ID");
+                throw new Exception("Consultation Services & Productis must have an ID");
             }
 
             if (consultation.Date != DateTime.Now)
             {
-                throw new Exception("Owner Registration Date must be the current day");
+                throw new Exception("Consultation Date must be the current day");
             }
 
             if (consultation.Record.Length < 2 || consultation.Record.Length > 500)
             {
-                throw new Exception("Owner Observation name can be empty or be 2-500 characters long");
+                throw new Exception("Consultation Record must be 2-500 characters long");
             }
 
             if ((!String.IsNullOrEmpty(consultation.Prescription)))
             {
                 if (consultation.Prescription.Length < 2 || consultation.Prescription.Length > 500)
                 {
-                    throw new Exception("Owner Observation name can be empty or be 2-500 characters long");
+                    throw new Exception("Consultation Prescription can be empty or be 2-500 characters long");
                 }
-            }
-
-            if (consultation.Quantity == 0)
-            {
-                throw new Exception("Owner Details 1 must have an ID");
             }
             
             if (consultation.Cost == 0)
             {
-                throw new Exception("Owner Details 1 must have an ID");
+                throw new Exception("Consultation Cost must be greater than 0");
             }
 
             if (consultation.Id == 0)
@@ -94,38 +83,5 @@ namespace VeterinaryManagementSystem.Business
         {
             dataAccess.Update(consultation);
         }
-
-        public void Delete(Consultation consultation)
-        {
-            dataAccess.Delete(consultation);
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

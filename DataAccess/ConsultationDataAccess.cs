@@ -23,8 +23,8 @@ namespace VeterinaryManagementSystem.DataAccess
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
-            var sql = "INSERT INTO TBLCONSULTATION (ANIMALID, EMPLOYEEID, VACCINEID, SERVPRODID, DATE, RECORD, PRESCRIPTION, QUANTITY, COST)" +
-                " VALUES (@AnimalID, @EmployeeID, @VaccineID, @ServProdID, @Date, @Record, @Prescription, @Quantity, @Cost)";
+            var sql = "INSERT INTO TBLCONSULTATION (ANIMALID, EMPLOYEEID, VACCINEID, SERVPRODID, DATE, RECORD, PRESCRIPTION, COST)" +
+                " VALUES (@AnimalID, @EmployeeID, @VaccineID, @ServProdID, @Date, @Record, @Prescription, @Cost)";
 
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.Add(new SqlParameter("@AnimalID", consultation.AnimalID));
@@ -34,13 +34,32 @@ namespace VeterinaryManagementSystem.DataAccess
             command.Parameters.Add(new SqlParameter("@Date", consultation.Date));
             command.Parameters.Add(new SqlParameter("@Record", consultation.Record));
             command.Parameters.Add(new SqlParameter("@Prescription", consultation.Prescription));
-            command.Parameters.Add(new SqlParameter("@Quantity", consultation.Quantity));
             command.Parameters.Add(new SqlParameter("@Cost", consultation.Cost));
 
             command.ExecuteNonQuery();
             connection.Close();
         }
 
+        public void Update(Consultation consultation)
+        {
+            connection = new SqlConnection(connectionString);
+            connection.Open();
+            var sql = "UPDATE TBLCONSULTATION (ANIMALID, EMPLOYEEID, VACCINEID, SERVPRODID, DATE, RECORD, PRESCRIPTION, COST)" +
+                " VALUES (@AnimalID, @EmployeeID, @VaccineID, @ServProdID, @Date, @Record, @Prescription, @Cost)";
+
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.Add(new SqlParameter("@AnimalID", consultation.AnimalID));
+            command.Parameters.Add(new SqlParameter("@EmployeeID", consultation.EmployeeID));
+            command.Parameters.Add(new SqlParameter("@VaccineID", consultation.VaccineID));
+            command.Parameters.Add(new SqlParameter("@ServProdID", consultation.ServProdID));
+            command.Parameters.Add(new SqlParameter("@Date", consultation.Date));
+            command.Parameters.Add(new SqlParameter("@Record", consultation.Record));
+            command.Parameters.Add(new SqlParameter("@Prescription", consultation.Prescription));
+            command.Parameters.Add(new SqlParameter("@Cost", consultation.Cost));
+
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
 
 
         public List<Consultation> GetAllConsultations()
@@ -59,7 +78,6 @@ namespace VeterinaryManagementSystem.DataAccess
                     DateTime date = (DateTime)reader["Date"];
                     string record = (string)reader["Record"];
                     string prescription = (string)reader["Prescription"];
-                    int quantity = (int)reader["Quantity"];
                     decimal cost = (decimal)reader["Cost"];
 
                     var consultation = new Consultation
@@ -72,23 +90,12 @@ namespace VeterinaryManagementSystem.DataAccess
                         Date = date,
                         Record = record,
                         Prescription = prescription,
-                        Quantity = quantity,
                         Cost = cost
                     };
                     result.Add(consultation);
                 }
             }
             return result;
-        }
-
-        internal void Delete(Consultation consultation)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal void Update(Consultation consultation)
-        {
-            throw new NotImplementedException();
         }
     }
 }

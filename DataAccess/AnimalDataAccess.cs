@@ -42,6 +42,7 @@ namespace VeterinaryManagementSystem.DataAccess
             command.Parameters.Add(new SqlParameter("@Flagset", animal.Flagset));
             command.Parameters.Add(new SqlParameter("@Vethistoric", animal.Vethistoric));
 
+
             command.ExecuteNonQuery();
             connection.Close();
         }
@@ -50,8 +51,8 @@ namespace VeterinaryManagementSystem.DataAccess
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
-            var sql = "UPDATE TBLANIMAL (PICTURE, OWNERID, BREEDID, VACHISTID, DATEREG, NAME, GENDER, DATEOFBIRTH, WEIGHT, SPECIE, IDENTIFICATION, FOOD, PHOBIA, FLAGSET, VETHISTORIC)" +
-                " VALUES (@Picture, @OwnerID, @BreedID, @VachistID, @Datereg, @Name, @Gender, @Dateofbirth, @Weight, @Specie, @Identification, @Food, @Phobia, @Flagset, @Vethistoric)";
+            var sql = "UPDATE TBLANIMAL (PICTURE, OWNERID, BREEDID, VACHISTID, DATEREG, NAME, GENDER, DATEOFBIRTH, WEIGHT, SPECIE, IDENTIFICATION, FOOD, PHOBIA, FLAGSET, VETHISTORIC, STATUS)" +
+                " VALUES (@Picture, @OwnerID, @BreedID, @VachistID, @Datereg, @Name, @Gender, @Dateofbirth, @Weight, @Specie, @Identification, @Food, @Phobia, @Flagset, @Vethistoric, @Status)";
 
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.Add(new SqlParameter("@Picture", animal.Picture));
@@ -69,6 +70,7 @@ namespace VeterinaryManagementSystem.DataAccess
             command.Parameters.Add(new SqlParameter("@Phobia", animal.Phobia));
             command.Parameters.Add(new SqlParameter("@Flagset", animal.Flagset));
             command.Parameters.Add(new SqlParameter("@Vethistoric", animal.Vethistoric));
+            command.Parameters.Add(new SqlParameter("@Vethistoric", animal.Status));
 
             command.ExecuteNonQuery();
             connection.Close();
@@ -78,7 +80,7 @@ namespace VeterinaryManagementSystem.DataAccess
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
-            var sql = "DELETE FROM TBLANIMAL WHERE ID=@Id";
+            var sql = "DELETE FROM TBLANIMAL WHERE ID=@Id NOT IN (SELECT ANIMALID FROM TBLCONSULTATION)";
 
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.Add(new SqlParameter("@Id", animal.Id));
@@ -87,10 +89,10 @@ namespace VeterinaryManagementSystem.DataAccess
             connection.Close();
         }
 
-        public List<Animal> GetAllAnimals()
+        public List<Animal> GetAllAnimalsActives()
         {
             List<Animal> result = new List<Animal>();
-            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLEMPLOYEE", connection))
+            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLANIMAL WHERE STATUS='Active'", connection))
             using (SqlDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
@@ -136,7 +138,58 @@ namespace VeterinaryManagementSystem.DataAccess
             }
             return result;
         }
-        
+
+        public List<Animal> GetAllAnimals()
+        {
+            List<Animal> result = new List<Animal>();
+            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLEMPLOYEE", connection))
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    int id = (int)reader["Id"];
+                    Byte[] picture = (Byte[])reader["Picture"];
+                    int ownerID = (int)reader["OwnerID"];
+                    int breedID = (int)reader["BreedID"];
+                    int vachistID = (int)reader["VachistID"];
+                    DateTime datereg = (DateTime)reader["Datereg"];
+                    string name = (string)reader["Name"];
+                    string gender = (string)reader["Gender"];
+                    DateTime dateofbirth = (DateTime)reader["Dateofbirth"];
+                    decimal weight = (decimal)reader["Weight"];
+                    string specie = (string)reader["Specie"];
+                    string identification = (string)reader["Identification"];
+                    string food = (string)reader["Food"];
+                    string phobia = (string)reader["Phobia"];
+                    string flagset = (string)reader["Flagset"];
+                    string vethistoric = (string)reader["Vethistoric"];
+                    string status = (string)reader["Status"];
+
+                    var animal = new Animal
+                    {
+                        Id = id,
+                        Picture = picture,
+                        OwnerID = ownerID,
+                        BreedID = breedID,
+                        VachistID = vachistID,
+                        Datereg = datereg,
+                        Name = name,
+                        Gender = gender,
+                        Dateofbirth = dateofbirth,
+                        Weight = weight,
+                        Specie = specie,
+                        Identification = identification,
+                        Food = food,
+                        Phobia = phobia,
+                        Flagset = flagset,
+                        Vethistoric = vethistoric,
+                        Status = status
+                    };
+                    result.Add(animal);
+                }
+            }
+            return result;
+        }
 
 
     }

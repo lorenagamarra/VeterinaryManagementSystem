@@ -63,13 +63,5 @@ namespace VeterinaryManagementSystem.Business
         {
             dataAccess.Update(vaccinehistoric);
         }
-
-        public void Delete(VaccineHistoric vaccinehistoric)
-        {
-            dataAccess.Delete(vaccinehistoric);
-        }
-
-
-
     }
 }
