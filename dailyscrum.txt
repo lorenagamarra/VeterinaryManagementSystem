@@ -123,3 +123,27 @@ WHERE I NEED HELP IS...
 	1. Window, Grid Shrink
 
 -----------------------------------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------------------------
+*** April 19 Nedis ***
+DID SINCE LAST SCRUM:
+	1. Started Unit Tests
+WILL DO IN THE NEXT 24 HOURS
+	1. Work on Unit Tests.
+	2. Modify some tables to improve the project
+WHERE I NEED HELP IS...
+	1. Nothing for today
+
+
+*** April 19 Lorena ***
+DID SINCE LAST SCRUM:
+	1. I stayed all afternoon and part of the night (until midnight) with my son at the hospital. So unfortunately I'm late with my personal task.
+WILL DO IN THE NEXT 24 HOURS
+	1. Work on the events implementation
+WHERE I NEED HELP IS...
+	1. Window, Grid Shrink
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+
+
