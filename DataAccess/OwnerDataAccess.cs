@@ -57,7 +57,7 @@ namespace VeterinaryManagementSystem.DataAccess
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
-            var sql = "DELETE FROM TBLOWNER WHERE ID=@Id" NOT IN (SELECT OWNERID FROM TBLANIMAL);
+            var sql = "DELETE FROM TBLOWNER WHERE ID=@Id NOT IN (SELECT OWNERID FROM TBLANIMAL)";
 
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.Add(new SqlParameter("@Id", owner.Id));
