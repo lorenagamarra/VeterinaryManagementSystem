@@ -71,6 +71,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UnitTests\ServicesProductsUnitTest.cs" />
+    <Compile Include="UnitTests\VaccineHistoricUnitTest.cs" />
+    <Compile Include="UnitTests\VaccineUnitTest.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -143,7 +146,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\" />
-    <Folder Include="UnitTests\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using VeterinaryManagementSystem.Classes;
 using VeterinaryManagementSystem.DataAccess;
+using VeterinaryManagementSystem.UnitTests;
 
 namespace VeterinaryManagementSystem.Business
 {
-    class VaccineBusiness
+    public class VaccineBusiness
     {
         private VaccineDataAccess dataAccess;
 
@@ -25,9 +26,9 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Vaccine is null");
             }
 
-            if (String.IsNullOrEmpty(vaccine.Name))
+            if (vaccine.Name.Length < 2 || vaccine.Name.Length > 30)
             {
-                throw new Exception("Vaccine has null name");
+                throw new Exception("Vaccine Name must be 2-30 characters long");
             }
 
             if (vaccine.Price <= 0)
@@ -35,9 +36,9 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Vaccine must have price greater than zero");
             }
 
-            if (String.IsNullOrEmpty(vaccine.Status))
+            if (vaccine.Status.Length < 6 || vaccine.Status.Length > 8)
             {
-                throw new Exception("Vaccine has null Status");
+                throw new Exception("Vaccine Status must be ACTIVE or INACTIVE");
             }
 
             if (vaccine.Id == 0)
