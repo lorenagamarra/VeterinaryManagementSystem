@@ -25,5 +25,21 @@ namespace VeterinaryManagementSystem
         {
             InitializeComponent();
          }
+
+        private void Button_Click_ConsultationSearch(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnConsultationNewConsult_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        
+        private void lvConsultationSearchResult_NewConsult_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

@@ -32,8 +32,8 @@
                         <Grid Height="680">
                             <Label Content="Search for Owner's Name, Phone or Animal Name" Margin="10,10,0,642" HorizontalAlignment="Left" Width="281"/>
                             <TextBox x:Name="tbConsultationSearch" Height="23" TextWrapping="Wrap" Margin="10,43,95,614"/>
-                            <Button Content="Search" Margin="271,43,10,614"/>
-                            <ListView Margin="10,71,10,44" x:Name="lvConsultationSearchResult">
+                            <Button Click="Button_Click_ConsultationSearch" Name="btnConsultationSearch" Content="Search" Margin="271,43,10,614"/>
+                            <ListView Margin="10,71,10,44" x:Name="lvConsultationSearchResult" MouseDoubleClick="lvConsultationSearchResult_NewConsult_MouseDoubleClick">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="130" Header="Name"/>
@@ -42,7 +42,7 @@
                                     </GridView>
                                 </ListView.View>
                             </ListView>
-                            <Button x:Name="btnConsultationConsult" Content="Consult" HorizontalAlignment="Left" Margin="136,650,0,0" VerticalAlignment="Top" Width="75"/>
+                            <Button Click="btnConsultationNewConsult_Click" x:Name="btnConsultationNewConsult" Content="New Consult" HorizontalAlignment="Left" Margin="136,650,0,0" VerticalAlignment="Top" Width="75"/>
                         </Grid>
                     </StackPanel>
                     <!-- Column 1, Row 0, Cell 1-->
