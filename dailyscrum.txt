@@ -144,6 +144,27 @@ WHERE I NEED HELP IS...
 	1. Window, Grid Shrink
 -----------------------------------------------------------------------------------------------------------------------------
 
+-----------------------------------------------------------------------------------------------------------------------------
+*** April 20 Nedis ***
+DID SINCE LAST SCRUM:
+	1. Updated DB Tables, Classes, Business and DataAccess
+	2. UnitTests - Vaccine, Services&Products and VaccineHistoric
+WILL DO IN THE NEXT 24 HOURS
+	1. Work on Unit Tests.
+	2. Start to implement code into events
+WHERE I NEED HELP IS...
+	1. Make sure if we have all UI to add, update and delete (if possible).
+	2. Make sure if we have status field into (vaccine, service&products, owner, employee, animal)
 
+
+*** April 20 Lorena ***
+DID SINCE LAST SCRUM:
+	1. Started to work on the events implementation.
+WILL DO IN THE NEXT 24 HOURS
+	1. Work on the events implementation
+	2. Work on camera event
+WHERE I NEED HELP IS...
+	1. Camera/Photo capture, Grid Shrink
+-----------------------------------------------------------------------------------------------------------------------------
 
 
