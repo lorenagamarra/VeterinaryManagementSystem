@@ -40,6 +40,7 @@ namespace VeterinaryManagementSystem.DataAccess
             var sql = "UPDATE TBLSERVICES&PRODUCTS SET NAME=@Name, PRICE=@Price, STATUS=@Status WHERE ID=@Id";
 
             SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.Add(new SqlParameter("@Id", servicesproducts.Id));
             command.Parameters.Add(new SqlParameter("@Name", servicesproducts.Name));
             command.Parameters.Add(new SqlParameter("@Price", servicesproducts.Price));
             command.Parameters.Add(new SqlParameter("@Status", servicesproducts.Status));
@@ -64,7 +65,7 @@ namespace VeterinaryManagementSystem.DataAccess
         public List<ServicesProducts> GetAllServicesProductsActives()
         {
             List<ServicesProducts> result = new List<ServicesProducts>();
-            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLSERVICES&PRODUCTS", connection))
+            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLSERVICES&PRODUCTS WHERE STATUS='Active'", connection))
             using (SqlDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
@@ -72,13 +73,11 @@ namespace VeterinaryManagementSystem.DataAccess
                     int id = (int)reader["Id"];
                     string name = (string)reader["Name"];
                     decimal price = (decimal)reader["Price"];
-                    string status = (string)reader["Status"];
                     var servicesproducts = new ServicesProducts
                     {
                         Id = id,
                         Name = name,
-                        Price = price,
-                        Status = status
+                        Price = price
                     };
                     result.Add(servicesproducts);
                 }
@@ -97,11 +96,13 @@ namespace VeterinaryManagementSystem.DataAccess
                     int id = (int)reader["Id"];
                     string name = (string)reader["Name"];
                     decimal price = (decimal)reader["Price"];
+                    string status = (string)reader["Status"];
                     var servicesproducts = new ServicesProducts
                     {
                         Id = id,
                         Name = name,
-                        Price = price
+                        Price = price,
+                        Status = status
                     };
                     result.Add(servicesproducts);
                 }

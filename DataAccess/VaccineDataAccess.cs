@@ -41,6 +41,7 @@ namespace VeterinaryManagementSystem.DataAccess
             var sql = "UPDATE TBLVACCINE SET NAME=@Name, PRICE=@Price, STATUS=@Status WHERE ID=@Id";
 
             SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.Add(new SqlParameter("@Id", vaccine.Id));
             command.Parameters.Add(new SqlParameter("@Name", vaccine.Name));
             command.Parameters.Add(new SqlParameter("@Price", vaccine.Price));
             command.Parameters.Add(new SqlParameter("@Status", vaccine.Status));

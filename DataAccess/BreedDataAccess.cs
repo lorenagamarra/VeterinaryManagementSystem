@@ -38,11 +38,12 @@ namespace VeterinaryManagementSystem.DataAccess
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
-            var sql = "UPDATE TBLBREED SET SPECIE=@Specie, NAME=@Name WHERE ID=@Id";
+            var sql = "UPDATE TBLBREED SET SPECIE=@Specie, NAME=@Name, STATUS=@Status  WHERE ID=@Id";
 
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.Add(new SqlParameter("@Specie", breed.Specie));
             command.Parameters.Add(new SqlParameter("@Name", breed.Name));
+            command.Parameters.Add(new SqlParameter("@Status", breed.Status));
 
             command.ExecuteNonQuery();
             connection.Close();
@@ -62,6 +63,48 @@ namespace VeterinaryManagementSystem.DataAccess
             connection.Close();
         }
 
+        public List<Breed> GetAllSpecieActives()
+        {
+            List<Breed> result = new List<Breed>();
+            using (SqlCommand command = new SqlCommand("SELECT DISTINCT SPECIE FROM TBLBREED WHERE STATUS='Active'", connection))
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    string specie = (string)reader["Specie"];
+                    //string status = (string)reader["Status"];
+                    var breed = new Breed
+                    {
+                        Specie = specie
+                    };
+                    result.Add(breed);
+                }
+            }
+            return result;
+        }
+
+        public List<Breed> GetAllBreedsActivesBySpecie()
+        {
+            List<Breed> result = new List<Breed>();
+            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLBREED WHERE STATUS='Active' AND SPECIE=@Specie", connection))
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    string specie = (string)reader["Specie"];
+                    string name = (string)reader["Name"];
+                   // string status = (string)reader["Status"];
+                    var breed = new Breed
+                    {
+                        Name = name,
+                    };
+                    result.Add(breed);
+                }
+            }
+            return result;
+        }
+
+
         public List<Breed> GetAllBreeds()
         {
             List<Breed> result = new List<Breed>();
@@ -73,11 +116,13 @@ namespace VeterinaryManagementSystem.DataAccess
                     int id = (int)reader["Id"];
                     string specie = (string)reader["Specie"];
                     string name = (string)reader["Name"];
+                    string status = (string)reader["Status"];
                     var breed = new Breed
                     {
                         Id = id,
                         Name = name,
-                        Specie = specie
+                        Specie = specie,
+                        Status = status
                     };
                     result.Add(breed);
                 }

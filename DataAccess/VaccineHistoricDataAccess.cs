@@ -41,6 +41,7 @@ namespace VeterinaryManagementSystem.DataAccess
             var sql = "UPDATE TBLVACCINEHISTORIC SET NAME=@Name, DATE=@Date, DETAILS=@Details  WHERE ID=@Id";
 
             SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.Add(new SqlParameter("@Id", vaccinehistoric.Id));
             command.Parameters.Add(new SqlParameter("@Name", vaccinehistoric.Name));
             command.Parameters.Add(new SqlParameter("@Date", vaccinehistoric.Date));
             command.Parameters.Add(new SqlParameter("@Details", vaccinehistoric.Details));
@@ -48,12 +49,12 @@ namespace VeterinaryManagementSystem.DataAccess
             command.ExecuteNonQuery();
             connection.Close();
         }
-/*
+
         public void Delete(VaccineHistoric vaccinehistoric)
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
-            var sql = "DELETE FROM TBLVACCINEHISTORIC WHERE ID=@Id";
+            var sql = "DELETE FROM TBLVACCINEHISTORIC WHERE ID=@Id NOT IN (SELECT VACHISTID FROM TBLANIMAL)";
 
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.Add(new SqlParameter("@Id", vaccinehistoric.Id));
@@ -61,11 +62,11 @@ namespace VeterinaryManagementSystem.DataAccess
             command.ExecuteNonQuery();
             connection.Close();
         }
-*/
-        public List<VaccineHistoric> GetAllVaccineHistorics()
+
+        public List<VaccineHistoric> GetAllVaccineHistorics()    
         {
             List<VaccineHistoric> result = new List<VaccineHistoric>();
-            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLVACCINEHISTORIC", connection))
+            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLVACCINEHISTORIC WHERE ID=@Id", connection))
             using (SqlDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())

@@ -160,7 +160,8 @@ namespace VeterinaryManagementSystem.DataAccess
                     string email_02 = (string)reader["Email_02"];
 
                     string observation = (string)reader["Observation"];
-                    
+                    string status = (string)reader["Status"];
+
                     var owner = new Owner
                     {
                         Id = id,

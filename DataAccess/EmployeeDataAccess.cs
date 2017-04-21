@@ -114,6 +114,7 @@ namespace VeterinaryManagementSystem.DataAccess
                     int sin = (int)reader["SIN"];
                     string position = (string)reader["Position"];
                     string observations = (string)reader["Observations"];
+                    string status = (string)reader["Status"];
 
                     var employee = new Employee
                     {

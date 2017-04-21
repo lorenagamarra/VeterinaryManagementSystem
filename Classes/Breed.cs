@@ -13,5 +13,7 @@ namespace VeterinaryManagementSystem.Classes
         public string Specie { get; set; }
 
         public string Name { get; set; }
+
+        public string Status { get; set; }
     }
 }
