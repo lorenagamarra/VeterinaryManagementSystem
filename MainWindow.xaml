@@ -5,7 +5,7 @@
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VeterinaryManagementSystem"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="VeterinaryManagementSystem.MainWindow"
+        x:Class="VeterinaryManagementSystem.MainWindow"
         mc:Ignorable="d"
         Title="Veterinary Management System" Height="732" Width="1360"
         WindowStartupLocation="Manual"
@@ -48,50 +48,6 @@
                     <StackPanel Grid.Column="1" Margin="0,0,0,0" HorizontalAlignment="Left" Width="900">
                         <Grid Margin="0,0,0,0" Height="692" HorizontalAlignment="Left" Width="894">
                             <TabControl x:Name="tabcConsult" Height="601" VerticalAlignment="Top" HorizontalAlignment="Left" Width="884" Margin="6,46,0,0">
-                                <TabItem Header="Animal" HeaderTemplate="{StaticResource HeaderTemplate}">
-                                    <Grid Background="#FFE5E5E5" Margin="0,0,0,0" HorizontalAlignment="Left" Width="880">
-                                        <Label Content="Status" HorizontalAlignment="Left" Margin="657,10,0,0" VerticalAlignment="Top"/>
-                                        <RadioButton Content="Active" HorizontalAlignment="Left" Margin="657,36,0,0" VerticalAlignment="Top"/>
-                                        <RadioButton Content="Inactive" HorizontalAlignment="Left" Margin="657,52,0,0" VerticalAlignment="Top"/>
-                                        <Label Content="Animal Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                                        <TextBox x:Name="tbConsultationAnimalName" HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137"/>
-                                        <RadioButton x:Name="rbConsultationAnimalMale" Content="Male" Margin="0,41,677,447" HorizontalAlignment="Right" Width="51"/>
-                                        <RadioButton x:Name="rbConsultationAnimalFemale" Content="Female" Margin="0,41,612,447" HorizontalAlignment="Right" Width="60" RenderTransformOrigin="1.45,-0.778"/>
-                                        <DatePicker x:Name="dpConsultationAnimalBirthday" Margin="273,41,469,442" IsTodayHighlighted="True" />
-                                        <Label Content="Gender" HorizontalAlignment="Left" Margin="152,10,0,0" VerticalAlignment="Top"/>
-                                        <Label Content="Birthday" HorizontalAlignment="Left" Margin="273,10,0,0" VerticalAlignment="Top"/>
-                                        <Label Content="Current Weight (kg)" HorizontalAlignment="Left" Margin="416,10,0,0" VerticalAlignment="Top"/>
-                                        <Label Content="SPECIES" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top"/>
-                                        <ComboBox x:Name="cbConsultationAnimalSpecies" Margin="10,95,733,386">
-                                            <ComboBoxItem Content="Cat" IsSelected="True"/>
-                                            <ComboBoxItem Content="Dog"/>
-                                        </ComboBox>
-                                        <Label Content="BREEDS" HorizontalAlignment="Left" Margin="152,69,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.569,0.269"/>
-                                        <ComboBox x:Name="cbConsultationAnimalBreeds" Margin="152,95,469,386"/>
-                                        <Label Content="Identification, Color or Coat" Margin="10,125,714,0" VerticalAlignment="Top" />
-                                        <TextBox x:Name="tbConsultationAnimalIdentification" HorizontalAlignment="Left" Height="23" Margin="10,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="522"/>
-                                        <Button x:Name="btnConsultationAnimalTakePicture" Content="Take a New Picture" HorizontalAlignment="Left" Margin="584,378,0,0" VerticalAlignment="Top" Width="252" Height="40" RenderTransformOrigin="2.215,2.05"/>
-
-                                        <Label Content="Food - Brand - Quantity - Schedules (morning, afternoon, evening, free)" HorizontalAlignment="Left" Margin="10,184,0,0" VerticalAlignment="Top"/>
-                                        <TextBox x:Name="tbConsultationAnimalFood" HorizontalAlignment="Left" Height="23" Margin="10,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="522"/>
-                                        <Label Content="Phobias" HorizontalAlignment="Left" Margin="10,243,0,0" VerticalAlignment="Top"/>
-                                        <TextBox x:Name="tbConsultationAnimalPhobias" HorizontalAlignment="Left" Height="23" Margin="10,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="520"/>
-                                        <CheckBox x:Name="ckbConsultationAnimalGromming" Content="Available for Gromming" HorizontalAlignment="Left" Margin="10,328,0,0" VerticalAlignment="Top"/>
-                                        <CheckBox x:Name="ckbConsultationAnimalPedigree" Content="Has a Pedigree" HorizontalAlignment="Left" Margin="10,348,0,0" VerticalAlignment="Top"/>
-                                        <CheckBox x:Name="ckbConsultationAnimalRestrictions" Content="Restrictions / Problems" HorizontalAlignment="Left" Margin="10,368,0,123"/>
-                                        <CheckBox x:Name="ckbConsultationAnimalDead" Content="Dead / Deceased" HorizontalAlignment="Left" Margin="10,388,0,0" VerticalAlignment="Top"/>
-                                        <CheckBox x:Name="ckbConsultationAnimalAgressive" Content="Agressive" HorizontalAlignment="Left" Margin="204,328,0,0" VerticalAlignment="Top"/>
-                                        <CheckBox x:Name="ckbConsultationAnimalHyperactive" Content="Hyperactive" HorizontalAlignment="Left" Margin="204,348,0,0" VerticalAlignment="Top"/>
-                                        <CheckBox x:Name="ckbConsultationAnimalAntiSocial" Content="Anti Social" HorizontalAlignment="Left" Margin="204,368,0,0" VerticalAlignment="Top"/>
-                                        <CheckBox x:Name="ckbConsultationAnimalObsessive" Content="Obsessive" HorizontalAlignment="Left" Margin="204,388,0,0" VerticalAlignment="Top"/>
-                                        <Button x:Name="btnConsultationAnimalUpdate" Content="Update" HorizontalAlignment="Left" Margin="765,10,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
-                                        <TextBox x:Name="tbConsultationAnimalWeight" HorizontalAlignment="Left" Height="23" Margin="416,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="116"/>
-                                        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="252" Margin="584,95,0,0" VerticalAlignment="Top" Width="252" Background="White">
-                                            <Image x:Name="imgConsultationAnimalImage" HorizontalAlignment="Left" Height="250" Margin="0,0,0,0" VerticalAlignment="Top" Width="250"/>
-                                        </Border>
-
-                                    </Grid>
-                                </TabItem>
                                 <TabItem Header="Owner" HeaderTemplate="{StaticResource HeaderTemplate}">
                                     <Grid Background="#FFE5E5E5">
                                         <Label Content="Date of Registration" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
@@ -204,6 +160,50 @@
 
                                     </Grid>
                                 </TabItem>
+                                <TabItem Header="Animal" HeaderTemplate="{StaticResource HeaderTemplate}" IsSelected="True">
+                                    <Grid Background="#FFE5E5E5" Margin="0,0,0,0" HorizontalAlignment="Left" Width="880">
+                                        <Label Content="Status" HorizontalAlignment="Left" Margin="657,10,0,0" VerticalAlignment="Top"/>
+                                        <RadioButton Content="Active" HorizontalAlignment="Left" Margin="657,36,0,0" VerticalAlignment="Top"/>
+                                        <RadioButton Content="Inactive" HorizontalAlignment="Left" Margin="657,52,0,0" VerticalAlignment="Top"/>
+                                        <Label Content="Animal Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                                        <TextBox x:Name="tbConsultationAnimalName" HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137"/>
+                                        <RadioButton x:Name="rbConsultationAnimalMale" Content="Male" Margin="0,41,677,447" HorizontalAlignment="Right" Width="51"/>
+                                        <RadioButton x:Name="rbConsultationAnimalFemale" Content="Female" Margin="0,41,612,447" HorizontalAlignment="Right" Width="60" RenderTransformOrigin="1.45,-0.778"/>
+                                        <DatePicker x:Name="dpConsultationAnimalBirthday" Margin="273,41,469,490" IsTodayHighlighted="True" />
+                                        <Label Content="Gender" HorizontalAlignment="Left" Margin="152,10,0,0" VerticalAlignment="Top"/>
+                                        <Label Content="Birthday" HorizontalAlignment="Left" Margin="273,10,0,0" VerticalAlignment="Top"/>
+                                        <Label Content="Current Weight (kg)" HorizontalAlignment="Left" Margin="416,10,0,0" VerticalAlignment="Top"/>
+                                        <Label Content="SPECIES" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top"/>
+                                        <ComboBox x:Name="cbConsultationAnimalSpecies" Margin="10,95,733,437">
+                                            <ComboBoxItem Content="Cat" IsSelected="True"/>
+                                            <ComboBoxItem Content="Dog"/>
+                                        </ComboBox>
+                                        <Label Content="BREEDS" HorizontalAlignment="Left" Margin="152,69,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.569,0.269"/>
+                                        <ComboBox x:Name="cbConsultationAnimalBreeds" Margin="152,95,469,437"/>
+                                        <Label Content="Identification, Color or Coat" Margin="10,125,714,0" VerticalAlignment="Top" />
+                                        <TextBox x:Name="tbConsultationAnimalIdentification" HorizontalAlignment="Left" Height="23" Margin="10,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="522"/>
+                                        <Button x:Name="btnConsultationAnimalTakePicture" Content="Take a New Picture" HorizontalAlignment="Left" Margin="584,378,0,0" VerticalAlignment="Top" Width="252" Height="40" RenderTransformOrigin="2.215,2.05"/>
+
+                                        <Label Content="Food - Brand - Quantity - Schedules (morning, afternoon, evening, free)" HorizontalAlignment="Left" Margin="10,184,0,0" VerticalAlignment="Top"/>
+                                        <TextBox x:Name="tbConsultationAnimalFood" HorizontalAlignment="Left" Height="23" Margin="10,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="522"/>
+                                        <Label Content="Phobias" HorizontalAlignment="Left" Margin="10,243,0,0" VerticalAlignment="Top"/>
+                                        <TextBox x:Name="tbConsultationAnimalPhobias" HorizontalAlignment="Left" Height="23" Margin="10,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="520"/>
+                                        <CheckBox x:Name="ckbConsultationAnimalGromming" Content="Available for Gromming" HorizontalAlignment="Left" Margin="10,328,0,0" VerticalAlignment="Top"/>
+                                        <CheckBox x:Name="ckbConsultationAnimalPedigree" Content="Has a Pedigree" HorizontalAlignment="Left" Margin="10,348,0,0" VerticalAlignment="Top"/>
+                                        <CheckBox x:Name="ckbConsultationAnimalRestrictions" Content="Restrictions / Problems" HorizontalAlignment="Left" Margin="10,368,0,123"/>
+                                        <CheckBox x:Name="ckbConsultationAnimalDead" Content="Dead / Deceased" HorizontalAlignment="Left" Margin="10,388,0,0" VerticalAlignment="Top"/>
+                                        <CheckBox x:Name="ckbConsultationAnimalAgressive" Content="Agressive" HorizontalAlignment="Left" Margin="204,328,0,0" VerticalAlignment="Top"/>
+                                        <CheckBox x:Name="ckbConsultationAnimalHyperactive" Content="Hyperactive" HorizontalAlignment="Left" Margin="204,348,0,0" VerticalAlignment="Top"/>
+                                        <CheckBox x:Name="ckbConsultationAnimalAntiSocial" Content="Anti Social" HorizontalAlignment="Left" Margin="204,368,0,0" VerticalAlignment="Top"/>
+                                        <CheckBox x:Name="ckbConsultationAnimalObsessive" Content="Obsessive" HorizontalAlignment="Left" Margin="204,388,0,0" VerticalAlignment="Top"/>
+                                        <Button x:Name="btnConsultationAnimalUpdate" Content="Update" HorizontalAlignment="Left" Margin="765,10,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
+                                        <TextBox x:Name="tbConsultationAnimalWeight" HorizontalAlignment="Left" Height="23" Margin="416,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="116"/>
+                                        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="252" Margin="584,95,0,0" VerticalAlignment="Top" Width="252" Background="White">
+                                            <Image x:Name="imgConsultationAnimalImage" HorizontalAlignment="Left" Height="250" Margin="0,0,0,0" VerticalAlignment="Top" Width="250"/>
+                                        </Border>
+
+                                    </Grid>
+                                </TabItem>
                                 <TabItem Header="Vet Historic" HeaderTemplate="{StaticResource HeaderTemplate}">
                                     <Grid Background="#FFE5E5E5">
                                         <Button x:Name="btnConsultationVHPrint" Content="Print Registry" HorizontalAlignment="Left" Margin="764,10,0,0" VerticalAlignment="Top" Width="104" Height="30"/>
@@ -234,7 +234,7 @@
                                         <Button x:Name="btnConsultationVaccinesAdd" Content="Add" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="86"/>
                                         <Button x:Name="btnConsultationVaccinesUpdate" Content="Update" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="86"/>
                                         <Button x:Name="btnConsultationVaccinesDelete" Content="Delete" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="86"/>
-                                        <ListView Margin="101,10,10,10" Name="lvConsultVaccinesHistory">
+                                        <ListView Margin="101,10,10,10" x:Name="lvConsultVaccinesHistory">
                                             <ListView.View>
                                                 <GridView>
                                                     <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="300" Header="Vaccine Name"/>
