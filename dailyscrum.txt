@@ -188,7 +188,31 @@ WHERE I NEED HELP IS...
 	1. Camera/Photo capture, Grid Shrink
 -----------------------------------------------------------------------------------------------------------------------------
 
+-----------------------------------------------------------------------------------------------------------------------------
+*** April 21 Nedis *** AFTERNOON
+DID SINCE LAST SCRUM:
+	1. Updated DB Tables, Classes, Business and DataAccess
+	2. Delete Person Table and add fields into Owner(2x) and Employee(1x)
+WILL DO IN THE NEXT 24 HOURS
+	1. Delete Observation in Owner
+	2. Modify Picture as NULL (Owner, Animal and Employee)
+	2. Work on capture photo / Print / Send PDF by E-mail
+WHERE I NEED HELP IS...
+	1. Find a tutorial how to:
+			* capture photo and save into AzureDB
+			* Print 
+			* Generate PDF* and send by e-mail
 
+
+*** April 21 Lorena *** AFTERNOON
+DID SINCE LAST SCRUM:
+	1. Worked in the UI changes/fixes (after discussion about functionalities)
+WILL DO IN THE NEXT 24 HOURS
+	1. Work on the events implementation
+	2. to finalize UI modification
+WHERE I NEED HELP IS...
+	1. Save Image in AzureDB
+-----------------------------------------------------------------------------------------------------------------------------
 
 
 
