@@ -33,7 +33,7 @@
                             <Label Content="Search for Owner's Name, Phone or Animal Name" Margin="10,10,0,642" HorizontalAlignment="Left" Width="281"/>
                             <TextBox x:Name="tbConsultationSearch" Height="23" TextWrapping="Wrap" Margin="10,43,95,614"/>
                             <Button Click="Button_Click_ConsultationSearch" Name="btnConsultationSearch" Content="Search" Margin="271,43,10,614"/>
-                            <ListView Margin="10,71,10,0" x:Name="lvConsultationSearchResult" MouseDoubleClick="lvConsultationSearchResult_NewConsult_MouseDoubleClick">
+                            <ListView Margin="10,71,10,0" x:Name="lvConsultationSearchResult" MouseLeftButtonUp="lvConsultationSearchResult_MouseLeftButtonUp">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="130" Header="Name"/>
@@ -310,12 +310,12 @@
                                         <Grid Height="665">
                                             <Label Content="Search by Name or Phone Number" Margin="10,10,0,632" HorizontalAlignment="Left" Width="auto"/>
                                             <TextBox x:Name="tbRegistryOwnerSearch" Height="23" TextWrapping="Wrap" Margin="10,33,117,609"/>
-                                            <Button Content="Search" Margin="271,33,10,609"/>
-                                            <ListView Margin="10,61,10,10" x:Name="lvRegistryOwnerSearchResult">
+                                            <Button Content="Search" Margin="271,33,10,609" Click="RegistryOwnerSearchResult_ButtonSearch_Click"/>
+                                            <ListView Margin="10,61,10,10" x:Name="lvRegistryOwnerSearchResult" SelectionChanged="lvRegistryOwnerSearchResult_SelectionChanged">
                                                 <ListView.View>
                                                     <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="45" Header="ID"/>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding FullName}" Width="300" Header="Full Name"/>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Path=ID}" Width="45" Header="ID"/>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Path=FullName}" Width="300" Header="Full Name"/>
                                                     </GridView>
                                                 </ListView.View>
                                             </ListView>
@@ -336,7 +336,7 @@
                                                     <Label Content="First Name" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
                                                     <TextBox x:Name="tbRegistryOwner1FName" HorizontalAlignment="Left" Height="23" Margin="10,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                                                     <Label Content="Middle Name" HorizontalAlignment="Left" Margin="135,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.737,1.038"/>
-                                                    <TextBox x:Name="tbRegistryOwner1MNAme" HorizontalAlignment="Left" Height="23" Margin="135,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                                    <TextBox x:Name="tbRegistryOwner1MName" HorizontalAlignment="Left" Height="23" Margin="135,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                                                     <Label Content="Last Name" HorizontalAlignment="Left" Margin="260,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.737,1.038"/>
                                                     <TextBox x:Name="tbRegistryOwner1LName" HorizontalAlignment="Left" Height="23" Margin="260,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                                                     <Label Content="Number" HorizontalAlignment="Left" Margin="10,54,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.481,0.385"/>
@@ -423,11 +423,16 @@
                                                     </Border>
                                                 </Grid>
                                             </Expander>
-                                            <Button x:Name="btnRegistryOwnerSave" Content="Save Record" HorizontalAlignment="Left" Margin="423,632,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
+                                            <Button x:Name="btnRegistryOwnerSave" Click="btnRegistryOwnerSave_Click" Content="Save Record" HorizontalAlignment="Left" Margin="423,632,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
                                             <Button x:Name="btnRegistryOwnerExit" Content="Exit" HorizontalAlignment="Left" Margin="589,632,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
-                                            <Label Content="Status" HorizontalAlignment="Left" Margin="684,10,0,0" VerticalAlignment="Top"/>
-                                            <RadioButton Content="Active" HorizontalAlignment="Left" Margin="684,32,0,0" VerticalAlignment="Top"/>
-                                            <RadioButton Content="Inactive" HorizontalAlignment="Left" Margin="684,52,0,0" VerticalAlignment="Top"/>
+
+                                            <GroupBox Name="gb_rb_OwnerStatus" Header="Satus" Width="100" Margin="650,10,10,612">
+                                                <StackPanel>
+                                                    <RadioButton Name="rbOwnerStatus_Active" Content="Active" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusOwner" IsChecked="True"/>
+                                                    <RadioButton Name="rbOwnerStatus_Inactive" Content="Inactive" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusOwner" Height="18"/>
+                                                </StackPanel>
+                                            </GroupBox>
+
                                         </Grid>
                                     </StackPanel>
                                     <GridSplitter Grid.Column="1" Background="Gray" Width="2" Margin="0,0,402,0" />
@@ -627,6 +632,7 @@
                                     <GridSplitter Grid.Column="1" Background="Gray" Width="2" Margin="0,0,402,0" />
                                 </Grid>
                             </TabItem>
+
                         </TabControl>
                     </StackPanel>
                 </Grid>
