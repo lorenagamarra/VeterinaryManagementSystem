@@ -83,7 +83,6 @@
     <Compile Include="Business\ConsultationBusiness.cs" />
     <Compile Include="Business\EmployeeBusiness.cs" />
     <Compile Include="Business\OwnerBusiness.cs" />
-    <Compile Include="Business\PersonBusiness.cs" />
     <Compile Include="Business\ServicesProductsBusiness.cs" />
     <Compile Include="Business\VaccineBusiness.cs" />
     <Compile Include="Business\VaccineHistoricBusiness.cs" />
@@ -92,7 +91,6 @@
     <Compile Include="Classes\Consultation.cs" />
     <Compile Include="Classes\Employee.cs" />
     <Compile Include="Classes\Owner.cs" />
-    <Compile Include="Classes\Person.cs" />
     <Compile Include="Classes\ServicesProducts.cs" />
     <Compile Include="Classes\Vaccine.cs" />
     <Compile Include="Classes\VaccineHistoric.cs" />
@@ -105,7 +103,6 @@
     <Compile Include="DataAccess\ConsultationDataAccess.cs" />
     <Compile Include="DataAccess\EmployeeDataAccess.cs" />
     <Compile Include="DataAccess\OwnerDataAccess.cs" />
-    <Compile Include="DataAccess\PersonDataAccess.cs" />
     <Compile Include="DataAccess\ServicesProductsDataAccess.cs" />
     <Compile Include="DataAccess\VaccineDataAccess.cs" />
     <Compile Include="DataAccess\VaccineHistoricDataAccess.cs" />
