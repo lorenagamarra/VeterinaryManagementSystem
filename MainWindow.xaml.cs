@@ -48,19 +48,7 @@ namespace VeterinaryManagementSystem
         List<VaccineHistoric> vaccineHistoryList = new List<VaccineHistoric>();
 
         private bool unsavedChanges = false;
-
-
-
-
-
-        byte[] imagen;
-        BitmapDecoder bitCoder;
-
-
-
-
-
-
+        
 
         public MainWindow()
         {
@@ -174,11 +162,7 @@ namespace VeterinaryManagementSystem
             //Receiving data from UI
             //TODO: Como armazenar a imagem no BD
             //byte [] picture_01 = imgRegistryOwner1Image.
-
-
             
-
-
             string firstName_01 = tbRegistryOwner1LName.Text;
             string middleName_01 = tbRegistryOwner1MName.Text;
             string lastName_01 = tbRegistryOwner1LName.Text;
@@ -233,6 +217,7 @@ namespace VeterinaryManagementSystem
             string email_02 = tbRegistryOwner2Email.Text;
             //TODO: Status (Active / Inactive)
             string status = gb_rb_OwnerStatus.Content.ToString();
+            
             //Sending data to DB
             try
             {
@@ -278,58 +263,6 @@ namespace VeterinaryManagementSystem
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void RegistryOwner1ImageButton_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog OD = new OpenFileDialog();
-            OD.Filter = "Imagenes jpg(*.jpg)| *.jpg | All Files(*.*) | *.*";
-            if (OD.ShowDialog() == true)
-            {
-                using (Stream stream = OD.OpenFile())
-                {
-                    bitCoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat,
-                        BitmapCacheOption.OnLoad);
-                    imgRegistryOwner1Image.Source = bitCoder.Frames[0];
-                    txtRutaImagen.Text = OD.FileName;
-                }
-            }
-            else
-            {
-                imgRegistryOwner1Image.Source = null;
-            }
-            System.IO.FileStream fs;
-            fs = new System.IO.FileStream(txtRutaImagen.Text, System.IO.FileMode.Open);
-            imagen = new byte[Convert.ToInt32(fs.Length.ToString())];
-            fs.Read(imagen, 0, imagen.Length);
-        }
-        
-
-
-
-
-        private byte[] BitmapSourceToByteArray(BitmapSource image)
-        {
-            using (var stream = new MemoryStream())
-            {
-                var encoder = new PngBitmapEncoder(); // or some other encoder
-                encoder.Frames.Add(BitmapFrame.Create(image));
-                encoder.Save(stream);
-                return stream.ToArray();
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         //Registry -> Owner -> Button Exit Event
         private void btnRegistryOwnerExit_Click(object sender, RoutedEventArgs e)

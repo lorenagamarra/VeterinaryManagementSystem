@@ -377,8 +377,6 @@
                                                     <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="202" Margin="535,10,0,0" VerticalAlignment="Top" Width="202" Background="White">
                                                         <Image x:Name="imgRegistryOwner1Image" HorizontalAlignment="Left" Height="200" Margin="0,0,0,0" VerticalAlignment="Top" Width="200" MaxWidth="200" MaxHeight="200" UseLayoutRounding="False" Stretch="Fill"/>
                                                     </Border>
-                                                    <TextBox Name="txtRutaImagen" HorizontalAlignment="Left" Height="23" Margin="410,40,0,0" TextWrapping="Wrap" Text="File Path" VerticalAlignment="Top" Width="120"/>
-                                                    <Button Click="RegistryOwner1ImageButton_Click" Content=". . ." HorizontalAlignment="Left" Margin="430,68,0,0" VerticalAlignment="Top" Width="76"/>
                                                 </Grid>
                                             </Expander>
                                             <Expander IsExpanded="False"  Header="Second Owner (Optional)" HorizontalAlignment="Left" Height="246" Margin="10,318,0,0" VerticalAlignment="Top" Width="749">
