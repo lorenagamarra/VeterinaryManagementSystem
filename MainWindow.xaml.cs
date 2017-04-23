@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +46,21 @@ namespace VeterinaryManagementSystem
         List<ServicesProducts> servicesProductsList = new List<ServicesProducts>();
         List<Vaccine> vaccineList = new List<Vaccine>();
         List<VaccineHistoric> vaccineHistoryList = new List<VaccineHistoric>();
+
+        private bool unsavedChanges = false;
+
+
+
+
+
+        byte[] imagen;
+        BitmapDecoder bitCoder;
+
+
+
+
+
+
 
         public MainWindow()
         {
@@ -87,14 +104,16 @@ namespace VeterinaryManagementSystem
         {
 
         }
-
-       
-
+                
+        /******************************************************************************************
+         * REGISTRY => OWNER
+         ******************************************************************************************/
+        //Registry -> Owner -> Search Button Event
+        //Se já vamos usar LINQ para a pesquisa, precisa colocar botão "Search"?
         private void RegistryOwnerSearchResult_ButtonSearch_Click(object sender, RoutedEventArgs e)
         {
 
         }
-
         //Registry -> Owner -> Search List Result
         private void lvRegistryOwnerSearchResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -105,10 +124,10 @@ namespace VeterinaryManagementSystem
                 return;
             }
             Owner owner = ownerList[index];
+            //General Information for both owners
             tbRegistryOwnerDateRegistration.Text = owner.RegistrationDate + "";
             tbRegistryOwnerID.Text = owner.Id + "";
-
-
+            //Owner 1
             tbRegistryOwner1FName.Text = owner.FirstName_01;
             tbRegistryOwner1MName.Text = owner.MiddleName_01;
             tbRegistryOwner1LName.Text = owner.LastName_01;
@@ -124,7 +143,8 @@ namespace VeterinaryManagementSystem
             //TOD: Descobrir qual é a propriedade da imagem que guarda o que a imagem tem dentro..
             //Content? Text?
             //imgRegistryOwner1Image.Source = owner.Picture_01;
-            
+
+            //Owner 2
             tbRegistryOwner2FName.Text = owner.FirstName_02;
             tbRegistryOwner2MName.Text = owner.MiddleName_02;
             tbRegistryOwner2LName.Text = owner.LastName_02;
@@ -140,15 +160,25 @@ namespace VeterinaryManagementSystem
             //TOD: Descobrir qual é a propriedade da imagem que guarda o que a imagem tem dentro..
             //Content? Text?
             //imgRegistryOwner2Image.Source = owner.Picture_02;
-
         }
-        //Registry -> Owner -> Save/Add
+        //Registry -> Owner -> Buttons Save/Add Record Event
         private void btnRegistryOwnerSave_Click(object sender, RoutedEventArgs e)
+        {
+            SavingOwnerRegistryOnDB();
+        }
+        //Registry -> Owner -> Method Saving to DB
+        private void SavingOwnerRegistryOnDB()
         {
             DateTime registrationDate = DateTime.Now;
             //Owner 1
-            //TODO Como armazenar a imagem no BD
+            //Receiving data from UI
+            //TODO: Como armazenar a imagem no BD
             //byte [] picture_01 = imgRegistryOwner1Image.
+
+
+            
+
+
             string firstName_01 = tbRegistryOwner1LName.Text;
             string middleName_01 = tbRegistryOwner1MName.Text;
             string lastName_01 = tbRegistryOwner1LName.Text;
@@ -173,10 +203,9 @@ namespace VeterinaryManagementSystem
                 return;
             }
             string email_01 = tbRegistryOwner1Email.Text;
-
-
             //Owner 2
-            //TODO Como armazenar a imagem no BD
+            //Receiving data from UI
+            //TODO: Como armazenar a imagem no BD
             //byte [] picture_02 = imgRegistryOwner1Image.
             string firstName_02 = tbRegistryOwner2LName.Text;
             string middleName_02 = tbRegistryOwner2MName.Text;
@@ -202,17 +231,17 @@ namespace VeterinaryManagementSystem
                 return;
             }
             string email_02 = tbRegistryOwner2Email.Text;
-
-            //TODO Status (Active / Inactive)
+            //TODO: Status (Active / Inactive)
             string status = gb_rb_OwnerStatus.Content.ToString();
-
-
+            //Sending data to DB
             try
             {
+                //Doing this way because we don't have Constructor
                 var ownerRegistry = new Owner
                 {
                     RegistrationDate = registrationDate,
-
+                    Status = status,
+                    //Owner 1
                     //Picture_01 = picture_01,
                     FirstName_01 = firstName_01,
                     MiddleName_01 = middleName_01,
@@ -226,7 +255,7 @@ namespace VeterinaryManagementSystem
                     PhoneNumber_01 = phoneNumber_01,
                     OtherPhoneNumber_01 = otherPhoneNumber_01,
                     Email_01 = email_01,
-
+                    //Owner 2
                     //Picture_02 = picture_02,
                     FirstName_02 = firstName_02,
                     MiddleName_02 = middleName_02,
@@ -239,12 +268,8 @@ namespace VeterinaryManagementSystem
                     PostalCode_02 = postalCode_02,
                     PhoneNumber_02 = phoneNumber_02,
                     OtherPhoneNumber_02 = otherPhoneNumber_02,
-                    Email_02 = email_02,
-
-                    Status = status
+                    Email_02 = email_02
                 };
-
-                //Owner ownerRegistry = new Owner();
                 ownerList.Add(ownerRegistry);
                 lvRegistryOwnerSearchResult.Items.Refresh();
             }
@@ -253,7 +278,241 @@ namespace VeterinaryManagementSystem
                 MessageBox.Show(ex.Message);
             }
         }
-     
+
+
+        private void imgRegistryOwner1Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            OpenFileDialog OD = new OpenFileDialog();
+            OD.Filter = "Imagenes jpg(*.jpg)| *.jpg | All Files(*.*) | *.*";
+            if (OD.ShowDialog() == true)
+            {
+                using (Stream stream = OD.OpenFile())
+                {
+                    bitCoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat,
+                        BitmapCacheOption.OnLoad);
+                    imgRegistryOwner1Image.Source = bitCoder.Frames[0];
+                    txtRutaImagen.Text = OD.FileName;
+                }
+            }
+            else
+            {
+                imgRegistryOwner1Image.Source = null;
+            }
+            System.IO.FileStream fs;
+            fs = new System.IO.FileStream(txtRutaImagen.Text, System.IO.FileMode.Open);
+            imagen = new byte[Convert.ToInt32(fs.Length.ToString())];
+            fs.Read(imagen, 0, imagen.Length);
+        }
+
+
+
+
+        private byte[] BitmapSourceToByteArray(BitmapSource image)
+        {
+            using (var stream = new MemoryStream())
+            {
+                var encoder = new PngBitmapEncoder(); // or some other encoder
+                encoder.Frames.Add(BitmapFrame.Create(image));
+                encoder.Save(stream);
+                return stream.ToArray();
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //Registry -> Owner -> Button Exit Event
+        private void btnRegistryOwnerExit_Click(object sender, RoutedEventArgs e)
+        {
+            if (unsavedChanges)
+            {
+                MessageBoxResult result = MessageBox.Show("Save unsaved changes?", "Unsaved changes",
+                    MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                switch (result)
+                {
+                    case MessageBoxResult.No:
+                        OwnerForm_clearFields();
+                        break;
+                    case MessageBoxResult.Cancel:
+                        break;
+                    case MessageBoxResult.Yes:
+                        SavingOwnerRegistryOnDB();
+                        break;
+                }
+            }
+        }
+        //Registry -> Owner -> Text changed on TextBox around the Registration window
+        private void tbOwnerTextChanged(object sender, TextChangedEventArgs e)
+        {
+            unsavedChanges = true;
+        }
+        //Registry -> Owner -> Method to clear the fields
+        private void OwnerForm_clearFields()
+        {            
+            tbRegistryOwnerDateRegistration.Text = String.Empty;
+            tbRegistryOwnerID.Text = String.Empty;
+            //Owner 1
+            tbRegistryOwner1FName.Text = String.Empty;
+            tbRegistryOwner1MName.Text = String.Empty;
+            tbRegistryOwner1LName.Text = String.Empty;
+            tbRegistryOwner1NumberAddress.Text = String.Empty;
+            tbRegistryOwner1Address.Text = String.Empty;
+            tbRegistryOwner1Complement.Text = String.Empty;
+            tbRegistryOwner1City.Text = String.Empty;
+            //cbRegistryOwner1Province.Text = String.Empty;
+            tbRegistryOwner1PostalCode.Text = String.Empty;
+            tbRegistryOwner1Phone.Text = String.Empty;
+            tbRegistryOwner1OtherNumber.Text = String.Empty;
+            tbRegistryOwner1Email.Text = String.Empty;
+            //TOD: Descobrir qual é a propriedade da imagem que guarda o que a imagem tem dentro..
+            //Content? Text?
+            //imgRegistryOwner1Image.Source = owner.Picture_01;
+
+            //Owner 2
+            tbRegistryOwner2FName.Text = String.Empty;
+            tbRegistryOwner2MName.Text = String.Empty;
+            tbRegistryOwner2LName.Text = String.Empty;
+            tbRegistryOwner2NumberAddress.Text = String.Empty;
+            tbRegistryOwner2Address.Text = String.Empty;
+            tbRegistryOwner2Complement.Text = String.Empty;
+            tbRegistryOwner2City.Text = String.Empty;
+            cbRegistryOwner2Province.Text = String.Empty;
+            tbRegistryOwner2PostalCode.Text = String.Empty;
+            tbRegistryOwner2Phone.Text = String.Empty;
+            tbRegistryOwner2OtherNumber.Text = String.Empty;
+            tbRegistryOwner2Email.Text = String.Empty;
+            //TOD: Descobrir qual é a propriedade da imagem que guarda o que a imagem tem dentro..
+            //Content? Text?
+            //imgRegistryOwner1Image.Source = owner.Picture_01;
+        }
+        /******************************************************************************************
+        * REGISTRY => ANIMAL
+        ******************************************************************************************/
+        private void RegistryAnimalSearchResult_ButtonSearch_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        //Registry -> Animal -> Search List Result
+        private void lvRegistryAnimalSearchResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = lvRegistryAnimalSearchResult.SelectedIndex;
+            if (index < 0)
+            {
+                tbRegistryAnimalDateRegistration.Text = "";
+                return;
+            }
+            Animal animal = animalList[index];
+            tbRegistryAnimalDateRegistration.Text = animal.Datereg + "";
+            //FIXME: Ao invés de mostrar o número do Id do Owner, mostrar o nome (se possível completo)
+            tbRegistryAnimalOwner1FName.Text = animal.OwnerID + "";
+            //TODO: Status
+            tbRegistryAnimalName.Text = animal.Name;
+            //TODO: Puxar no DB qual Gender está salvo, Male/Female
+            //rbRegistryAnimalFemale.IsChecked = 
+            dpRegistryAnimalBirthday.Text = animal.Dateofbirth + "";
+            tbRegistryAnimalWeight.Text = animal.Weight + "";
+            cbRegistryAnimalSpecies.Text = animal.Specie;
+            //TODO: Puxar a Raca que esta relacionada com esse ID
+            cbRegistryAnimalBreeds.Text = animal.BreedID + "";
+            tbRegistryAnimalIdentification.Text = animal.Identification;
+            tbRegistryAnimalFood.Text = animal.Food;
+            tbRegistryAnimalPhobias.Text = animal.Phobia;
+            //TODO: Como puxar do DB o Flagset
+            // animal.Flagset;
+
+            /* TODO: Puxar dados da tabela de Historico de Vacinas para a 
+            * tab de Vaccines
+            * E para o Vet History
+            */
+        }
+
+
+        //Registry -> Animal -> Method Saving to DB
+        private void SavingAnimalRegistryOnDB()
+        {
+            DateTime datereg = DateTime.Now;
+
+            //Receiving data from UI
+            //TODO: Como armazenar a imagem no BD
+            //byte [] picture_01 = imgRegistryOwner1Image.
+            //FIXME: arrumar esses ID...
+            string ownerID = tbRegistryOwner1LName.Text;
+            string breedID = cbRegistryAnimalBreeds.Text;
+            string name = tbRegistryAnimalName.Text;
+            string specie = cbRegistryAnimalSpecies.Text;
+            string gender = rbRegistryAnimalFemale.ContentStringFormat;
+            
+            DateTime dateofbirth = Convert.ToDateTime(dpRegistryAnimalBirthday.Text);
+            decimal weight = decimal.Parse(tbConsultationAnimalWeight.Text, CultureInfo.InvariantCulture);
+            Console.WriteLine(weight.ToString(CultureInfo.InvariantCulture));
+            string identification = tbRegistryAnimalIdentification.Text;
+            string food = tbRegistryAnimalFood.Text;
+            string phobia = tbRegistryAnimalPhobias.Text;
+            //string flagset = tbRegistryOwner1Phone.Text;
+            string vethistoric = tbRegistryAnimalVetHistory.Text;
+            //TODO: Status (Active / Inactive)
+            string status = gb_rb_OwnerStatus.Content.ToString();
+
+            //Sending data to DB
+            try
+            {
+                //Doing this way because we don't have Constructor
+                var animalRegistry = new Animal
+                {
+                    Datereg = datereg,
+                    //Picture = picture,
+                   // OwnerID = ownerID,
+                    //BreedID = breedID,
+                    //VachistID = vachistID,
+                    Name = name,
+                    Specie = specie,
+                    Gender = gender,
+                    Dateofbirth = dateofbirth,
+                    Weight = weight,
+                    
+                    Identification = identification,
+                    Food = food,
+                    Phobia = phobia,
+                   // Flagset = flagset,
+                    Vethistoric = vethistoric
+                };
+                animalList.Add(animalRegistry);
+                lvRegistryOwnerSearchResult.Items.Refresh();
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        //TODO: Onde usar isso??? Verifica se o valor e nulo...
+        private void dpRegistryAnimalBirthday_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // ... Get DatePicker reference.
+            var picker = sender as DatePicker;
+            // ... Get nullable DateTime from SelectedDate.
+            DateTime? date = picker.SelectedDate;
+            if (date == null)
+            {
+                // ... A null object.
+                this.Title = "No date";
+            }
+            else
+            {
+                // ... No need to display the time.
+                this.Title = date.Value.ToShortDateString();
+            }
+        }
+
         
     }
 }
