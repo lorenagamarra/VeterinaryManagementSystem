@@ -279,8 +279,7 @@ namespace VeterinaryManagementSystem
             }
         }
 
-
-        private void imgRegistryOwner1Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void RegistryOwner1ImageButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog OD = new OpenFileDialog();
             OD.Filter = "Imagenes jpg(*.jpg)| *.jpg | All Files(*.*) | *.*";
@@ -303,6 +302,7 @@ namespace VeterinaryManagementSystem
             imagen = new byte[Convert.ToInt32(fs.Length.ToString())];
             fs.Read(imagen, 0, imagen.Length);
         }
+        
 
 
 

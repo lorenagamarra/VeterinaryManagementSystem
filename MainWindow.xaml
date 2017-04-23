@@ -375,9 +375,10 @@
                                                     <Label Content="Other Number" HorizontalAlignment="Left" Margin="105,159,0,0" VerticalAlignment="Top"/>
                                                     <TextBox TextChanged="tbOwnerTextChanged" x:Name="tbRegistryOwner1OtherNumber" HorizontalAlignment="Left" Height="23" Margin="105,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
                                                     <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="202" Margin="535,10,0,0" VerticalAlignment="Top" Width="202" Background="White">
-                                                        <Image MouseLeftButtonUp="imgRegistryOwner1Image_MouseLeftButtonUp" x:Name="imgRegistryOwner1Image" HorizontalAlignment="Left" Height="200" Margin="0,0,0,0" VerticalAlignment="Top" Width="200" MaxWidth="200" MaxHeight="200" UseLayoutRounding="False" Stretch="Fill"/>
+                                                        <Image x:Name="imgRegistryOwner1Image" HorizontalAlignment="Left" Height="200" Margin="0,0,0,0" VerticalAlignment="Top" Width="200" MaxWidth="200" MaxHeight="200" UseLayoutRounding="False" Stretch="Fill"/>
                                                     </Border>
-                                                    <TextBox Name="txtRutaImagen" HorizontalAlignment="Left" Height="23" Margin="399,131,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                                                    <TextBox Name="txtRutaImagen" HorizontalAlignment="Left" Height="23" Margin="410,40,0,0" TextWrapping="Wrap" Text="File Path" VerticalAlignment="Top" Width="120"/>
+                                                    <Button Click="RegistryOwner1ImageButton_Click" Content=". . ." HorizontalAlignment="Left" Margin="430,68,0,0" VerticalAlignment="Top" Width="76"/>
                                                 </Grid>
                                             </Expander>
                                             <Expander IsExpanded="False"  Header="Second Owner (Optional)" HorizontalAlignment="Left" Height="246" Margin="10,318,0,0" VerticalAlignment="Top" Width="749">
@@ -429,7 +430,7 @@
                                             <Button x:Name="btnRegistryOwnerSave" Click="btnRegistryOwnerSave_Click" Content="Save Record" HorizontalAlignment="Left" Margin="423,632,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
                                             <Button x:Name="btnRegistryOwnerExit" Click="btnRegistryOwnerExit_Click" Content="Exit" HorizontalAlignment="Left" Margin="589,632,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
 
-                                            <GroupBox Name="gb_rb_OwnerStatus" Header="Satus" Width="100" Margin="650,10,10,612">
+                                            <GroupBox Name="gb_rb_OwnerStatus" Header="Satus" Width="100" Margin="650,10,10,603">
                                                 <StackPanel>
                                                     <RadioButton Name="rbOwnerStatus_Active" Content="Active" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusOwner" IsChecked="True"/>
                                                     <RadioButton Name="rbOwnerStatus_Inactive" Content="Inactive" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusOwner" Height="18"/>
