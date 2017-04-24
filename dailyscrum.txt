@@ -215,6 +215,33 @@ WHERE I NEED HELP IS...
 -----------------------------------------------------------------------------------------------------------------------------
 
 
+-----------------------------------------------------------------------------------------------------------------------------
+*** April 24 Nedis ***
+DID SINCE LAST SCRUM:
+	1. Founded posible solution to Capture Image (with VB) - Need confirm if we can use this tecnology
+WILL DO IN THE NEXT 24 HOURS
+	1. Delete Observation in Owner
+	2. Modify Picture as NULL (Owner, Animal and Employee)
+	3. Work on implement events
+WHERE I NEED HELP IS...
+	1. Find a tutorial how to:
+			* Capture Image
+			* Print 
+			* Generate PDF* and send by e-mail
+
+
+*** April 24 Lorena ***
+DID SINCE LAST SCRUM:
+	1. Founded posible solution to capture image in C# .NET
+	2. Worked in Owner registry implementation
+	3. Started on Animal registry implementation
+WILL DO IN THE NEXT 24 HOURS
+	1. Work on Owner registry
+	2. Try to implement capture photo
+WHERE I NEED HELP IS...
+	1. Save Image in AzureDB
+	2. How to save/retreive to/from DB the ComboBox, CheckBoxGroup (flag set) and RadioButtonGroup (status/gender) 
+-----------------------------------------------------------------------------------------------------------------------------
 
 
 
