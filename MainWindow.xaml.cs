@@ -66,6 +66,12 @@ namespace VeterinaryManagementSystem
                 InitializeComponent();
 
                 lvRegistryOwnerSearchResult.ItemsSource = ownerList;
+                
+                //Add date on date fields
+                string strTODAY = Convert.ToString(DateTime.Now);
+                tbRegistryOwnerDateRegistration.Text = strTODAY;
+
+
                 //RefreshBookList();
                 // TODO: load genres into combo box
                 //allGenres = db.GetAllGenres();
@@ -96,12 +102,8 @@ namespace VeterinaryManagementSystem
         /******************************************************************************************
          * REGISTRY => OWNER
          ******************************************************************************************/
-        //Registry -> Owner -> Search Button Event
-        //Se já vamos usar LINQ para a pesquisa, precisa colocar botão "Search"?
-        private void RegistryOwnerSearchResult_ButtonSearch_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
+
         //Registry -> Owner -> Search List Result
         private void lvRegistryOwnerSearchResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -148,7 +150,18 @@ namespace VeterinaryManagementSystem
             //TOD: Descobrir qual é a propriedade da imagem que guarda o que a imagem tem dentro..
             //Content? Text?
             //imgRegistryOwner2Image.Source = owner.Picture_02;
-        }
+            string verifyOwnerCkbStatus = owner.Status;
+            if (verifyOwnerCkbStatus == "ACTIVE") {
+                rbOwnerStatus_Active.IsChecked = true;
+                rbOwnerStatus_Inactive.IsChecked = false;
+            }
+            else{
+                rbOwnerStatus_Active.IsChecked = false;
+                rbOwnerStatus_Inactive.IsChecked = true;
+            }
+
+
+    }
         //Registry -> Owner -> Buttons Save/Add Record Event
         private void btnRegistryOwnerSave_Click(object sender, RoutedEventArgs e)
         {
@@ -162,7 +175,19 @@ namespace VeterinaryManagementSystem
             //Receiving data from UI
             //TODO: Como armazenar a imagem no BD
             //byte [] picture_01 = imgRegistryOwner1Image.
-            
+
+
+            string RegistryOwnerStatusChoice;
+            if (rbOwnerStatus_Active.IsChecked == true)
+            {
+                RegistryOwnerStatusChoice = "ACTIVE";
+            }
+            else
+            {
+                RegistryOwnerStatusChoice = "INACTIVE";
+            }
+
+
             string firstName_01 = tbRegistryOwner1LName.Text;
             string middleName_01 = tbRegistryOwner1MName.Text;
             string lastName_01 = tbRegistryOwner1LName.Text;
@@ -176,16 +201,19 @@ namespace VeterinaryManagementSystem
             int phoneNumber_01;
             if (!int.TryParse(phone1, out phoneNumber_01))
             {
-                MessageBox.Show("Phone Number must contain only numbers");
+                MessageBox.Show("Phone Number Ownwer 1 must contain only numbers");
                 return;
             }
             string phoneOther1 = tbRegistryOwner1OtherNumber.Text;
             int otherPhoneNumber_01;
-            if (!int.TryParse(phoneOther1, out otherPhoneNumber_01))
-            {
-                MessageBox.Show("Other Number must contain only numbers");
-                return;
-            }
+
+
+                if (!int.TryParse(phoneOther1, out otherPhoneNumber_01))
+                {
+                    MessageBox.Show("Other Number  Ownwer 1 must contain only numbers");
+                    return;
+                }
+
             string email_01 = tbRegistryOwner1Email.Text;
             //Owner 2
             //Receiving data from UI
@@ -204,14 +232,14 @@ namespace VeterinaryManagementSystem
             int phoneNumber_02;
             if (!int.TryParse(phone2, out phoneNumber_02))
             {
-                MessageBox.Show("Phone Number must contain only numbers");
+                MessageBox.Show("Phone Number  Ownwer 2 must contain only numbers");
                 return;
             }
             string phoneOther2 = tbRegistryOwner2OtherNumber.Text;
             int otherPhoneNumber_02;
             if (!int.TryParse(phoneOther2, out otherPhoneNumber_02))
             {
-                MessageBox.Show("Other Number must contain only numbers");
+                MessageBox.Show("Other Number  Ownwer 2 must contain only numbers");
                 return;
             }
             string email_02 = tbRegistryOwner2Email.Text;
@@ -446,6 +474,23 @@ namespace VeterinaryManagementSystem
             }
         }
 
-        
+        private void tbRegistryOwnerSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string filter = tbRegistryOwnerSearch.Text.ToLower();
+            if (filter == "")
+            {
+                lvRegistryOwnerSearchResult.ItemsSource = dbOwner.GetAllOwnersActives();
+            }
+            else
+            {
+                List<Owner> list = dbOwner.GetAllOwnersActives();
+                var filteredList = from o in list where o.FirstName_01.ToLower().Contains(filter) || o.PhoneNumber_01.ToString().Contains(filter) || o.FirstName_02.ToLower().Contains(filter) || o.PhoneNumber_02.ToString().Contains(filter) select o;
+
+                lvRegistryOwnerSearchResult.ItemsSource = filteredList;
+            }
+        }
     }
 }
+
+
+//List<Owner> ownerList = new List<Owner>();

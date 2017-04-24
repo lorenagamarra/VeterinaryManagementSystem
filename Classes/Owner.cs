@@ -63,9 +63,7 @@ namespace VeterinaryManagementSystem.Classes
         public int OtherPhoneNumber_02 { get; set; }
 
         public String Email_02 { get; set; }
-
-        public string Observation { get; set; }
-        
+      
         public string Status { get; set; }
 
     }

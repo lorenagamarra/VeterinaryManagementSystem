@@ -41,9 +41,12 @@ namespace VeterinaryManagementSystem.Business
 
             //START owner 01
 
-            if (owner.Picture_01 == null)
+            if ((!String.IsNullOrEmpty(owner.Picture_01.ToString())))
             {
-                throw new Exception("owner_01 has null picture");
+                if (owner.Picture_01 == null)
+                {
+                    throw new Exception("owner_01 has null picture");
+                }
             }
 
             if (owner.FirstName_01.Length < 2 || owner.FirstName_01.Length > 20)
@@ -120,9 +123,12 @@ namespace VeterinaryManagementSystem.Business
 
             //START owner 02
 
-            if (owner.Picture_02 == null)
+            if ((!String.IsNullOrEmpty(owner.Picture_02.ToString())))
             {
-                throw new Exception("owner_02 has null picture");
+                if (owner.Picture_02 == null)
+                {
+                    throw new Exception("owner_02 has null picture");
+                }
             }
 
             if (owner.FirstName_02.Length < 2 || owner.FirstName_02.Length > 20)
@@ -196,16 +202,7 @@ namespace VeterinaryManagementSystem.Business
 
             //END owner 02
 
-
-
-            if ((!String.IsNullOrEmpty(owner.Observation)))
-            {
-                if (owner.Observation.Length < 2 || owner.Observation.Length > 500)
-                {
-                    throw new Exception("Owner Observation can be empty or be 2-500 characters long");
-                }
-            }
-            
+          
             if (String.IsNullOrEmpty(owner.Status))
             {
                 throw new Exception("Owner has null Status");

@@ -309,8 +309,8 @@
                                     <StackPanel Grid.Column="0" Margin="0,0,0,10">
                                         <Grid Height="665">
                                             <Label Content="Search by Name or Phone Number" Margin="10,10,0,632" HorizontalAlignment="Left" Width="auto"/>
-                                            <TextBox x:Name="tbRegistryOwnerSearch" Height="23" TextWrapping="Wrap" Margin="10,33,117,609"/>
-                                            <Button Content="Search" Margin="271,33,10,609" Click="RegistryOwnerSearchResult_ButtonSearch_Click"/>
+                                            <TextBox x:Name="tbRegistryOwnerSearch" Height="23" TextWrapping="Wrap" Margin="10,33,117,609" TextChanged="tbRegistryOwnerSearch_TextChanged"/>
+                                            <Button Content="Search" Margin="271,33,10,609"/>
                                             <ListView Margin="10,61,10,10" x:Name="lvRegistryOwnerSearchResult" SelectionChanged="lvRegistryOwnerSearchResult_SelectionChanged">
                                                 <ListView.View>
                                                     <GridView>
