@@ -19,7 +19,12 @@
 
     <Grid Margin="0,0,0,0">
         <TabControl TabStripPlacement="Left" HorizontalAlignment="Left" Width="1342" Margin="0,0,0,3">
-            <TabItem Header="Consultation">
+            <TabItem Header="Home" Name="Home">
+                <Grid>
+                    <Image Source="D:\IPD9\BitBucket\Project\VeterinaryManagementSystem\Images\background image.jpg"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Consultation" >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <!--Defining column 0-->
@@ -31,8 +36,7 @@
                     <StackPanel Grid.Column="0">
                         <Grid Height="680">
                             <Label Content="Search for Owner's Name, Phone or Animal Name" Margin="10,10,0,642" HorizontalAlignment="Left" Width="281"/>
-                            <TextBox x:Name="tbConsultationSearch" Height="23" TextWrapping="Wrap" Margin="10,43,95,614"/>
-                            <Button Click="Button_Click_ConsultationSearch" Name="btnConsultationSearch" Content="Search" Margin="271,43,10,614"/>
+                            <TextBox x:Name="tbConsultationSearch" Height="23" TextWrapping="Wrap" Margin="10,43,10,614"/>
                             <ListView Margin="10,71,10,0" x:Name="lvConsultationSearchResult" MouseLeftButtonUp="lvConsultationSearchResult_MouseLeftButtonUp">
                                 <ListView.View>
                                     <GridView>
@@ -54,7 +58,11 @@
                                         <TextBox x:Name="tbConsultationOwnerDateRegistration" HorizontalAlignment="Left" Height="23" Margin="131,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                                         <Label Content="ID" HorizontalAlignment="Left" Margin="256,10,0,0" VerticalAlignment="Top"/>
                                         <TextBox x:Name="tbConsultationOwnerID" HorizontalAlignment="Left" Height="23" Margin="283,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                                        <Expander IsExpanded="True" HorizontalAlignment="Left" Height="251" Margin="0,41,0,0" VerticalAlignment="Top" Width="540">
+                                        <Label Content="Status" HorizontalAlignment="Left" Margin="666,0,0,0" VerticalAlignment="Top"/>
+                                        <RadioButton Content="Active" HorizontalAlignment="Left" Margin="666,21,0,0" VerticalAlignment="Top"/>
+                                        <RadioButton Content="Inactive" HorizontalAlignment="Left" Margin="666,36,0,0" VerticalAlignment="Top"/>
+                                        <Button x:Name="btnConsultationOwnerUpdate" Content="Update" HorizontalAlignment="Left" Margin="765,10,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
+                                        <Expander IsExpanded="True" HorizontalAlignment="Left" Height="251" Margin="0,41,0,0" VerticalAlignment="Top" Width="870">
                                             <Expander.Header>
                                                 <TextBlock><Run Text="First Owner (Required)"/></TextBlock>
                                             </Expander.Header>
@@ -75,7 +83,7 @@
                                                 <TextBox x:Name="tbConsultationOwner1City" HorizontalAlignment="Left" Height="23" Margin="0,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="97"/>
                                                 <Label Content="Province" HorizontalAlignment="Left" Margin="102,113,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.364,0.692"/>
                                                 <ComboBox x:Name="cbConsultationOwner1Province" HorizontalAlignment="Left" Margin="102,139,0,0" VerticalAlignment="Top" Width="55" RenderTransformOrigin="-0.566,0.773">
-                                                    <ComboBoxItem Content="AB" IsSelected="True"/>
+                                                    <ComboBoxItem Content="AB"/>
                                                     <ComboBoxItem Content="BC"/>
                                                     <ComboBoxItem Content="MB"/>
                                                     <ComboBoxItem Content="NB"/>
@@ -85,7 +93,7 @@
                                                     <ComboBoxItem Content="NU"/>
                                                     <ComboBoxItem Content="ON"/>
                                                     <ComboBoxItem Content="PE"/>
-                                                    <ComboBoxItem Content="QC"/>
+                                                    <ComboBoxItem Content="QC" IsSelected="True"/>
                                                     <ComboBoxItem Content="SK"/>
                                                     <ComboBoxItem Content="YT"/>
                                                 </ComboBox>
@@ -105,7 +113,7 @@
 
                                             </Grid>
                                         </Expander>
-                                        <Expander IsExpanded="False"  Header="Second Owner (Optional)" HorizontalAlignment="Left" Height="242" Margin="0,297,0,0" VerticalAlignment="Top" Width="540">
+                                        <Expander IsExpanded="False"  Header="Second Owner (Optional)" HorizontalAlignment="Left" Height="242" Margin="0,297,0,0" VerticalAlignment="Top" Width="870">
                                             <Grid  Background="#FFE5E5E5" Margin="0,0,-2,0" Height="227">
                                                 <Label Content="First Name" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                                                 <TextBox x:Name="tbConsultationOwner2FName" HorizontalAlignment="Left" Height="23" Margin="0,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -162,9 +170,9 @@
                                 </TabItem>
                                 <TabItem Header="Animal" HeaderTemplate="{StaticResource HeaderTemplate}" IsSelected="True">
                                     <Grid Background="#FFE5E5E5" Margin="0,0,0,0" HorizontalAlignment="Left" Width="880">
-                                        <Label Content="Status" HorizontalAlignment="Left" Margin="657,10,0,0" VerticalAlignment="Top"/>
-                                        <RadioButton Content="Active" HorizontalAlignment="Left" Margin="657,36,0,0" VerticalAlignment="Top"/>
-                                        <RadioButton Content="Inactive" HorizontalAlignment="Left" Margin="657,52,0,0" VerticalAlignment="Top"/>
+                                        <Label Content="Status" HorizontalAlignment="Left" Margin="666,0,0,0" VerticalAlignment="Top"/>
+                                        <RadioButton Content="Active" HorizontalAlignment="Left" Margin="666,21,0,0" VerticalAlignment="Top"/>
+                                        <RadioButton Content="Inactive" HorizontalAlignment="Left" Margin="666,36,0,0" VerticalAlignment="Top"/>
                                         <Label Content="Animal Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                                         <TextBox x:Name="tbConsultationAnimalName" HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137"/>
                                         <RadioButton x:Name="rbConsultationAnimalMale" Content="Male" Margin="0,41,677,447" HorizontalAlignment="Right" Width="51"/>
@@ -309,8 +317,7 @@
                                     <StackPanel Grid.Column="0" Margin="0,0,0,10">
                                         <Grid Height="665">
                                             <Label Content="Search by Name or Phone Number" Margin="10,10,0,632" HorizontalAlignment="Left" Width="auto"/>
-                                            <TextBox x:Name="tbRegistryOwnerSearch" Height="23" TextWrapping="Wrap" Margin="10,33,117,609" TextChanged="tbRegistryOwnerSearch_TextChanged"/>
-                                            <Button Content="Search" Margin="271,33,10,609"/>
+                                            <TextBox x:Name="tbRegistryOwnerSearch" Height="23" TextWrapping="Wrap" Margin="10,33,10,609" TextChanged="tbRegistryOwnerSearch_TextChanged"/>
                                             <ListView Margin="10,61,10,10" x:Name="lvRegistryOwnerSearchResult" SelectionChanged="lvRegistryOwnerSearchResult_SelectionChanged">
                                                 <ListView.View>
                                                     <GridView>
@@ -351,7 +358,7 @@
                                                     <TextBox TextChanged="tbOwnerTextChanged" x:Name="tbRegistryOwner1City" HorizontalAlignment="Left" Height="23" Margin="11,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                                                     <Label Content="Province" HorizontalAlignment="Left" Margin="136,133,0,0" VerticalAlignment="Top"/>
                                                     <ComboBox x:Name="cbRegistryOwner1Province" HorizontalAlignment="Left" Margin="136,159,0,0" VerticalAlignment="Top" Width="53">
-                                                        <ComboBoxItem Content="AB" IsSelected="True"/>
+                                                        <ComboBoxItem Content="AB"/>
                                                         <ComboBoxItem Content="BC"/>
                                                         <ComboBoxItem Content="MB"/>
                                                         <ComboBoxItem Content="NB"/>
@@ -361,7 +368,7 @@
                                                         <ComboBoxItem Content="NU"/>
                                                         <ComboBoxItem Content="ON"/>
                                                         <ComboBoxItem Content="PE"/>
-                                                        <ComboBoxItem Content="QC"/>
+                                                        <ComboBoxItem Content="QC" IsSelected="True"/>
                                                         <ComboBoxItem Content="SK"/>
                                                         <ComboBoxItem Content="YT"/>
                                                     </ComboBox>
@@ -406,7 +413,7 @@
                                                     <TextBox TextChanged="tbOwnerTextChanged" x:Name="tbRegistryOwner2City" HorizontalAlignment="Left" Height="23" Margin="10,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                                                     <Label Content="Province" HorizontalAlignment="Left" Margin="135,108,0,0" VerticalAlignment="Top"/>
                                                     <ComboBox x:Name="cbRegistryOwner2Province" HorizontalAlignment="Left" Margin="135,135,0,0" VerticalAlignment="Top" Width="53">
-                                                        <ComboBoxItem Content="AB" IsSelected="True"/>
+                                                        <ComboBoxItem Content="AB"/>
                                                         <ComboBoxItem Content="BC"/>
                                                         <ComboBoxItem Content="MB"/>
                                                         <ComboBoxItem Content="NB"/>
@@ -416,7 +423,7 @@
                                                         <ComboBoxItem Content="NU"/>
                                                         <ComboBoxItem Content="ON"/>
                                                         <ComboBoxItem Content="PE"/>
-                                                        <ComboBoxItem Content="QC"/>
+                                                        <ComboBoxItem Content="QC" IsSelected="True"/>
                                                         <ComboBoxItem Content="SK"/>
                                                         <ComboBoxItem Content="YT"/>
                                                     </ComboBox>
@@ -461,8 +468,7 @@
                                     <StackPanel Grid.Column="0" Margin="0,0,0,-9">
                                         <Grid Height="680">
                                             <Label Content="Search for Animal Name, Owner Name" Margin="10,10,0,642" HorizontalAlignment="Left" Width="auto"/>
-                                            <TextBox x:Name="tbRegistryAnimalSearch" Height="23" TextWrapping="Wrap" Margin="10,38,117,619" TextChanged="tbRegistryAnimalSearch_TextChanged" />
-                                            <Button Content="Search" Margin="271,38,10,619"/>
+                                            <TextBox x:Name="tbRegistryAnimalSearch" Height="23" TextWrapping="Wrap" Margin="10,38,10,619" TextChanged="tbRegistryAnimalSearch_TextChanged" />
                                             <ListView Margin="10,66,10,51" x:Name="lvRegistryAnimalSearchResult" SelectionChanged="lvRegistryAnimalSearchResult_SelectionChanged">
                                                 <ListView.View>
                                                     <GridView>
@@ -472,6 +478,7 @@
                                                     </GridView>
                                                 </ListView.View>
                                             </ListView>
+                                            <Button Content="Add a new Animal to this Owner" HorizontalAlignment="Left" Margin="84,634,0,0" VerticalAlignment="Top" Width="auto"/>
                                         </Grid>
                                     </StackPanel>
                                     <!-- Column 1, Row 0, Cell 1-->
@@ -481,17 +488,17 @@
                                             <TextBox x:Name="tbRegistryAnimalDateRegistration" HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" IsEnabled="False"/>
                                             <Label Content="Animal ID" HorizontalAlignment="Left" Margin="146,10,0,0" VerticalAlignment="Top"/>
                                             <TextBox x:Name="tbRegistryAnimalID" HorizontalAlignment="Left" Height="23" Margin="146,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278" IsEnabled="False"/>
-                                            <Label Content="Status" HorizontalAlignment="Left" Margin="684,10,0,0" VerticalAlignment="Top"/>
-                                            <RadioButton Name="rbAnimalStatus_Active" Content="Active" HorizontalAlignment="Left" Margin="684,32,0,0" VerticalAlignment="Top"/>
-                                            <RadioButton Name="rbAnimalStatus_Inactive" Content="Inactive" HorizontalAlignment="Left" Margin="684,52,0,0" VerticalAlignment="Top"/>
+                                            <Label Content="Status" HorizontalAlignment="Left" Margin="735,10,0,0" VerticalAlignment="Top"/>
+                                            <RadioButton Name="rbAnimalStatus_Active" Content="Active" HorizontalAlignment="Left" Margin="735,32,0,0" VerticalAlignment="Top"/>
+                                            <RadioButton Name="rbAnimalStatus_Inactive" Content="Inactive" HorizontalAlignment="Left" Margin="735,52,0,0" VerticalAlignment="Top"/>
                                             <Label Content="Animal Name" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
                                             <TextBox x:Name="tbRegistryAnimalName" HorizontalAlignment="Left" Height="23" Margin="10,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278"/>
-                                            <RadioButton x:Name="rbRegistryAnimalMale" Content="Male" Margin="0,95,419,554" HorizontalAlignment="Right" Width="51" GroupName="gb_rb_AnimalGender"/>
-                                            <RadioButton x:Name="rbRegistryAnimalFemale" Content="Female" Margin="0,95,354,554" HorizontalAlignment="Right" Width="60" GroupName="gb_rb_AnimalGender"/>
+                                            <RadioButton x:Name="rbRegistryAnimalMale" Content="Male" Margin="0,95,457,554" HorizontalAlignment="Right" Width="51" GroupName="gb_rb_AnimalGender"/>
+                                            <RadioButton x:Name="rbRegistryAnimalFemale" Content="Female" Margin="0,95,397,554" HorizontalAlignment="Right" Width="60" GroupName="gb_rb_AnimalGender"/>
                                             <DatePicker SelectedDateChanged="dpRegistryAnimalBirthday_SelectedDateChanged" x:Name="dpRegistryAnimalBirthday" Margin="423,90,208,551" />
                                             <Label Content="Gender" HorizontalAlignment="Left" Margin="293,64,0,0" VerticalAlignment="Top"/>
                                             <Label Content="Birthday" HorizontalAlignment="Left" Margin="423,64,0,0" VerticalAlignment="Top"/>
-                                            <Label Content="Current Weight (kg)" HorizontalAlignment="Left" Margin="560,64,0,0" VerticalAlignment="Top"/>
+                                            <Label Content="Current Weight (kg)" HorizontalAlignment="Left" Margin="603,64,0,0" VerticalAlignment="Top"/>
                                             <TabControl Margin="10,130,10,147" BorderThickness="2">
                                                 <TabItem Header="Animal Information">
                                                     <Grid Margin="0,0,0,0">
@@ -550,13 +557,13 @@
                                             <Button x:Name="btnRegistryAnimalSave" Content="Save Record" HorizontalAlignment="Left" Margin="426,589,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
                                             <Button x:Name="btnRegistryAnimalPrint" Content="Print Registry" HorizontalAlignment="Left" Margin="592,589,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
                                             <Button x:Name="btnRegistryAnimalExit" Content="Exit" HorizontalAlignment="Left" Margin="592,624,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
-                                            <TextBox x:Name="tbRegistryAnimalWeight" HorizontalAlignment="Left" Height="23" Margin="564,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110"/>
+                                            <TextBox x:Name="tbRegistryAnimalWeight" HorizontalAlignment="Left" Height="23" Margin="603,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110"/>
                                             <Button x:Name="btnRegistryAnimalEmail" Content="Send by Email" HorizontalAlignment="Left" Margin="426,624,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
                                             <Label Content="*" HorizontalAlignment="Left" Margin="83,64,0,0" VerticalAlignment="Top" Foreground="#FFFD0606" FontWeight="Bold" RenderTransformOrigin="2.267,2.154"/>
                                             <Label Content="*" HorizontalAlignment="Left" Margin="334,64,0,0" VerticalAlignment="Top" Foreground="#FFFD0606" FontWeight="Bold" RenderTransformOrigin="2.267,2.154"/>
                                             <Label Content="*" HorizontalAlignment="Left" Margin="469,64,0,0" VerticalAlignment="Top" Foreground="#FFFD0606" FontWeight="Bold" RenderTransformOrigin="2.267,2.154"/>
-                                            <Label Content="*" HorizontalAlignment="Left" Margin="666,64,0,0" VerticalAlignment="Top" Foreground="#FFFD0606" FontWeight="Bold" RenderTransformOrigin="2.267,2.154"/>
-                                            <Label Content="Required Items" HorizontalAlignment="Left" Margin="11,-8,0,0" VerticalAlignment="Top" FontStyle="Italic" Foreground="#FFFD0606"/>
+                                            <Label Content="*" HorizontalAlignment="Left" Margin="711,67,0,0" VerticalAlignment="Top" Foreground="#FFFD0606" FontWeight="Bold" RenderTransformOrigin="2.267,2.154"/>
+                                            <Label Content="Required Items" HorizontalAlignment="Left" Margin="626,-8,0,0" VerticalAlignment="Top" FontStyle="Italic" Foreground="#FFFD0606"/>
                                         </Grid>
                                     </StackPanel>
                                     <GridSplitter Grid.Column="1" Background="Gray" Width="2" Margin="0,0,402,0" />
@@ -574,8 +581,7 @@
                                     <StackPanel Grid.Column="0" Margin="0,0,0,-9">
                                         <Grid Height="680">
                                             <Label Content="Search for Employee Name or ID" Margin="10,10,0,642" HorizontalAlignment="Left" Width="auto"/>
-                                            <TextBox  x:Name="tbRegistryEmployeeSearch" Height="23" TextWrapping="Wrap" Margin="10,38,117,619" TextChanged="tbRegistryEmployeeSearch_TextChanged"/>
-                                            <Button Content="Search" Margin="271,38,10,619"/>
+                                            <TextBox  x:Name="tbRegistryEmployeeSearch" Height="23" TextWrapping="Wrap" Margin="10,38,10,619" TextChanged="tbRegistryEmployeeSearch_TextChanged"/>
                                             <ListView Margin="10,66,10,10" x:Name="lvRegistrySearchResult" SelectionChanged="lvRegistryEmployeeSearchResult_SelectionChanged">
                                                 <ListView.View>
                                                     <GridView>
@@ -610,7 +616,7 @@
                                             <TextBox x:Name="tbRegistryEmployeeCity" HorizontalAlignment="Left" Height="23" Margin="10,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                                             <Label Content="Province" HorizontalAlignment="Left" Margin="135,177,0,0" VerticalAlignment="Top"/>
                                             <ComboBox x:Name="cbRegistryEmployeeProvince" HorizontalAlignment="Left" Margin="135,202,0,0" VerticalAlignment="Top" Width="120">
-                                                <ComboBoxItem Content="AB" IsSelected="True"/>
+                                                <ComboBoxItem Content="AB"/>
                                                 <ComboBoxItem Content="BC"/>
                                                 <ComboBoxItem Content="MB"/>
                                                 <ComboBoxItem Content="NB"/>
@@ -620,7 +626,7 @@
                                                 <ComboBoxItem Content="NU"/>
                                                 <ComboBoxItem Content="ON"/>
                                                 <ComboBoxItem Content="PE"/>
-                                                <ComboBoxItem Content="QC"/>
+                                                <ComboBoxItem Content="QC" IsSelected="True"/>
                                                 <ComboBoxItem Content="SK"/>
                                                 <ComboBoxItem Content="YT"/>
                                             </ComboBox>
