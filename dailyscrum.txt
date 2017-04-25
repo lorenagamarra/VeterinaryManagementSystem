@@ -244,6 +244,29 @@ WHERE I NEED HELP IS...
 -----------------------------------------------------------------------------------------------------------------------------
 
 
+-----------------------------------------------------------------------------------------------------------------------------
+*** April 25 Nedis ***
+DID SINCE LAST SCRUM:
+	1. Delete Observation in Owner
+	2. Modify Picture as NULL (Owner, Animal and Employee)
+	3. Change datatype int to string (phone number and SIN)
+	4. Work on implement events (registry: Owner / Animal)
+WILL DO IN THE NEXT 24 HOURS
+	1. Work on implement events (registry: Employee)
+WHERE I NEED HELP IS...
+	1. Find how to save and retrieve from DB some datatypes (image, combobox, radiobuttongroup, checkboxgroup, etc..)
+
+*** April 25 Lorena ***
+DID SINCE LAST SCRUM:
+	1. Worked in the UI changes/fixes 
+	2. Worked on WebCam capture
+WILL DO IN THE NEXT 24 HOURS
+	1. Work on checkbox/ComboBox/RadioButton saving to DB and recovering
+	2. Work on camera saving picture
+WHERE I NEED HELP IS...
+	1. Camera/Photo saving on DB
+	2. How to save/retreive to/from DB the ComboBox, CheckBoxGroup (flag set) and RadioButtonGroup (status/gender) 
+-----------------------------------------------------------------------------------------------------------------------------
 
 
 
