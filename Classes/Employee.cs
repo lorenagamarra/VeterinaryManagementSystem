@@ -30,9 +30,9 @@ namespace VeterinaryManagementSystem.Classes
 
         public String PostalCode { get; set; }
 
-        public int PhoneNumber { get; set; }
+        public String PhoneNumber { get; set; }
 
-        public int OtherPhoneNumber { get; set; }
+        public String OtherPhoneNumber { get; set; }
 
         public String Email { get; set; }
 
@@ -40,7 +40,7 @@ namespace VeterinaryManagementSystem.Classes
 
         public DateTime TermDate { get; set; }
 
-        public int SIN { get; set; }
+        public String SIN { get; set; }
 
         public String Position { get; set; }
 

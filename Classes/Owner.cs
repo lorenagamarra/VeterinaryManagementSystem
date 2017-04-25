@@ -32,9 +32,9 @@ namespace VeterinaryManagementSystem.Classes
 
         public String PostalCode_01 { get; set; }
 
-        public int PhoneNumber_01 { get; set; }
+        public String PhoneNumber_01 { get; set; }
 
-        public int OtherPhoneNumber_01 { get; set; }
+        public String OtherPhoneNumber_01 { get; set; }
 
         public String Email_01 { get; set; }
 
@@ -58,9 +58,9 @@ namespace VeterinaryManagementSystem.Classes
 
         public String PostalCode_02 { get; set; }
 
-        public int PhoneNumber_02 { get; set; }
+        public String PhoneNumber_02 { get; set; }
 
-        public int OtherPhoneNumber_02 { get; set; }
+        public String OtherPhoneNumber_02 { get; set; }
 
         public String Email_02 { get; set; }
       

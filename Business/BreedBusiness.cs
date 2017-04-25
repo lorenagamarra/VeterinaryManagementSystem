@@ -25,9 +25,9 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Breed is null");
             }
 
-            if (breed.Specie.Length < 2 || breed.Specie.Length > 15)
+            if (String.IsNullOrEmpty(breed.Specie))
             {
-                throw new Exception("Breed Specie must be 2-15 characters long");
+                throw new Exception("Breed Specie must be selected");
             }
             
             if (breed.Name.Length < 2 || breed.Name.Length > 20)
@@ -35,9 +35,9 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Breed Name must be 2-20 characters long");
             }
             
-            if (breed.Status.Length < 6 || breed.Status.Length > 8)
+            if (String.IsNullOrEmpty(breed.Status))
             {
-                throw new Exception("Breed Status must be ACTIVE or INACTIVE");
+                throw new Exception("Breed Status has null Status");
             }
 
             if (breed.Id == 0)

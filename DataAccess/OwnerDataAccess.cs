@@ -138,8 +138,8 @@ namespace VeterinaryManagementSystem.DataAccess
                     string city_01 = (string)reader["City_01"];
                     string province_01 = (string)reader["Province_01"];
                     string postalCode_01 = (string)reader["PostalCode_01"];
-                    int phoneNumber_01 = (int)reader["PhoneNumber_01"];
-                    int otherPhoneNumber_01 = (int)reader["OtherPhoneNumber_01"];
+                    string phoneNumber_01 = (string)reader["PhoneNumber_01"];
+                    string otherPhoneNumber_01 = (string)reader["OtherPhoneNumber_01"];
                     string email_01 = (string)reader["Email_01"];
 
                     Byte[] picture_02 = (Byte[])reader["Picture_02"];
@@ -152,8 +152,8 @@ namespace VeterinaryManagementSystem.DataAccess
                     string city_02 = (string)reader["City_02"];
                     string province_02 = (string)reader["Province_02"];
                     string postalCode_02 = (string)reader["PostalCode_02"];
-                    int phoneNumber_02 = (int)reader["PhoneNumber_02"];
-                    int otherPhoneNumber_02 = (int)reader["OtherPhoneNumber_02"];
+                    string phoneNumber_02 = (string)reader["PhoneNumber_02"];
+                    string otherPhoneNumber_02 = (string)reader["OtherPhoneNumber_02"];
                     string email_02 = (string)reader["Email_02"];
 
                     string status = (string)reader["Status"];
@@ -219,8 +219,8 @@ namespace VeterinaryManagementSystem.DataAccess
                     string city_01 = (string)reader["City_01"];
                     string province_01 = (string)reader["Province_01"];
                     string postalCode_01 = (string)reader["PostalCode_01"];
-                    int phoneNumber_01 = (int)reader["PhoneNumber_01"];
-                    int otherPhoneNumber_01 = (int)reader["OtherPhoneNumber_01"];
+                    string phoneNumber_01 = (string)reader["PhoneNumber_01"];
+                    string otherPhoneNumber_01 = (string)reader["OtherPhoneNumber_01"];
                     string email_01 = (string)reader["Email_01"];
 
                     Byte[] picture_02 = (Byte[])reader["Picture_02"];
@@ -233,8 +233,8 @@ namespace VeterinaryManagementSystem.DataAccess
                     string city_02 = (string)reader["City_02"];
                     string province_02 = (string)reader["Province_02"];
                     string postalCode_02 = (string)reader["PostalCode_02"];
-                    int phoneNumber_02 = (int)reader["PhoneNumber_02"];
-                    int otherPhoneNumber_02 = (int)reader["OtherPhoneNumber_02"];
+                    string phoneNumber_02 = (string)reader["PhoneNumber_02"];
+                    string otherPhoneNumber_02 = (string)reader["OtherPhoneNumber_02"];
                     string email_02 = (string)reader["Email_02"];
 
                     string status = (string)reader["Status"];
@@ -300,8 +300,8 @@ namespace VeterinaryManagementSystem.DataAccess
                     string city_01 = (string)reader["City_01"];
                     string province_01 = (string)reader["Province_01"];
                     string postalCode_01 = (string)reader["PostalCode_01"];
-                    int phoneNumber_01 = (int)reader["PhoneNumber_01"];
-                    int otherPhoneNumber_01 = (int)reader["OtherPhoneNumber_01"];
+                    string phoneNumber_01 = (string)reader["PhoneNumber_01"];
+                    string otherPhoneNumber_01 = (string)reader["OtherPhoneNumber_01"];
                     string email_01 = (string)reader["Email_01"];
 
                     Byte[] picture_02 = (Byte[])reader["Picture_02"];
@@ -314,8 +314,8 @@ namespace VeterinaryManagementSystem.DataAccess
                     string city_02 = (string)reader["City_02"];
                     string province_02 = (string)reader["Province_02"];
                     string postalCode_02 = (string)reader["PostalCode_02"];
-                    int phoneNumber_02 = (int)reader["PhoneNumber_02"];
-                    int otherPhoneNumber_02 = (int)reader["OtherPhoneNumber_02"];
+                    string phoneNumber_02 = (string)reader["PhoneNumber_02"];
+                    string otherPhoneNumber_02 = (string)reader["OtherPhoneNumber_02"];
                     string email_02 = (string)reader["Email_02"];
 
                     string status = (string)reader["Status"];

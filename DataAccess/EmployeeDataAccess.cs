@@ -105,16 +105,15 @@ namespace VeterinaryManagementSystem.DataAccess
                     string city = (string)reader["City"];
                     string province = (string)reader["Province"];
                     string postalCode = (string)reader["PostalCode"];
-                    int phoneNumber = (int)reader["PhoneNumber"];
-                    int otherPhoneNumber = (int)reader["OtherPhoneNumber"];
+                    string phoneNumber = (string)reader["PhoneNumber"];
+                    string otherPhoneNumber = (string)reader["OtherPhoneNumber"];
                     string email = (string)reader["Email"];
 
                     DateTime hireDate = (DateTime)reader["HireDate"];
                     DateTime termDate = (DateTime)reader["TermDate"];
-                    int sin = (int)reader["SIN"];
+                    string sin = (string)reader["SIN"];
                     string position = (string)reader["Position"];
                     string observations = (string)reader["Observations"];
-                    string status = (string)reader["Status"];
 
                     var employee = new Employee
                     {
@@ -167,13 +166,13 @@ namespace VeterinaryManagementSystem.DataAccess
                     string city = (string)reader["City"];
                     string province = (string)reader["Province"];
                     string postalCode = (string)reader["PostalCode"];
-                    int phoneNumber = (int)reader["PhoneNumber"];
-                    int otherPhoneNumber = (int)reader["OtherPhoneNumber"];
+                    string phoneNumber = (string)reader["PhoneNumber"];
+                    string otherPhoneNumber = (string)reader["OtherPhoneNumber"];
                     string email = (string)reader["Email"];
 
                     DateTime hireDate = (DateTime)reader["HireDate"];
                     DateTime termDate = (DateTime)reader["TermDate"];
-                    int sin = (int)reader["SIN"];
+                    string sin = (string)reader["SIN"];
                     string position = (string)reader["Position"];
                     string observations = (string)reader["Observations"];
                     string status = (string)reader["Status"];

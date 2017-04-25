@@ -25,11 +25,14 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Animal is null");
             }
 
-            if (animal.Picture == null)
+            if ((!String.IsNullOrEmpty(animal.Picture.ToString())))
             {
-                throw new Exception("Animal has null picture");
+                if (animal.Picture == null)
+                {
+                    throw new Exception("Animal has null picture");
+                }
             }
-            
+
             if (animal.OwnerID == 0)
             {
                 throw new Exception("Animal must have an Owner ID");
@@ -53,12 +56,12 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Animal Registration Date must be the current day");
             }
 
-            if (String.IsNullOrEmpty(animal.Name) || animal.Name.Length < 2 || animal.Name.Length > 15)
+            if (animal.Name.Length < 2 || animal.Name.Length > 15)
             {
                 throw new Exception("Animal name must be 2-15 characters long");
             }
 
-            if (String.IsNullOrEmpty(animal.Gender) || animal.Gender.Length < 4 || animal.Gender.Length > 6)
+            if (String.IsNullOrEmpty(animal.Gender))
             {
                 throw new Exception("Animal gender must be male or female");
             }
@@ -73,7 +76,7 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Animal can not have more than 400 pounds");
             }
 
-            if (String.IsNullOrEmpty(animal.Specie) || animal.Specie.Length < 2 || animal.Specie.Length > 10)
+            if (String.IsNullOrEmpty(animal.Specie))
             {
                 throw new Exception("Animal must have an specie");
             }
@@ -112,9 +115,9 @@ namespace VeterinaryManagementSystem.Business
 
             if ((!String.IsNullOrEmpty(animal.Vethistoric)))
             {
-                if (animal.Vethistoric.Length < 2 || animal.Vethistoric.Length > 500)
+                if (animal.Vethistoric.Length < 2 || animal.Vethistoric.Length > 5000)
                 {
-                    throw new Exception("Animal VetHistoric can be empty or be 2-500 characters long");
+                    throw new Exception("Animal VetHistoric can be empty or be 2-5000 characters long");
                 }
             }
             

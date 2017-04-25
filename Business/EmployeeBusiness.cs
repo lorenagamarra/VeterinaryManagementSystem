@@ -32,9 +32,12 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Employee is null");
             }
 
-            if (employee.Picture == null)
+            if ((!String.IsNullOrEmpty(employee.Picture.ToString())))
             {
-                throw new Exception("employee has null picture");
+                if (employee.Picture.ToString().Length < 1)
+                {
+                    throw new Exception("employee has null picture");
+                }
             }
 
             if (employee.FirstName.Length < 2 || employee.FirstName.Length > 20)
@@ -62,7 +65,7 @@ namespace VeterinaryManagementSystem.Business
 
             if (employee.Address.Length < 2 || employee.Address.Length > 50)
             {
-                throw new Exception("employee number must be 2-50 characters long");
+                throw new Exception("employee address must be 2-50 characters long");
             }
 
             if ((!String.IsNullOrEmpty(employee.Complement)))
@@ -89,22 +92,25 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("employee Postal Code invalid");
             }
 
-            if (!(phone.Match(employee.PhoneNumber.ToString()).Success))
+            if (!(phone.Match(employee.PhoneNumber).Success))
             {
                 throw new Exception("employee Phone Number invalid");
             }
 
-            if (!(employee.OtherPhoneNumber.ToString() == null))
+            if (!(employee.OtherPhoneNumber == null))
             {
-                if (!(phone.Match(employee.OtherPhoneNumber.ToString()).Success))
+                if (!(phone.Match(employee.OtherPhoneNumber).Success))
                 {
                     throw new Exception("employee Other Phone Number invalid");
                 }
             }
 
-            if (!(email.Match(employee.Email).Success) || employee.Email.Length > 50)
+            if (!(employee.Email == null))
             {
-                throw new Exception("employee E-mail invalid (max 50 characters long)");
+                if (!(email.Match(employee.Email).Success) || employee.Email.Length > 50)
+                {
+                    throw new Exception("employee E-mail invalid (max 50 characters long)");
+                }
             }
 
             if (employee.HireDate < DateTime.Now)
@@ -120,12 +126,12 @@ namespace VeterinaryManagementSystem.Business
                 }
             }
 
-            if (!(sin.Match(employee.SIN.ToString()).Success))
+            if (!(sin.Match(employee.SIN).Success))
             {
                 throw new Exception("Employee Phone Number invalid");
             }
 
-            if (String.IsNullOrEmpty(employee.Position) || employee.Position.Length < 2 || employee.Position.Length > 15)
+            if (employee.Position.Length < 2 || employee.Position.Length > 15)
             {
                 throw new Exception("Employee City must be 2-50 characters long");
             }

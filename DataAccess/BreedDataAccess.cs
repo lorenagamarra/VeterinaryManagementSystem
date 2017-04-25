@@ -72,7 +72,7 @@ namespace VeterinaryManagementSystem.DataAccess
                 while (reader.Read())
                 {
                     string specie = (string)reader["Specie"];
-                    //string status = (string)reader["Status"];
+
                     var breed = new Breed
                     {
                         Specie = specie
@@ -93,7 +93,7 @@ namespace VeterinaryManagementSystem.DataAccess
                 {
                     string specie = (string)reader["Specie"];
                     string name = (string)reader["Name"];
-                   // string status = (string)reader["Status"];
+
                     var breed = new Breed
                     {
                         Name = name,

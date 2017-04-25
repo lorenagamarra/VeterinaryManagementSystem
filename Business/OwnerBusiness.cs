@@ -94,30 +94,35 @@ namespace VeterinaryManagementSystem.Business
             {
                 throw new Exception("owner_01 Province must be 2 characters long");
             }
-
-
+            
             if (!(postalcode.Match(owner.PostalCode_01).Success))
             {
                 throw new Exception("owner_01 Postal Code invalid");
             }
 
-            if (!(phone.Match(owner.PhoneNumber_01.ToString()).Success))
+            if (!(phone.Match(owner.PhoneNumber_01).Success))
             {
                 throw new Exception("owner_01 Phone Number invalid");
             }
 
-            if (!(owner.OtherPhoneNumber_01.ToString() == null))
+            if (!(owner.OtherPhoneNumber_01 == null))
             {
-                if (!(phone.Match(owner.OtherPhoneNumber_01.ToString()).Success))
+                if (!(phone.Match(owner.OtherPhoneNumber_01).Success))
                 {
                     throw new Exception("owner_01 Other Phone Number invalid");
                 }
             }
 
-            if (!(email.Match(owner.Email_01).Success) || owner.Email_01.Length > 50)
+            if (!(owner.Email_01 == null))
             {
-                throw new Exception("owner_01 E-mail invalid (max 50 characters long)");
+                if (!(email.Match(owner.Email_01).Success) || owner.Email_01.Length > 50)
+                {
+                    throw new Exception("owner_01 E-mail invalid (max 50 characters long");
+                }
             }
+
+
+
 
             //END owner 01
 
@@ -182,27 +187,30 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("owner_02 Postal Code invalid");
             }
 
-            if (!(phone.Match(owner.PhoneNumber_02.ToString()).Success))
+            if (!(phone.Match(owner.PhoneNumber_02).Success))
             {
                 throw new Exception("owner_02 Phone Number invalid");
             }
 
-            if (!(owner.OtherPhoneNumber_02.ToString() == null))
+            if (!(owner.OtherPhoneNumber_02 == null))
             {
-                if (!(phone.Match(owner.OtherPhoneNumber_02.ToString()).Success))
+                if (!(phone.Match(owner.OtherPhoneNumber_02).Success))
                 {
                     throw new Exception("owner_02 Other Phone Number invalid");
                 }
             }
 
-            if (!(email.Match(owner.Email_02).Success) || owner.Email_02.Length > 50)
+            if (!(owner.Email_02 == null))
             {
-                throw new Exception("owner_02 E-mail invalid (max 50 characters long)");
+                if (!(email.Match(owner.Email_02).Success) || owner.Email_02.Length > 50)
+                {
+                    throw new Exception("owner_02 E-mail invalid (max 50 characters long");
+                }
             }
 
             //END owner 02
 
-          
+
             if (String.IsNullOrEmpty(owner.Status))
             {
                 throw new Exception("Owner has null Status");

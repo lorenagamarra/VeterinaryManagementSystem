@@ -98,12 +98,32 @@ namespace VeterinaryManagementSystem
         {
 
         }
-                
+
+
+
+
         /******************************************************************************************
          * REGISTRY => OWNER
          ******************************************************************************************/
+        
 
+        //LINQ - SEARCH ALL OWNERS
+        private void tbRegistryOwnerSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string filter = tbRegistryOwnerSearch.Text.ToLower();
+            if (filter == "")
+            {
+                lvRegistryOwnerSearchResult.ItemsSource = dbOwner.GetAllOwners();
+            }
+            else
+            {
+                List<Owner> list = dbOwner.GetAllOwners();
+                var filteredList = from o in list where o.FirstName_01.ToLower().Contains(filter) || o.PhoneNumber_01.ToString().Contains(filter) || o.FirstName_02.ToLower().Contains(filter) || o.PhoneNumber_02.ToString().Contains(filter) select o;
 
+                lvRegistryOwnerSearchResult.ItemsSource = filteredList;
+            }
+        }
+        
         //Registry -> Owner -> Search List Result
         private void lvRegistryOwnerSearchResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -114,10 +134,13 @@ namespace VeterinaryManagementSystem
                 return;
             }
             Owner owner = ownerList[index];
+
             //General Information for both owners
-            tbRegistryOwnerDateRegistration.Text = owner.RegistrationDate + "";
-            tbRegistryOwnerID.Text = owner.Id + "";
+            tbRegistryOwnerDateRegistration.Text = owner.RegistrationDate.ToString();
+            tbRegistryOwnerID.Text = owner.Id.ToString();
+
             //Owner 1
+            //imgRegistryOwner1Image.Source = owner.Picture_01;  //TODO: Descobrir qual é a propriedade da imagem que guarda o que a imagem tem dentro..Content? Text?
             tbRegistryOwner1FName.Text = owner.FirstName_01;
             tbRegistryOwner1MName.Text = owner.MiddleName_01;
             tbRegistryOwner1LName.Text = owner.LastName_01;
@@ -127,14 +150,12 @@ namespace VeterinaryManagementSystem
             tbRegistryOwner1City.Text = owner.City_01;
             cbRegistryOwner1Province.Text = owner.Province_01;
             tbRegistryOwner1PostalCode.Text = owner.PostalCode_01;
-            tbRegistryOwner1Phone.Text = owner.PhoneNumber_01 + "";
-            tbRegistryOwner1OtherNumber.Text = owner.OtherPhoneNumber_01 + "";
+            tbRegistryOwner1Phone.Text = owner.PhoneNumber_01;
+            tbRegistryOwner1OtherNumber.Text = owner.OtherPhoneNumber_01;
             tbRegistryOwner1Email.Text = owner.Email_01;
-            //TOD: Descobrir qual é a propriedade da imagem que guarda o que a imagem tem dentro..
-            //Content? Text?
-            //imgRegistryOwner1Image.Source = owner.Picture_01;
 
             //Owner 2
+            //imgRegistryOwner2Image.Source = owner.Picture_02;
             tbRegistryOwner2FName.Text = owner.FirstName_02;
             tbRegistryOwner2MName.Text = owner.MiddleName_02;
             tbRegistryOwner2LName.Text = owner.LastName_02;
@@ -144,161 +165,87 @@ namespace VeterinaryManagementSystem
             tbRegistryOwner2City.Text = owner.City_02;
             cbRegistryOwner2Province.Text = owner.Province_02;
             tbRegistryOwner2PostalCode.Text = owner.PostalCode_02;
-            tbRegistryOwner2Phone.Text = owner.PhoneNumber_02 + "";
-            tbRegistryOwner2OtherNumber.Text = owner.OtherPhoneNumber_02 + "";
+            tbRegistryOwner2Phone.Text = owner.PhoneNumber_02;
+            tbRegistryOwner2OtherNumber.Text = owner.OtherPhoneNumber_02;
             tbRegistryOwner2Email.Text = owner.Email_02;
-            //TOD: Descobrir qual é a propriedade da imagem que guarda o que a imagem tem dentro..
-            //Content? Text?
-            //imgRegistryOwner2Image.Source = owner.Picture_02;
-            string verifyOwnerCkbStatus = owner.Status;
-            if (verifyOwnerCkbStatus == "ACTIVE") {
+
+            string verifyOwnerCkbStatus = owner.Status;   //Atualizando Status radiobutton de acordo com o Owner ????????????
+            if (verifyOwnerCkbStatus == "ACTIVE")
+            {
                 rbOwnerStatus_Active.IsChecked = true;
                 rbOwnerStatus_Inactive.IsChecked = false;
             }
-            else{
+            else
+            {
                 rbOwnerStatus_Active.IsChecked = false;
                 rbOwnerStatus_Inactive.IsChecked = true;
             }
+        }
 
-
-    }
         //Registry -> Owner -> Buttons Save/Add Record Event
         private void btnRegistryOwnerSave_Click(object sender, RoutedEventArgs e)
         {
             SavingOwnerRegistryOnDB();
         }
+
+        private OwnerBusiness ownerBusiness;
         //Registry -> Owner -> Method Saving to DB
         private void SavingOwnerRegistryOnDB()
         {
-            DateTime registrationDate = DateTime.Now;
-            //Owner 1
-            //Receiving data from UI
-            //TODO: Como armazenar a imagem no BD
-            //byte [] picture_01 = imgRegistryOwner1Image.
-
-
-            string RegistryOwnerStatusChoice;
-            if (rbOwnerStatus_Active.IsChecked == true)
+            var owner = new Owner
             {
-                RegistryOwnerStatusChoice = "ACTIVE";
-            }
-            else
-            {
-                RegistryOwnerStatusChoice = "INACTIVE";
-            }
+                RegistrationDate = DateTime.Now,                   // Add ok. mas update.. mudar a data de registro?????????????????
 
+                //Owner 1
+                //Picture_01 = imgRegistryOwner1Image.              ????????????????????????????????????????????
+                FirstName_01 = tbRegistryOwner1LName.Text,
+                MiddleName_01 = tbRegistryOwner1MName.Text,
+                LastName_01 = tbRegistryOwner1LName.Text,
+                Number_01 = tbRegistryOwner1NumberAddress.Text,
+                Address_01 = tbRegistryOwner1Address.Text,
+                Complement_01 = tbRegistryOwner1Complement.Text,
+                City_01 = tbRegistryOwner1City.Text,
+                Province_01 = cbRegistryOwner1Province.Text,          //combobox
+                PostalCode_01 = tbRegistryOwner1PostalCode.Text,      
+                PhoneNumber_01 = tbRegistryOwner1Phone.Text,
+                OtherPhoneNumber_01 = tbRegistryOwner1OtherNumber.Text,
+                Email_01 = tbRegistryOwner1Email.Text,
 
-            string firstName_01 = tbRegistryOwner1LName.Text;
-            string middleName_01 = tbRegistryOwner1MName.Text;
-            string lastName_01 = tbRegistryOwner1LName.Text;
-            string number_01 = tbRegistryOwner1NumberAddress.Text;
-            string address_01 = tbRegistryOwner1Address.Text;
-            string complement_01 = tbRegistryOwner1Complement.Text;
-            string city_01 = tbRegistryOwner1City.Text;
-            string province_01 = cbRegistryOwner1Province.Text;
-            string postalCode_01 = tbRegistryOwner1PostalCode.Text;
-            string phone1 = tbRegistryOwner1Phone.Text;
-            int phoneNumber_01;
-            if (!int.TryParse(phone1, out phoneNumber_01))
-            {
-                MessageBox.Show("Phone Number Ownwer 1 must contain only numbers");
-                return;
-            }
-            string phoneOther1 = tbRegistryOwner1OtherNumber.Text;
-            int otherPhoneNumber_01;
+                //Owner 2
+                //Picture_02 = imgRegistryOwner2Image,                 ????????????????????????????????????????????
+                FirstName_02 = tbRegistryOwner2LName.Text,
+                MiddleName_02 = tbRegistryOwner2MName.Text,
+                LastName_02 = tbRegistryOwner2LName.Text,
+                Number_02 = tbRegistryOwner2NumberAddress.Text,
+                Address_02 = tbRegistryOwner2Address.Text,
+                Complement_02 = tbRegistryOwner2Complement.Text,
+                City_02 = tbRegistryOwner2City.Text,
+                Province_02 = cbRegistryOwner2Province.Text,         //combobox
+                PostalCode_02 = tbRegistryOwner2PostalCode.Text,
+                PhoneNumber_02 = tbRegistryOwner2Phone.Text,
+                OtherPhoneNumber_02 = tbRegistryOwner2OtherNumber.Text,
+                Email_02 = tbRegistryOwner2Email.Text,
 
+                Status = gb_rb_OwnerStatus.Content.ToString()       //radio button group
+            };
 
-                if (!int.TryParse(phoneOther1, out otherPhoneNumber_01))
-                {
-                    MessageBox.Show("Other Number  Ownwer 1 must contain only numbers");
-                    return;
-                }
-
-            string email_01 = tbRegistryOwner1Email.Text;
-            //Owner 2
-            //Receiving data from UI
-            //TODO: Como armazenar a imagem no BD
-            //byte [] picture_02 = imgRegistryOwner1Image.
-            string firstName_02 = tbRegistryOwner2LName.Text;
-            string middleName_02 = tbRegistryOwner2MName.Text;
-            string lastName_02 = tbRegistryOwner2LName.Text;
-            string number_02 = tbRegistryOwner2NumberAddress.Text;
-            string address_02 = tbRegistryOwner2Address.Text;
-            string complement_02 = tbRegistryOwner2Complement.Text;
-            string city_02 = tbRegistryOwner2City.Text;
-            string province_02 = cbRegistryOwner2Province.Text;
-            string postalCode_02 = tbRegistryOwner2PostalCode.Text;
-            string phone2 = tbRegistryOwner2Phone.Text;
-            int phoneNumber_02;
-            if (!int.TryParse(phone2, out phoneNumber_02))
-            {
-                MessageBox.Show("Phone Number  Ownwer 2 must contain only numbers");
-                return;
-            }
-            string phoneOther2 = tbRegistryOwner2OtherNumber.Text;
-            int otherPhoneNumber_02;
-            if (!int.TryParse(phoneOther2, out otherPhoneNumber_02))
-            {
-                MessageBox.Show("Other Number  Ownwer 2 must contain only numbers");
-                return;
-            }
-            string email_02 = tbRegistryOwner2Email.Text;
-            //TODO: Status (Active / Inactive)
-            string status = gb_rb_OwnerStatus.Content.ToString();
-            
-            //Sending data to DB
             try
             {
-                //Doing this way because we don't have Constructor
-                var ownerRegistry = new Owner
-                {
-                    RegistrationDate = registrationDate,
-                    Status = status,
-                    //Owner 1
-                    //Picture_01 = picture_01,
-                    FirstName_01 = firstName_01,
-                    MiddleName_01 = middleName_01,
-                    LastName_01 = lastName_01,
-                    Number_01 = number_01,
-                    Address_01 = address_01,
-                    Complement_01 = complement_01,
-                    City_01 = city_01,
-                    Province_01 = province_01,
-                    PostalCode_01 = postalCode_01,
-                    PhoneNumber_01 = phoneNumber_01,
-                    OtherPhoneNumber_01 = otherPhoneNumber_01,
-                    Email_01 = email_01,
-                    //Owner 2
-                    //Picture_02 = picture_02,
-                    FirstName_02 = firstName_02,
-                    MiddleName_02 = middleName_02,
-                    LastName_02 = lastName_02,
-                    Number_02 = number_02,
-                    Address_02 = address_02,
-                    Complement_02 = complement_02,
-                    City_02 = city_02,
-                    Province_02 = province_02,
-                    PostalCode_02 = postalCode_02,
-                    PhoneNumber_02 = phoneNumber_02,
-                    OtherPhoneNumber_02 = otherPhoneNumber_02,
-                    Email_02 = email_02
-                };
-                ownerList.Add(ownerRegistry);
-                lvRegistryOwnerSearchResult.Items.Refresh();
+                ownerBusiness.Save(owner);
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+
 
         //Registry -> Owner -> Button Exit Event
         private void btnRegistryOwnerExit_Click(object sender, RoutedEventArgs e)
         {
             if (unsavedChanges)
             {
-                MessageBoxResult result = MessageBox.Show("Save unsaved changes?", "Unsaved changes",
-                    MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show("Save unsaved changes?", "Unsaved changes", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
                 switch (result)
                 {
                     case MessageBoxResult.No:
@@ -312,17 +259,23 @@ namespace VeterinaryManagementSystem
                 }
             }
         }
+
+
         //Registry -> Owner -> Text changed on TextBox around the Registration window
         private void tbOwnerTextChanged(object sender, TextChangedEventArgs e)
         {
             unsavedChanges = true;
         }
+
+
         //Registry -> Owner -> Method to clear the fields
         private void OwnerForm_clearFields()
         {            
-            tbRegistryOwnerDateRegistration.Text = String.Empty;
+            tbRegistryOwnerDateRegistration.Text = DateTime.Now.ToString();   //Data no campo Data Registration????????????
             tbRegistryOwnerID.Text = String.Empty;
+
             //Owner 1
+            imgRegistryOwner1Image = null;                    //Limpar imagem????????????????????????????????????????????????
             tbRegistryOwner1FName.Text = String.Empty;
             tbRegistryOwner1MName.Text = String.Empty;
             tbRegistryOwner1LName.Text = String.Empty;
@@ -330,16 +283,15 @@ namespace VeterinaryManagementSystem
             tbRegistryOwner1Address.Text = String.Empty;
             tbRegistryOwner1Complement.Text = String.Empty;
             tbRegistryOwner1City.Text = String.Empty;
-            //cbRegistryOwner1Province.Text = String.Empty;
+            cbRegistryOwner1Province.Items.Clear();             //ComboBOX solucao que encontrei na internert para limpar item selecionado do elemento. certo??????
             tbRegistryOwner1PostalCode.Text = String.Empty;
             tbRegistryOwner1Phone.Text = String.Empty;
             tbRegistryOwner1OtherNumber.Text = String.Empty;
             tbRegistryOwner1Email.Text = String.Empty;
-            //TOD: Descobrir qual é a propriedade da imagem que guarda o que a imagem tem dentro..
-            //Content? Text?
-            //imgRegistryOwner1Image.Source = owner.Picture_01;
+
 
             //Owner 2
+            imgRegistryOwner1Image = null;                    //Limpar imagem????????????????????????????????????????????????
             tbRegistryOwner2FName.Text = String.Empty;
             tbRegistryOwner2MName.Text = String.Empty;
             tbRegistryOwner2LName.Text = String.Empty;
@@ -347,19 +299,23 @@ namespace VeterinaryManagementSystem
             tbRegistryOwner2Address.Text = String.Empty;
             tbRegistryOwner2Complement.Text = String.Empty;
             tbRegistryOwner2City.Text = String.Empty;
-            cbRegistryOwner2Province.Text = String.Empty;
+            cbRegistryOwner2Province.Items.Clear();             //ComboBOX solucao que encontrei na internert para limpar item selecionado do elemento. certo??????
             tbRegistryOwner2PostalCode.Text = String.Empty;
             tbRegistryOwner2Phone.Text = String.Empty;
             tbRegistryOwner2OtherNumber.Text = String.Empty;
             tbRegistryOwner2Email.Text = String.Empty;
-            //TOD: Descobrir qual é a propriedade da imagem que guarda o que a imagem tem dentro..
-            //Content? Text?
-            //imgRegistryOwner1Image.Source = owner.Picture_01;
+
+            rbOwnerStatus_Active.IsChecked = true;                   //STATUS Deixar como default o ACTIVE
         }
+
+
+
+
+
         /******************************************************************************************
         * REGISTRY => ANIMAL
         ******************************************************************************************/
-        private void RegistryAnimalSearchResult_ButtonSearch_Click(object sender, RoutedEventArgs e)
+            private void RegistryAnimalSearchResult_ButtonSearch_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -474,21 +430,7 @@ namespace VeterinaryManagementSystem
             }
         }
 
-        private void tbRegistryOwnerSearch_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string filter = tbRegistryOwnerSearch.Text.ToLower();
-            if (filter == "")
-            {
-                lvRegistryOwnerSearchResult.ItemsSource = dbOwner.GetAllOwnersActives();
-            }
-            else
-            {
-                List<Owner> list = dbOwner.GetAllOwnersActives();
-                var filteredList = from o in list where o.FirstName_01.ToLower().Contains(filter) || o.PhoneNumber_01.ToString().Contains(filter) || o.FirstName_02.ToLower().Contains(filter) || o.PhoneNumber_02.ToString().Contains(filter) select o;
-
-                lvRegistryOwnerSearchResult.ItemsSource = filteredList;
-            }
-        }
+        
     }
 }
 
