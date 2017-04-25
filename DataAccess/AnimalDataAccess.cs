@@ -142,7 +142,7 @@ namespace VeterinaryManagementSystem.DataAccess
         public List<Animal> GetAllAnimals()
         {
             List<Animal> result = new List<Animal>();
-            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLEMPLOYEE", connection))
+            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLANIMAL", connection))
             using (SqlDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
@@ -191,6 +191,15 @@ namespace VeterinaryManagementSystem.DataAccess
             return result;
         }
 
+
+        /* LINQ PARA ANIMAL REGISTRY DEVE PEGAR NOME DO ANIMAL E OS NOMES DOS 2 DONOS
+         * 
+         *
+        SELECT O.FIRSTNAME_01, O.FIRSTNAME_02, A.NAME
+        FROM TBLANIMAL AS A
+        INNER JOINT TBLOWNER AS O
+        ON A.OWNERID = O.ID
+        */
 
     }
 }

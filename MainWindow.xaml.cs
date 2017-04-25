@@ -23,10 +23,6 @@ using VeterinaryManagementSystem.DataAccess;
 
 namespace VeterinaryManagementSystem
 {
-    /// <summary>
-    /// Interação lógica para MainWindow.xam
-    /// </summary>
-    /// 
 
     public partial class MainWindow : Window
     {
@@ -48,7 +44,12 @@ namespace VeterinaryManagementSystem
         List<VaccineHistoric> vaccineHistoryList = new List<VaccineHistoric>();
 
         private bool unsavedChanges = false;
-        
+
+        private OwnerBusiness ownerBusiness;
+        private AnimalBusiness animalBusiness;
+
+
+
 
         public MainWindow()
         {
@@ -75,6 +76,13 @@ namespace VeterinaryManagementSystem
                 //RefreshBookList();
                 // TODO: load genres into combo box
                 //allGenres = db.GetAllGenres();
+
+
+
+
+                ownerBusiness = new OwnerBusiness();
+                animalBusiness = new AnimalBusiness();
+
             }
             catch (SqlException e)
             {
@@ -130,7 +138,7 @@ namespace VeterinaryManagementSystem
             int index = lvRegistryOwnerSearchResult.SelectedIndex;
             if (index < 0)
             {
-                tbRegistryOwnerID.Text = "";
+                tbRegistryOwnerID.ToString();
                 return;
             }
             Owner owner = ownerList[index];
@@ -188,13 +196,13 @@ namespace VeterinaryManagementSystem
             SavingOwnerRegistryOnDB();
         }
 
-        private OwnerBusiness ownerBusiness;
+        
         //Registry -> Owner -> Method Saving to DB
         private void SavingOwnerRegistryOnDB()
         {
             var owner = new Owner
             {
-                RegistrationDate = DateTime.Now,                   // Add ok. mas update.. mudar a data de registro?????????????????
+                RegistrationDate = DateTime.Now.Date,                   // Add ok. mas update.. mudar a data de registro?????????????????
 
                 //Owner 1
                 //Picture_01 = imgRegistryOwner1Image.              ????????????????????????????????????????????
@@ -261,7 +269,7 @@ namespace VeterinaryManagementSystem
         }
 
 
-        //Registry -> Owner -> Text changed on TextBox around the Registration window
+        //Registry -> Owner -> Text changed on TextBox around the Registration window           //e os outros elementos diferentes de TB como combobom ou radiobutton??
         private void tbOwnerTextChanged(object sender, TextChangedEventArgs e)
         {
             unsavedChanges = true;
@@ -315,102 +323,172 @@ namespace VeterinaryManagementSystem
         /******************************************************************************************
         * REGISTRY => ANIMAL
         ******************************************************************************************/
-            private void RegistryAnimalSearchResult_ButtonSearch_Click(object sender, RoutedEventArgs e)
-        {
 
+
+        //LINQ - SEARCH ALL ANIMALS
+        private void tbRegistryAnimalSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string filter = tbRegistryAnimalSearch.Text.ToLower();
+            if (filter == "")
+            {
+                lvRegistryAnimalSearchResult.ItemsSource = dbAnimal.GetAllAnimals();
+            }
+            else
+            {
+                List<Animal> list = dbAnimal.GetAllAnimals();
+                var filteredList = from a in list where a.Name.Contains(filter) /*|| o.FIRSTNAME_01.Contains(filter) || o.FIRSTNAME_02.Contains(filter)*/ select a;
+                /* LINQ PARA ANIMAL REGISTRY DEVE PEGAR NOME DO ANIMAL E OS NOMES DOS 2 DONOS
+
+                SELECT O.FIRSTNAME_01, O.FIRSTNAME_02, A.NAME
+                FROM TBLANIMAL AS A
+                INNER JOINT TBLOWNER AS O
+                ON A.OWNERID = O.ID
+                */
+
+                lvRegistryAnimalSearchResult.ItemsSource = filteredList;
+            }
         }
+
+
         //Registry -> Animal -> Search List Result
         private void lvRegistryAnimalSearchResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = lvRegistryAnimalSearchResult.SelectedIndex;
             if (index < 0)
             {
-                tbRegistryAnimalDateRegistration.Text = "";
+                tbRegistryAnimalID.ToString();
                 return;
             }
             Animal animal = animalList[index];
-            tbRegistryAnimalDateRegistration.Text = animal.Datereg + "";
-            //FIXME: Ao invés de mostrar o número do Id do Owner, mostrar o nome (se possível completo)
-            tbRegistryAnimalOwner1FName.Text = animal.OwnerID + "";
-            //TODO: Status
+
+            //General Information for both owners
+            tbRegistryAnimalDateRegistration.Text = animal.Datereg.ToString();
+            tbRegistryAnimalID.Text = animal.Id.ToString();
+
+
+            //imgRegistryAnimalPicture.Source = animal.Picture;     //TODO: Descobrir qual é a propriedade da imagem que guarda o que a imagem tem dentro..Content? Text?
             tbRegistryAnimalName.Text = animal.Name;
-            //TODO: Puxar no DB qual Gender está salvo, Male/Female
-            //rbRegistryAnimalFemale.IsChecked = 
-            dpRegistryAnimalBirthday.Text = animal.Dateofbirth + "";
-            tbRegistryAnimalWeight.Text = animal.Weight + "";
+            dpRegistryAnimalBirthday.Text = animal.Dateofbirth.ToString();
+            tbRegistryAnimalWeight.Text = animal.Weight.ToString();
             cbRegistryAnimalSpecies.Text = animal.Specie;
-            //TODO: Puxar a Raca que esta relacionada com esse ID
-            cbRegistryAnimalBreeds.Text = animal.BreedID + "";
+            //cbRegistryAnimalBreeds.Text = animal.BreedID;                                         //COMO PEGAR VALOR DA COLUNA NAME BY BREEDID?
+            lvRegistryAnimalVaccines.ItemsSource = dbVaccineHistory.GetAllVaccineHistorics();       //COMO PEGAR VALOR DA TABELA E POR NA list BY VachistID?
             tbRegistryAnimalIdentification.Text = animal.Identification;
             tbRegistryAnimalFood.Text = animal.Food;
             tbRegistryAnimalPhobias.Text = animal.Phobia;
-            //TODO: Como puxar do DB o Flagset
-            // animal.Flagset;
+            //FLAGSET
+            tbRegistryAnimalVetHistory.Text = animal.Vethistoric;
 
-            /* TODO: Puxar dados da tabela de Historico de Vacinas para a 
-            * tab de Vaccines
-            * E para o Vet History
-            */
+
+            //Atualizando Gender radiobutton de acordo com o Animal ????????????
+            string verifyAnimalCkbGender = animal.Gender;   
+            if (verifyAnimalCkbGender == "MALE")
+            {
+                rbRegistryAnimalMale.IsChecked = true;
+                rbRegistryAnimalFemale.IsChecked = false;
+            }
+            else
+            {
+                rbRegistryAnimalMale.IsChecked = false;
+                rbRegistryAnimalFemale.IsChecked = true;
+            }
+
+            //Atualizando Status radiobutton de acordo com o Animal ????????????
+            string verifyAnimalCkbStatus = animal.Status;   
+            if (verifyAnimalCkbStatus == "ACTIVE")
+            {
+                rbAnimalStatus_Active.IsChecked = true;
+                rbAnimalStatus_Inactive.IsChecked = false;
+            }
+            else
+            {
+                rbAnimalStatus_Active.IsChecked = false;
+                rbAnimalStatus_Inactive.IsChecked = true;
+            }
         }
 
+
+        //Registry -> Animal -> Buttons Save/Add Record Event
+        private void btnRegistryAnimalSave_Click(object sender, RoutedEventArgs e)
+        {
+            SavingAnimalRegistryOnDB();
+        }
 
         //Registry -> Animal -> Method Saving to DB
         private void SavingAnimalRegistryOnDB()
         {
-            DateTime datereg = DateTime.Now;
+            var animal = new Animal
+            {
+                //Picture = imgRegistryAnimalPicture.  ,       //imagem
+                //OwnerID = ?????????  ,                       //nao se tem campo com ownerID
+                //BreedID = cbRegistryAnimalBreeds.Text,       //combobox
+                //VachistID = lvRegistryAnimalVaccines,        //outra tabela
+                Datereg = DateTime.Now.Date,                   // Add ok. mas update.. mudar a data de registro?????????????????
+                Name = tbRegistryAnimalName.Text,
+                Gender = gb_rb_AnimalGender.Content.ToString(), //radio button group,
+                //Dateofbirth = dpRegistryAnimalBirthday  ,   // date picker 
+                //Weight = tbRegistryAnimalWeight ,            //decimal
+                Specie = cbRegistryAnimalSpecies.Text,
+                Identification = tbRegistryAnimalIdentification.Text,
+                Food = tbRegistryAnimalFood.Text,
+                Phobia = tbRegistryAnimalPhobias.Text,
+                //Flagset = ?????,                             //Conjunto de checkbox salvos em uma coluda separados por ,
+                Vethistoric = tbRegistryAnimalVetHistory.Text,
+                Status = gb_rb_AnimalStatus.Content.ToString()  //radio button group
+            };
 
-            //Receiving data from UI
-            //TODO: Como armazenar a imagem no BD
-            //byte [] picture_01 = imgRegistryOwner1Image.
-            //FIXME: arrumar esses ID...
-            string ownerID = tbRegistryOwner1LName.Text;
-            string breedID = cbRegistryAnimalBreeds.Text;
-            string name = tbRegistryAnimalName.Text;
-            string specie = cbRegistryAnimalSpecies.Text;
-            string gender = rbRegistryAnimalFemale.ContentStringFormat;
-            
-            DateTime dateofbirth = Convert.ToDateTime(dpRegistryAnimalBirthday.Text);
-            decimal weight = decimal.Parse(tbConsultationAnimalWeight.Text, CultureInfo.InvariantCulture);
-            Console.WriteLine(weight.ToString(CultureInfo.InvariantCulture));
-            string identification = tbRegistryAnimalIdentification.Text;
-            string food = tbRegistryAnimalFood.Text;
-            string phobia = tbRegistryAnimalPhobias.Text;
-            //string flagset = tbRegistryOwner1Phone.Text;
-            string vethistoric = tbRegistryAnimalVetHistory.Text;
-            //TODO: Status (Active / Inactive)
-            string status = gb_rb_OwnerStatus.Content.ToString();
-
-            //Sending data to DB
             try
             {
-                //Doing this way because we don't have Constructor
-                var animalRegistry = new Animal
-                {
-                    Datereg = datereg,
-                    //Picture = picture,
-                   // OwnerID = ownerID,
-                    //BreedID = breedID,
-                    //VachistID = vachistID,
-                    Name = name,
-                    Specie = specie,
-                    Gender = gender,
-                    Dateofbirth = dateofbirth,
-                    Weight = weight,
-                    
-                    Identification = identification,
-                    Food = food,
-                    Phobia = phobia,
-                   // Flagset = flagset,
-                    Vethistoric = vethistoric
-                };
-                animalList.Add(animalRegistry);
-                lvRegistryOwnerSearchResult.Items.Refresh();
+                animalBusiness.Save(animal);
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+
+
+        //Registry -> Animal -> Button Exit Event
+        private void btnRegistryAnimalExit_Click(object sender, RoutedEventArgs e)
+        {
+            if (unsavedChanges)
+            {
+                MessageBoxResult result = MessageBox.Show("Save unsaved changes?", "Unsaved changes", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                switch (result)
+                {
+                    case MessageBoxResult.No:
+                        AnimalForm_clearFields();
+                        break;
+                    case MessageBoxResult.Cancel:
+                        break;
+                    case MessageBoxResult.Yes:
+                        SavingAnimalRegistryOnDB();
+                        break;
+                }
+            }
+        }
+
+
+        //Registry -> Animal -> Text changed on TextBox around the Registration window           //e os outros elementos diferentes de TB como combobom ou radiobutton??
+        private void tbAnimalTextChanged(object sender, TextChangedEventArgs e)
+        {
+            unsavedChanges = true;
+        }
+
+        private void AnimalForm_clearFields()
+        {
+
+
+
+        }
+
+
+
+
+
+
+
+
         //TODO: Onde usar isso??? Verifica se o valor e nulo...
         private void dpRegistryAnimalBirthday_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -430,9 +508,8 @@ namespace VeterinaryManagementSystem
             }
         }
 
-        
+
     }
 }
 
 
-//List<Owner> ownerList = new List<Owner>();
