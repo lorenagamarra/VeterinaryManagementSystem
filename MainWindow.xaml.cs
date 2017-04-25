@@ -442,7 +442,8 @@ namespace VeterinaryManagementSystem
                 //VachistID = lvRegistryAnimalVaccines,        //outra tabela
                 Datereg = DateTime.Now.Date,                   // Add ok. mas update.. mudar a data de registro?????????????????
                 Name = tbRegistryAnimalName.Text,
-                Gender = gb_rb_AnimalGender.Content.ToString(), //radio button group,
+                //Fixme
+                //Gender = gb_rb_AnimalGender.Content.ToString(), //radio button group,
                 //Dateofbirth = dpRegistryAnimalBirthday  ,     // date picker 
                 //Weight = tbRegistryAnimalWeight ,             //decimal
                 Specie = cbRegistryAnimalSpecies.Text,
@@ -451,7 +452,8 @@ namespace VeterinaryManagementSystem
                 Phobia = tbRegistryAnimalPhobias.Text,
                 //Flagset = ?????,                               //Conjunto de checkbox salvos em uma coluda separados por ,
                 Vethistoric = tbRegistryAnimalVetHistory.Text,
-                Status = gb_rb_AnimalStatus.Content.ToString()   //radio button group
+                //Fixme
+                //Status = gb_rb_AnimalStatus.Content.ToString()   //radio button group
             };
 
             try
@@ -558,7 +560,7 @@ namespace VeterinaryManagementSystem
             else
             {
                 List<Employee> list = dbEmployee.GetAllEmployees();
-                var filteredList = from e in list where e.Id.ToString().ToLower().Contains(filter) || (e.FirstName + " " + e.MiddleName + " " + e.LastName).ToString().Contains(filter) select e;  //primeiro "E" em vermelho
+                var filteredList = from emp in list where emp.Id.ToString().ToLower().Contains(filter) || (emp.FirstName + " " + emp.MiddleName + " " + emp.LastName).ToString().Contains(filter) select emp;  //primeiro "E" em vermelho
 
                 lvRegistryOwnerSearchResult.ItemsSource = filteredList;
             }
@@ -576,23 +578,23 @@ namespace VeterinaryManagementSystem
             Employee employee = employeeList[index];
 
 
-            tbRegistryOwnerID.Text = owner.Id.ToString();
+            tbRegistryOwnerID.Text = employee.Id.ToString();
             //imgRegistryOwner1Image.Source = owner.Picture_01;  //TODO: Descobrir qual é a propriedade da imagem que guarda o que a imagem tem dentro..Content? Text?
-            tbRegistryOwner1FName.Text = owner.FirstName_01;
-            tbRegistryOwner1MName.Text = owner.MiddleName_01;
-            tbRegistryOwner1LName.Text = owner.LastName_01;
-            tbRegistryOwner1NumberAddress.Text = owner.Number_01;
-            tbRegistryOwner1Address.Text = owner.Address_01;
-            tbRegistryOwner1Complement.Text = owner.Complement_01;
-            tbRegistryOwner1City.Text = owner.City_01;
-            cbRegistryOwner1Province.Text = owner.Province_01;
-            tbRegistryOwner1PostalCode.Text = owner.PostalCode_01;
-            tbRegistryOwner1Phone.Text = owner.PhoneNumber_01;
-            tbRegistryOwner1OtherNumber.Text = owner.OtherPhoneNumber_01;
-            tbRegistryOwner1Email.Text = owner.Email_01;
+            tbRegistryOwner1FName.Text = employee.FirstName;
+            tbRegistryOwner1MName.Text = employee.MiddleName;
+            tbRegistryOwner1LName.Text = employee.LastName;
+            tbRegistryOwner1NumberAddress.Text = employee.Number;
+            tbRegistryOwner1Address.Text = employee.Address;
+            tbRegistryOwner1Complement.Text = employee.Complement;
+            tbRegistryOwner1City.Text = employee.City;
+            cbRegistryOwner1Province.Text = employee.Province;
+            tbRegistryOwner1PostalCode.Text = employee.PostalCode;
+            tbRegistryOwner1Phone.Text = employee.PhoneNumber;
+            tbRegistryOwner1OtherNumber.Text = employee.PhoneNumber;
+            tbRegistryOwner1Email.Text = employee.Email;
 
 
-            string verifyOwnerCkbStatus = owner.Status;   //Atualizando Status radiobutton de acordo com o Owner ????????????
+            string verifyOwnerCkbStatus = employee.Status;   //Atualizando Status radiobutton de acordo com o Owner ????????????
             if (verifyOwnerCkbStatus == "ACTIVE")
             {
                 rbOwnerStatus_Active.IsChecked = true;

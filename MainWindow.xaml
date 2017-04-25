@@ -24,7 +24,7 @@
                     <Image Source="D:\IPD9\BitBucket\Project\VeterinaryManagementSystem\Images\background image.jpg"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Consultation" >
+            <TabItem Header="Consultation" Height="24" VerticalAlignment="Top" >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <!--Defining column 0-->
@@ -59,8 +59,8 @@
                                         <Label Content="ID" HorizontalAlignment="Left" Margin="256,10,0,0" VerticalAlignment="Top"/>
                                         <TextBox x:Name="tbConsultationOwnerID" HorizontalAlignment="Left" Height="23" Margin="283,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                                         <Label Content="Status" HorizontalAlignment="Left" Margin="666,0,0,0" VerticalAlignment="Top"/>
-                                        <RadioButton Content="Active" HorizontalAlignment="Left" Margin="666,21,0,0" VerticalAlignment="Top"/>
-                                        <RadioButton Content="Inactive" HorizontalAlignment="Left" Margin="666,36,0,0" VerticalAlignment="Top"/>
+                                        <RadioButton Content="Active" HorizontalAlignment="Left" Margin="666,21,0,0" VerticalAlignment="Top" IsChecked="True" GroupName="SatusConsultationOwner"/>
+                                        <RadioButton Content="Inactive" HorizontalAlignment="Left" Margin="666,36,0,0" VerticalAlignment="Top" GroupName="SatusConsultationOwner"/>
                                         <Button x:Name="btnConsultationOwnerUpdate" Content="Update" HorizontalAlignment="Left" Margin="765,10,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
                                         <Expander IsExpanded="True" HorizontalAlignment="Left" Height="251" Margin="0,41,0,0" VerticalAlignment="Top" Width="870">
                                             <Expander.Header>
@@ -171,8 +171,8 @@
                                 <TabItem Header="Animal" HeaderTemplate="{StaticResource HeaderTemplate}" IsSelected="True">
                                     <Grid Background="#FFE5E5E5" Margin="0,0,0,0" HorizontalAlignment="Left" Width="880">
                                         <Label Content="Status" HorizontalAlignment="Left" Margin="666,0,0,0" VerticalAlignment="Top"/>
-                                        <RadioButton Content="Active" HorizontalAlignment="Left" Margin="666,21,0,0" VerticalAlignment="Top"/>
-                                        <RadioButton Content="Inactive" HorizontalAlignment="Left" Margin="666,36,0,0" VerticalAlignment="Top"/>
+                                        <RadioButton Content="Active" HorizontalAlignment="Left" Margin="666,21,0,0" VerticalAlignment="Top"  GroupName="SatusConsultationAnimal" IsChecked="True"/>
+                                        <RadioButton Content="Inactive" HorizontalAlignment="Left" Margin="666,36,0,0" VerticalAlignment="Top" GroupName="SatusConsultationAnimal"/>
                                         <Label Content="Animal Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                                         <TextBox x:Name="tbConsultationAnimalName" HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137"/>
                                         <RadioButton x:Name="rbConsultationAnimalMale" Content="Male" Margin="0,41,677,447" HorizontalAlignment="Right" Width="51"/>
@@ -444,7 +444,7 @@
                                             <Button x:Name="btnRegistryOwnerSave" Click="btnRegistryOwnerSave_Click" Content="Save Record" HorizontalAlignment="Left" Margin="423,632,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
                                             <Button x:Name="btnRegistryOwnerExit" Click="btnRegistryOwnerExit_Click" Content="Exit" HorizontalAlignment="Left" Margin="589,632,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
 
-                                            <GroupBox Name="gb_rb_OwnerStatus" Header="Satus" Width="100" Margin="650,10,10,603">
+                                            <GroupBox Name="gb_rb_OwnerStatus" Header="Status" Width="100" Margin="650,10,10,603" IsHitTestVisible="False">
                                                 <StackPanel>
                                                     <RadioButton Name="rbOwnerStatus_Active" Content="Active" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusOwner" IsChecked="True"/>
                                                     <RadioButton Name="rbOwnerStatus_Inactive" Content="Inactive" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusOwner" Height="18"/>
@@ -488,9 +488,14 @@
                                             <TextBox x:Name="tbRegistryAnimalDateRegistration" HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" IsEnabled="False"/>
                                             <Label Content="Animal ID" HorizontalAlignment="Left" Margin="146,10,0,0" VerticalAlignment="Top"/>
                                             <TextBox x:Name="tbRegistryAnimalID" HorizontalAlignment="Left" Height="23" Margin="146,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278" IsEnabled="False"/>
-                                            <Label Content="Status" HorizontalAlignment="Left" Margin="735,10,0,0" VerticalAlignment="Top"/>
-                                            <RadioButton Name="rbAnimalStatus_Active" Content="Active" HorizontalAlignment="Left" Margin="735,32,0,0" VerticalAlignment="Top"/>
-                                            <RadioButton Name="rbAnimalStatus_Inactive" Content="Inactive" HorizontalAlignment="Left" Margin="735,52,0,0" VerticalAlignment="Top"/>
+
+                                            <GroupBox Name="gb_rb_AnimalStatus" Header="Status" Width="100" Margin="650,10,10,603">
+                                                <StackPanel>
+                                                    <RadioButton Name="rbAnimalStatus_Active" Content="Active" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusAnimal" IsChecked="True"/>
+                                                    <RadioButton Name="rbAnimalStatus_Inactive" Content="Inactive" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusAnimal" Height="18"/>
+                                                </StackPanel>
+                                            </GroupBox>
+
                                             <Label Content="Animal Name" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
                                             <TextBox x:Name="tbRegistryAnimalName" HorizontalAlignment="Left" Height="23" Margin="10,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="278"/>
                                             <RadioButton x:Name="rbRegistryAnimalMale" Content="Male" Margin="0,95,457,554" HorizontalAlignment="Right" Width="51" GroupName="gb_rb_AnimalGender"/>
@@ -563,7 +568,7 @@
                                             <Label Content="*" HorizontalAlignment="Left" Margin="334,64,0,0" VerticalAlignment="Top" Foreground="#FFFD0606" FontWeight="Bold" RenderTransformOrigin="2.267,2.154"/>
                                             <Label Content="*" HorizontalAlignment="Left" Margin="469,64,0,0" VerticalAlignment="Top" Foreground="#FFFD0606" FontWeight="Bold" RenderTransformOrigin="2.267,2.154"/>
                                             <Label Content="*" HorizontalAlignment="Left" Margin="711,67,0,0" VerticalAlignment="Top" Foreground="#FFFD0606" FontWeight="Bold" RenderTransformOrigin="2.267,2.154"/>
-                                            <Label Content="Required Items" HorizontalAlignment="Left" Margin="626,-8,0,0" VerticalAlignment="Top" FontStyle="Italic" Foreground="#FFFD0606"/>
+                                            <Label Content="Required Items" HorizontalAlignment="Left" Margin="709,130,0,0" VerticalAlignment="Top" FontStyle="Italic" Foreground="#FFFD0606"/>
                                         </Grid>
                                     </StackPanel>
                                     <GridSplitter Grid.Column="1" Background="Gray" Width="2" Margin="0,0,402,0" />
@@ -582,7 +587,7 @@
                                         <Grid Height="680">
                                             <Label Content="Search for Employee Name or ID" Margin="10,10,0,642" HorizontalAlignment="Left" Width="auto"/>
                                             <TextBox  x:Name="tbRegistryEmployeeSearch" Height="23" TextWrapping="Wrap" Margin="10,38,10,619" TextChanged="tbRegistryEmployeeSearch_TextChanged"/>
-                                            <ListView Margin="10,66,10,10" x:Name="lvRegistrySearchResult" SelectionChanged="lvRegistryEmployeeSearchResult_SelectionChanged">
+                                            <ListView Margin="10,66,10,10" x:Name="lvRegistryEmployeeSearchResult" SelectionChanged="lvRegistryEmployeeSearchResult_SelectionChanged">
                                                 <ListView.View>
                                                     <GridView>
                                                         <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="45" Header="ID"/>
@@ -597,9 +602,12 @@
                                         <Grid Margin="0,0,0,0" Height="664">
                                             <Label Content="ID" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                                             <TextBox x:Name="tbRegistryEmployeeID" HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                                            <Label Content="Status" HorizontalAlignment="Left" Margin="684,10,0,0" VerticalAlignment="Top"/>
-                                            <RadioButton Name="rbEmployeeStatus_Active" Content="Active" HorizontalAlignment="Left" Margin="684,32,0,0" VerticalAlignment="Top"/>
-                                            <RadioButton Name="rbEmployeeStatus_Inactive" Content="Inactive" HorizontalAlignment="Left" Margin="684,52,0,0" VerticalAlignment="Top"/>
+                                            <GroupBox Name="gb_rb_EmployeeStatus" Header="Status" Width="100" Margin="650,10,10,603">
+                                                <StackPanel>
+                                                    <RadioButton Name="rbEmployeeStatus_Active" Content="Active" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusEmployee" IsChecked="True"/>
+                                                    <RadioButton Name="rbEmployeeStatus_Inactive" Content="Inactive" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusEmployee" Height="18"/>
+                                                </StackPanel>
+                                            </GroupBox>
                                             <Label Content="First Name" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top"/>
                                             <TextBox x:Name="tbRegistryEmployeeFName" HorizontalAlignment="Left" Height="23" Margin="10,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                                             <Label Content="Middle Name" HorizontalAlignment="Left" Margin="135,69,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.737,1.038"/>
@@ -678,30 +686,37 @@
 
             <TabItem Header="Tables">
                 <Grid>
-                    <TabControl HorizontalAlignment="Left" Height="683" VerticalAlignment="Top" Width="919" TabStripPlacement="Left">
+                    <TabControl HorizontalAlignment="Left" Height="683" VerticalAlignment="Top" Width="1255" TabStripPlacement="Left">
                         <TabItem Header="Register of Breeds">
                             <Grid Background="#FFE5E5E5">
                                 <ListView Margin="10,10,314,10" x:Name="lvTableRegisterBreeds">
                                     <ListView.View>
                                         <GridView>
                                             <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="60" Header="ID"/>
-                                            <GridViewColumn DisplayMemberBinding="{Binding Specie}" Width="70" Header="Specie"/>
-                                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="320" Header="Name"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Specie}" Width="130" Header="Specie"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="250" Header="Name"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Status}" Width="70" Header="Status"/>
                                         </GridView>
                                     </ListView.View>
                                 </ListView>
-                                <Label Content="ID" HorizontalAlignment="Left" Margin="471,10,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="tbTablesBreedsID" HorizontalAlignment="Left" Height="23" Margin="471,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" IsEnabled="False"/>
-                                <Label Content="Specie" HorizontalAlignment="Left" Margin="530,10,0,0" VerticalAlignment="Top"/>
-                                <ComboBox x:Name="cbTablesBreedsSpecies" HorizontalAlignment="Left" Margin="530,41,0,0" VerticalAlignment="Top" Width="120">
+                                <GroupBox Name="gb_rb_TablesBreedsStatus" Header="Status" Width="100" Margin="1001,10,10,603">
+                                    <StackPanel>
+                                        <RadioButton Name="rbTablesBreedsStatus_Active" Content="Active" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusTablesBreeds" IsChecked="True"/>
+                                        <RadioButton Name="rbTablesBreedsStatus_Inactive" Content="Inactive" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusTablesBreeds" Height="18"/>
+                                    </StackPanel>
+                                </GroupBox>
+                                <Label Content="ID" HorizontalAlignment="Left" Margin="809,86,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.614,0.865"/>
+                                <TextBox x:Name="tbTablesBreedsID" HorizontalAlignment="Left" Height="23" Margin="809,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" IsEnabled="False"/>
+                                <Label Content="Specie" HorizontalAlignment="Left" Margin="868,86,0,0" VerticalAlignment="Top"/>
+                                <ComboBox x:Name="cbTablesBreedsSpecies" HorizontalAlignment="Left" Margin="868,118,0,0" VerticalAlignment="Top" Width="120">
                                     <ComboBoxItem Content="Cat" IsSelected="True"/>
                                     <ComboBoxItem Content="Dog"/>
                                 </ComboBox>
-                                <Label Content="Name" HorizontalAlignment="Left" Margin="471,69,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="tbTablesBreedsName" HorizontalAlignment="Left" Height="23" Margin="471,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="292"/>
-                                <Button x:Name="btnTablesBreedsAdd" Content="Add" HorizontalAlignment="Left" Margin="471,140,0,0" VerticalAlignment="Top" Width="75"/>
-                                <Button x:Name="btnTablesBreedsUpdate" Content="Update" HorizontalAlignment="Left" Margin="583,140,0,0" VerticalAlignment="Top" Width="75"/>
-                                <Button x:Name="btnTablesBreedsDelete" Content="Delete" HorizontalAlignment="Left" Margin="688,140,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Label Content="Name" HorizontalAlignment="Left" Margin="809,146,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="tbTablesBreedsName" HorizontalAlignment="Left" Height="23" Margin="809,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="276" RenderTransformOrigin="0.577,1.065"/>
+                                <Button x:Name="btnTablesBreedsAdd" Content="Add" HorizontalAlignment="Left" Margin="809,216,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="btnTablesBreedsUpdate" Content="Update" HorizontalAlignment="Left" Margin="921,216,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="btnTablesBreedsDelete" Content="Delete" HorizontalAlignment="Left" Margin="1026,216,0,0" VerticalAlignment="Top" Width="75"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Register of Vaccines">
@@ -710,20 +725,27 @@
                                     <ListView.View>
                                         <GridView>
                                             <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="60" Header="ID"/>
-                                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="320" Header="Name"/>
-                                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="70" Header="Price"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="300" Header="Name"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Price}" Width="70" Header="Price"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Status}" Width="70" Header="Status"/>
                                         </GridView>
                                     </ListView.View>
                                 </ListView>
-                                <Label Content="ID" HorizontalAlignment="Left" Margin="471,10,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="tbTablesVaccinesID" HorizontalAlignment="Left" Height="23" Margin="471,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" IsEnabled="False"/>
-                                <Label Content="Price (CAD$)" HorizontalAlignment="Left" Margin="530,10,0,0" VerticalAlignment="Top"/>
-                                <Label Content="Name" HorizontalAlignment="Left" Margin="471,69,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="tbTablesVaccinesName" HorizontalAlignment="Left" Height="23" Margin="471,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="292"/>
-                                <Button x:Name="btnTablesVaccinesAdd" Content="Add" HorizontalAlignment="Left" Margin="471,140,0,0" VerticalAlignment="Top" Width="75"/>
-                                <Button x:Name="btnTablesVaccinesUpdate" Content="Update" HorizontalAlignment="Left" Margin="583,140,0,0" VerticalAlignment="Top" Width="75"/>
-                                <Button x:Name="btnTablesVaccinesDelete" Content="Delete" HorizontalAlignment="Left" Margin="688,140,0,0" VerticalAlignment="Top" Width="75"/>
-                                <TextBox x:Name="tbTablesVaccinesPrice" HorizontalAlignment="Left" Height="23" Margin="530,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76"/>
+                                <GroupBox Name="gb_rb_TablesVaccinesStatus" Header="Status" Width="100" Margin="1001,10,10,603">
+                                    <StackPanel>
+                                        <RadioButton Name="rbTablesVaccinesStatus_Active" Content="Active" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusTablesVaccines" IsChecked="True"/>
+                                        <RadioButton Name="rbTablesVaccinesStatus_Inactive" Content="Inactive" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusTablesVaccines" Height="18"/>
+                                    </StackPanel>
+                                </GroupBox>
+                                <Label Content="ID" HorizontalAlignment="Left" Margin="809,86,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="tbTablesVaccinesID" HorizontalAlignment="Left" Height="24" Margin="809,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" IsEnabled="False"/>
+                                <Label Content="Price (CAD$)" HorizontalAlignment="Left" Margin="868,86,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Name" HorizontalAlignment="Left" Margin="809,146,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="tbTablesVaccinesName" HorizontalAlignment="Left" Height="24" Margin="809,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="292"/>
+                                <Button x:Name="btnTablesVaccinesAdd" Content="Add" HorizontalAlignment="Left" Margin="809,216,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="btnTablesVaccinesUpdate" Content="Update" HorizontalAlignment="Left" Margin="921,216,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="btnTablesVaccinesDelete" Content="Delete" HorizontalAlignment="Left" Margin="1026,216,0,0" VerticalAlignment="Top" Width="75"/>
+                                <TextBox x:Name="tbTablesVaccinesPrice" HorizontalAlignment="Left" Height="24" Margin="868,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Register of Serv &amp; Prod">
@@ -734,18 +756,25 @@
                                             <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="60" Header="ID"/>
                                             <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="320" Header="Name"/>
                                             <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="70" Header="Price"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Status}" Width="70" Header="Status"/>
                                         </GridView>
                                     </ListView.View>
                                 </ListView>
-                                <Label Content="ID" HorizontalAlignment="Left" Margin="471,10,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="tbTablesServicesProductsID" HorizontalAlignment="Left" Height="23" Margin="471,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" IsEnabled="False"/>
-                                <Label Content="Price (CAD$)" HorizontalAlignment="Left" Margin="530,10,0,0" VerticalAlignment="Top"/>
-                                <Label Content="Name" HorizontalAlignment="Left" Margin="471,69,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="tbTablesServicesProductsName" HorizontalAlignment="Left" Height="23" Margin="471,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="292"/>
-                                <Button x:Name="btnTablesServicesProductsAdd" Content="Add" HorizontalAlignment="Left" Margin="471,140,0,0" VerticalAlignment="Top" Width="75"/>
-                                <Button x:Name="btnTablesServicesProductsUpdate" Content="Update" HorizontalAlignment="Left" Margin="583,140,0,0" VerticalAlignment="Top" Width="75"/>
-                                <Button x:Name="btnTablesServicesProductsDelete" Content="Delete" HorizontalAlignment="Left" Margin="688,140,0,0" VerticalAlignment="Top" Width="75"/>
-                                <TextBox x:Name="tbTablesServicesProductsPrice" HorizontalAlignment="Left" Height="23" Margin="530,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76"/>
+                                <GroupBox Name="gb_rb_TablesServProdStatus" Header="Status" Width="100" Margin="1001,10,10,603">
+                                    <StackPanel>
+                                        <RadioButton Name="rbTablesServProdStatus_Active" Content="Active" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusTablesServProd" IsChecked="True"/>
+                                        <RadioButton Name="rbTablesServProdStatus_Inactive" Content="Inactive" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusTablesServProd" Height="18"/>
+                                    </StackPanel>
+                                </GroupBox>
+                                <Label Content="ID" HorizontalAlignment="Left" Margin="809,84,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="tbTablesServicesProductsID" HorizontalAlignment="Left" Height="24" Margin="809,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" IsEnabled="False"/>
+                                <Label Content="Price (CAD$)" HorizontalAlignment="Left" Margin="868,84,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Name" HorizontalAlignment="Left" Margin="809,142,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="tbTablesServicesProductsName" HorizontalAlignment="Left" Height="22" Margin="809,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="292"/>
+                                <Button x:Name="btnTablesServicesProductsAdd" Content="Add" HorizontalAlignment="Left" Margin="809,214,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="btnTablesServicesProductsUpdate" Content="Update" HorizontalAlignment="Left" Margin="921,214,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="btnTablesServicesProductsDelete" Content="Delete" HorizontalAlignment="Left" Margin="1026,214,0,0" VerticalAlignment="Top" Width="75"/>
+                                <TextBox x:Name="tbTablesServicesProductsPrice" HorizontalAlignment="Left" Height="24" Margin="868,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76"/>
                             </Grid>
                         </TabItem>
                     </TabControl>
