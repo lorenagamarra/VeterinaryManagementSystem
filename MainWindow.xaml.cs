@@ -75,6 +75,8 @@ namespace VeterinaryManagementSystem
 
 
                 //RefreshBookList();
+                //criar todos os refresh para as todas as listas
+                //carregar todos os conteudos dos combo box e 
                 // TODO: load genres into combo box
                 //allGenres = db.GetAllGenres();
 
@@ -94,6 +96,13 @@ namespace VeterinaryManagementSystem
             }
         }
 
+
+
+
+
+        /******************************************************************************************
+         * CONSULTATION
+         ******************************************************************************************/
         private void Button_Click_ConsultationSearch(object sender, RoutedEventArgs e)
         {
 
@@ -115,8 +124,7 @@ namespace VeterinaryManagementSystem
         /******************************************************************************************
          * REGISTRY => OWNER
          ******************************************************************************************/
-        
-
+    
         //LINQ - SEARCH ALL OWNERS
         private void tbRegistryOwnerSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -158,7 +166,7 @@ namespace VeterinaryManagementSystem
             tbRegistryOwner1Address.Text = owner.Address_01;
             tbRegistryOwner1Complement.Text = owner.Complement_01;
             tbRegistryOwner1City.Text = owner.City_01;
-            cbRegistryOwner1Province.Text = owner.Province_01;
+            cbRegistryOwner1Province.Text = owner.Province_01;       //puxar dado da lista para selecionar opcao do combobox
             tbRegistryOwner1PostalCode.Text = owner.PostalCode_01;
             tbRegistryOwner1Phone.Text = owner.PhoneNumber_01;
             tbRegistryOwner1OtherNumber.Text = owner.OtherPhoneNumber_01;
@@ -598,14 +606,14 @@ namespace VeterinaryManagementSystem
         }
 
         //Registry -> Owner -> Buttons Save/Add Record Event
-        private void btnRegistryOwnerSave_Click(object sender, RoutedEventArgs e)
+        private void btnRegistryEmployeeSave_Click(object sender, RoutedEventArgs e)
         {
-            SavingOwnerRegistryOnDB();
+            SavingEmployeeRegistryOnDB();
         }
 
 
         //Registry -> Owner -> Method Saving to DB
-        private void SavingOwnerRegistryOnDB()
+        private void SavingEmployeeRegistryOnDB()
         {
             var owner = new Owner
             {
@@ -656,7 +664,7 @@ namespace VeterinaryManagementSystem
 
 
         //Registry -> Owner -> Button Exit Event
-        private void btnRegistryOwnerExit_Click(object sender, RoutedEventArgs e)
+        private void btnRegistryEmployeeExit_Click(object sender, RoutedEventArgs e)
         {
             if (unsavedChanges)
             {
@@ -664,12 +672,12 @@ namespace VeterinaryManagementSystem
                 switch (result)
                 {
                     case MessageBoxResult.No:
-                        OwnerForm_clearFields();
+                        EmployeeForm_clearFields();
                         break;
                     case MessageBoxResult.Cancel:
                         break;
                     case MessageBoxResult.Yes:
-                        SavingOwnerRegistryOnDB();
+                        SavingEmployeeRegistryOnDB();
                         break;
                 }
             }
@@ -677,14 +685,14 @@ namespace VeterinaryManagementSystem
 
 
         //Registry -> Owner -> Text changed on TextBox around the Registration window           //e os outros elementos diferentes de TB como combobom ou radiobutton??
-        private void tbOwnerTextChanged(object sender, TextChangedEventArgs e)
+        private void tbEmployeeTextChanged(object sender, TextChangedEventArgs e)
         {
             unsavedChanges = true;
         }
 
 
         //Registry -> Owner -> Method to clear the fields
-        private void OwnerForm_clearFields()
+        private void EmployeeForm_clearFields()
         {
             tbRegistryOwnerDateRegistration.Text = DateTime.Now.ToString();   //Data no campo Data Registration????????????
             tbRegistryOwnerID.Text = String.Empty;
