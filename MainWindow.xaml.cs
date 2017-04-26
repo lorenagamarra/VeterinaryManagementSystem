@@ -37,6 +37,7 @@ namespace VeterinaryManagementSystem
 
         List<Animal> animalList = new List<Animal>();
         List<Breed> breedList = new List<Breed>();
+        List<Consultation> consultationList = new List<Consultation>();
         List<Employee> employeeList = new List<Employee>();
         List<Owner> ownerList = new List<Owner>();
         List<ServicesProducts> servicesProductsList = new List<ServicesProducts>();
@@ -95,7 +96,7 @@ namespace VeterinaryManagementSystem
                 servicesproductsBusiness = new ServicesProductsBusiness();
                 vaccineBusiness = new VaccineBusiness();
                 vaccinehistoricBusiness = new VaccineHistoricBusiness();
-    }
+            }
             catch (SqlException e)
             {
                 Console.WriteLine(e.StackTrace);
@@ -107,6 +108,7 @@ namespace VeterinaryManagementSystem
             //REFRESH ALL LISTS
             refreshBreedList();
             refreshVaccineList();
+            refreshServicesProductsList();
 
 
 
@@ -373,14 +375,23 @@ namespace VeterinaryManagementSystem
             }
             else
             {
-                List<Animal> list = dbAnimal.GetAllAnimals();
-                var filteredList = from a in list where a.Name.Contains(filter) /*|| o.FIRSTNAME_01.Contains(filter) || o.FIRSTNAME_02.Contains(filter)*/ select a;
-                /* LINQ PARA ANIMAL REGISTRY DEVE PEGAR NOME DO ANIMAL E OS NOMES DOS 2 DONOS
+                List<Animal> listAnimal = dbAnimal.GetAllAnimals();
+                List<Owner> listOwner = dbOwner.GetAllOwners();
 
-                SELECT O.FIRSTNAME_01, O.FIRSTNAME_02, A.NAME
-                FROM TBLANIMAL AS A
-                INNER JOINT TBLOWNER AS O
-                ON A.OWNERID = O.ID
+                //multiple words LINQ ?????????????????????????????????????????????????????????????????
+                string[] searchstrings = filter.Split(' ');
+                var filteredList = from animal in listAnimal
+                                   join owner in listOwner 
+                                   on animal.OwnerID equals owner.Id
+                                   where searchstrings.All(word => animal.Name.ToLower().Contains(word) || owner.FirstName_01.Contains(word) || owner.FirstName_02.Contains(word))
+                                   select animal;
+                /*
+                //one word LINQ
+                var filteredList = from animal in listAnimal
+                                   join owner in listOwner 
+                                   on animal.OwnerID equals owner.Id
+                                   where animal.Name.Contains(filter) || owner.FirstName_01.Contains(filter) || owner.FirstName_02.Contains(filter))
+                                   select animal;
                 */
 
                 lvRegistryAnimalSearchResult.ItemsSource = filteredList;
@@ -456,7 +467,7 @@ namespace VeterinaryManagementSystem
             {
                 //Picture = imgRegistryAnimalPicture.  ,       //imagem
                 //OwnerID = ?????????  ,                       //nao se tem campo com ownerID
-                //BreedID = cbRegistryAnimalBreeds.Text,       //combobox
+                BreedID = cbRegistryAnimalBreeds.Text,       //combobox
                 //VachistID = lvRegistryAnimalVaccines,        //outra tabela
                 Datereg = DateTime.Now.Date,                   // Add ok. mas update.. mudar a data de registro?????????????????
                 Name = tbRegistryAnimalName.Text,
