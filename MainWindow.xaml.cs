@@ -45,9 +45,15 @@ namespace VeterinaryManagementSystem
 
         private bool unsavedChanges = false;
 
-        private OwnerBusiness ownerBusiness;
+
         private AnimalBusiness animalBusiness;
+        private BreedBusiness breedBusiness;
+        private ConsultationBusiness consultationBusiness;
         private EmployeeBusiness employeeBusiness;
+        private OwnerBusiness ownerBusiness;
+        private ServicesProductsBusiness servicesproductsBusiness;
+        private VaccineBusiness vaccineBusiness;
+        private VaccineHistoricBusiness vaccinehistoricBusiness;
 
 
 
@@ -81,19 +87,31 @@ namespace VeterinaryManagementSystem
                 //allGenres = db.GetAllGenres();
 
 
-
-
-                ownerBusiness = new OwnerBusiness();
                 animalBusiness = new AnimalBusiness();
+                breedBusiness = new BreedBusiness();
+                consultationBusiness = new ConsultationBusiness();
                 employeeBusiness = new EmployeeBusiness();
-
-            }
+                ownerBusiness = new OwnerBusiness();
+                servicesproductsBusiness = new ServicesProductsBusiness();
+                vaccineBusiness = new VaccineBusiness();
+                vaccinehistoricBusiness = new VaccineHistoricBusiness();
+    }
             catch (SqlException e)
             {
                 Console.WriteLine(e.StackTrace);
                 MessageBox.Show("Error opening database connection: " + e.Message);
                 Environment.Exit(1);
             }
+
+
+            //REFRESH ALL LISTS
+            refreshBreedList();
+            refreshVaccineList();
+
+
+
+
+
         }
 
 
@@ -181,7 +199,7 @@ namespace VeterinaryManagementSystem
             tbRegistryOwner2Address.Text = owner.Address_02;
             tbRegistryOwner2Complement.Text = owner.Complement_02;
             tbRegistryOwner2City.Text = owner.City_02;
-            cbRegistryOwner2Province.Text = owner.Province_02;
+            cbRegistryOwner2Province.Text = owner.Province_02;               //comboBOX
             tbRegistryOwner2PostalCode.Text = owner.PostalCode_02;
             tbRegistryOwner2Phone.Text = owner.PhoneNumber_02;
             tbRegistryOwner2OtherNumber.Text = owner.OtherPhoneNumber_02;
@@ -737,7 +755,237 @@ namespace VeterinaryManagementSystem
         {
 
         }
+
+        /******************************************************************************************
+        * SECONDARY TABLES > BREEDS
+        ******************************************************************************************/
+        private void refreshBreedList()
+        {
+            lvTableRegisterBreeds.ItemsSource = dbBreed.GetAllBreeds();
+        }
+
+        private void lvTableRegisterBreeds_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = lvTableRegisterBreeds.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+            Breed breed = (Breed)lvTableRegisterBreeds.Items[index];
+            tbTablesBreedsID.Text = breed.Id.ToString();
+            tbTablesBreedsName.Text = breed.Name;
+            tbTablesBreedsSpecies.Text = breed.Specie;             
+
+            string verifyBreedCkbStatus = breed.Status;                  //Atualizando Status radiobutton de acordo com o Breed ????????????
+            if (verifyBreedCkbStatus == "ACTIVE")
+            {
+                rbTablesBreedsStatus_Active.IsChecked = true;
+                rbTablesBreedsStatus_Inactive.IsChecked = false;
+            }
+            else
+            {
+                rbTablesBreedsStatus_Active.IsChecked = false;
+                rbTablesBreedsStatus_Inactive.IsChecked = true;
+            }
+        }
+
+        private void btnTablesBreedsAdd_Click(object sender, RoutedEventArgs e)
+        {
+            var breed = new Breed
+            {
+                Specie = tbTablesBreedsSpecies.Text,
+                Name = tbTablesBreedsName.Text,
+                Status = gb_rb_TablesBreedsStatus.Content.ToString()       //radio button group
+            };
+
+            try
+            {
+                breedBusiness.Save(breed);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            refreshBreedList();
+        }
+
+        private void btnTablesBreedsDelete_Click(object sender, RoutedEventArgs e)
+        {
+            int index = lvTableRegisterBreeds.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+            Breed breed = (Breed)lvTableRegisterBreeds.Items[index];
+            try
+            {
+                breedBusiness.Delete(breed);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            refreshBreedList();
+        }
+
+
+
+        /******************************************************************************************
+        * SECONDARY TABLES > VACCINES
+        ******************************************************************************************/
+        private void refreshVaccineList()
+        {
+            lvTableRegisterVaccines.ItemsSource = dbVaccine.GetAllVaccines();
+        }
+
+        private void lvTableRegisterVaccines_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = lvTableRegisterVaccines.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+
+            Vaccine vaccine = (Vaccine)lvTableRegisterVaccines.Items[index];
+            tbTablesVaccinesID.Text = vaccine.Id.ToString();
+            tbTablesVaccinesPrice.Text = vaccine.Price.ToString();
+            tbTablesVaccinesName.Text = vaccine.Name;
+
+            string verifyVaccineCkbStatus = vaccine.Status;                  //Atualizando Status radiobutton de acordo com o vaccine ????????????
+            if (verifyVaccineCkbStatus == "ACTIVE")
+            {
+                rbTablesVaccinesStatus_Active.IsChecked = true;
+                rbTablesVaccinesStatus_Inactive.IsChecked = false;
+            }
+            else
+            {
+                rbTablesVaccinesStatus_Active.IsChecked = false;
+                rbTablesVaccinesStatus_Inactive.IsChecked = true;
+            }
+        }
+
+        private void btnTablesVaccinesAdd_Click(object sender, RoutedEventArgs e)
+        {
+            Decimal price = 0;
+            Decimal.TryParse(tbTablesVaccinesPrice.Text, out price);
+
+            var vaccine = new Vaccine
+            {
+                Name = tbTablesVaccinesName.Text,
+                Price = price,
+                Status = gb_rb_TablesVaccinesStatus.Content.ToString()       //radio button group
+            };
+
+            try
+            {
+                vaccineBusiness.Save(vaccine);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            refreshVaccineList();
+        }
+
+        private void btnTablesVaccinesDelete_Click(object sender, RoutedEventArgs e)
+        {
+            int index = lvTableRegisterVaccines.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+            Vaccine vaccine = (Vaccine)lvTableRegisterVaccines.Items[index];
+            try
+            {
+                vaccineBusiness.Delete(vaccine);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            refreshVaccineList();
+        }
+
+
+        /******************************************************************************************
+        * SECONDARY TABLES > SERVICES & PRODUCTS
+        ******************************************************************************************/
+        private void refreshServicesProductsList()
+        {
+            lvTablesRegisterServicesProducts.ItemsSource = dbServicesProducts.GetAllServicesProducts();
+        }
+        
+        private void lvTableRegisterServicesProducts_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = lvTablesRegisterServicesProducts.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+
+            ServicesProducts servicesproducts = (ServicesProducts)lvTableRegisterVaccines.Items[index];
+            tbTablesServicesProductsID.Text = servicesproducts.Id.ToString();
+            tbTablesServicesProductsPrice.Text = servicesproducts.Price.ToString();
+            tbTablesServicesProductsName.Text = servicesproducts.Name;
+
+            string verifyVaccineCkbStatus = servicesproducts.Status;                  //Atualizando Status radiobutton de acordo com o vaccine ????????????
+            if (verifyVaccineCkbStatus == "ACTIVE")
+            {
+                rbTablesVaccinesStatus_Active.IsChecked = true;
+                rbTablesVaccinesStatus_Inactive.IsChecked = false;
+            }
+            else
+            {
+                rbTablesVaccinesStatus_Active.IsChecked = false;
+                rbTablesVaccinesStatus_Inactive.IsChecked = true;
+            }
+        }
+
+        private void btnTablesServicesProductsAdd_Click(object sender, RoutedEventArgs e)
+        {
+            Decimal price = 0;
+            Decimal.TryParse(tbTablesServicesProductsPrice.Text, out price);
+
+            var servicesproducts = new ServicesProducts
+            {
+                Name = tbTablesServicesProductsName.Text,
+                Price = price,
+                Status = gb_rb_TablesServProdStatus.Content.ToString()       //radio button group
+            };
+
+            try
+            {
+                servicesproductsBusiness.Save(servicesproducts);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            refreshServicesProductsList();
+        }
+
+        private void btnTablesServicesProductsDelete_Click(object sender, RoutedEventArgs e)
+        {
+            int index = lvTablesRegisterServicesProducts.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+            ServicesProducts servicesproducts = (ServicesProducts)lvTablesRegisterServicesProducts.Items[index];
+            try
+            {
+                servicesproductsBusiness.Delete(servicesproducts);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            refreshServicesProductsList();
+        }
     }
 }
 
 
+
+
+            

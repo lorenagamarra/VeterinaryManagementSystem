@@ -689,7 +689,7 @@
                     <TabControl HorizontalAlignment="Left" Height="683" VerticalAlignment="Top" Width="1255" TabStripPlacement="Left">
                         <TabItem Header="Register of Breeds">
                             <Grid Background="#FFE5E5E5">
-                                <ListView Margin="10,10,314,10" x:Name="lvTableRegisterBreeds">
+                                <ListView Margin="10,10,314,10" x:Name="lvTableRegisterBreeds" SelectionChanged="lvTableRegisterBreeds_OnSelectionChanged">
                                     <ListView.View>
                                         <GridView>
                                             <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="60" Header="ID"/>
@@ -708,20 +708,16 @@
                                 <Label Content="ID" HorizontalAlignment="Left" Margin="809,86,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.614,0.865"/>
                                 <TextBox x:Name="tbTablesBreedsID" HorizontalAlignment="Left" Height="23" Margin="809,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" IsEnabled="False"/>
                                 <Label Content="Specie" HorizontalAlignment="Left" Margin="868,86,0,0" VerticalAlignment="Top"/>
-                                <ComboBox x:Name="cbTablesBreedsSpecies" HorizontalAlignment="Left" Margin="868,118,0,0" VerticalAlignment="Top" Width="120">
-                                    <ComboBoxItem Content="Cat" IsSelected="True"/>
-                                    <ComboBoxItem Content="Dog"/>
-                                </ComboBox>
+                                <TextBox x:Name="tbTablesBreedsSpecies" HorizontalAlignment="Left" Margin="868,118,0,0" VerticalAlignment="Top" Width="120"/>
                                 <Label Content="Name" HorizontalAlignment="Left" Margin="809,146,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="tbTablesBreedsName" HorizontalAlignment="Left" Height="23" Margin="809,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="276" RenderTransformOrigin="0.577,1.065"/>
-                                <Button x:Name="btnTablesBreedsAdd" Content="Add" HorizontalAlignment="Left" Margin="809,216,0,0" VerticalAlignment="Top" Width="75"/>
-                                <Button x:Name="btnTablesBreedsUpdate" Content="Update" HorizontalAlignment="Left" Margin="921,216,0,0" VerticalAlignment="Top" Width="75"/>
-                                <Button x:Name="btnTablesBreedsDelete" Content="Delete" HorizontalAlignment="Left" Margin="1026,216,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="btnTablesBreedsAdd" Content="Add" HorizontalAlignment="Left" Margin="809,216,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesBreedsAdd_Click"/>
+                                <Button x:Name="btnTablesBreedsDelete" Content="Delete" HorizontalAlignment="Left" Margin="1026,216,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesBreedsDelete_Click"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Register of Vaccines">
                             <Grid Background="#FFE5E5E5">
-                                <ListView Margin="10,10,314,10" x:Name="lvTableRegisterVaccines">
+                                <ListView Margin="10,10,314,10" x:Name="lvTableRegisterVaccines" SelectionChanged="lvTableRegisterVaccines_OnSelectionChanged">
                                     <ListView.View>
                                         <GridView>
                                             <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="60" Header="ID"/>
@@ -742,15 +738,14 @@
                                 <Label Content="Price (CAD$)" HorizontalAlignment="Left" Margin="868,86,0,0" VerticalAlignment="Top"/>
                                 <Label Content="Name" HorizontalAlignment="Left" Margin="809,146,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="tbTablesVaccinesName" HorizontalAlignment="Left" Height="24" Margin="809,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="292"/>
-                                <Button x:Name="btnTablesVaccinesAdd" Content="Add" HorizontalAlignment="Left" Margin="809,216,0,0" VerticalAlignment="Top" Width="75"/>
-                                <Button x:Name="btnTablesVaccinesUpdate" Content="Update" HorizontalAlignment="Left" Margin="921,216,0,0" VerticalAlignment="Top" Width="75"/>
-                                <Button x:Name="btnTablesVaccinesDelete" Content="Delete" HorizontalAlignment="Left" Margin="1026,216,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="btnTablesVaccinesAdd" Content="Add" HorizontalAlignment="Left" Margin="809,216,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesVaccinesAdd_Click"/>
+                                <Button x:Name="btnTablesVaccinesDelete" Content="Delete" HorizontalAlignment="Left" Margin="1026,216,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesVaccinesDelete_Click"/>
                                 <TextBox x:Name="tbTablesVaccinesPrice" HorizontalAlignment="Left" Height="24" Margin="868,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Register of Serv &amp; Prod">
                             <Grid Background="#FFE5E5E5">
-                                <ListView Margin="10,10,314,10" x:Name="lvTablesRegisterServicesProducts">
+                                <ListView Margin="10,10,314,10" x:Name="lvTablesRegisterServicesProducts" SelectionChanged="lvTableRegisterServicesProducts_OnSelectionChanged">
                                     <ListView.View>
                                         <GridView>
                                             <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="60" Header="ID"/>
@@ -771,9 +766,8 @@
                                 <Label Content="Price (CAD$)" HorizontalAlignment="Left" Margin="868,84,0,0" VerticalAlignment="Top"/>
                                 <Label Content="Name" HorizontalAlignment="Left" Margin="809,142,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="tbTablesServicesProductsName" HorizontalAlignment="Left" Height="22" Margin="809,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="292"/>
-                                <Button x:Name="btnTablesServicesProductsAdd" Content="Add" HorizontalAlignment="Left" Margin="809,214,0,0" VerticalAlignment="Top" Width="75"/>
-                                <Button x:Name="btnTablesServicesProductsUpdate" Content="Update" HorizontalAlignment="Left" Margin="921,214,0,0" VerticalAlignment="Top" Width="75"/>
-                                <Button x:Name="btnTablesServicesProductsDelete" Content="Delete" HorizontalAlignment="Left" Margin="1026,214,0,0" VerticalAlignment="Top" Width="75"/>
+                                <Button x:Name="btnTablesServicesProductsAdd" Content="Add" HorizontalAlignment="Left" Margin="809,214,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesServicesProductsAdd_Click"/>
+                                <Button x:Name="btnTablesServicesProductsDelete" Content="Delete" HorizontalAlignment="Left" Margin="1026,214,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesServicesProductsDelete_Click"/>
                                 <TextBox x:Name="tbTablesServicesProductsPrice" HorizontalAlignment="Left" Height="24" Margin="868,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76"/>
                             </Grid>
                         </TabItem>
