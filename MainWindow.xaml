@@ -756,7 +756,7 @@
                                 <Button x:Name="btnTablesBreedsAdd" Content="Add" HorizontalAlignment="Left" Margin="809,216,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesBreedsAdd_Click"/>
                                 <Button x:Name="btnTablesBreedsDelete" Content="Delete" HorizontalAlignment="Left" Margin="1026,216,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesBreedsDelete_Click"/>
                                 <Label Content="Search for Breed Name" Margin="10,10,0,639" HorizontalAlignment="Left" Width="auto"/>
-                                <TextBox x:Name="tbTablesBreedSearch" Height="23" TextWrapping="Wrap" Margin="10,38,790,616" TextChanged="tbRegistryAnimalSearch_TextChanged" />
+                                <TextBox x:Name="tbTablesBreedSearch" Height="23" TextWrapping="Wrap" Margin="10,38,790,616" TextChanged="tbTablesBreedSearch_TextChanged" />
                             </Grid>
                         </TabItem>
                         <TabItem Height="24" VerticalAlignment="Top" Header="Register of Vaccines">
@@ -786,7 +786,7 @@
                                 <Button x:Name="btnTablesVaccinesDelete" Content="Delete" HorizontalAlignment="Left" Margin="1014,206,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesVaccinesDelete_Click"/>
                                 <TextBox x:Name="tbTablesVaccinesPrice" HorizontalAlignment="Left" Height="24" Margin="849,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76"/>
                                 <Label Content="Search for Vaccine Name" Margin="10,10,0,639" HorizontalAlignment="Left" Width="auto"/>
-                                <TextBox x:Name="tbTablesVaccineSearch" Height="23" TextWrapping="Wrap" Margin="10,38,790,616" TextChanged="tbRegistryAnimalSearch_TextChanged" />
+                                <TextBox x:Name="tbTablesVaccineSearch" Height="23" TextWrapping="Wrap" Margin="10,38,790,616" TextChanged="tbTablesVaccineSearch_TextChanged" />
                             </Grid>
                         </TabItem>
                         <TabItem Height="24" VerticalAlignment="Top" Header="Register of Serv &amp; Prod">
@@ -816,7 +816,7 @@
                                 <Button x:Name="btnTablesServicesProductsDelete" Content="Delete" HorizontalAlignment="Left" Margin="1014,202,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesServicesProductsDelete_Click" RenderTransformOrigin="0.553,1.15"/>
                                 <TextBox x:Name="tbTablesServicesProductsPrice" HorizontalAlignment="Left" Height="24" Margin="849,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76" RenderTransformOrigin="0.059,0.5"/>
                                 <Label Content="Search for Product or Service Name" Margin="10,10,0,639" HorizontalAlignment="Left" Width="auto"/>
-                                <TextBox x:Name="tbTablesProdServSearch" Height="23" TextWrapping="Wrap" Margin="10,38,790,616" TextChanged="tbRegistryAnimalSearch_TextChanged" />
+                                <TextBox x:Name="tbTablesProdServSearch" Height="23" TextWrapping="Wrap" Margin="10,38,790,616" TextChanged="tbTablesProdServSearch_TextChanged" />
                             </Grid>
                         </TabItem>
                     </TabControl>

@@ -118,6 +118,40 @@ namespace VeterinaryManagementSystem
         /******************************************************************************************
          * CONSULTATION
          ******************************************************************************************/
+        //LINQ - SEARCH ALL OWNERS/ANIMALS ACTIVES IN CONSULTATION
+        private void tbConsultationSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string filter = tbConsultationSearch.Text.ToLower();
+            if (filter == "")
+            {
+                lvConsultationSearchResult.ItemsSource = dbAnimal.GetAllAnimalsActives();
+                //HOW TO JOIN OWNERS/ANIMALS WITH 2 DIFERENTES FUNCTIONS??? CREATE A NEW FUNTION WITH JOIN???
+            }
+            else
+            {
+                List<Animal> listAnimal = dbAnimal.GetAllAnimalsActives();
+                List<Owner> listOwner = dbOwner.GetAllOwnersActives();
+
+                //multiple words LINQ ?????????????????????????????????????????????????????????????????
+                string[] searchstrings = filter.Split(' ');
+                var filteredList = from animal in listAnimal
+                                   join owner in listOwner
+                                   on animal.OwnerID equals owner.Id
+                                   where searchstrings.All(word => animal.Name.ToLower().Contains(word) || owner.FirstName_01.Contains(word) || owner.FirstName_02.Contains(word))
+                                   select animal;
+                /*
+                //one word LINQ
+                var filteredList = from animal in listAnimal
+                                   join owner in listOwner 
+                                   on animal.OwnerID equals owner.Id
+                                   where animal.Name.Contains(filter) || owner.FirstName_01.Contains(filter) || owner.FirstName_02.Contains(filter))
+                                   select animal;
+                */
+
+                lvRegistryAnimalSearchResult.ItemsSource = filteredList;
+            }
+        }
+
         private void Button_Click_ConsultationSearch(object sender, RoutedEventArgs e)
         {
 
@@ -728,6 +762,22 @@ namespace VeterinaryManagementSystem
         /******************************************************************************************
         * SECONDARY TABLES > BREEDS
         ******************************************************************************************/
+        //LINQ - SEARCH ALL BREEDS
+        private void tbTablesBreedSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string filter = tbTablesBreedSearch.Text.ToLower();
+            if (filter == "")
+            {
+                lvTableRegisterBreeds.ItemsSource = dbBreed.GetAllBreeds();
+            }
+            else
+            {
+                List<Breed> list = dbBreed.GetAllBreeds();
+                var filteredList = from breed in list where breed.Name.ToLower().Contains(filter) select breed;
+                lvTableRegisterBreeds.ItemsSource = filteredList;
+            }
+        }
+
         private void refreshBreedList()
         {
             lvTableRegisterBreeds.ItemsSource = dbBreed.GetAllBreeds();
@@ -802,6 +852,22 @@ namespace VeterinaryManagementSystem
         /******************************************************************************************
         * SECONDARY TABLES > VACCINES
         ******************************************************************************************/
+        //LINQ - SEARCH ALL VACCINES
+        private void tbRegistryVaccineSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string filter = tbTablesVaccineSearch.Text.ToLower();
+            if (filter == "")
+            {
+                lvTableRegisterVaccines.ItemsSource = dbVaccine.GetAllVaccines();
+            }
+            else
+            {
+                List<Vaccine> list = dbVaccine.GetAllVaccines();
+                var filteredList = from vaccine in list where vaccine.Name.ToLower().Contains(filter) select vaccine;
+                lvTableRegisterVaccines.ItemsSource = filteredList;
+            }
+        }
+
         private void refreshVaccineList()
         {
             lvTableRegisterVaccines.ItemsSource = dbVaccine.GetAllVaccines();
@@ -879,6 +945,22 @@ namespace VeterinaryManagementSystem
         /******************************************************************************************
         * SECONDARY TABLES > SERVICES & PRODUCTS
         ******************************************************************************************/
+        //LINQ - SEARCH ALL SERVICES & PRODUCTS
+        private void tbTablesProdServSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string filter = tbTablesProdServSearch.Text.ToLower();
+            if (filter == "")
+            {
+                lvTablesRegisterServicesProducts.ItemsSource = dbServicesProducts.GetAllServicesProducts();
+            }
+            else
+            {
+                List<ServicesProducts> list = dbServicesProducts.GetAllServicesProducts();
+                var filteredList = from servicesproducts in list where servicesproducts.Name.ToLower().Contains(filter) select servicesproducts;
+                lvTablesRegisterServicesProducts.ItemsSource = filteredList;
+            }
+        }
+
         private void refreshServicesProductsList()
         {
             lvTablesRegisterServicesProducts.ItemsSource = dbServicesProducts.GetAllServicesProducts();
