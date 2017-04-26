@@ -270,11 +270,31 @@ WHERE I NEED HELP IS...
 
 
 
+-----------------------------------------------------------------------------------------------------------------------------
+*** April 26 Nedis ***
+DID SINCE LAST SCRUM:
+	1. Work on implement events (registry: Employee)
+	2. Work on implement events (secondaty tables: Breed, Vaccines and Services&Products)
+	3. Refresh List (Breed, Vaccines and Services&Products)
+	4. LINQ with join 2 tables (maybe multiple words)
+WILL DO IN THE NEXT 24 HOURS
+	1. create refreshlist() methods to all listviews
+	2. full up combo box with quereis (via method() from dataaccess or directly in main window)
+	3. LINQ to search into secondaty tables: Breed, Vaccines and Services&Products
+WHERE I NEED HELP IS...
+	1. Find how to save and retrieve from DB some datatypes (image, combobox, radiobuttongroup, checkboxgroup, etc..)
 
 
-
-
-
-
-
-
+*** April 26 Lorena ***
+DID SINCE LAST SCRUM:
+	1. Worked in the UI changes/fixes 
+WILL DO IN THE NEXT 24 HOURS
+	1. Insert Search field into TABLES (BREED, VACCINE, SERVPROD)
+	2. Implement add new animal button (clear all fields function) after owner search into registry
+        3. Update exit button if there are no unsaved changes (go to tab home)
+	4. Change button save content (id==0 ->add, id!=0 -> update)
+	5. Implement take a picture button and new window do capture.
+WHERE I NEED HELP IS...
+	1. Camera/Photo saving on DB
+	2. How to save/retreive to/from DB the ComboBox, CheckBoxGroup (flag set) and RadioButtonGroup (status/gender) 
+-----------------------------------------------------------------------------------------------------------------------------
