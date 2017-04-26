@@ -96,6 +96,11 @@ namespace VeterinaryManagementSystem
                 servicesproductsBusiness = new ServicesProductsBusiness();
                 vaccineBusiness = new VaccineBusiness();
                 vaccinehistoricBusiness = new VaccineHistoricBusiness();
+
+                //REFRESH ALL LISTS
+                refreshBreedList();
+                refreshVaccineList();
+                refreshServicesProductsList();
             }
             catch (SqlException e)
             {
@@ -103,17 +108,7 @@ namespace VeterinaryManagementSystem
                 MessageBox.Show("Error opening database connection: " + e.Message);
                 Environment.Exit(1);
             }
-
-
-            //REFRESH ALL LISTS
-            refreshBreedList();
-            refreshVaccineList();
-            refreshServicesProductsList();
-
-
-
-
-
+            
         }
 
 
@@ -467,7 +462,7 @@ namespace VeterinaryManagementSystem
             {
                 //Picture = imgRegistryAnimalPicture.  ,       //imagem
                 //OwnerID = ?????????  ,                       //nao se tem campo com ownerID
-                BreedID = cbRegistryAnimalBreeds.Text,       //combobox
+                //BreedID = cbRegistryAnimalBreeds.Text,       //combobox
                 //VachistID = lvRegistryAnimalVaccines,        //outra tabela
                 Datereg = DateTime.Now.Date,                   // Add ok. mas update.. mudar a data de registro?????????????????
                 Name = tbRegistryAnimalName.Text,

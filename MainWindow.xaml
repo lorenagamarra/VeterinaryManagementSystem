@@ -21,10 +21,18 @@
         <TabControl TabStripPlacement="Left" HorizontalAlignment="Left" Width="1342" Margin="0,0,0,3">
             <TabItem Header="Home" Name="Home">
                 <Grid>
-                    <Image Source="D:\IPD9\BitBucket\Project\VeterinaryManagementSystem\Images\background image.jpg"/>
+                    <Image Source="Images\background image.jpg"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Consultation" Height="24" VerticalAlignment="Top" >
+            <TabItem Height="24" VerticalAlignment="Top" >
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Name="img" Height="auto" Width="auto" Source="Images\hospital.png" />
+                        <TextBlock Text="Consultation" Margin="2,0,0,0" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+
+
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <!--Defining column 0-->
@@ -689,7 +697,7 @@
                     <TabControl HorizontalAlignment="Left" Height="683" VerticalAlignment="Top" Width="1255" TabStripPlacement="Left">
                         <TabItem Header="Register of Breeds">
                             <Grid Background="#FFE5E5E5">
-                                <ListView Margin="10,10,314,10" x:Name="lvTableRegisterBreeds" SelectionChanged="lvTableRegisterBreeds_OnSelectionChanged">
+                                <ListView Margin="10,86,314,10" x:Name="lvTableRegisterBreeds" SelectionChanged="lvTableRegisterBreeds_OnSelectionChanged">
                                     <ListView.View>
                                         <GridView>
                                             <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="60" Header="ID"/>
@@ -699,7 +707,7 @@
                                         </GridView>
                                     </ListView.View>
                                 </ListView>
-                                <GroupBox Name="gb_rb_TablesBreedsStatus" Header="Status" Width="100" Margin="1001,10,10,603">
+                                <GroupBox Name="gb_rb_TablesBreedsStatus" Header="Status" Width="100" Margin="980,10,10,603">
                                     <StackPanel>
                                         <RadioButton Name="rbTablesBreedsStatus_Active" Content="Active" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusTablesBreeds" IsChecked="True"/>
                                         <RadioButton Name="rbTablesBreedsStatus_Inactive" Content="Inactive" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusTablesBreeds" Height="18"/>
@@ -713,11 +721,13 @@
                                 <TextBox x:Name="tbTablesBreedsName" HorizontalAlignment="Left" Height="23" Margin="809,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="276" RenderTransformOrigin="0.577,1.065"/>
                                 <Button x:Name="btnTablesBreedsAdd" Content="Add" HorizontalAlignment="Left" Margin="809,216,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesBreedsAdd_Click"/>
                                 <Button x:Name="btnTablesBreedsDelete" Content="Delete" HorizontalAlignment="Left" Margin="1026,216,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesBreedsDelete_Click"/>
+                                <Label Content="Search for Breed Name" Margin="10,10,0,639" HorizontalAlignment="Left" Width="auto"/>
+                                <TextBox x:Name="tbTablesBreedSearch" Height="23" TextWrapping="Wrap" Margin="10,38,790,616" TextChanged="tbRegistryAnimalSearch_TextChanged" />
                             </Grid>
                         </TabItem>
                         <TabItem Header="Register of Vaccines">
                             <Grid Background="#FFE5E5E5">
-                                <ListView Margin="10,10,314,10" x:Name="lvTableRegisterVaccines" SelectionChanged="lvTableRegisterVaccines_OnSelectionChanged">
+                                <ListView Margin="10,86,314,10" x:Name="lvTableRegisterVaccines" SelectionChanged="lvTableRegisterVaccines_OnSelectionChanged">
                                     <ListView.View>
                                         <GridView>
                                             <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="60" Header="ID"/>
@@ -741,11 +751,13 @@
                                 <Button x:Name="btnTablesVaccinesAdd" Content="Add" HorizontalAlignment="Left" Margin="809,216,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesVaccinesAdd_Click"/>
                                 <Button x:Name="btnTablesVaccinesDelete" Content="Delete" HorizontalAlignment="Left" Margin="1026,216,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesVaccinesDelete_Click"/>
                                 <TextBox x:Name="tbTablesVaccinesPrice" HorizontalAlignment="Left" Height="24" Margin="868,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76"/>
+                                <Label Content="Search for Vaccine Name" Margin="10,10,0,639" HorizontalAlignment="Left" Width="auto"/>
+                                <TextBox x:Name="tbTablesVaccineSearch" Height="23" TextWrapping="Wrap" Margin="10,38,790,616" TextChanged="tbRegistryAnimalSearch_TextChanged" />
                             </Grid>
                         </TabItem>
                         <TabItem Header="Register of Serv &amp; Prod">
                             <Grid Background="#FFE5E5E5">
-                                <ListView Margin="10,10,314,10" x:Name="lvTablesRegisterServicesProducts" SelectionChanged="lvTableRegisterServicesProducts_OnSelectionChanged">
+                                <ListView Margin="10,84,314,10" x:Name="lvTablesRegisterServicesProducts" SelectionChanged="lvTableRegisterServicesProducts_OnSelectionChanged">
                                     <ListView.View>
                                         <GridView>
                                             <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="60" Header="ID"/>
@@ -769,6 +781,8 @@
                                 <Button x:Name="btnTablesServicesProductsAdd" Content="Add" HorizontalAlignment="Left" Margin="809,214,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesServicesProductsAdd_Click"/>
                                 <Button x:Name="btnTablesServicesProductsDelete" Content="Delete" HorizontalAlignment="Left" Margin="1026,214,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesServicesProductsDelete_Click"/>
                                 <TextBox x:Name="tbTablesServicesProductsPrice" HorizontalAlignment="Left" Height="24" Margin="868,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76"/>
+                                <Label Content="Search for Product or Service Name" Margin="10,10,0,639" HorizontalAlignment="Left" Width="auto"/>
+                                <TextBox x:Name="tbTablesProdServSearch" Height="23" TextWrapping="Wrap" Margin="10,38,790,616" TextChanged="tbRegistryAnimalSearch_TextChanged" />
                             </Grid>
                         </TabItem>
                     </TabControl>
