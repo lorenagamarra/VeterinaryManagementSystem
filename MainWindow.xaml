@@ -18,21 +18,25 @@
     </Window.Resources>
 
     <Grid Margin="0,0,0,0">
-        <TabControl TabStripPlacement="Left" HorizontalAlignment="Left" Width="1342" Margin="0,0,0,3">
-            <TabItem Header="Home" Name="Home">
+        <TabControl TabStripPlacement="Left" Margin="0,0,0,3">
+            <TabItem Height="24" Name="Home">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Name="iconHome" Height="auto" Width="auto" Source="Images\petshop.png" />
+                        <TextBlock Text="Home" Margin="2,0,0,0" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid>
                     <Image Source="Images\background image.jpg"/>
                 </Grid>
             </TabItem>
-            <TabItem Height="24" VerticalAlignment="Top" >
+            <TabItem Height="24" VerticalAlignment="Top">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Image Name="img" Height="auto" Width="auto" Source="Images\hospital.png" />
                         <TextBlock Text="Consultation" Margin="2,0,0,0" VerticalAlignment="Center" />
                     </StackPanel>
                 </TabItem.Header>
-
-
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <!--Defining column 0-->
@@ -48,9 +52,9 @@
                             <ListView Margin="10,71,10,0" x:Name="lvConsultationSearchResult" MouseLeftButtonUp="lvConsultationSearchResult_MouseLeftButtonUp">
                                 <ListView.View>
                                     <GridView>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="130" Header="Name"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Phone}" Width="70" Header="Phone"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Animal}" Width="130" Header="Animal"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Owner1}" Width="130" Header="Owner 1"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Owner2}" Width="130" Header="Owner 2"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Animal}" Width="70" Header="Animal"/>
                                     </GridView>
                                 </ListView.View>
                             </ListView>
@@ -59,7 +63,7 @@
                     <!-- Column 1, Row 0, Cell 1-->
                     <StackPanel Grid.Column="1" Margin="0,0,0,0" HorizontalAlignment="Left" Width="900">
                         <Grid Margin="0,0,0,0" Height="692" HorizontalAlignment="Left" Width="894">
-                            <TabControl x:Name="tabcConsult" Height="601" VerticalAlignment="Top" HorizontalAlignment="Left" Width="884" Margin="6,46,0,0">
+                            <TabControl x:Name="tabcConsult" Height="601" VerticalAlignment="Top" HorizontalAlignment="Left" Width="863" Margin="6,46,0,0">
                                 <TabItem Header="Owner" HeaderTemplate="{StaticResource HeaderTemplate}">
                                     <Grid Background="#FFE5E5E5">
                                         <Label Content="Date of Registration" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
@@ -69,12 +73,12 @@
                                         <Label Content="Status" HorizontalAlignment="Left" Margin="666,0,0,0" VerticalAlignment="Top"/>
                                         <RadioButton Content="Active" HorizontalAlignment="Left" Margin="666,21,0,0" VerticalAlignment="Top" IsChecked="True" GroupName="SatusConsultationOwner"/>
                                         <RadioButton Content="Inactive" HorizontalAlignment="Left" Margin="666,36,0,0" VerticalAlignment="Top" GroupName="SatusConsultationOwner"/>
-                                        <Button x:Name="btnConsultationOwnerUpdate" Content="Update" HorizontalAlignment="Left" Margin="765,10,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
+                                        <Button x:Name="btnConsultationOwnerUpdate" Content="Update" HorizontalAlignment="Left" Margin="747,10,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
                                         <Expander IsExpanded="True" HorizontalAlignment="Left" Height="251" Margin="0,41,0,0" VerticalAlignment="Top" Width="870">
                                             <Expander.Header>
                                                 <TextBlock><Run Text="First Owner (Required)"/></TextBlock>
                                             </Expander.Header>
-                                            <Grid Background="#FFE5E5E5" Margin="0,0,-2,0">
+                                            <Grid Background="#FFE5E5E5" Margin="0,0,8,0">
                                                 <Label Content="First Name" HorizontalAlignment="Left" Margin="0,5,0,0" VerticalAlignment="Top"/>
                                                 <TextBox x:Name="tbConsultationOwner1FName" HorizontalAlignment="Left" Height="23" Margin="0,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                                                 <Label Content="Middle Name" HorizontalAlignment="Left" Margin="125,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.737,1.038"/>
@@ -121,7 +125,7 @@
 
                                             </Grid>
                                         </Expander>
-                                        <Expander IsExpanded="False"  Header="Second Owner (Optional)" HorizontalAlignment="Left" Height="242" Margin="0,297,0,0" VerticalAlignment="Top" Width="870">
+                                        <Expander IsExpanded="False"  Header="Second Owner (Optional)" HorizontalAlignment="Left" Height="242" Margin="0,297,0,0" VerticalAlignment="Top" Width="857">
                                             <Grid  Background="#FFE5E5E5" Margin="0,0,-2,0" Height="227">
                                                 <Label Content="First Name" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                                                 <TextBox x:Name="tbConsultationOwner2FName" HorizontalAlignment="Left" Height="23" Margin="0,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -304,16 +308,28 @@
                     <GridSplitter Grid.Column="1" Background="Gray" HorizontalAlignment="Left" Width="2" />
                 </Grid>
             </TabItem>
-            <TabItem Header="Registry">
+            <TabItem Height="24" VerticalAlignment="Top">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Name="iconRegistry" Height="auto" Width="auto" Source="Images\file_blanc_plus.png" />
+                        <TextBlock Text="Registry" Margin="2,0,0,0" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid Margin="0,0,0,3">
                     <Grid.ColumnDefinitions>
                         <!--Defining column 0-->
                         <ColumnDefinition MinWidth="300" Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <!-- Column 0, Row 0, Cell 1-->
-                    <StackPanel Grid.Column="0" Margin="0,0,-313,-5" HorizontalAlignment="Left" Width="1255">
-                        <TabControl Margin="0,0,0,0" TabStripPlacement="Left" Height="678" HorizontalAlignment="Left" Width="1255" >
-                            <TabItem Header="Owner Registry">
+                    <StackPanel Grid.Column="0" Margin="0,0,-303,-5" HorizontalAlignment="Left" Width="1246">
+                        <TabControl Margin="0,0,0,0" TabStripPlacement="Left" Height="688" HorizontalAlignment="Left" Width="1246" >
+                            <TabItem Height="24" VerticalAlignment="Top">
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Name="imgOwnerRegistry" Height="auto" Width="auto" Source="Images\client2.png" />
+                                        <TextBlock Text="Owner Registry" Margin="2,0,0,0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </TabItem.Header>
                                 <Grid Margin="0,0,0,-9">
                                     <Grid.ColumnDefinitions>
                                         <!--Defining column 0-->
@@ -339,13 +355,13 @@
                                         </Grid>
                                     </StackPanel>
                                     <!-- Column 1, Row 0, Cell 1-->
-                                    <StackPanel Grid.Column="1" Margin="1,0,-360,10" HorizontalAlignment="Left" Width="770">
+                                    <StackPanel Grid.Column="1" Margin="1,0,-324,10" HorizontalAlignment="Left" Width="735">
                                         <Grid Height="672" Margin="0,0,10,0">
                                             <Label Content="Date of Registration" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                                             <TextBox x:Name="tbRegistryOwnerDateRegistration" HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
                                             <Label Content="ID" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top"/>
                                             <TextBox x:Name="tbRegistryOwnerID" HorizontalAlignment="Left" Height="23" Margin="135,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                                            <Expander IsExpanded="True" HorizontalAlignment="Left" Height="269" Margin="10,74,0,0" VerticalAlignment="Top" Width="749">
+                                            <Expander IsExpanded="True" HorizontalAlignment="Left" Height="269" Margin="10,74,0,0" VerticalAlignment="Top" Width="715">
                                                 <Expander.Header>
                                                     <TextBlock><Run Text="First Owner (Required)"/></TextBlock>
                                                 </Expander.Header>
@@ -389,8 +405,8 @@
                                                     <TextBox TextChanged="tbOwnerTextChanged" x:Name="tbRegistryOwner1Email" HorizontalAlignment="Left" Height="23" Margin="207,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                                                     <Label Content="Other Number" HorizontalAlignment="Left" Margin="112,187,0,0" VerticalAlignment="Top"/>
                                                     <TextBox TextChanged="tbOwnerTextChanged" x:Name="tbRegistryOwner1OtherNumber" HorizontalAlignment="Left" Height="23" Margin="112,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
-                                                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="202" Margin="535,10,0,0" VerticalAlignment="Top" Width="202" Background="White">
-                                                        <Image x:Name="imgRegistryOwner1Image" HorizontalAlignment="Left" Height="200" Margin="0,0,0,0" VerticalAlignment="Top" Width="200" MaxWidth="200" MaxHeight="200" UseLayoutRounding="False" Stretch="Fill"/>
+                                                    <Border BorderBrush="Black" BorderThickness="1" Height="202" Margin="501,10,10,0" VerticalAlignment="Top" Background="White">
+                                                        <Image x:Name="imgRegistryOwner1Image" Height="200" Margin="0,0,0,0" VerticalAlignment="Top" MaxWidth="200" MaxHeight="200" UseLayoutRounding="False" Stretch="Fill"/>
                                                     </Border>
                                                     <Label Content="Required Items" HorizontalAlignment="Left" Margin="11,2,0,0" VerticalAlignment="Top" FontStyle="Italic" Foreground="#FFFD0606"/>
                                                     <Label Content="*" HorizontalAlignment="Left" Margin="69,28,0,0" VerticalAlignment="Top" Foreground="#FFFD0606" FontWeight="Bold"/>
@@ -403,7 +419,7 @@
                                                     <Label Content="*" HorizontalAlignment="Left" Margin="91,185,0,0" VerticalAlignment="Top" Foreground="#FFFD0606" FontWeight="Bold"/>
                                                 </Grid>
                                             </Expander>
-                                            <Expander IsExpanded="False"  Header="Second Owner (Optional)" HorizontalAlignment="Left" Height="269" Margin="11,348,0,0" VerticalAlignment="Top" Width="749">
+                                            <Expander IsExpanded="False"  Header="Second Owner (Optional)" Height="269" Margin="11,348,0,0" VerticalAlignment="Top">
                                                 <Grid  Background="#FFE5E5E5" Margin="0,0,0,0">
                                                     <Label Content="First Name" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
                                                     <TextBox TextChanged="tbOwnerTextChanged" x:Name="tbRegistryOwner2FName" HorizontalAlignment="Left" Height="23" Margin="10,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -444,7 +460,7 @@
                                                     <TextBox TextChanged="tbOwnerTextChanged" x:Name="tbRegistryOwner2Phone" HorizontalAlignment="Left" Height="23" Margin="10,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
                                                     <Label Content="Other Number" HorizontalAlignment="Left" Margin="105,162,0,0" VerticalAlignment="Top"/>
                                                     <TextBox TextChanged="tbOwnerTextChanged" x:Name="tbRegistryOwner2OtherNumber" HorizontalAlignment="Left" Height="23" Margin="105,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
-                                                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="202" Margin="535,10,0,0" VerticalAlignment="Top" Width="202" Background="White">
+                                                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="202" Margin="500,10,0,0" VerticalAlignment="Top" Width="202" Background="White">
                                                         <Image HorizontalAlignment="Left" Height="200" Margin="0,0,0,0" VerticalAlignment="Top" Width="200"/>
                                                     </Border>
                                                 </Grid>
@@ -464,7 +480,13 @@
                                     <GridSplitter Grid.Column="1" Background="Gray" Width="2" Margin="0,0,402,0" />
                                 </Grid>
                             </TabItem>
-                            <TabItem Header="Animal Registry">
+                            <TabItem Height="24" VerticalAlignment="Top">
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Name="iconAnimalRegistry" Height="auto" Width="auto" Source="Images\pawprint2.png" />
+                                        <TextBlock Text="Animal Registry" Margin="2,0,0,0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </TabItem.Header>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <!--Defining column 0-->
@@ -486,12 +508,12 @@
                                                     </GridView>
                                                 </ListView.View>
                                             </ListView>
-                                            <Button Content="Add a new Animal to this Owner" HorizontalAlignment="Left" Margin="84,634,0,0" VerticalAlignment="Top" Width="auto"/>
+                                            <Button Content="Add a new Animal to this Owner" HorizontalAlignment="Left" Margin="84,634,0,0" VerticalAlignment="Top" Width="auto" Click="ButtonAddNewAnimal_Click"/>
                                         </Grid>
                                     </StackPanel>
                                     <!-- Column 1, Row 0, Cell 1-->
-                                    <StackPanel Grid.Column="1" Margin="1,0,-400,0" HorizontalAlignment="Left" Width="806">
-                                        <Grid Margin="0,0,0,0" Height="664">
+                                    <StackPanel Grid.Column="1" Margin="1,0,-368,0" HorizontalAlignment="Left" Width="775">
+                                        <Grid Margin="0,0,10,0" Height="664">
                                             <Label Content="Date of Registration" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                                             <TextBox x:Name="tbRegistryAnimalDateRegistration" HorizontalAlignment="Left" Height="23" Margin="10,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131" IsEnabled="False"/>
                                             <Label Content="Animal ID" HorizontalAlignment="Left" Margin="146,10,0,0" VerticalAlignment="Top"/>
@@ -512,7 +534,7 @@
                                             <Label Content="Gender" HorizontalAlignment="Left" Margin="293,64,0,0" VerticalAlignment="Top"/>
                                             <Label Content="Birthday" HorizontalAlignment="Left" Margin="423,64,0,0" VerticalAlignment="Top"/>
                                             <Label Content="Current Weight (kg)" HorizontalAlignment="Left" Margin="603,64,0,0" VerticalAlignment="Top"/>
-                                            <TabControl Margin="10,130,10,147" BorderThickness="2">
+                                            <TabControl Margin="10,130,0,147" BorderThickness="2">
                                                 <TabItem Header="Animal Information">
                                                     <Grid Margin="0,0,0,0">
                                                         <Label Content="SPECIES" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
@@ -569,7 +591,7 @@
                                             <CheckBox x:Name="ckbRegistryAnimalObsessive" Content="Obsessive" HorizontalAlignment="Left" Margin="206,583,0,0" VerticalAlignment="Top"/>
                                             <Button x:Name="btnRegistryAnimalSave" Content="Save Record" HorizontalAlignment="Left" Margin="426,589,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
                                             <Button x:Name="btnRegistryAnimalPrint" Content="Print Registry" HorizontalAlignment="Left" Margin="592,589,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
-                                            <Button x:Name="btnRegistryAnimalExit" Content="Exit" HorizontalAlignment="Left" Margin="592,624,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
+                                            <Button x:Name="btnRegistryAnimalExit" Content="Exit" HorizontalAlignment="Left" Margin="592,624,0,0" VerticalAlignment="Top" Width="161" Height="30" Click="btnRegistryAnimalExit_Click"/>
                                             <TextBox x:Name="tbRegistryAnimalWeight" HorizontalAlignment="Left" Height="23" Margin="603,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110"/>
                                             <Button x:Name="btnRegistryAnimalEmail" Content="Send by Email" HorizontalAlignment="Left" Margin="426,624,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
                                             <Label Content="*" HorizontalAlignment="Left" Margin="83,64,0,0" VerticalAlignment="Top" Foreground="#FFFD0606" FontWeight="Bold" RenderTransformOrigin="2.267,2.154"/>
@@ -582,7 +604,13 @@
                                     <GridSplitter Grid.Column="1" Background="Gray" Width="2" Margin="0,0,402,0" />
                                 </Grid>
                             </TabItem>
-                            <TabItem Header="Employee Registry">
+                            <TabItem Height="24" VerticalAlignment="Top">
+                                <TabItem.Header>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Name="iconEmployeeRegistry" Height="auto" Width="auto" Source="Images\veterinarian2_2.png" />
+                                        <TextBlock Text="Employee Registry" Margin="2,0,0,0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </TabItem.Header>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <!--Defining column 0-->
@@ -606,11 +634,11 @@
                                         </Grid>
                                     </StackPanel>
                                     <!-- Column 1, Row 0, Cell 1-->
-                                    <StackPanel Grid.Column="1" Margin="1,0,-355,0" HorizontalAlignment="Left" Width="761">
+                                    <StackPanel Grid.Column="1" Margin="1,0,-323,0" HorizontalAlignment="Left" Width="730">
                                         <Grid Margin="0,0,0,0" Height="664">
                                             <Label Content="ID" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                                             <TextBox x:Name="tbRegistryEmployeeID" HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                                            <GroupBox Name="gb_rb_EmployeeStatus" Header="Status" Width="100" Margin="650,10,10,603">
+                                            <GroupBox Name="gb_rb_EmployeeStatus" Header="Status" Width="100" Margin="620,10,10,603">
                                                 <StackPanel>
                                                     <RadioButton Name="rbEmployeeStatus_Active" Content="Active" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusEmployee" IsChecked="True"/>
                                                     <RadioButton Name="rbEmployeeStatus_Inactive" Content="Inactive" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusEmployee" Height="18"/>
@@ -662,11 +690,11 @@
                                             <Label Content="SIN" HorizontalAlignment="Left" Margin="260,285,0,0" VerticalAlignment="Top"/>
                                             <TextBox x:Name="tbRegistryEmployeeSIN" HorizontalAlignment="Left" Height="23" Margin="260,307,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                                             <Label Content="Positions" HorizontalAlignment="Left" Margin="135,285,0,0" VerticalAlignment="Top"/>
-                                            <TextBox x:Name="tbRegistryEmployeeObservations" HorizontalAlignment="Left" Height="98" Margin="12,423,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="741" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"/>
+                                            <TextBox x:Name="tbRegistryEmployeeObservations" Height="98" Margin="12,423,10,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible"/>
                                             <Label Content="Observations" HorizontalAlignment="Left" Margin="12,392,0,0" VerticalAlignment="Top"/>
                                             <ComboBox x:Name="cbRegistryEmployeePositions" HorizontalAlignment="Left" Margin="135,308,0,0" VerticalAlignment="Top" Width="120"/>
-                                            <Button x:Name="btnRegistryEmployeeSave" Content="Save Record" HorizontalAlignment="Left" Margin="426,624,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
-                                            <Button x:Name="btnRegistryEmployeeExit" Content="Exit" HorizontalAlignment="Left" Margin="592,624,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
+                                            <Button x:Name="btnRegistryEmployeeSave" Content="Save Record" HorizontalAlignment="Left" Margin="393,624,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
+                                            <Button x:Name="btnRegistryEmployeeExit" Content="Exit" HorizontalAlignment="Left" Margin="559,624,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
                                             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="202" Margin="474,103,0,0" VerticalAlignment="Top" Width="202">
                                                 <Image x:Name="imgRegistryEmployeeImage" HorizontalAlignment="Left" Height="200" Margin="0,0,0,0" VerticalAlignment="Top" Width="200" MaxWidth="200" MaxHeight="200" UseLayoutRounding="False"/>
                                             </Border>
@@ -692,10 +720,16 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Tables">
+            <TabItem Height="24" VerticalAlignment="Top">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Name="iconTables" Height="auto" Width="auto" Source="Images\document.png" />
+                        <TextBlock Text="Tables" Margin="2,0,0,0" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid>
-                    <TabControl HorizontalAlignment="Left" Height="683" VerticalAlignment="Top" Width="1255" TabStripPlacement="Left">
-                        <TabItem Header="Register of Breeds">
+                    <TabControl Height="683" VerticalAlignment="Top" TabStripPlacement="Left">
+                        <TabItem Height="24" VerticalAlignment="Top" Header="Register of Breeds">
                             <Grid Background="#FFE5E5E5">
                                 <ListView Margin="10,86,314,10" x:Name="lvTableRegisterBreeds" SelectionChanged="lvTableRegisterBreeds_OnSelectionChanged">
                                     <ListView.View>
@@ -725,7 +759,7 @@
                                 <TextBox x:Name="tbTablesBreedSearch" Height="23" TextWrapping="Wrap" Margin="10,38,790,616" TextChanged="tbRegistryAnimalSearch_TextChanged" />
                             </Grid>
                         </TabItem>
-                        <TabItem Header="Register of Vaccines">
+                        <TabItem Height="24" VerticalAlignment="Top" Header="Register of Vaccines">
                             <Grid Background="#FFE5E5E5">
                                 <ListView Margin="10,86,314,10" x:Name="lvTableRegisterVaccines" SelectionChanged="lvTableRegisterVaccines_OnSelectionChanged">
                                     <ListView.View>
@@ -737,26 +771,26 @@
                                         </GridView>
                                     </ListView.View>
                                 </ListView>
-                                <GroupBox Name="gb_rb_TablesVaccinesStatus" Header="Status" Width="100" Margin="1001,10,10,603">
+                                <GroupBox Name="gb_rb_TablesVaccinesStatus" Header="Status" Width="100" Margin="989,10,10,603">
                                     <StackPanel>
                                         <RadioButton Name="rbTablesVaccinesStatus_Active" Content="Active" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusTablesVaccines" IsChecked="True"/>
                                         <RadioButton Name="rbTablesVaccinesStatus_Inactive" Content="Inactive" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusTablesVaccines" Height="18"/>
                                     </StackPanel>
                                 </GroupBox>
-                                <Label Content="ID" HorizontalAlignment="Left" Margin="809,86,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="tbTablesVaccinesID" HorizontalAlignment="Left" Height="24" Margin="809,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" IsEnabled="False"/>
-                                <Label Content="Price (CAD$)" HorizontalAlignment="Left" Margin="868,86,0,0" VerticalAlignment="Top"/>
-                                <Label Content="Name" HorizontalAlignment="Left" Margin="809,146,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="tbTablesVaccinesName" HorizontalAlignment="Left" Height="24" Margin="809,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="292"/>
-                                <Button x:Name="btnTablesVaccinesAdd" Content="Add" HorizontalAlignment="Left" Margin="809,216,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesVaccinesAdd_Click"/>
-                                <Button x:Name="btnTablesVaccinesDelete" Content="Delete" HorizontalAlignment="Left" Margin="1026,216,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesVaccinesDelete_Click"/>
-                                <TextBox x:Name="tbTablesVaccinesPrice" HorizontalAlignment="Left" Height="24" Margin="868,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76"/>
+                                <Label Content="ID" HorizontalAlignment="Left" Margin="790,86,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="tbTablesVaccinesID" HorizontalAlignment="Left" Height="24" Margin="790,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" IsEnabled="False"/>
+                                <Label Content="Price (CAD$)" HorizontalAlignment="Left" Margin="849,86,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Name" HorizontalAlignment="Left" Margin="790,146,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="tbTablesVaccinesName" Height="24" Margin="790,177,10,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                                <Button x:Name="btnTablesVaccinesAdd" Content="Add" HorizontalAlignment="Left" Margin="790,206,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesVaccinesAdd_Click" RenderTransformOrigin="0.327,0.45"/>
+                                <Button x:Name="btnTablesVaccinesDelete" Content="Delete" HorizontalAlignment="Left" Margin="1014,206,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesVaccinesDelete_Click"/>
+                                <TextBox x:Name="tbTablesVaccinesPrice" HorizontalAlignment="Left" Height="24" Margin="849,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76"/>
                                 <Label Content="Search for Vaccine Name" Margin="10,10,0,639" HorizontalAlignment="Left" Width="auto"/>
                                 <TextBox x:Name="tbTablesVaccineSearch" Height="23" TextWrapping="Wrap" Margin="10,38,790,616" TextChanged="tbRegistryAnimalSearch_TextChanged" />
                             </Grid>
                         </TabItem>
-                        <TabItem Header="Register of Serv &amp; Prod">
-                            <Grid Background="#FFE5E5E5">
+                        <TabItem Height="24" VerticalAlignment="Top" Header="Register of Serv &amp; Prod">
+                            <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
                                 <ListView Margin="10,84,314,10" x:Name="lvTablesRegisterServicesProducts" SelectionChanged="lvTableRegisterServicesProducts_OnSelectionChanged">
                                     <ListView.View>
                                         <GridView>
@@ -767,20 +801,20 @@
                                         </GridView>
                                     </ListView.View>
                                 </ListView>
-                                <GroupBox Name="gb_rb_TablesServProdStatus" Header="Status" Width="100" Margin="1001,10,10,603">
+                                <GroupBox Name="gb_rb_TablesServProdStatus" Header="Status" Width="100" Margin="989,10,10,603">
                                     <StackPanel>
                                         <RadioButton Name="rbTablesServProdStatus_Active" Content="Active" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusTablesServProd" IsChecked="True"/>
                                         <RadioButton Name="rbTablesServProdStatus_Inactive" Content="Inactive" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusTablesServProd" Height="18"/>
                                     </StackPanel>
                                 </GroupBox>
-                                <Label Content="ID" HorizontalAlignment="Left" Margin="809,84,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="tbTablesServicesProductsID" HorizontalAlignment="Left" Height="24" Margin="809,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" IsEnabled="False"/>
-                                <Label Content="Price (CAD$)" HorizontalAlignment="Left" Margin="868,84,0,0" VerticalAlignment="Top"/>
-                                <Label Content="Name" HorizontalAlignment="Left" Margin="809,142,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="tbTablesServicesProductsName" HorizontalAlignment="Left" Height="22" Margin="809,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="292"/>
-                                <Button x:Name="btnTablesServicesProductsAdd" Content="Add" HorizontalAlignment="Left" Margin="809,214,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesServicesProductsAdd_Click"/>
-                                <Button x:Name="btnTablesServicesProductsDelete" Content="Delete" HorizontalAlignment="Left" Margin="1026,214,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesServicesProductsDelete_Click"/>
-                                <TextBox x:Name="tbTablesServicesProductsPrice" HorizontalAlignment="Left" Height="24" Margin="868,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76"/>
+                                <Label Content="ID" HorizontalAlignment="Left" Margin="790,84,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="tbTablesServicesProductsID" HorizontalAlignment="Left" Height="24" Margin="790,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" IsEnabled="False"/>
+                                <Label Content="Price (CAD$)" HorizontalAlignment="Left" Margin="849,84,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Name" HorizontalAlignment="Left" Margin="790,144,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="tbTablesServicesProductsName" Height="24" Margin="790,175,7,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                                <Button x:Name="btnTablesServicesProductsAdd" Content="Add" HorizontalAlignment="Left" Margin="790,202,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesServicesProductsAdd_Click"/>
+                                <Button x:Name="btnTablesServicesProductsDelete" Content="Delete" HorizontalAlignment="Left" Margin="1014,202,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesServicesProductsDelete_Click" RenderTransformOrigin="0.553,1.15"/>
+                                <TextBox x:Name="tbTablesServicesProductsPrice" HorizontalAlignment="Left" Height="24" Margin="849,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76" RenderTransformOrigin="0.059,0.5"/>
                                 <Label Content="Search for Product or Service Name" Margin="10,10,0,639" HorizontalAlignment="Left" Width="auto"/>
                                 <TextBox x:Name="tbTablesProdServSearch" Height="23" TextWrapping="Wrap" Margin="10,38,790,616" TextChanged="tbRegistryAnimalSearch_TextChanged" />
                             </Grid>

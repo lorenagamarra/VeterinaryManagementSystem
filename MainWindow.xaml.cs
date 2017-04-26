@@ -98,9 +98,9 @@ namespace VeterinaryManagementSystem
                 vaccinehistoricBusiness = new VaccineHistoricBusiness();
 
                 //REFRESH ALL LISTS
-                refreshBreedList();
-                refreshVaccineList();
-                refreshServicesProductsList();
+                //refreshBreedList();
+                //refreshVaccineList();
+                //refreshServicesProductsList();
             }
             catch (SqlException e)
             {
@@ -272,28 +272,6 @@ namespace VeterinaryManagementSystem
             }
         }
 
-
-        //Registry -> Owner -> Button Exit Event
-        private void btnRegistryOwnerExit_Click(object sender, RoutedEventArgs e)
-        {
-            if (unsavedChanges)
-            {
-                MessageBoxResult result = MessageBox.Show("Save unsaved changes?", "Unsaved changes", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-                switch (result)
-                {
-                    case MessageBoxResult.No:
-                        OwnerForm_clearFields();
-                        break;
-                    case MessageBoxResult.Cancel:
-                        break;
-                    case MessageBoxResult.Yes:
-                        SavingOwnerRegistryOnDB();
-                        break;
-                }
-            }
-        }
-
-
         //Registry -> Owner -> Text changed on TextBox around the Registration window           //e os outros elementos diferentes de TB como combobom ou radiobutton??
         private void tbOwnerTextChanged(object sender, TextChangedEventArgs e)
         {
@@ -322,7 +300,6 @@ namespace VeterinaryManagementSystem
             tbRegistryOwner1OtherNumber.Text = String.Empty;
             tbRegistryOwner1Email.Text = String.Empty;
 
-
             //Owner 2
             imgRegistryOwner1Image = null;                    //Limpar imagem????????????????????????????????????????????????
             tbRegistryOwner2FName.Text = String.Empty;
@@ -341,17 +318,26 @@ namespace VeterinaryManagementSystem
             rbOwnerStatus_Active.IsChecked = true;                   //STATUS Deixar como default o ACTIVE
         }
 
-
-
-
-
-
-
-
-
-
-
-
+        //Registry -> Owner -> Button Exit Event
+        private void btnRegistryOwnerExit_Click(object sender, RoutedEventArgs e)
+        {
+            if (unsavedChanges)
+            {
+                MessageBoxResult result = MessageBox.Show("Save unsaved changes?", "Unsaved changes", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                switch (result)
+                {
+                    case MessageBoxResult.No:
+                        OwnerForm_clearFields();
+                        SwitchToTabHome();
+                        break;
+                    case MessageBoxResult.Cancel:
+                        break;
+                    case MessageBoxResult.Yes:
+                        SavingOwnerRegistryOnDB();
+                        break;
+                }
+            }
+        }
 
 
 
@@ -490,7 +476,10 @@ namespace VeterinaryManagementSystem
             }
         }
 
-
+        private void ButtonAddNewAnimal_Click(object sender, RoutedEventArgs e)
+        {
+            AnimalForm_clearFields();
+        }
         //Registry -> Animal -> Button Exit Event
         private void btnRegistryAnimalExit_Click(object sender, RoutedEventArgs e)
         {
@@ -501,17 +490,17 @@ namespace VeterinaryManagementSystem
                 {
                     case MessageBoxResult.No:
                         AnimalForm_clearFields();
+                        SwitchToTabHome();
                         break;
                     case MessageBoxResult.Cancel:
                         break;
                     case MessageBoxResult.Yes:
-                        SavingAnimalRegistryOnDB();
+                        SavingOwnerRegistryOnDB();
                         break;
                 }
             }
         }
-
-
+        
         //Registry -> Animal -> Text changed on TextBox around the Registration window           //e os outros elementos diferentes de TB como combobom ou radiobutton??
         private void tbAnimalTextChanged(object sender, TextChangedEventArgs e)
         {
@@ -554,19 +543,7 @@ namespace VeterinaryManagementSystem
                 this.Title = date.Value.ToShortDateString();
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
 
 
         /******************************************************************************************
@@ -689,7 +666,31 @@ namespace VeterinaryManagementSystem
         }
 
 
-        //Registry -> Owner -> Button Exit Event
+        //Registry -> Employee -> Method to clear the fields
+        private void EmployeeForm_clearFields()
+        {
+            tbRegistryEmployeeID.Text = String.Empty;
+            imgRegistryEmployeeImage = null;                    //Limpar imagem????????????????????????????????????????????????
+            tbRegistryEmployeeFName.Text = String.Empty;
+            tbRegistryEmployeeMName.Text = String.Empty;
+            tbRegistryEmployeeLName.Text = String.Empty;
+            tbRegistryEmployeeNumberAddress.Text = String.Empty;
+            tbRegistryEmployeeAddress.Text = String.Empty;
+            tbRegistryEmployeeComplement.Text = String.Empty;
+            tbRegistryEmployeeCity.Text = String.Empty;
+            cbRegistryEmployeeProvince.Items.Clear();             //ComboBOX solucao que encontrei na internert para limpar item selecionado do elemento. certo??????
+            tbRegistryEmployeePostalCode.Text = String.Empty;
+            tbRegistryEmployeePhone.Text = String.Empty;
+            tbRegistryEmployeeOtherNumber.Text = String.Empty;
+            tbRegistryEmployeeEmail.Text = String.Empty;
+            rbEmployeeStatus_Active.IsChecked = true;                   //STATUS Deixar como default o ACTIVE
+            dpRegistryEmployeeHire.Text = null;   //Data no campo Data Registration????????????
+            cbRegistryEmployeePositions.Items.Clear();             //ComboBOX solucao que encontrei na internert para limpar item selecionado do elemento. certo??????
+            dpRegistryEmployeeTerm.Text = null;   //Data no campo Data Registration????????????
+            tbRegistryEmployeeObservations.Text = String.Empty;
+        }
+
+        //Registry -> Employee -> Button Exit Event
         private void btnRegistryEmployeeExit_Click(object sender, RoutedEventArgs e)
         {
             if (unsavedChanges)
@@ -699,6 +700,7 @@ namespace VeterinaryManagementSystem
                 {
                     case MessageBoxResult.No:
                         EmployeeForm_clearFields();
+                        SwitchToTabHome();
                         break;
                     case MessageBoxResult.Cancel:
                         break;
@@ -709,7 +711,6 @@ namespace VeterinaryManagementSystem
             }
         }
 
-
         //Registry -> Owner -> Text changed on TextBox around the Registration window           //e os outros elementos diferentes de TB como combobom ou radiobutton??
         private void tbEmployeeTextChanged(object sender, TextChangedEventArgs e)
         {
@@ -717,45 +718,7 @@ namespace VeterinaryManagementSystem
         }
 
 
-        //Registry -> Owner -> Method to clear the fields
-        private void EmployeeForm_clearFields()
-        {
-            tbRegistryOwnerDateRegistration.Text = DateTime.Now.ToString();   //Data no campo Data Registration????????????
-            tbRegistryOwnerID.Text = String.Empty;
-
-            //Owner 1
-            imgRegistryOwner1Image = null;                    //Limpar imagem????????????????????????????????????????????????
-            tbRegistryOwner1FName.Text = String.Empty;
-            tbRegistryOwner1MName.Text = String.Empty;
-            tbRegistryOwner1LName.Text = String.Empty;
-            tbRegistryOwner1NumberAddress.Text = String.Empty;
-            tbRegistryOwner1Address.Text = String.Empty;
-            tbRegistryOwner1Complement.Text = String.Empty;
-            tbRegistryOwner1City.Text = String.Empty;
-            cbRegistryOwner1Province.Items.Clear();             //ComboBOX solucao que encontrei na internert para limpar item selecionado do elemento. certo??????
-            tbRegistryOwner1PostalCode.Text = String.Empty;
-            tbRegistryOwner1Phone.Text = String.Empty;
-            tbRegistryOwner1OtherNumber.Text = String.Empty;
-            tbRegistryOwner1Email.Text = String.Empty;
-
-
-            //Owner 2
-            imgRegistryOwner1Image = null;                    //Limpar imagem????????????????????????????????????????????????
-            tbRegistryOwner2FName.Text = String.Empty;
-            tbRegistryOwner2MName.Text = String.Empty;
-            tbRegistryOwner2LName.Text = String.Empty;
-            tbRegistryOwner2NumberAddress.Text = String.Empty;
-            tbRegistryOwner2Address.Text = String.Empty;
-            tbRegistryOwner2Complement.Text = String.Empty;
-            tbRegistryOwner2City.Text = String.Empty;
-            cbRegistryOwner2Province.Items.Clear();             //ComboBOX solucao que encontrei na internert para limpar item selecionado do elemento. certo??????
-            tbRegistryOwner2PostalCode.Text = String.Empty;
-            tbRegistryOwner2Phone.Text = String.Empty;
-            tbRegistryOwner2OtherNumber.Text = String.Empty;
-            tbRegistryOwner2Email.Text = String.Empty;
-
-            rbOwnerStatus_Active.IsChecked = true;                   //STATUS Deixar como default o ACTIVE
-        }
+        
 
         private void tbRegistrySearch_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -987,6 +950,12 @@ namespace VeterinaryManagementSystem
                 MessageBox.Show(ex.Message);
             }
             refreshServicesProductsList();
+        }
+        
+        //Method to return to Home
+        private void SwitchToTabHome()
+        {
+            Home.IsSelected = true;
         }
     }
 }
