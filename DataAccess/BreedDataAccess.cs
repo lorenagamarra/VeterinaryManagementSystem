@@ -65,6 +65,8 @@ namespace VeterinaryManagementSystem.DataAccess
 
         public List<Breed> GetAllSpecieActives()
         {
+            connection = new SqlConnection(connectionString);
+            connection.Open();
             List<Breed> result = new List<Breed>();
             using (SqlCommand command = new SqlCommand("SELECT DISTINCT SPECIE FROM TBLBREED WHERE STATUS='Active'", connection))
             using (SqlDataReader reader = command.ExecuteReader())
@@ -80,11 +82,15 @@ namespace VeterinaryManagementSystem.DataAccess
                     result.Add(breed);
                 }
             }
+            connection.Close();
             return result;
+            
         }
 
         public List<Breed> GetAllBreedsActivesBySpecie()
         {
+            connection = new SqlConnection(connectionString);
+            connection.Open();
             List<Breed> result = new List<Breed>();
             using (SqlCommand command = new SqlCommand("SELECT * FROM TBLBREED WHERE STATUS='Active' AND SPECIE=@Specie", connection))
             using (SqlDataReader reader = command.ExecuteReader())
@@ -101,12 +107,15 @@ namespace VeterinaryManagementSystem.DataAccess
                     result.Add(breed);
                 }
             }
+            connection.Close();
             return result;
         }
 
 
         public List<Breed> GetAllBreeds()
         {
+            connection = new SqlConnection(connectionString);
+            connection.Open();
             List<Breed> result = new List<Breed>();
             using (SqlCommand command = new SqlCommand("SELECT * FROM TBLBREED", connection))
             using (SqlDataReader reader = command.ExecuteReader())
@@ -127,6 +136,7 @@ namespace VeterinaryManagementSystem.DataAccess
                     result.Add(breed);
                 }
             }
+            connection.Close();
             return result;
         }
 

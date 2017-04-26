@@ -98,7 +98,7 @@ namespace VeterinaryManagementSystem
                 vaccinehistoricBusiness = new VaccineHistoricBusiness();
 
                 //REFRESH ALL LISTS
-                //refreshBreedList();
+                refreshBreedList();
                 //refreshVaccineList();
                 //refreshServicesProductsList();
             }
@@ -315,10 +315,7 @@ namespace VeterinaryManagementSystem
             unsavedChanges = true;
         }
 
-        private void cbOwnerSelectionChanged(object sender, TextChangedEventArgs e)
-        {
-            unsavedChanges = true;
-        }
+        
 
 
         //Registry -> Owner -> Method to clear the fields
