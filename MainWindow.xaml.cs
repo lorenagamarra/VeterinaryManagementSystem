@@ -79,7 +79,7 @@ namespace VeterinaryManagementSystem
                 //Add date on date fields
                 string strTODAY = Convert.ToString(DateTime.Now);
                 tbRegistryOwnerDateRegistration.Text = strTODAY;
-
+                tbRegistryAnimalDateRegistration.Text = strTODAY;
 
                 //RefreshBookList();
                 //criar todos os refresh para as todas as listas
@@ -190,8 +190,8 @@ namespace VeterinaryManagementSystem
                 lvRegistryOwnerSearchResult.ItemsSource = filteredList;
             }
         }
-        
-        //Registry -> Owner -> Search List Result
+
+        //LOAD FIELDS FROM OWNERS LIST
         private void lvRegistryOwnerSearchResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = lvRegistryOwnerSearchResult.SelectedIndex;
@@ -207,7 +207,7 @@ namespace VeterinaryManagementSystem
             tbRegistryOwnerID.Text = owner.Id.ToString();
 
             //Owner 1
-            //imgRegistryOwner1Image.Source = owner.Picture_01;  //TODO: Descobrir qual é a propriedade da imagem que guarda o que a imagem tem dentro..Content? Text?
+            //imgRegistryOwner1Image.Source = owner.Picture_01;            //TODO: Descobrir qual é a propriedade da imagem que guarda o que a imagem tem dentro..Content? Text?
             tbRegistryOwner1FName.Text = owner.FirstName_01;
             tbRegistryOwner1MName.Text = owner.MiddleName_01;
             tbRegistryOwner1LName.Text = owner.LastName_01;
@@ -215,14 +215,14 @@ namespace VeterinaryManagementSystem
             tbRegistryOwner1Address.Text = owner.Address_01;
             tbRegistryOwner1Complement.Text = owner.Complement_01;
             tbRegistryOwner1City.Text = owner.City_01;
-            cbRegistryOwner1Province.Text = owner.Province_01;       //puxar dado da lista para selecionar opcao do combobox
+            cbRegistryOwner1Province.Text = owner.Province_01;              //puxar dado da lista para selecionar opcao do combobox
             tbRegistryOwner1PostalCode.Text = owner.PostalCode_01;
             tbRegistryOwner1Phone.Text = owner.PhoneNumber_01;
             tbRegistryOwner1OtherNumber.Text = owner.OtherPhoneNumber_01;
             tbRegistryOwner1Email.Text = owner.Email_01;
 
             //Owner 2
-            //imgRegistryOwner2Image.Source = owner.Picture_02;
+            //imgRegistryOwner2Image.Source = owner.Picture_02;             //TODO: Descobrir qual é a propriedade da imagem que guarda o que a imagem tem dentro..Content? Text?
             tbRegistryOwner2FName.Text = owner.FirstName_02;
             tbRegistryOwner2MName.Text = owner.MiddleName_02;
             tbRegistryOwner2LName.Text = owner.LastName_02;
@@ -236,7 +236,7 @@ namespace VeterinaryManagementSystem
             tbRegistryOwner2OtherNumber.Text = owner.OtherPhoneNumber_02;
             tbRegistryOwner2Email.Text = owner.Email_02;
 
-            string verifyOwnerCkbStatus = owner.Status;   //Atualizando Status radiobutton de acordo com o Owner ????????????
+            string verifyOwnerCkbStatus = owner.Status;                      //Atualizando Status radiobutton de acordo com o Owner ????????????
             if (verifyOwnerCkbStatus == "ACTIVE")
             {
                 rbOwnerStatus_Active.IsChecked = true;
@@ -249,14 +249,15 @@ namespace VeterinaryManagementSystem
             }
         }
 
-        //Registry -> Owner -> Buttons Save/Add Record Event
+
+        //SAVE(Add/Update) OWNERS
         private void btnRegistryOwnerSave_Click(object sender, RoutedEventArgs e)
         {
             SavingOwnerRegistryOnDB();
         }
 
-        
-        //Registry -> Owner -> Method Saving to DB
+
+        //SAVE OWNERS METHOD
         private void SavingOwnerRegistryOnDB()
         {
             var owner = new Owner
@@ -264,7 +265,7 @@ namespace VeterinaryManagementSystem
                 RegistrationDate = DateTime.Now.Date,                   // Add ok. mas update.. mudar a data de registro?????????????????
 
                 //Owner 1
-                //Picture_01 = imgRegistryOwner1Image.              ????????????????????????????????????????????
+                //Picture_01 = imgRegistryOwner1Image.                  //IMAGE ????????????????????????????????????????????
                 FirstName_01 = tbRegistryOwner1LName.Text,
                 MiddleName_01 = tbRegistryOwner1MName.Text,
                 LastName_01 = tbRegistryOwner1LName.Text,
@@ -272,14 +273,14 @@ namespace VeterinaryManagementSystem
                 Address_01 = tbRegistryOwner1Address.Text,
                 Complement_01 = tbRegistryOwner1Complement.Text,
                 City_01 = tbRegistryOwner1City.Text,
-                Province_01 = cbRegistryOwner1Province.Text,          //combobox
+                Province_01 = cbRegistryOwner1Province.Text,            //combobox
                 PostalCode_01 = tbRegistryOwner1PostalCode.Text,      
                 PhoneNumber_01 = tbRegistryOwner1Phone.Text,
                 OtherPhoneNumber_01 = tbRegistryOwner1OtherNumber.Text,
                 Email_01 = tbRegistryOwner1Email.Text,
 
                 //Owner 2
-                //Picture_02 = imgRegistryOwner2Image,                 ????????????????????????????????????????????
+                //Picture_02 = imgRegistryOwner2Image,                  //IMAGE ????????????????????????????????????????????
                 FirstName_02 = tbRegistryOwner2LName.Text,
                 MiddleName_02 = tbRegistryOwner2MName.Text,
                 LastName_02 = tbRegistryOwner2LName.Text,
@@ -287,13 +288,13 @@ namespace VeterinaryManagementSystem
                 Address_02 = tbRegistryOwner2Address.Text,
                 Complement_02 = tbRegistryOwner2Complement.Text,
                 City_02 = tbRegistryOwner2City.Text,
-                Province_02 = cbRegistryOwner2Province.Text,         //combobox
+                Province_02 = cbRegistryOwner2Province.Text,             //combobox
                 PostalCode_02 = tbRegistryOwner2PostalCode.Text,
                 PhoneNumber_02 = tbRegistryOwner2Phone.Text,
                 OtherPhoneNumber_02 = tbRegistryOwner2OtherNumber.Text,
                 Email_02 = tbRegistryOwner2Email.Text,
 
-                Status = gb_rb_OwnerStatus.Content.ToString()       //radio button group
+                Status = gb_rb_OwnerStatus.Content.ToString()            //radio button group
             };
 
             try
@@ -306,8 +307,15 @@ namespace VeterinaryManagementSystem
             }
         }
 
+
+        //SAVE OWNERS METHOD
         //Registry -> Owner -> Text changed on TextBox around the Registration window           //e os outros elementos diferentes de TB como combobom ou radiobutton??
         private void tbOwnerTextChanged(object sender, TextChangedEventArgs e)
+        {
+            unsavedChanges = true;
+        }
+
+        private void cbOwnerSelectionChanged(object sender, TextChangedEventArgs e)
         {
             unsavedChanges = true;
         }
@@ -370,6 +378,7 @@ namespace VeterinaryManagementSystem
                         SavingOwnerRegistryOnDB();
                         break;
                 }
+                unsavedChanges = false;                             //zerando unsaved changes apos uso do botam exit
             }
         }
 
@@ -378,7 +387,6 @@ namespace VeterinaryManagementSystem
         /******************************************************************************************
         * REGISTRY => ANIMAL
         ******************************************************************************************/
-
 
         //LINQ - SEARCH ALL ANIMALS
         private void tbRegistryAnimalSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -411,6 +419,11 @@ namespace VeterinaryManagementSystem
 
                 lvRegistryAnimalSearchResult.ItemsSource = filteredList;
             }
+        }
+
+        private void refreshAnimalList()
+        {
+            lvRegistryAnimalSearchResult.ItemsSource = dbAnimal.GetAllAnimals();
         }
 
 
@@ -473,6 +486,7 @@ namespace VeterinaryManagementSystem
         private void btnRegistryAnimalSave_Click(object sender, RoutedEventArgs e)
         {
             SavingAnimalRegistryOnDB();
+            refreshAnimalList();
         }
 
         //Registry -> Animal -> Method Saving to DB
@@ -514,6 +528,7 @@ namespace VeterinaryManagementSystem
         {
             AnimalForm_clearFields();
         }
+
         //Registry -> Animal -> Button Exit Event
         private void btnRegistryAnimalExit_Click(object sender, RoutedEventArgs e)
         {
@@ -759,9 +774,13 @@ namespace VeterinaryManagementSystem
 
         }
 
+
+
         /******************************************************************************************
         * SECONDARY TABLES > BREEDS
         ******************************************************************************************/
+        
+
         //LINQ - SEARCH ALL BREEDS
         private void tbTablesBreedSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -778,11 +797,15 @@ namespace VeterinaryManagementSystem
             }
         }
 
+
+        //REFRESH BREEDS LIST
         private void refreshBreedList()
         {
             lvTableRegisterBreeds.ItemsSource = dbBreed.GetAllBreeds();
         }
 
+
+        //LOAD FIELDS FROM BREEDS LIST
         private void lvTableRegisterBreeds_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = lvTableRegisterBreeds.SelectedIndex;
@@ -808,6 +831,8 @@ namespace VeterinaryManagementSystem
             }
         }
 
+
+        //SAVE(Add/Update) BREEDS
         private void btnTablesBreedsAdd_Click(object sender, RoutedEventArgs e)
         {
             var breed = new Breed
@@ -828,6 +853,8 @@ namespace VeterinaryManagementSystem
             refreshBreedList();
         }
 
+
+        //DELETE BREEDS
         private void btnTablesBreedsDelete_Click(object sender, RoutedEventArgs e)
         {
             int index = lvTableRegisterBreeds.SelectedIndex;
@@ -852,8 +879,9 @@ namespace VeterinaryManagementSystem
         /******************************************************************************************
         * SECONDARY TABLES > VACCINES
         ******************************************************************************************/
+
         //LINQ - SEARCH ALL VACCINES
-        private void tbRegistryVaccineSearch_TextChanged(object sender, TextChangedEventArgs e)
+        private void tbTablesVaccineSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             string filter = tbTablesVaccineSearch.Text.ToLower();
             if (filter == "")
@@ -868,11 +896,15 @@ namespace VeterinaryManagementSystem
             }
         }
 
+
+        //REFRESH VACCINES LIST
         private void refreshVaccineList()
         {
             lvTableRegisterVaccines.ItemsSource = dbVaccine.GetAllVaccines();
         }
 
+
+        //LOAD FIELDS FROM VACCINES LIST
         private void lvTableRegisterVaccines_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = lvTableRegisterVaccines.SelectedIndex;
@@ -899,6 +931,8 @@ namespace VeterinaryManagementSystem
             }
         }
 
+
+        //SAVE(Add/Update) VACCINES
         private void btnTablesVaccinesAdd_Click(object sender, RoutedEventArgs e)
         {
             Decimal price = 0;
@@ -922,6 +956,8 @@ namespace VeterinaryManagementSystem
             refreshVaccineList();
         }
 
+
+        //DELETE VACCINES
         private void btnTablesVaccinesDelete_Click(object sender, RoutedEventArgs e)
         {
             int index = lvTableRegisterVaccines.SelectedIndex;
@@ -945,6 +981,7 @@ namespace VeterinaryManagementSystem
         /******************************************************************************************
         * SECONDARY TABLES > SERVICES & PRODUCTS
         ******************************************************************************************/
+        
         //LINQ - SEARCH ALL SERVICES & PRODUCTS
         private void tbTablesProdServSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -961,11 +998,15 @@ namespace VeterinaryManagementSystem
             }
         }
 
+
+        //REFRESH SERVICES & PRODUCTS LIST
         private void refreshServicesProductsList()
         {
             lvTablesRegisterServicesProducts.ItemsSource = dbServicesProducts.GetAllServicesProducts();
         }
-        
+
+
+        //LOAD FIELDS FROM SERVICES & PRODUCTS LIST
         private void lvTableRegisterServicesProducts_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = lvTablesRegisterServicesProducts.SelectedIndex;
@@ -992,6 +1033,7 @@ namespace VeterinaryManagementSystem
             }
         }
 
+        //SAVE(Add/Update) SERVICES & PRODUCTS
         private void btnTablesServicesProductsAdd_Click(object sender, RoutedEventArgs e)
         {
             Decimal price = 0;
@@ -1015,6 +1057,7 @@ namespace VeterinaryManagementSystem
             refreshServicesProductsList();
         }
 
+        //DELETE Tables ServicesProducts
         private void btnTablesServicesProductsDelete_Click(object sender, RoutedEventArgs e)
         {
             int index = lvTablesRegisterServicesProducts.SelectedIndex;
@@ -1033,12 +1076,34 @@ namespace VeterinaryManagementSystem
             }
             refreshServicesProductsList();
         }
-        
-        //Method to return to Home
+
+
+
+
+        /******************************************************************************************
+        * COMMON METHODS
+        ******************************************************************************************/
+
+        //RETURN HOME
         private void SwitchToTabHome()
         {
             Home.IsSelected = true;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
 
