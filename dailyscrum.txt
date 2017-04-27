@@ -298,3 +298,34 @@ WHERE I NEED HELP IS...
 	1. Camera/Photo saving on DB
 	2. How to save/retreive to/from DB the ComboBox, CheckBoxGroup (flag set) and RadioButtonGroup (status/gender) 
 -----------------------------------------------------------------------------------------------------------------------------
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+*** April 27 Nedis ***
+DID SINCE LAST SCRUM:
+	1. Changing radio button data type to Boolean (Status / Gender) - only to Breed
+	2. Fill up combo box with quereis via method() - only to Animal Species
+	3. LINQ to search into secondaty tables: Breed, Vaccines and Services&Products
+WILL DO IN THE NEXT 24 HOURS
+	1. Changing radio button data type to Boolean (Status / Gender) - all other tables
+	2. Fill up combo box with queries via method() - Animal breed
+	3. Update DB (status, gender, unique constraints, etc...)
+WHERE I NEED HELP IS...
+
+
+
+*** April 27 Lorena ***
+DID SINCE LAST SCRUM:
+	1. Insert Search field into TABLES (BREED, VACCINE, SERVPROD)
+	2. Implement add new animal button (clear all fields function) after owner search into registry
+        3. Update exit button if there are no unsaved changes (go to tab home)
+	4. Camera/Photo saving on DB for Owner 1
+WILL DO IN THE NEXT 24 HOURS
+	1. Change button save content (id==0 ->add, id!=0 -> update)
+	2. Implement take a picture button for all the others registers and consult.
+	3. Change the WebCam window to start the camera when it open, and close the camera when it's closed.
+WHERE I NEED HELP IS...
+	1. Camera/Photo Retrieving from DB
+	2. How to use just one Webcam Window (each Take a Picture button pick the picture to his own image space)
+-----------------------------------------------------------------------------------------------------------------------------
