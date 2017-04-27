@@ -29,6 +29,7 @@ namespace VeterinaryManagementSystem
             // TODO: Add event handler implementation here.
             webcam = new WebCam();
             webcam.InitializeWebCam(ref imgVideo);
+            webcam.Start();
         }
 
         private void bntStart_Click(object sender, RoutedEventArgs e)
@@ -54,7 +55,18 @@ namespace VeterinaryManagementSystem
 
         private void bntSaveImage_Click(object sender, RoutedEventArgs e)
         {
-            Helper.SaveImageCapture((BitmapSource)imgCapture.Source);
+            //Helper.SaveImageCapture((BitmapSource)imgCapture.Source);
+            /*
+            if (Index == 1)
+            {
+                ((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner1Image.Source = imgCapture.Source;
+            }
+            if (Index == 2)
+            {
+                ((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner2Image.Source = imgCapture.Source;
+            }
+            */
+            ((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner1Image.Source = imgCapture.Source;
         }
 
         private void bntResolution_Click(object sender, RoutedEventArgs e)
@@ -65,6 +77,10 @@ namespace VeterinaryManagementSystem
         private void bntSetting_Click(object sender, RoutedEventArgs e)
         {
             webcam.AdvanceSetting();
+        }
+        private void webCamWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            webcam.Stop();
         }
     }
 }

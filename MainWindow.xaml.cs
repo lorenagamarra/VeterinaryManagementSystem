@@ -1115,6 +1115,11 @@ namespace VeterinaryManagementSystem
             var newWindow = new WebCamWindow();
             newWindow.Show();
         }
+        private void btnRegistryOwner2TakePicture_Click(object sender, RoutedEventArgs e)
+        {
+            var newWindow = new WebCamWindow();
+            newWindow.Show();
+        }
 
         /******************************************************************************************
         * COMMON METHODS
