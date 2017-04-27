@@ -28,6 +28,7 @@ namespace VeterinaryManagementSystem
         void webcam_ImageCaptured(object source, WebcamEventArgs e)
         {
             _FrameImage.Source = Helper.LoadBitmap((System.Drawing.Bitmap)e.WebCamImage);
+
         }
 
         public void Start()
