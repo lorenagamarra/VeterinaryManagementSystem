@@ -33,9 +33,7 @@ namespace VeterinaryManagementSystem.Business
             {
                 throw new Exception("Consultation must have an Employee ID");
             }
-            
-            //if(consultation.VaccineID != 0) - null allowed
-            
+         
             if (consultation.ServProdID == 0)
             {
                 throw new Exception("Consultation Services & Productis must have an ID");
@@ -46,9 +44,9 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Consultation Date must be the current day");
             }
 
-            if (consultation.Record.Length < 2 || consultation.Record.Length > 500)
+            if (consultation.Record.Length < 2 || consultation.Record.Length > 1000)
             {
-                throw new Exception("Consultation Record must be 2-500 characters long");
+                throw new Exception("Consultation Record must be 2-1000 characters long");
             }
 
             if ((!String.IsNullOrEmpty(consultation.Prescription)))
@@ -64,6 +62,9 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Consultation Cost must be greater than 0");
             }
 
+            Insert(consultation);
+
+            /*
             if (consultation.Id == 0)
             {
                 Insert(consultation);
@@ -72,16 +73,18 @@ namespace VeterinaryManagementSystem.Business
             {
                 Update(consultation);
             }
+            */
         }
 
         public void Insert(Consultation consultation)
         {
             dataAccess.Add(consultation);
         }
-
+        /*
         public void Update(Consultation consultation)
         {
             dataAccess.Update(consultation);
         }
+        */
     }
 }

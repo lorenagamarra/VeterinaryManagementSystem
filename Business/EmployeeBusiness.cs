@@ -22,22 +22,14 @@ namespace VeterinaryManagementSystem.Business
         public void Save(Employee employee)
         {
             // regular expressions
-            Regex postalcode = new Regex(@"^([abceghjklmnprstvxyABCEGHJKLMNPRSTVXY]\d){ 1}[ ]?(a-zA-Z]\d){ 2}$");
-            Regex phone = new Regex(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$");
-            Regex email = new Regex(@"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|([a-zA-Z0-9]+[\w-]+\.)+[a-zA-Z]{1}[a-zA-Z0-9-]{1,23})$");
-            Regex sin = new Regex(@"^(\d{3}-\d{3}-\d{3})|(\d{9})$");
+            Regex postalcode = new Regex(@"^([a-zA-Z]\d){ 3}$");
+            Regex phone = new Regex(@"^[0-9]{ 10}$");
+            Regex email = new Regex(@"^([a-zA-Z0-9_-.]{2,30})@([a-zA-Z0-9]{2,15})+\.+[a-zA-Z]{2,5}$");
+            Regex sin = new Regex(@"([0-9]{ 9}$");
 
             if (employee == null)
             {
                 throw new Exception("Employee is null");
-            }
-
-            if ((!String.IsNullOrEmpty(employee.Picture.ToString())))
-            {
-                if (employee.Picture.ToString().Length < 1)
-                {
-                    throw new Exception("employee has null picture");
-                }
             }
 
             if (employee.FirstName.Length < 2 || employee.FirstName.Length > 20)
@@ -85,8 +77,7 @@ namespace VeterinaryManagementSystem.Business
             {
                 throw new Exception("employee Province must be 2 characters long");
             }
-
-
+            
             if (!(postalcode.Match(employee.PostalCode).Success))
             {
                 throw new Exception("employee Postal Code invalid");
@@ -97,7 +88,7 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("employee Phone Number invalid");
             }
 
-            if (!(employee.OtherPhoneNumber == null))
+            if (!String.IsNullOrEmpty(employee.OtherPhoneNumber))
             {
                 if (!(phone.Match(employee.OtherPhoneNumber).Success))
                 {
@@ -105,11 +96,11 @@ namespace VeterinaryManagementSystem.Business
                 }
             }
 
-            if (!(employee.Email == null))
+            if (!String.IsNullOrEmpty(employee.Email))
             {
-                if (!(email.Match(employee.Email).Success) || employee.Email.Length > 50)
+                if (!(email.Match(employee.Email).Success))
                 {
-                    throw new Exception("employee E-mail invalid (max 50 characters long)");
+                    throw new Exception("employee E-mail invalid");
                 }
             }
 
@@ -128,12 +119,12 @@ namespace VeterinaryManagementSystem.Business
 
             if (!(sin.Match(employee.SIN).Success))
             {
-                throw new Exception("Employee Phone Number invalid");
+                throw new Exception("Employee SIN invalid");
             }
 
-            if (employee.Position.Length < 2 || employee.Position.Length > 15)
+            if (employee.Position.Length < 2 || employee.Position.Length > 20)
             {
-                throw new Exception("Employee City must be 2-50 characters long");
+                throw new Exception("Employee City must be 2-20 characters long");
             }
 
             if ((!String.IsNullOrEmpty(employee.Observations)))
@@ -144,11 +135,6 @@ namespace VeterinaryManagementSystem.Business
                 }
             }
             
-            if (String.IsNullOrEmpty(employee.Status))
-            {
-                throw new Exception("Employee has null Status");
-            }
-
             if (employee.Id == 0)
             {
                 Insert(employee);

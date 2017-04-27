@@ -21,92 +21,118 @@ namespace VeterinaryManagementSystem.DataAccess
 
         public void Add(ServicesProducts servicesproducts)
         {
-            connection = new SqlConnection(connectionString);
-            connection.Open();
-            var sql = "INSERT INTO TBLSERVICES&PRODUCTS (NAME, PRICE) VALUES (@Name, @Price)";
+            //'using' block calls Dispose method at the end of the structure.
+            using (connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var sql = "INSERT INTO TBLSERVICES&PRODUCTS (NAME, PRICE, STATUS) VALUES (@Name, @Price, @Status)";
 
-            SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.Add(new SqlParameter("@Name", servicesproducts.Name));
-            command.Parameters.Add(new SqlParameter("@Price", servicesproducts.Price));
-
-            command.ExecuteNonQuery();
-            connection.Close();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.Add(new SqlParameter("@Name", servicesproducts.Name));
+                    command.Parameters.Add(new SqlParameter("@Price", servicesproducts.Price));
+                    command.Parameters.Add(new SqlParameter("@Status", servicesproducts.Status));
+                    command.ExecuteNonQuery();
+                }
+            } //close and dispose --> connection
         }
 
         public void Update(ServicesProducts servicesproducts)
         {
-            connection = new SqlConnection(connectionString);
-            connection.Open();
-            var sql = "UPDATE TBLSERVICES&PRODUCTS SET NAME=@Name, PRICE=@Price, STATUS=@Status WHERE ID=@Id";
+            //'using' block calls Dispose method at the end of the structure.
+            using (connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var sql = "UPDATE TBLSERVICES&PRODUCTS SET NAME=@Name, PRICE=@Price, STATUS=@Status WHERE ID=@Id";
 
-            SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.Add(new SqlParameter("@Id", servicesproducts.Id));
-            command.Parameters.Add(new SqlParameter("@Name", servicesproducts.Name));
-            command.Parameters.Add(new SqlParameter("@Price", servicesproducts.Price));
-            command.Parameters.Add(new SqlParameter("@Status", servicesproducts.Status));
-
-            command.ExecuteNonQuery();
-            connection.Close();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.Add(new SqlParameter("@Id", servicesproducts.Id));
+                    command.Parameters.Add(new SqlParameter("@Name", servicesproducts.Name));
+                    command.Parameters.Add(new SqlParameter("@Price", servicesproducts.Price));
+                    command.Parameters.Add(new SqlParameter("@Status", servicesproducts.Status));
+                    command.ExecuteNonQuery();
+                }
+            } //close and dispose --> connection
         }
 
         public void Delete(ServicesProducts servicesproducts)
         {
-            connection = new SqlConnection(connectionString);
-            connection.Open();
-            var sql = "DELETE FROM TBLSERVICES&PRODUCTS WHERE ID=@Id NOT IN (SELECT SERVPRODID FROM TBLCONSULTATION)";
+            //'using' block calls Dispose method at the end of the structure.
+            using (connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var sql = "DELETE FROM TBLSERVICES&PRODUCTS WHERE ID=@Id";
 
-            SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.Add(new SqlParameter("@Id", servicesproducts.Id));
-
-            command.ExecuteNonQuery();
-            connection.Close();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.Add(new SqlParameter("@Id", servicesproducts.Id));
+                    command.ExecuteNonQuery();
+                }
+            } //close and dispose --> connection
         }
 
         public List<ServicesProducts> GetAllServicesProductsActives()
         {
-            List<ServicesProducts> result = new List<ServicesProducts>();
-            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLSERVICES&PRODUCTS WHERE STATUS='Active'", connection))
-            using (SqlDataReader reader = command.ExecuteReader())
+            var result = new List<ServicesProducts>();
+
+            //'using' block calls Dispose method at the end of the structure.
+            using (connection = new SqlConnection(connectionString))
             {
-                while (reader.Read())
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("SELECT * FROM TBLSERVICES&PRODUCTS WHERE STATUS=1", connection))
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    int id = (int)reader["Id"];
-                    string name = (string)reader["Name"];
-                    decimal price = (decimal)reader["Price"];
-                    var servicesproducts = new ServicesProducts
+                    while (reader.Read())
                     {
-                        Id = id,
-                        Name = name,
-                        Price = price
-                    };
-                    result.Add(servicesproducts);
+                        int id = (int)reader["Id"];
+                        string name = (string)reader["Name"];
+                        decimal price = (decimal)reader["Price"];
+
+                        var servicesproducts = new ServicesProducts
+                        {
+                            Id = id,
+                            Name = name,
+                            Price = price
+                        };
+                        result.Add(servicesproducts);
+                    }
                 }
-            }
+            } //close and dispose --> connection
             return result;
         }
 
         public List<ServicesProducts> GetAllServicesProducts()
         {
-            List<ServicesProducts> result = new List<ServicesProducts>();
-            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLSERVICES&PRODUCTS", connection))
-            using (SqlDataReader reader = command.ExecuteReader())
+            var result = new List<ServicesProducts>();
+
+            //'using' block calls Dispose method at the end of the structure.
+            using (connection = new SqlConnection(connectionString))
             {
-                while (reader.Read())
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("SELECT * FROM TBLSERVICES&PRODUCTS", connection))
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    int id = (int)reader["Id"];
-                    string name = (string)reader["Name"];
-                    decimal price = (decimal)reader["Price"];
-                    string status = (string)reader["Status"];
-                    var servicesproducts = new ServicesProducts
+                    while (reader.Read())
                     {
-                        Id = id,
-                        Name = name,
-                        Price = price,
-                        Status = status
-                    };
-                    result.Add(servicesproducts);
+                        int id = (int)reader["Id"];
+                        string name = (string)reader["Name"];
+                        decimal price = (decimal)reader["Price"];
+                        Boolean status = (Boolean)reader["Status"];
+
+                        var servicesproducts = new ServicesProducts
+                        {
+                            Id = id,
+                            Name = name,
+                            Price = price,
+                            Status = status
+                        };
+                        result.Add(servicesproducts);
+                    }
                 }
-            }
+            } //close and dispose --> connection
             return result;
         }
     }

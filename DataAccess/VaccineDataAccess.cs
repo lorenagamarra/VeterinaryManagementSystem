@@ -22,95 +22,119 @@ namespace VeterinaryManagementSystem.DataAccess
 
         public void Add(Vaccine vaccine)
         {
-            connection = new SqlConnection(connectionString);
-            connection.Open();
-            var sql = "INSERT INTO TBLVACCINE (NAME, PRICE) VALUES (@Name, @Price)";
+            //'using' block calls Dispose method at the end of the structure.
+            using (connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var sql = "INSERT INTO TBLVACCINE (NAME, PRICE, STATUS) VALUES (@Name, @Price, @Status)";
 
-            SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.Add(new SqlParameter("@Name", vaccine.Name));
-            command.Parameters.Add(new SqlParameter("@Price", vaccine.Price));
-
-            command.ExecuteNonQuery();
-            connection.Close();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.Add(new SqlParameter("@Name", vaccine.Name));
+                    command.Parameters.Add(new SqlParameter("@Price", vaccine.Price));
+                    command.Parameters.Add(new SqlParameter("@Status", vaccine.Status));
+                    command.ExecuteNonQuery();
+                }
+            } //close and dispose --> connection
         }
 
         public void Update(Vaccine vaccine)
         {
-            connection = new SqlConnection(connectionString);
-            connection.Open();
-            var sql = "UPDATE TBLVACCINE SET NAME=@Name, PRICE=@Price, STATUS=@Status WHERE ID=@Id";
+            //'using' block calls Dispose method at the end of the structure.
+            using (connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var sql = "UPDATE TBLVACCINE SET NAME=@Name, PRICE=@Price, STATUS=@Status WHERE ID=@Id";
 
-            SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.Add(new SqlParameter("@Id", vaccine.Id));
-            command.Parameters.Add(new SqlParameter("@Name", vaccine.Name));
-            command.Parameters.Add(new SqlParameter("@Price", vaccine.Price));
-            command.Parameters.Add(new SqlParameter("@Status", vaccine.Status));
-
-            command.ExecuteNonQuery();
-            connection.Close();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.Add(new SqlParameter("@Id", vaccine.Id));
+                    command.Parameters.Add(new SqlParameter("@Name", vaccine.Name));
+                    command.Parameters.Add(new SqlParameter("@Price", vaccine.Price));
+                    command.Parameters.Add(new SqlParameter("@Status", vaccine.Status));
+                    command.ExecuteNonQuery();
+                }
+            } //close and dispose --> connection
         }
 
         public void Delete (Vaccine vaccine)
         {
-            connection = new SqlConnection(connectionString);
-            connection.Open();
-            var sql = "DELETE FROM TBLVACCINE WHERE ID=@Id NOT IN (SELECT VACCINEID FROM TBLCONSULTATION)";
+            //'using' block calls Dispose method at the end of the structure.
+            using (connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var sql = "DELETE FROM TBLVACCINE WHERE ID=@Id";
 
-            SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.Add(new SqlParameter("@Id", vaccine.Id));
-
-            command.ExecuteNonQuery();
-            connection.Close();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.Add(new SqlParameter("@Id", vaccine.Id));
+                    command.ExecuteNonQuery();
+                }
+            } //close and dispose --> connection
         }
 
         public List<Vaccine> GetAllVaccinesActives()
         {
-            List<Vaccine> result = new List<Vaccine>();
-            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLVACCINE WHERE STATUS='Active'", connection))
-            using (SqlDataReader reader = command.ExecuteReader())
+            var result = new List<Vaccine>();
+
+            //'using' block calls Dispose method at the end of the structure.
+            using (connection = new SqlConnection(connectionString))
             {
-                while (reader.Read())
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("SELECT * FROM TBLBREED WHERE STATUS=1", connection))
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    int id = (int)reader["Id"];
-                    string name = (string)reader["Name"];
-                    decimal price = (decimal)reader["Price"];
-                    var vaccine = new Vaccine
+                    while (reader.Read())
                     {
-                        Id = id,
-                        Name = name,
-                        Price = price
-                    };
-                    result.Add(vaccine);
+                        int id = (int)reader["Id"];
+                        string name = (string)reader["Name"];
+                        decimal price = (decimal)reader["Price"];
+
+                        var vaccine = new Vaccine
+                        {
+                            Id = id,
+                            Name = name,
+                            Price = price
+                        };
+                        result.Add(vaccine);
+                    }
                 }
-            }
+            } //close and dispose --> connection
             return result;
         }
 
         public List<Vaccine> GetAllVaccines()
         {
-            List<Vaccine> result = new List<Vaccine>();
-            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLVACCINE", connection))
-            using (SqlDataReader reader = command.ExecuteReader())
+            var result = new List<Vaccine>();
+
+            //'using' block calls Dispose method at the end of the structure.
+            using (connection = new SqlConnection(connectionString))
             {
-                while (reader.Read())
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("SELECT * FROM TBLBREED", connection))
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    int id = (int)reader["Id"];
-                    string name = (string)reader["Name"];
-                    decimal price = (decimal)reader["Price"];
-                    string status = (string)reader["Status"];
-                    var vaccine = new Vaccine
+                    while (reader.Read())
                     {
-                        Id = id,
-                        Name = name,
-                        Price = price,
-                        Status = status
-                    };
-                    result.Add(vaccine);
+                        int id = (int)reader["Id"];
+                        string name = (string)reader["Name"];
+                        decimal price = (decimal)reader["Price"];
+                        Boolean status = (Boolean)reader["Status"];
+
+                        var vaccine = new Vaccine
+                        {
+                            Id = id,
+                            Name = name,
+                            Price = price,
+                            Status = status
+                        };
+                        result.Add(vaccine);
+                    }
                 }
-            }
+            } //close and dispose --> connection
             return result;
         }
-
-
     }
 }

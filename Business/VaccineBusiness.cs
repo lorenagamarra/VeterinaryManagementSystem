@@ -36,11 +36,6 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Vaccine must have price greater than zero");
             }
 
-            if (vaccine.Status.Length < 6 || vaccine.Status.Length > 8)
-            {
-                throw new Exception("Vaccine Status must be ACTIVE or INACTIVE");
-            }
-
             if (vaccine.Id == 0)
             {
                 Insert(vaccine);

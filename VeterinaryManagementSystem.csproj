@@ -76,6 +76,7 @@
     <Compile Include="UnitTests\ServicesProductsUnitTest.cs" />
     <Compile Include="UnitTests\VaccineHistoricUnitTest.cs" />
     <Compile Include="UnitTests\VaccineUnitTest.cs" />
+    <Compile Include="ViewModels\BreedNameViewModel.cs" />
     <Compile Include="ViewModels\BreedSpecieViewModel.cs" />
     <Compile Include="WebCam.cs" />
     <Compile Include="WebCamWindow.xaml.cs">

@@ -25,19 +25,14 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Services & Products is null");
             }
 
-            if (String.IsNullOrEmpty(servicesproducts.Name))
+            if (servicesproducts.Name.Length < 2 || servicesproducts.Name.Length > 30)
             {
-                throw new Exception("Services & Products has null name");
+                throw new Exception("Services & Products must be 2-30 characters long");
             }
 
             if (servicesproducts.Price <= 0)
             {
                 throw new Exception("Services & Products must have price greater than zero");
-            }
-            
-            if (String.IsNullOrEmpty(servicesproducts.Status))
-            {
-                throw new Exception("Services & Products has null Status");
             }
 
             if (servicesproducts.Id == 0)

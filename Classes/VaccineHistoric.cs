@@ -15,5 +15,6 @@ namespace VeterinaryManagementSystem.Classes
         public DateTime Date { get; set; }
 
         public string Details { get; set; }
+
     }
 }

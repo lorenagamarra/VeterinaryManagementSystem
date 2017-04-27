@@ -21,34 +21,39 @@ namespace VeterinaryManagementSystem.DataAccess
 
         public void Add(Breed breed)
         {
-            connection = new SqlConnection(connectionString);
-            connection.Open();
-            var sql = "INSERT INTO TBLBREED (SPECIE, NAME, STATUS) VALUES (@Specie, @Name, @Status)";
+            //'using' block calls Dispose method at the end of the structure.
+            using (connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var sql = "INSERT INTO TBLBREED (SPECIE, NAME, STATUS) VALUES (@Specie, @Name, @Status)";
 
-            SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.Add(new SqlParameter("@Specie", breed.Specie));
-            command.Parameters.Add(new SqlParameter("@Name", breed.Name));
-            command.Parameters.Add(new SqlParameter("@Status", breed.Status));
-
-
-            command.ExecuteNonQuery();
-            connection.Close();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.Add(new SqlParameter("@Specie", breed.Specie));
+                    command.Parameters.Add(new SqlParameter("@Name", breed.Name));
+                    command.Parameters.Add(new SqlParameter("@Status", breed.Status));
+                    command.ExecuteNonQuery();
+                }
+            } //close and dispose --> connection
         }
 
         public void Update(Breed breed)
         {
-            connection = new SqlConnection(connectionString);
-            connection.Open();
-            var sql = "UPDATE TBLBREED SET SPECIE=@Specie, NAME=@Name, STATUS=@Status  WHERE ID=@Id";
+            //'using' block calls Dispose method at the end of the structure.
+            using (connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var sql = "UPDATE TBLBREED SET SPECIE=@Specie, NAME=@Name, STATUS=@Status  WHERE ID=@Id";
 
-            SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.Add(new SqlParameter("@Specie", breed.Specie));
-            command.Parameters.Add(new SqlParameter("@Name", breed.Name));
-            command.Parameters.Add(new SqlParameter("@Status", breed.Status));
-            command.Parameters.Add(new SqlParameter("@Id", breed.Id));
-
-            command.ExecuteNonQuery();
-            connection.Close();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.Add(new SqlParameter("@Id", breed.Id));
+                    command.Parameters.Add(new SqlParameter("@Specie", breed.Specie));
+                    command.Parameters.Add(new SqlParameter("@Name", breed.Name));
+                    command.Parameters.Add(new SqlParameter("@Status", breed.Status));
+                    command.ExecuteNonQuery();
+                }
+            } //close and dispose --> connection
         }
 
 
@@ -72,6 +77,7 @@ namespace VeterinaryManagementSystem.DataAccess
         {
             var result = new List<Breed>();
 
+            //'using' block calls Dispose method at the end of the structure.
             using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -90,63 +96,68 @@ namespace VeterinaryManagementSystem.DataAccess
                         result.Add(breed);
                     }
                 }
-            }
+            } //close and dispose --> connection
             return result;
-            
         }
 
         public List<Breed> GetAllBreedsActivesBySpecie()
         {
-            connection = new SqlConnection(connectionString);
-            connection.Open();
-            List<Breed> result = new List<Breed>();
-            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLBREED WHERE STATUS='Active' AND SPECIE=@Specie", connection))
-            using (SqlDataReader reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    string specie = (string)reader["Specie"];
-                    string name = (string)reader["Name"];
+            var result = new List<Breed>();
 
-                    var breed = new Breed
+            using (connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("SELECT * FROM TBLBREED WHERE STATUS=1 AND SPECIE=@Specie", connection))
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
                     {
-                        Name = name,
-                    };
-                    result.Add(breed);
+                        string specie = (string)reader["Specie"];
+                        string name = (string)reader["Name"];
+
+                        var breed = new Breed
+                        {
+                            Name = name,
+                        };
+                        result.Add(breed);
+                    }
                 }
             }
-            connection.Close();
             return result;
         }
 
 
         public List<Breed> GetAllBreeds()
         {
-            connection = new SqlConnection(connectionString);
-            connection.Open();
-            List<Breed> result = new List<Breed>();
-            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLBREED", connection))
-            using (SqlDataReader reader = command.ExecuteReader())
+            var result = new List<Breed>();
+
+            using (connection = new SqlConnection(connectionString))
             {
-                while (reader.Read())
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("SELECT * FROM TBLBREED", connection))
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    int id = (int)reader["Id"];
-                    string specie = (string)reader["Specie"];
-                    string name = (string)reader["Name"];
-                    Boolean status = (Boolean)reader["Status"];
-                    var breed = new Breed
+                    while (reader.Read())
                     {
-                        Id = id,
-                        Name = name,
-                        Specie = specie,
-                        Status = status
-                    };
-                    result.Add(breed);
+                        int id = (int)reader["Id"];
+                        string specie = (string)reader["Specie"];
+                        string name = (string)reader["Name"];
+                        Boolean status = (Boolean)reader["Status"];
+
+                        var breed = new Breed
+                        {
+                            Id = id,
+                            Name = name,
+                            Specie = specie,
+                            Status = status
+                        };
+                        result.Add(breed);
+                    }
                 }
             }
-            connection.Close();
             return result;
         }
-
     }
 }

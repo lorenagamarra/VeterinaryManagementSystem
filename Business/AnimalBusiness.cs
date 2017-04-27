@@ -25,14 +25,6 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Animal is null");
             }
 
-            if ((!String.IsNullOrEmpty(animal.Picture.ToString())))
-            {
-                if (animal.Picture == null)
-                {
-                    throw new Exception("Animal has null picture");
-                }
-            }
-
             if (animal.OwnerID == 0)
             {
                 throw new Exception("Animal must have an Owner ID");
@@ -43,27 +35,14 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Animal must have a Breed ID");
             }
 
-            if (animal.VachistID != 0)
-            {
-                if (!(animal.VachistID >= 1))
-                {
-                    throw new Exception("Animal Vaccine Historic can be empty or an existent VacHist ID ");
-                }
-            }
-
             if (animal.Datereg != DateTime.Now)
             {
                 throw new Exception("Animal Registration Date must be the current day");
             }
 
-            if (animal.Name.Length < 2 || animal.Name.Length > 15)
+            if (animal.Name.Length < 2 || animal.Name.Length > 20)
             {
-                throw new Exception("Animal name must be 2-15 characters long");
-            }
-
-            if (String.IsNullOrEmpty(animal.Gender))
-            {
-                throw new Exception("Animal gender must be male or female");
+                throw new Exception("Animal name must be 2-20 characters long");
             }
 
             if ((DateTime.Now.Year - animal.Dateofbirth.Year) > 100)
@@ -93,7 +72,7 @@ namespace VeterinaryManagementSystem.Business
             {
                 if (animal.Food.Length < 2 || animal.Food.Length > 50)
                 {
-                    throw new Exception("Animal Food be empty or be 2-50 characters long");
+                    throw new Exception("Animal Food can be empty or be 2-50 characters long");
                 }
             }
 
@@ -101,7 +80,7 @@ namespace VeterinaryManagementSystem.Business
             {
                 if (animal.Phobia.Length < 2 || animal.Phobia.Length > 50)
                 {
-                    throw new Exception("Animal Food be empty or be 2-50 characters long");
+                    throw new Exception("Animal Phobia can be empty or be 2-50 characters long");
                 }
             }
 
@@ -115,15 +94,10 @@ namespace VeterinaryManagementSystem.Business
 
             if ((!String.IsNullOrEmpty(animal.Vethistoric)))
             {
-                if (animal.Vethistoric.Length < 2 || animal.Vethistoric.Length > 5000)
+                if (animal.Vethistoric.Length < 2)
                 {
-                    throw new Exception("Animal VetHistoric can be empty or be 2-5000 characters long");
+                    throw new Exception("Animal VetHistoric can be empty or at least be 2 characters long");
                 }
-            }
-            
-            if (String.IsNullOrEmpty(animal.Status))
-            {
-                throw new Exception("Animal has null Status");
             }
 
             if (animal.Id == 0)

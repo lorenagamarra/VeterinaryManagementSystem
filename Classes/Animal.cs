@@ -22,7 +22,7 @@ namespace VeterinaryManagementSystem.Classes
 
         public string Name { get; set; }
         
-        public string Gender { get; set; }
+        public Boolean Gender { get; set; }
 
         public DateTime Dateofbirth { get; set; }
 
@@ -40,6 +40,6 @@ namespace VeterinaryManagementSystem.Classes
 
         public string Vethistoric { get; set; }
 
-        public string Status { get; set; }
+        public Boolean Status { get; set; }
     }
 }

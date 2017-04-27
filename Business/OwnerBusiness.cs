@@ -21,34 +21,22 @@ namespace VeterinaryManagementSystem.Business
         public void Save(Owner owner)
         {
             // regular expressions
-            Regex postalcode = new Regex(@"^([abceghjklmnprstvxyABCEGHJKLMNPRSTVXY]\d){ 1}[ ]?(a-zA-Z]\d){ 2}$");
-            Regex phone = new Regex(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$");
-            Regex email = new Regex(@"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|([a-zA-Z0-9]+[\w-]+\.)+[a-zA-Z]{1}[a-zA-Z0-9-]{1,23})$");
-
-
-
-
+            Regex postalcode = new Regex(@"^([a-zA-Z]\d){ 3}$");
+            Regex phone = new Regex(@"^[0-9]{ 10}$");
+            Regex email = new Regex(@"^([a-zA-Z0-9_-.]{2,30})@([a-zA-Z0-9]{2,15})+\.+[a-zA-Z]{2,5}$");
+            
 
             if (owner == null)
             {
                 throw new Exception("Owner is null");
             }
 
-            if (owner.RegistrationDate != DateTime.Now.Date)
+            if (owner.RegistrationDate != DateTime.Now)
             {
                 throw new Exception("Owner Registration Date must be the current day");
             }
 
             //START owner 01
-
-            if ((!String.IsNullOrEmpty(owner.Picture_01.ToString())))
-            {
-                if (owner.Picture_01 == null)
-                {
-                    throw new Exception("owner_01 has null picture");
-                }
-            }
-
             if (owner.FirstName_01.Length < 2 || owner.FirstName_01.Length > 20)
             {
                 throw new Exception("owner_01 first name must be 2-20 characters long");
@@ -74,7 +62,7 @@ namespace VeterinaryManagementSystem.Business
 
             if (owner.Address_01.Length < 2 || owner.Address_01.Length > 50)
             {
-                throw new Exception("owner_01 number must be 2-50 characters long");
+                throw new Exception("owner_01 address must be 2-50 characters long");
             }
 
             if ((!String.IsNullOrEmpty(owner.Complement_01)))
@@ -105,7 +93,7 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("owner_01 Phone Number invalid");
             }
 
-            if (!(owner.OtherPhoneNumber_01 == null))
+            if (!String.IsNullOrEmpty(owner.OtherPhoneNumber_01))
             {
                 if (!(phone.Match(owner.OtherPhoneNumber_01).Success))
                 {
@@ -113,29 +101,18 @@ namespace VeterinaryManagementSystem.Business
                 }
             }
 
-            if (!(owner.Email_01 == null))
+            if (!String.IsNullOrEmpty(owner.Email_01))
             {
                 if (!(email.Match(owner.Email_01).Success) || owner.Email_01.Length > 50)
                 {
                     throw new Exception("owner_01 E-mail invalid (max 50 characters long");
                 }
             }
-
-
-
-
             //END owner 01
 
+
+
             //START owner 02
-
-            if ((!String.IsNullOrEmpty(owner.Picture_02.ToString())))
-            {
-                if (owner.Picture_02 == null)
-                {
-                    throw new Exception("owner_02 has null picture");
-                }
-            }
-
             if (owner.FirstName_02.Length < 2 || owner.FirstName_02.Length > 20)
             {
                 throw new Exception("owner_02 first name must be 2-20 characters long");
@@ -161,7 +138,7 @@ namespace VeterinaryManagementSystem.Business
 
             if (owner.Address_02.Length < 2 || owner.Address_02.Length > 50)
             {
-                throw new Exception("owner_02 number must be 2-50 characters long");
+                throw new Exception("owner_02 address must be 2-50 characters long");
             }
 
             if ((!String.IsNullOrEmpty(owner.Complement_02)))
@@ -192,7 +169,7 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("owner_02 Phone Number invalid");
             }
 
-            if (!(owner.OtherPhoneNumber_02 == null))
+            if (!String.IsNullOrEmpty(owner.OtherPhoneNumber_02))
             {
                 if (!(phone.Match(owner.OtherPhoneNumber_02).Success))
                 {
@@ -200,21 +177,15 @@ namespace VeterinaryManagementSystem.Business
                 }
             }
 
-            if (!(owner.Email_02 == null))
+            if (!String.IsNullOrEmpty(owner.Email_02))
             {
-                if (!(email.Match(owner.Email_02).Success) || owner.Email_02.Length > 50)
+                if (!(email.Match(owner.Email_02).Success))
                 {
-                    throw new Exception("owner_02 E-mail invalid (max 50 characters long");
+                    throw new Exception("owner_02 E-mail invalid");
                 }
             }
-
             //END owner 02
 
-
-            if (String.IsNullOrEmpty(owner.Status))
-            {
-                throw new Exception("Owner has null Status");
-            }
 
             if (owner.Id == 0)
             {

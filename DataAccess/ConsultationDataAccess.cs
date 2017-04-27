@@ -21,81 +21,71 @@ namespace VeterinaryManagementSystem.DataAccess
 
         public void Add(Consultation consultation)
         {
-            connection = new SqlConnection(connectionString);
-            connection.Open();
-            var sql = "INSERT INTO TBLCONSULTATION (ANIMALID, EMPLOYEEID, VACCINEID, SERVPRODID, DATE, RECORD, PRESCRIPTION, COST)" +
-                " VALUES (@AnimalID, @EmployeeID, @VaccineID, @ServProdID, @Date, @Record, @Prescription, @Cost)";
+            //'using' block calls Dispose method at the end of the structure.
+            using (connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var sql = @"INSERT INTO TBLCONSULTATION(ANIMALID, EMPLOYEEID, VACCINEID, SERVPRODID, DATE, RECORD, PRESCRIPTION, COST)
+                                                VALUES (@AnimalID, @EmployeeID, @VaccineID, @ServProdID, @Date, @Record, @Prescription, @Cost)";
 
-            SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.Add(new SqlParameter("@AnimalID", consultation.AnimalID));
-            command.Parameters.Add(new SqlParameter("@EmployeeID", consultation.EmployeeID));
-            command.Parameters.Add(new SqlParameter("@VaccineID", consultation.VaccineID));
-            command.Parameters.Add(new SqlParameter("@ServProdID", consultation.ServProdID));
-            command.Parameters.Add(new SqlParameter("@Date", consultation.Date));
-            command.Parameters.Add(new SqlParameter("@Record", consultation.Record));
-            command.Parameters.Add(new SqlParameter("@Prescription", consultation.Prescription));
-            command.Parameters.Add(new SqlParameter("@Cost", consultation.Cost));
-
-            command.ExecuteNonQuery();
-            connection.Close();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.Add(new SqlParameter("@AnimalID", consultation.AnimalID));
+                    command.Parameters.Add(new SqlParameter("@EmployeeID", consultation.EmployeeID));
+                    command.Parameters.Add(new SqlParameter("@VaccineID", consultation.VaccineID));
+                    command.Parameters.Add(new SqlParameter("@ServProdID", consultation.ServProdID));
+                    command.Parameters.Add(new SqlParameter("@Date", consultation.Date));
+                    command.Parameters.Add(new SqlParameter("@Record", consultation.Record));
+                    command.Parameters.Add(new SqlParameter("@Prescription", consultation.Prescription));
+                    command.Parameters.Add(new SqlParameter("@Cost", consultation.Cost));
+                    command.ExecuteNonQuery();
+                }
+            } //close and dispose --> connection
         }
 
-        public void Update(Consultation consultation)
-        {
-            connection = new SqlConnection(connectionString);
-            connection.Open();
-            var sql = "UPDATE TBLCONSULTATION (ANIMALID, EMPLOYEEID, VACCINEID, SERVPRODID, DATE, RECORD, PRESCRIPTION, COST)" +
-                " VALUES (@AnimalID, @EmployeeID, @VaccineID, @ServProdID, @Date, @Record, @Prescription, @Cost)";
-
-            SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.Add(new SqlParameter("@AnimalID", consultation.AnimalID));
-            command.Parameters.Add(new SqlParameter("@EmployeeID", consultation.EmployeeID));
-            command.Parameters.Add(new SqlParameter("@VaccineID", consultation.VaccineID));
-            command.Parameters.Add(new SqlParameter("@ServProdID", consultation.ServProdID));
-            command.Parameters.Add(new SqlParameter("@Date", consultation.Date));
-            command.Parameters.Add(new SqlParameter("@Record", consultation.Record));
-            command.Parameters.Add(new SqlParameter("@Prescription", consultation.Prescription));
-            command.Parameters.Add(new SqlParameter("@Cost", consultation.Cost));
-
-            command.ExecuteNonQuery();
-            connection.Close();
-        }
-
-
+        /*
         public List<Consultation> GetAllConsultations()
         {
-            List<Consultation> result = new List<Consultation>();
-            using (SqlCommand command = new SqlCommand("SELECT * FROM TBLCONSULTATION", connection))
-            using (SqlDataReader reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    int id = (int)reader["Id"];
-                    int animalID = (int)reader["AnimalID"];
-                    int employeeID = (int)reader["EmployeeID"];
-                    int vaccineID = (int)reader["VaccineID"];
-                    int servProdID = (int)reader["ServProdID"];
-                    DateTime date = (DateTime)reader["Date"];
-                    string record = (string)reader["Record"];
-                    string prescription = (string)reader["Prescription"];
-                    decimal cost = (decimal)reader["Cost"];
+            var result = new List<Consultation>();
 
-                    var consultation = new Consultation
+            //'using' block calls Dispose method at the end of the structure.
+            using (connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("SELECT * FROM TBLANIMAL", connection))
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
                     {
-                        Id = id,
-                        AnimalID = animalID,
-                        EmployeeID = employeeID,
-                        VaccineID = vaccineID,
-                        ServProdID = servProdID,
-                        Date = date,
-                        Record = record,
-                        Prescription = prescription,
-                        Cost = cost
-                    };
-                    result.Add(consultation);
+                        int id = (int)reader["Id"];
+                        int animalID = (int)reader["AnimalID"];
+                        int employeeID = (int)reader["EmployeeID"];
+                        int vaccineID = (int)reader["VaccineID"];
+                        int servProdID = (int)reader["ServProdID"];
+                        DateTime date = (DateTime)reader["Date"];
+                        string record = (string)reader["Record"];
+                        string prescription = (string)reader["Prescription"];
+                        decimal cost = (decimal)reader["Cost"];
+
+                        var consultation = new Consultation
+                        {
+                            Id = id,
+                            AnimalID = animalID,
+                            EmployeeID = employeeID,
+                            VaccineID = vaccineID,
+                            ServProdID = servProdID,
+                            Date = date,
+                            Record = record,
+                            Prescription = prescription,
+                            Cost = cost
+                        };
+                        result.Add(consultation);
+                    }
                 }
-            }
+            } //close and dispose --> connection
             return result;
         }
+        */
     }
 }

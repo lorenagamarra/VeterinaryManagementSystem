@@ -46,6 +46,6 @@ namespace VeterinaryManagementSystem.Classes
 
         public String Observations { get; set; }
 
-        public string Status { get; set; }
+        public Boolean Status { get; set; }
     }
 }

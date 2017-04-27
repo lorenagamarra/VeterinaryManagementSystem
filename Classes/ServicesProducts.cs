@@ -15,6 +15,6 @@ namespace VeterinaryManagementSystem.Classes
 
         public decimal Price { get; set; }
 
-        public string Status { get; set; }
+        public Boolean Status { get; set; }
     }
 }

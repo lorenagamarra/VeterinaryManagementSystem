@@ -64,7 +64,7 @@ namespace VeterinaryManagementSystem.Classes
 
         public String Email_02 { get; set; }
       
-        public string Status { get; set; }
+        public Boolean Status { get; set; }
 
     }
 }
