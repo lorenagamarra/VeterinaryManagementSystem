@@ -872,10 +872,13 @@ namespace VeterinaryManagementSystem
             }
             refreshBreedList();
         }
+        //SAVE(Add/Update) BREEDS
+        private void btnTablesBreedsSave_Click(object sender, RoutedEventArgs e)
+        {
 
-
-        //DELETE BREEDS
-        private void btnTablesBreedsDelete_Click(object sender, RoutedEventArgs e)
+             }
+            //DELETE BREEDS
+            private void btnTablesBreedsDelete_Click(object sender, RoutedEventArgs e)
         {
             int index = lvTableRegisterBreeds.SelectedIndex;
             if (index < 0)
@@ -975,7 +978,11 @@ namespace VeterinaryManagementSystem
             }
             refreshVaccineList();
         }
+        //SAVE VACCINES
+        private void btnTablesVaccinesSave_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
 
         //DELETE VACCINES
         private void btnTablesVaccinesDelete_Click(object sender, RoutedEventArgs e)
@@ -1076,6 +1083,11 @@ namespace VeterinaryManagementSystem
             }
             refreshServicesProductsList();
         }
+        //SAVE SERVICES & PRODUCTS
+        private void btnTablesServicesProductsSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         //DELETE Tables ServicesProducts
         private void btnTablesServicesProductsDelete_Click(object sender, RoutedEventArgs e)
@@ -1098,7 +1110,11 @@ namespace VeterinaryManagementSystem
         }
 
 
-
+        private void btnRegistryOwner1TakePicture_Click(object sender, RoutedEventArgs e)
+        {
+            var newWindow = new WebCamWindow();
+            newWindow.Show();
+        }
 
         /******************************************************************************************
         * COMMON METHODS
@@ -1110,20 +1126,7 @@ namespace VeterinaryManagementSystem
             Home.IsSelected = true;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
     }
 }
 

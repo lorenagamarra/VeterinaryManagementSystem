@@ -49,6 +49,7 @@ namespace VeterinaryManagementSystem
         private void bntCapture_Click(object sender, RoutedEventArgs e)
         {
             imgCapture.Source = imgVideo.Source;
+            ((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner1Image.Source = imgVideo.Source;
         }
 
         private void bntSaveImage_Click(object sender, RoutedEventArgs e)
