@@ -22,8 +22,21 @@ namespace VeterinaryManagementSystem.DataAccess
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
-            var sql = "INSERT INTO TBLOWNER (REGISTRATIONDATE, PICTURE_01, FIRSTNAME_01, MIDDLENAME_01, LASTNAME_01, NUMBER_01, ADDRESS_01, COMPLEMENT_01, CITY_01, PROVINCE_01, POSTALCODE_01, PHONENUMBER_01, OTHERPHONENUMBER_01, EMAIL_01, PICTURE_02, FIRSTNAME_02, MIDDLENAME_02, LASTNAME_02, NUMBER_02, ADDRESS_02, COMPLEMENT_02, CITY_02, PROVINCE_02, POSTALCODE_02, PHONENUMBER_02, OTHERPHONENUMBER_02, EMAIL_02)" +
-                " VALUES (@RegistrationDate, @Picture_01, @FirstName_01, @MiddleName_01, @LastName_01, @Number_01, @Address_01, @Complement_01, @City_01, @Province_01, @PostalCode_01, @PhoneNumber_01, @OtherPhoneNumber_01, @Email_01, @Picture_02, @FirstName_02, @MiddleName_02, @LastName_02, @Number_02, @Address_02, @Complement_02, @City_02, @Province_02, @PostalCode_02, @PhoneNumber_02, @OtherPhoneNumber_02, @Email_02)";
+            var sql = @"INSERT INTO TBLOWNER (
+                        REGISTRATIONDATE, PICTURE_01, FIRSTNAME_01, MIDDLENAME_01, 
+                        LASTNAME_01, NUMBER_01, ADDRESS_01, COMPLEMENT_01, 
+                        CITY_01, PROVINCE_01, POSTALCODE_01, PHONENUMBER_01, 
+                        OTHERPHONENUMBER_01, EMAIL_01, PICTURE_02, FIRSTNAME_02, 
+                        MIDDLENAME_02, LASTNAME_02, NUMBER_02, ADDRESS_02, 
+                        COMPLEMENT_02, CITY_02, PROVINCE_02, POSTALCODE_02, 
+                        PHONENUMBER_02, OTHERPHONENUMBER_02, EMAIL_02)
+                VALUES (@RegistrationDate, @Picture_01, @FirstName_01, @MiddleName_01, 
+                        @LastName_01, @Number_01, @Address_01, @Complement_01, 
+                        @City_01, @Province_01, @PostalCode_01, @PhoneNumber_01, 
+                        @OtherPhoneNumber_01, @Email_01, @Picture_02, @FirstName_02, 
+                        @MiddleName_02, @LastName_02, @Number_02, @Address_02, 
+                        @Complement_02, @City_02, @Province_02, @PostalCode_02, 
+                        @PhoneNumber_02, @OtherPhoneNumber_02, @Email_02)";
 
             SqlCommand command = new SqlCommand(sql, connection);
 
@@ -31,7 +44,7 @@ namespace VeterinaryManagementSystem.DataAccess
 
             command.Parameters.Add(new SqlParameter("@Picture_01", owner.Picture_01));
             command.Parameters.Add(new SqlParameter("@FirstName_01", owner.FirstName_01));
-            command.Parameters.Add(new SqlParameter("@MiddletName_01", owner.MiddleName_01));
+            command.Parameters.Add(new SqlParameter("@MiddleName_01", owner.MiddleName_01));
             command.Parameters.Add(new SqlParameter("@LastName_01", owner.LastName_01));
             command.Parameters.Add(new SqlParameter("@Number_01", owner.Number_01));
             command.Parameters.Add(new SqlParameter("@Address_01", owner.Address_01));
@@ -45,7 +58,7 @@ namespace VeterinaryManagementSystem.DataAccess
 
             command.Parameters.Add(new SqlParameter("@Picture_02", owner.Picture_02));
             command.Parameters.Add(new SqlParameter("@FirstName_02", owner.FirstName_02));
-            command.Parameters.Add(new SqlParameter("@MiddletName_02", owner.MiddleName_02));
+            command.Parameters.Add(new SqlParameter("@MiddleName_02", owner.MiddleName_02));
             command.Parameters.Add(new SqlParameter("@LastName_02", owner.LastName_02));
             command.Parameters.Add(new SqlParameter("@Number_02", owner.Number_02));
             command.Parameters.Add(new SqlParameter("@Address_02", owner.Address_02));

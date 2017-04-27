@@ -14,6 +14,6 @@ namespace VeterinaryManagementSystem.Classes
 
         public string Name { get; set; }
 
-        public string Status { get; set; }
+        public Boolean Status { get; set; }
     }
 }

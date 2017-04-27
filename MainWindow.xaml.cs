@@ -20,6 +20,7 @@ using System.Windows.Shapes;
 using VeterinaryManagementSystem.Business;
 using VeterinaryManagementSystem.Classes;
 using VeterinaryManagementSystem.DataAccess;
+using VeterinaryManagementSystem.ViewModels;
 
 namespace VeterinaryManagementSystem
 {
@@ -58,10 +59,13 @@ namespace VeterinaryManagementSystem
 
 
 
+        private BreedSpecieViewModel BreedSpecieViewModel { get; set; }
 
         public MainWindow()
         {
-            try
+            InitializeComponent();
+
+           try
             {
                 dbAnimal = new AnimalDataAccess();
                 dbBreed = new BreedDataAccess();
@@ -72,7 +76,7 @@ namespace VeterinaryManagementSystem
                 dbVaccine = new VaccineDataAccess();
                 dbVaccineHistory = new VaccineHistoricDataAccess();
 
-                InitializeComponent();
+                
 
                 lvRegistryOwnerSearchResult.ItemsSource = ownerList;
                 
@@ -96,6 +100,13 @@ namespace VeterinaryManagementSystem
                 servicesproductsBusiness = new ServicesProductsBusiness();
                 vaccineBusiness = new VaccineBusiness();
                 vaccinehistoricBusiness = new VaccineHistoricBusiness();
+
+
+
+                BreedSpecieViewModel = new BreedSpecieViewModel();
+                BreedSpecieViewModel.Breeds = dbBreed.GetAllSpecieActives();
+                cbRegistryAnimalSpecies.DataContext = BreedSpecieViewModel;
+
 
                 //REFRESH ALL LISTS
                 refreshBreedList();
@@ -260,12 +271,18 @@ namespace VeterinaryManagementSystem
         //SAVE OWNERS METHOD
         private void SavingOwnerRegistryOnDB()
         {
+            
+            MemoryStream memStream = new MemoryStream();
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create((BitmapSource)imgRegistryOwner1Image.Source));
+            encoder.Save(memStream);
+
             var owner = new Owner
             {
                 RegistrationDate = DateTime.Now.Date,                   // Add ok. mas update.. mudar a data de registro?????????????????
 
                 //Owner 1
-                //Picture_01 = imgRegistryOwner1Image.                  //IMAGE ????????????????????????????????????????????
+                Picture_01 = memStream.ToArray(),                  //IMAGE ????????????????????????????????????????????
                 FirstName_01 = tbRegistryOwner1LName.Text,
                 MiddleName_01 = tbRegistryOwner1MName.Text,
                 LastName_01 = tbRegistryOwner1LName.Text,
@@ -280,7 +297,7 @@ namespace VeterinaryManagementSystem
                 Email_01 = tbRegistryOwner1Email.Text,
 
                 //Owner 2
-                //Picture_02 = imgRegistryOwner2Image,                  //IMAGE ????????????????????????????????????????????
+                Picture_02 = new byte[] { },//imgRegistryOwner2Image,                  //IMAGE ????????????????????????????????????????????
                 FirstName_02 = tbRegistryOwner2LName.Text,
                 MiddleName_02 = tbRegistryOwner2MName.Text,
                 LastName_02 = tbRegistryOwner2LName.Text,
@@ -800,7 +817,9 @@ namespace VeterinaryManagementSystem
         {
             lvTableRegisterBreeds.ItemsSource = dbBreed.GetAllBreeds();
         }
+        
 
+        private Breed SelectedBreed = new Breed ();
 
         //LOAD FIELDS FROM BREEDS LIST
         private void lvTableRegisterBreeds_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -810,38 +829,42 @@ namespace VeterinaryManagementSystem
             {
                 return;
             }
-            Breed breed = (Breed)lvTableRegisterBreeds.Items[index];
-            tbTablesBreedsID.Text = breed.Id.ToString();
-            tbTablesBreedsName.Text = breed.Name;
-            tbTablesBreedsSpecies.Text = breed.Specie;             
 
-            string verifyBreedCkbStatus = breed.Status;                  //Atualizando Status radiobutton de acordo com o Breed ????????????
-            if (verifyBreedCkbStatus == "ACTIVE")
+            SelectedBreed = (Breed)lvTableRegisterBreeds.SelectedItem;
+
+            //Breed breed = (Breed)lvTableRegisterBreeds.Items[index];
+            tbTablesBreedsID.Text = SelectedBreed.Id.ToString();
+            tbTablesBreedsName.Text = SelectedBreed.Name;
+            tbTablesBreedsSpecies.Text = SelectedBreed.Specie;
+
+            if (SelectedBreed.Status)
             {
                 rbTablesBreedsStatus_Active.IsChecked = true;
-                rbTablesBreedsStatus_Inactive.IsChecked = false;
+                //rbTablesBreedsStatus_Inactive.IsChecked = false;
             }
             else
             {
-                rbTablesBreedsStatus_Active.IsChecked = false;
+                //rbTablesBreedsStatus_Active.IsChecked = false;
                 rbTablesBreedsStatus_Inactive.IsChecked = true;
             }
         }
-
+        
 
         //SAVE(Add/Update) BREEDS
         private void btnTablesBreedsAdd_Click(object sender, RoutedEventArgs e)
         {
-            var breed = new Breed
-            {
-                Specie = tbTablesBreedsSpecies.Text,
-                Name = tbTablesBreedsName.Text,
-                Status = gb_rb_TablesBreedsStatus.Content.ToString()       //radio button group
-            };
+            var id = 0;
+            Int32.TryParse(tbTablesBreedsID.Text, out id);
+            SelectedBreed.Id = id;
+
+            SelectedBreed.Name = tbTablesBreedsName.Text;
+            SelectedBreed.Specie = tbTablesBreedsSpecies.Text;
+            SelectedBreed.Status = rbTablesBreedsStatus_Active.IsChecked.Value; //(bool)gb_rb_TablesBreedsStatus.Content       //radio button group
 
             try
             {
-                breedBusiness.Save(breed);
+                breedBusiness.Save(SelectedBreed);
+                SelectedBreed = new Breed();
             }
             catch (Exception ex)
             {

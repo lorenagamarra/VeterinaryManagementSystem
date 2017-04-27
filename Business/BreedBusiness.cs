@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,11 +35,6 @@ namespace VeterinaryManagementSystem.Business
             {
                 throw new Exception("Breed Name must be 2-20 characters long");
             }
-            
-            if (String.IsNullOrEmpty(breed.Status))
-            {
-                throw new Exception("Breed Status has null Status");
-            }
 
             if (breed.Id == 0)
             {
@@ -62,7 +58,22 @@ namespace VeterinaryManagementSystem.Business
 
         public void Delete(Breed breed)
         {
-            dataAccess.Delete(breed);
+            try
+            {
+                dataAccess.Delete(breed);
+            }
+            catch (InvalidOperationException ioEx)
+            {
+                //algo do tipo : Relationship (Constraints FK PK....)
+
+                //logger.add(ioEx);
+                throw new Exception("Cannot delete this item due to dependecies");
+
+            }
+            catch (Exception ex)
+            {
+                //connection invlid
+            }
         }
     }
 }

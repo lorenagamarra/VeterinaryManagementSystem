@@ -406,7 +406,7 @@
                                                     <Label Content="Other Number" HorizontalAlignment="Left" Margin="112,187,0,0" VerticalAlignment="Top"/>
                                                     <TextBox TextChanged="tbOwnerTextChanged" x:Name="tbRegistryOwner1OtherNumber" HorizontalAlignment="Left" Height="23" Margin="112,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
                                                     <Border BorderBrush="Black" BorderThickness="1" Height="202" Margin="501,10,10,0" VerticalAlignment="Top" Background="White">
-                                                        <Image x:Name="imgRegistryOwner1Image" Height="200" Margin="0,0,0,0" VerticalAlignment="Top" MaxWidth="200" MaxHeight="200" UseLayoutRounding="False" Stretch="Fill"/>
+                                                        <Image x:Name="imgRegistryOwner1Image" Height="200" Margin="0,0,0,0" VerticalAlignment="Top" MaxWidth="200" MaxHeight="200" UseLayoutRounding="False" Stretch="Fill" Source="Images/add.png"/>
                                                     </Border>
                                                     <Label Content="Required Items" HorizontalAlignment="Left" Margin="11,2,0,0" VerticalAlignment="Top" FontStyle="Italic" Foreground="#FFFD0606"/>
                                                     <Label Content="*" HorizontalAlignment="Left" Margin="69,28,0,0" VerticalAlignment="Top" Foreground="#FFFD0606" FontWeight="Bold"/>
@@ -538,7 +538,10 @@
                                                 <TabItem Header="Animal Information">
                                                     <Grid Margin="0,0,0,0">
                                                         <Label Content="SPECIES" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                                                        <ComboBox x:Name="cbRegistryAnimalSpecies" Margin="10,41,363,284" Height="22">
+                                                        <ComboBox x:Name="cbRegistryAnimalSpecies" Margin="10,41,363,284" Height="22" 
+ItemsSource="{Binding Path=Breeds}"
+DisplayMemberPath="Specie"
+ >
 
                                                         </ComboBox>
                                                         <Label Content="BREEDS" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top"/>
@@ -733,7 +736,7 @@
                                 <ListView Margin="10,86,314,10" x:Name="lvTableRegisterBreeds" SelectionChanged="lvTableRegisterBreeds_OnSelectionChanged">
                                     <ListView.View>
                                         <GridView>
-                                            <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="60" Header="ID"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Id}" Width="60" Header="ID"/>
                                             <GridViewColumn DisplayMemberBinding="{Binding Specie}" Width="130" Header="Specie"/>
                                             <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="250" Header="Name"/>
                                             <GridViewColumn DisplayMemberBinding="{Binding Status}" Width="70" Header="Status"/>

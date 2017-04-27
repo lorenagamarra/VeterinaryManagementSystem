@@ -71,6 +71,7 @@
     <Compile Include="UnitTests\ServicesProductsUnitTest.cs" />
     <Compile Include="UnitTests\VaccineHistoricUnitTest.cs" />
     <Compile Include="UnitTests\VaccineUnitTest.cs" />
+    <Compile Include="ViewModels\BreedSpecieViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

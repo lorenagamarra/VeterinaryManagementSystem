@@ -23,11 +23,12 @@ namespace VeterinaryManagementSystem.DataAccess
         {
             connection = new SqlConnection(connectionString);
             connection.Open();
-            var sql = "INSERT INTO TBLBREED (SPECIE, NAME) VALUES (@Specie, @Name)";
+            var sql = "INSERT INTO TBLBREED (SPECIE, NAME, STATUS) VALUES (@Specie, @Name, @Status)";
 
             SqlCommand command = new SqlCommand(sql, connection);
             command.Parameters.Add(new SqlParameter("@Specie", breed.Specie));
             command.Parameters.Add(new SqlParameter("@Name", breed.Name));
+            command.Parameters.Add(new SqlParameter("@Status", breed.Status));
 
 
             command.ExecuteNonQuery();
@@ -44,6 +45,7 @@ namespace VeterinaryManagementSystem.DataAccess
             command.Parameters.Add(new SqlParameter("@Specie", breed.Specie));
             command.Parameters.Add(new SqlParameter("@Name", breed.Name));
             command.Parameters.Add(new SqlParameter("@Status", breed.Status));
+            command.Parameters.Add(new SqlParameter("@Id", breed.Id));
 
             command.ExecuteNonQuery();
             connection.Close();
@@ -52,37 +54,43 @@ namespace VeterinaryManagementSystem.DataAccess
 
         public void Delete(Breed breed)
         {
-            connection = new SqlConnection(connectionString);
-            connection.Open();
-            var sql = "DELETE FROM TBLBREED WHERE ID=@Id NOT IN (SELECT BREEDID FROM TBLANIMAL)";
+            //'using' block calls Dispose method at the end of the structure.
+            using (connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var sql = "DELETE FROM TBLBREED WHERE ID=@Id";
 
-            SqlCommand command = new SqlCommand(sql, connection);
-            command.Parameters.Add(new SqlParameter("@Id", breed.Id));
-
-            command.ExecuteNonQuery();
-            connection.Close();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.Add(new SqlParameter("@Id", breed.Id));
+                    command.ExecuteNonQuery();
+                }
+            } //close and dispose --> connection
         }
 
         public List<Breed> GetAllSpecieActives()
         {
-            connection = new SqlConnection(connectionString);
-            connection.Open();
-            List<Breed> result = new List<Breed>();
-            using (SqlCommand command = new SqlCommand("SELECT DISTINCT SPECIE FROM TBLBREED WHERE STATUS='Active'", connection))
-            using (SqlDataReader reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    string specie = (string)reader["Specie"];
+            var result = new List<Breed>();
 
-                    var breed = new Breed
+            using (connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+              
+                using (SqlCommand command = new SqlCommand("SELECT DISTINCT SPECIE FROM TBLBREED WHERE STATUS=1", connection))
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
                     {
-                        Specie = specie
-                    };
-                    result.Add(breed);
+                        string specie = (string)reader["Specie"];
+
+                        var breed = new Breed
+                        {
+                            Specie = specie
+                        };
+                        result.Add(breed);
+                    }
                 }
             }
-            connection.Close();
             return result;
             
         }
@@ -125,7 +133,7 @@ namespace VeterinaryManagementSystem.DataAccess
                     int id = (int)reader["Id"];
                     string specie = (string)reader["Specie"];
                     string name = (string)reader["Name"];
-                    string status = (string)reader["Status"];
+                    Boolean status = (Boolean)reader["Status"];
                     var breed = new Breed
                     {
                         Id = id,
