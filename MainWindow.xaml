@@ -30,7 +30,7 @@
                     <Image Source="Images\background image.jpg"/>
                 </Grid>
             </TabItem>
-            <TabItem Height="24" VerticalAlignment="Top">
+            <TabItem Name="tabConsultation" Height="24" VerticalAlignment="Top">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Image Name="img" Height="auto" Width="auto" Source="Images\hospital.png" />
@@ -323,7 +323,7 @@
                     <!-- Column 0, Row 0, Cell 1-->
                     <StackPanel Grid.Column="0" Margin="0,0,-303,-5" HorizontalAlignment="Left" Width="1246">
                         <TabControl Margin="0,0,0,0" TabStripPlacement="Left" Height="688" HorizontalAlignment="Left" Width="1246" >
-                            <TabItem Height="24" VerticalAlignment="Top">
+                            <TabItem Name="tabRegistryOwner" Height="24" VerticalAlignment="Top">
                                 <TabItem.Header>
                                     <StackPanel Orientation="Horizontal">
                                         <Image Name="imgOwnerRegistry" Height="auto" Width="auto" Source="Images\client2.png" />

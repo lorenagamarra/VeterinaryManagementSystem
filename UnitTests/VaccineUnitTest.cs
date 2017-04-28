@@ -42,7 +42,7 @@ namespace VeterinaryManagementSystem.UnitTests
             {
                 Name = "N",
                 Price = 1,
-                Status = "Active"
+                //Status = "Active"
             };
 
             try
@@ -63,7 +63,7 @@ namespace VeterinaryManagementSystem.UnitTests
             {
                 Name = "Vaccine's name exceeds the limit of 30 characters long",
                 Price = 1,
-                Status = "Active"
+                //Status = "Active"
             };
 
             try
@@ -84,7 +84,7 @@ namespace VeterinaryManagementSystem.UnitTests
             {
                 Name = "Name",
                 Price = 0,
-                Status = "Active"
+                //Status = "Active"
             };
 
             try
@@ -105,7 +105,7 @@ namespace VeterinaryManagementSystem.UnitTests
             {
                 Name = "Name",
                 Price = 1,
-                Status = "Short"
+                //Status = "Short"
             };
 
             try
@@ -127,7 +127,7 @@ namespace VeterinaryManagementSystem.UnitTests
             {
                 Name = "Name",
                 Price = 1,
-                Status = "Vaccine's Status too long"
+                //Status = "Vaccine's Status too long"
             };
 
             try
@@ -152,7 +152,7 @@ namespace VeterinaryManagementSystem.UnitTests
             {
                 Name = "Name",
                 Price = 1,
-                Status = "Active"
+                //Status = "Active"
             };
             
             business.Save(vaccine);
