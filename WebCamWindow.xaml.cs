@@ -50,23 +50,13 @@ namespace VeterinaryManagementSystem
         private void bntCapture_Click(object sender, RoutedEventArgs e)
         {
             imgCapture.Source = imgVideo.Source;
-            ((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner1Image.Source = imgVideo.Source;
+            //((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner1Image.Source = imgVideo.Source;
         }
 
         private void bntSaveImage_Click(object sender, RoutedEventArgs e)
         {
             //Helper.SaveImageCapture((BitmapSource)imgCapture.Source);
-            /*
-            if (Index == 1)
-            {
-                ((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner1Image.Source = imgCapture.Source;
-            }
-            if (Index == 2)
-            {
-                ((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner2Image.Source = imgCapture.Source;
-            }
-            */
-            ((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner1Image.Source = imgCapture.Source;
+            DialogResult = true;
         }
 
         private void bntResolution_Click(object sender, RoutedEventArgs e)

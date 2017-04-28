@@ -384,7 +384,7 @@ namespace VeterinaryManagementSystem
                 MessageBox.Show(ex.Message);
             }
             refreshRegistryOwnerList();
-            unsavedChanges = false;
+            //unsavedChanges = false;
         }
 
 
@@ -421,8 +421,12 @@ namespace VeterinaryManagementSystem
         private void btnRegistryOwner1TakePicture_Click(object sender, RoutedEventArgs e)
         {
             var newWindow = new WebCamWindow();
-            newWindow.Show();
-            unsavedChanges = true;
+            //newWindow.ShowDialog();
+            //unsavedChanges = true;
+            if (newWindow.ShowDialog() == true)
+            {
+                imgRegistryOwner1Image.Source = ((WebCamWindow)Application.Current.MainWindow).imgCapture.Source;
+            }
         }
         private void btnRegistryOwner2TakePicture_Click(object sender, RoutedEventArgs e)
         {
@@ -502,6 +506,7 @@ namespace VeterinaryManagementSystem
 
 
             //Atualizando Gender radiobutton de acordo com o Animal ????????????
+            /*
             string verifyAnimalCkbGender = animal.Gender;
             if (verifyAnimalCkbGender == "MALE")
             {
@@ -513,8 +518,10 @@ namespace VeterinaryManagementSystem
                 rbRegistryAnimalMale.IsChecked = false;
                 rbRegistryAnimalFemale.IsChecked = true;
             }
+            */
 
             //Atualizando Status radiobutton de acordo com o Animal ????????????
+            /*
             string verifyAnimalCkbStatus = animal.Status;
             if (verifyAnimalCkbStatus == "ACTIVE")
             {
@@ -526,6 +533,7 @@ namespace VeterinaryManagementSystem
                 rbAnimalStatus_Active.IsChecked = false;
                 rbAnimalStatus_Inactive.IsChecked = true;
             }
+            */
         }
 
 
@@ -620,7 +628,7 @@ namespace VeterinaryManagementSystem
             tbRegistryAnimalPhobias.Text = String.Empty;
             //FLAGSET.Items.Clear();                                            //CHECKBOXES FLAG SET
             tbRegistryAnimalVetHistory.Text = String.Empty;
-            unsavedChanges = false;
+            //unsavedChanges = false;
         }
 
         //TODO: Onde usar isso??? Verifica se o valor e nulo...
@@ -692,7 +700,7 @@ namespace VeterinaryManagementSystem
             tbRegistryOwner1OtherNumber.Text = employee.PhoneNumber;
             tbRegistryOwner1Email.Text = employee.Email;
 
-
+            /*
             string verifyOwnerCkbStatus = employee.Status;   //Atualizando Status radiobutton de acordo com o Owner ????????????
             if (verifyOwnerCkbStatus == "ACTIVE")
             {
@@ -704,6 +712,7 @@ namespace VeterinaryManagementSystem
                 rbOwnerStatus_Active.IsChecked = false;
                 rbOwnerStatus_Inactive.IsChecked = true;
             }
+            */
         }
 
         //Registry -> Owner -> Buttons Save/Add Record Event
@@ -750,7 +759,7 @@ namespace VeterinaryManagementSystem
                 OtherPhoneNumber_02 = tbRegistryOwner2OtherNumber.Text,
                 Email_02 = tbRegistryOwner2Email.Text,
 
-                Status = gb_rb_OwnerStatus.Content.ToString()       //radio button group
+                //Status = gb_rb_OwnerStatus.Content.ToString()       //radio button group
             };
 
             try

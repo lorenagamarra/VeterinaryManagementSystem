@@ -12,7 +12,7 @@ namespace VeterinaryManagementSystem.UnitTests
     public class VaccineUnitTest
     {
         private VaccineBusiness business;
-
+        /*
         public VaccineUnitTest()
         {
             business = new VaccineBusiness();
@@ -158,5 +158,6 @@ namespace VeterinaryManagementSystem.UnitTests
             business.Save(vaccine);
             Assert.Pass("Valid Vaccine");
         }
+        */
     }
 }

@@ -11,6 +11,7 @@ namespace VeterinaryManagementSystem.UnitTests
 {
     public class ServicesProductsUnitTest
     {
+        /*
         private ServicesProductsBusiness business;
 
         public ServicesProductsUnitTest()
@@ -155,5 +156,6 @@ namespace VeterinaryManagementSystem.UnitTests
             business.Save(servicesproducts);
             Assert.Pass("Valid ServicesProducts");
         }
+        */
     }
 }
