@@ -130,7 +130,7 @@ namespace VeterinaryManagementSystem.DataAccess
                 }
             } //close and dispose --> connection
         }
-        
+        /*
         public void Delete(Owner owner)
         {
             //'using' block calls Dispose method at the end of the structure.
@@ -146,7 +146,7 @@ namespace VeterinaryManagementSystem.DataAccess
                 }
             } //close and dispose --> connection
         }
-        
+        */
         public List<Owner> GetAllOwnersActives()
         {
             var result = new List<Owner>();

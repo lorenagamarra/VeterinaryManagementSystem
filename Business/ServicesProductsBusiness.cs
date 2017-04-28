@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using VeterinaryManagementSystem.Classes;
 using VeterinaryManagementSystem.DataAccess;
 
@@ -57,7 +58,20 @@ namespace VeterinaryManagementSystem.Business
 
         public void Delete(ServicesProducts servicesproducts)
         {
-            dataAccess.Delete(servicesproducts);
+            try
+            {
+                dataAccess.Delete(servicesproducts);
+            }
+            catch (InvalidOperationException)
+            {
+                throw new Exception("This item can not be deleted because it is being used in another table." +
+                    " You can change your status to inactive.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

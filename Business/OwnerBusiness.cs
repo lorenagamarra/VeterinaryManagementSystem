@@ -206,10 +206,11 @@ namespace VeterinaryManagementSystem.Business
         {
             dataAccess.Update(owner);
         }
-
+        /*
         public void Delete(Owner owner)
         {
             dataAccess.Delete(owner);
         }
+        */
     }
 }

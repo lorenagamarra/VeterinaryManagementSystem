@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using VeterinaryManagementSystem.Classes;
 using VeterinaryManagementSystem.DataAccess;
 
@@ -62,17 +63,15 @@ namespace VeterinaryManagementSystem.Business
             {
                 dataAccess.Delete(breed);
             }
-            catch (InvalidOperationException ioEx)
+            catch (InvalidOperationException)
             {
-                //algo do tipo : Relationship (Constraints FK PK....)
-
-                //logger.add(ioEx);
-                throw new Exception("Cannot delete this item due to dependecies");
-
+                throw new Exception("This item can not be deleted because it is being used in another table." +
+                    " You can change your status to inactive.");
             }
             catch (Exception ex)
             {
-                //connection invlid
+                Console.WriteLine(ex.StackTrace);
+                MessageBox.Show(ex.Message);
             }
 
         }

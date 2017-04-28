@@ -154,5 +154,11 @@ namespace VeterinaryManagementSystem.Business
         {
             dataAccess.Update(employee);
         }
+        /*
+        public void Delete(Employee employee)
+        {
+            dataAccess.Delete(employee);
+        }
+        */
     }
 }

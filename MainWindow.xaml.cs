@@ -60,6 +60,7 @@ namespace VeterinaryManagementSystem
 
 
         private BreedSpecieViewModel BreedSpecieViewModel { get; set; }
+        private BreedNameViewModel BreedNameViewModel { get; set; }
 
         public MainWindow()
         {
@@ -100,18 +101,23 @@ namespace VeterinaryManagementSystem
                 servicesproductsBusiness = new ServicesProductsBusiness();
                 vaccineBusiness = new VaccineBusiness();
                 vaccinehistoricBusiness = new VaccineHistoricBusiness();
-
-
+                
 
                 BreedSpecieViewModel = new BreedSpecieViewModel();
                 BreedSpecieViewModel.Breeds = dbBreed.GetAllSpecieActives();
                 cbRegistryAnimalSpecies.DataContext = BreedSpecieViewModel;
 
+                BreedNameViewModel = new BreedNameViewModel();
+                BreedNameViewModel.Breeds = dbBreed.GetAllBreedsActivesBySpecie();
+                cbRegistryAnimalBreeds.DataContext = BreedNameViewModel;
+                
 
-                //REFRESH ALL LISTS
+                //REFRESH LISTS
                 refreshBreedList();
-                //refreshVaccineList();
-                //refreshServicesProductsList();
+                refreshVaccineList();
+                refreshServicesProductsList();
+                refreshRegistryOwnerList();
+
             }
             catch (SqlException e)
             {
@@ -121,7 +127,6 @@ namespace VeterinaryManagementSystem
             }
             
         }
-
 
 
 
@@ -163,6 +168,8 @@ namespace VeterinaryManagementSystem
             }
         }
 
+
+
         private void Button_Click_ConsultationSearch(object sender, RoutedEventArgs e)
         {
 
@@ -184,7 +191,8 @@ namespace VeterinaryManagementSystem
         /******************************************************************************************
          * REGISTRY => OWNER
          ******************************************************************************************/
-    
+        private Owner SelectedOwner = new Owner();
+
         //LINQ - SEARCH ALL OWNERS
         private void tbRegistryOwnerSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -202,64 +210,111 @@ namespace VeterinaryManagementSystem
             }
         }
 
+        //REFRESH OWNER LIST
+        private void refreshRegistryOwnerList()
+        {
+            lvRegistryOwnerSearchResult.ItemsSource = dbOwner.GetAllOwners();
+        }
+
+        //CLEAR FIELDS AND UNSELECT LISTVIEW
+        private void RegistryOwner_clearFields_UnselectListView()
+        {
+            tbRegistryOwnerID.Text = String.Empty;
+            tbRegistryOwnerDateRegistration.Text = DateTime.Now.ToString();
+
+            //Owner 1
+            imgRegistryOwner1Image.Source = null;                                 
+            tbRegistryOwner1FName.Text = String.Empty;
+            tbRegistryOwner1MName.Text = String.Empty;
+            tbRegistryOwner1LName.Text = String.Empty;
+            tbRegistryOwner1NumberAddress.Text = String.Empty;
+            tbRegistryOwner1Address.Text = String.Empty;
+            tbRegistryOwner1Complement.Text = String.Empty;
+            tbRegistryOwner1City.Text = String.Empty;
+            cbRegistryOwner1Province.Items.Clear();         
+            tbRegistryOwner1PostalCode.Text = String.Empty;
+            tbRegistryOwner1Phone.Text = String.Empty;
+            tbRegistryOwner1OtherNumber.Text = String.Empty;
+            tbRegistryOwner1Email.Text = String.Empty;
+
+            //Owner 2
+            imgRegistryOwner2Image.Source = null;
+            tbRegistryOwner2FName.Text = String.Empty;
+            tbRegistryOwner2MName.Text = String.Empty;
+            tbRegistryOwner2LName.Text = String.Empty;
+            tbRegistryOwner2NumberAddress.Text = String.Empty;
+            tbRegistryOwner2Address.Text = String.Empty;
+            tbRegistryOwner2Complement.Text = String.Empty;
+            tbRegistryOwner2City.Text = String.Empty;
+            cbRegistryOwner2Province.Items.Clear();
+            tbRegistryOwner2PostalCode.Text = String.Empty;
+            tbRegistryOwner2Phone.Text = String.Empty;
+            tbRegistryOwner2OtherNumber.Text = String.Empty;
+            tbRegistryOwner2Email.Text = String.Empty;
+
+            rbOwnerStatus_Active.IsChecked = true;
+            lvRegistryOwnerSearchResult.SelectedIndex = -1;
+        }
+
         //LOAD FIELDS FROM OWNERS LIST
         private void lvRegistryOwnerSearchResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = lvRegistryOwnerSearchResult.SelectedIndex;
             if (index < 0)
             {
-                tbRegistryOwnerID.ToString();
                 return;
             }
-            Owner owner = ownerList[index];
 
-            //General Information for both owners
-            tbRegistryOwnerDateRegistration.Text = owner.RegistrationDate.ToString();
-            tbRegistryOwnerID.Text = owner.Id.ToString();
+            SelectedOwner = (Owner)lvRegistryOwnerSearchResult.SelectedItem;
+
+            tbRegistryOwnerID.Text = SelectedOwner.Id.ToString();
+            tbRegistryOwnerDateRegistration.Text = SelectedOwner.RegistrationDate.ToString();
 
             //Owner 1
-            //imgRegistryOwner1Image.Source = owner.Picture_01;            //TODO: Descobrir qual é a propriedade da imagem que guarda o que a imagem tem dentro..Content? Text?
-            tbRegistryOwner1FName.Text = owner.FirstName_01;
-            tbRegistryOwner1MName.Text = owner.MiddleName_01;
-            tbRegistryOwner1LName.Text = owner.LastName_01;
-            tbRegistryOwner1NumberAddress.Text = owner.Number_01;
-            tbRegistryOwner1Address.Text = owner.Address_01;
-            tbRegistryOwner1Complement.Text = owner.Complement_01;
-            tbRegistryOwner1City.Text = owner.City_01;
-            cbRegistryOwner1Province.Text = owner.Province_01;              //puxar dado da lista para selecionar opcao do combobox
-            tbRegistryOwner1PostalCode.Text = owner.PostalCode_01;
-            tbRegistryOwner1Phone.Text = owner.PhoneNumber_01;
-            tbRegistryOwner1OtherNumber.Text = owner.OtherPhoneNumber_01;
-            tbRegistryOwner1Email.Text = owner.Email_01;
+            //imgRegistryOwner1Image = SelectedOwner.Picture_01.;       //criar codigo de frank
+            tbRegistryOwner1FName.Text = SelectedOwner.FirstName_01;
+            tbRegistryOwner1MName.Text = SelectedOwner.MiddleName_01;
+            tbRegistryOwner1LName.Text = SelectedOwner.LastName_01;
+            tbRegistryOwner1NumberAddress.Text = SelectedOwner.Number_01;
+            tbRegistryOwner1Address.Text = SelectedOwner.Address_01;
+            tbRegistryOwner1Complement.Text = SelectedOwner.Complement_01;
+            tbRegistryOwner1City.Text = SelectedOwner.City_01;
+            cbRegistryOwner1Province.ItemsSource = SelectedOwner.Province_01;
+            tbRegistryOwner1PostalCode.Text = SelectedOwner.PostalCode_01;
+            tbRegistryOwner1Phone.Text = SelectedOwner.PhoneNumber_01;
+            tbRegistryOwner1OtherNumber.Text = SelectedOwner.OtherPhoneNumber_01;
+            tbRegistryOwner1Email.Text = SelectedOwner.Email_01;
 
             //Owner 2
-            //imgRegistryOwner2Image.Source = owner.Picture_02;             //TODO: Descobrir qual é a propriedade da imagem que guarda o que a imagem tem dentro..Content? Text?
-            tbRegistryOwner2FName.Text = owner.FirstName_02;
-            tbRegistryOwner2MName.Text = owner.MiddleName_02;
-            tbRegistryOwner2LName.Text = owner.LastName_02;
-            tbRegistryOwner2NumberAddress.Text = owner.Number_02;
-            tbRegistryOwner2Address.Text = owner.Address_02;
-            tbRegistryOwner2Complement.Text = owner.Complement_02;
-            tbRegistryOwner2City.Text = owner.City_02;
-            cbRegistryOwner2Province.Text = owner.Province_02;               //comboBOX
-            tbRegistryOwner2PostalCode.Text = owner.PostalCode_02;
-            tbRegistryOwner2Phone.Text = owner.PhoneNumber_02;
-            tbRegistryOwner2OtherNumber.Text = owner.OtherPhoneNumber_02;
-            tbRegistryOwner2Email.Text = owner.Email_02;
+            //imgRegistryOwner2Image = SelectedOwner.Picture_02.;       //criar codigo de frank
+            tbRegistryOwner2FName.Text = SelectedOwner.FirstName_02;
+            tbRegistryOwner2MName.Text = SelectedOwner.MiddleName_02;
+            tbRegistryOwner2LName.Text = SelectedOwner.LastName_02;
+            tbRegistryOwner2NumberAddress.Text = SelectedOwner.Number_02;
+            tbRegistryOwner2Address.Text = SelectedOwner.Address_02;
+            tbRegistryOwner2Complement.Text = SelectedOwner.Complement_02;
+            tbRegistryOwner2City.Text = SelectedOwner.City_02;
+            cbRegistryOwner2Province.ItemsSource = SelectedOwner.Province_02;
+            tbRegistryOwner2PostalCode.Text = SelectedOwner.PostalCode_02;
+            tbRegistryOwner2Phone.Text = SelectedOwner.PhoneNumber_02;
+            tbRegistryOwner2OtherNumber.Text = SelectedOwner.OtherPhoneNumber_02;
+            tbRegistryOwner2Email.Text = SelectedOwner.Email_02;
 
-            string verifyOwnerCkbStatus = owner.Status;                      //Atualizando Status radiobutton de acordo com o Owner ????????????
-            if (verifyOwnerCkbStatus == "ACTIVE")
+            if (SelectedOwner.Status)
             {
                 rbOwnerStatus_Active.IsChecked = true;
-                rbOwnerStatus_Inactive.IsChecked = false;
             }
             else
             {
-                rbOwnerStatus_Active.IsChecked = false;
                 rbOwnerStatus_Inactive.IsChecked = true;
             }
         }
 
+        //ADD NEW OWNER (clear fields and unselect list)
+        private void btnRegistryOwnerAdd_Click(object sender, RoutedEventArgs e)
+        {
+            RegistryOwner_clearFields_UnselectListView();
+        }
 
         //SAVE(Add/Update) OWNERS
         private void btnRegistryOwnerSave_Click(object sender, RoutedEventArgs e)
@@ -271,7 +326,7 @@ namespace VeterinaryManagementSystem
         //SAVE OWNERS METHOD
         private void SavingOwnerRegistryOnDB()
         {
-            
+
             MemoryStream memStream = new MemoryStream();
             JpegBitmapEncoder encoder = new JpegBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create((BitmapSource)imgRegistryOwner1Image.Source));
@@ -291,7 +346,7 @@ namespace VeterinaryManagementSystem
                 Complement_01 = tbRegistryOwner1Complement.Text,
                 City_01 = tbRegistryOwner1City.Text,
                 Province_01 = cbRegistryOwner1Province.Text,            //combobox
-                PostalCode_01 = tbRegistryOwner1PostalCode.Text,      
+                PostalCode_01 = tbRegistryOwner1PostalCode.Text,
                 PhoneNumber_01 = tbRegistryOwner1Phone.Text,
                 OtherPhoneNumber_01 = tbRegistryOwner1OtherNumber.Text,
                 Email_01 = tbRegistryOwner1Email.Text,
@@ -322,7 +377,58 @@ namespace VeterinaryManagementSystem
             {
                 MessageBox.Show(ex.Message);
             }
+
+
+            //----------------------------------------
+
+            
+            var id = 0;
+            Int32.TryParse(tbRegistryOwnerID.Text, out id);
+
+            SelectedOwner.Id = id;
+            SelectedOwner.RegistrationDate = DateTime.Now;
+            SelectedOwner.Picture_01 = null ;
+            SelectedOwner.FirstName_01 = tbRegistryOwner1FName.Text;
+
+
+
+
+
+
+
+            SelectedOwner.Name = tbTablesBreedsName.Text;
+            SelectedOwner.Specie = tbTablesBreedsSpecies.Text;
+            SelectedOwner.Status = rbTablesBreedsStatus_Active.IsChecked.Value;
+
+            try
+            {
+                ownerBusiness.Save(SelectedOwner);
+                SelectedOwner = new Owner();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            refreshRegistryOwnerList();
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         //SAVE OWNERS METHOD
@@ -332,12 +438,12 @@ namespace VeterinaryManagementSystem
             unsavedChanges = true;
         }
 
-        
+
 
 
         //Registry -> Owner -> Method to clear the fields
         private void OwnerForm_clearFields()
-        {            
+        {
             tbRegistryOwnerDateRegistration.Text = DateTime.Now.ToString();   //Data no campo Data Registration????????????
             tbRegistryOwnerID.Text = String.Empty;
 
@@ -397,6 +503,16 @@ namespace VeterinaryManagementSystem
         }
 
 
+        private void btnRegistryOwner1TakePicture_Click(object sender, RoutedEventArgs e)
+        {
+            var newWindow = new WebCamWindow();
+            newWindow.Show();
+        }
+        private void btnRegistryOwner2TakePicture_Click(object sender, RoutedEventArgs e)
+        {
+            var newWindow = new WebCamWindow();
+            newWindow.Show();
+        }
 
         /******************************************************************************************
         * REGISTRY => ANIMAL
@@ -418,7 +534,7 @@ namespace VeterinaryManagementSystem
                 //multiple words LINQ ?????????????????????????????????????????????????????????????????
                 string[] searchstrings = filter.Split(' ');
                 var filteredList = from animal in listAnimal
-                                   join owner in listOwner 
+                                   join owner in listOwner
                                    on animal.OwnerID equals owner.Id
                                    where searchstrings.All(word => animal.Name.ToLower().Contains(word) || owner.FirstName_01.Contains(word) || owner.FirstName_02.Contains(word))
                                    select animal;
@@ -469,7 +585,7 @@ namespace VeterinaryManagementSystem
 
 
             //Atualizando Gender radiobutton de acordo com o Animal ????????????
-            string verifyAnimalCkbGender = animal.Gender;   
+            string verifyAnimalCkbGender = animal.Gender;
             if (verifyAnimalCkbGender == "MALE")
             {
                 rbRegistryAnimalMale.IsChecked = true;
@@ -482,7 +598,7 @@ namespace VeterinaryManagementSystem
             }
 
             //Atualizando Status radiobutton de acordo com o Animal ????????????
-            string verifyAnimalCkbStatus = animal.Status;   
+            string verifyAnimalCkbStatus = animal.Status;
             if (verifyAnimalCkbStatus == "ACTIVE")
             {
                 rbAnimalStatus_Active.IsChecked = true;
@@ -563,7 +679,7 @@ namespace VeterinaryManagementSystem
                 }
             }
         }
-        
+
         //Registry -> Animal -> Text changed on TextBox around the Registration window           //e os outros elementos diferentes de TB como combobom ou radiobutton??
         private void tbAnimalTextChanged(object sender, TextChangedEventArgs e)
         {
@@ -573,7 +689,7 @@ namespace VeterinaryManagementSystem
         private void AnimalForm_clearFields()
         {
             tbRegistryAnimalDateRegistration.Text = DateTime.Now.ToString();   //Data no campo Data Registration????????????
-            tbRegistryAnimalID.Text = String.Empty;                             
+            tbRegistryAnimalID.Text = String.Empty;
             imgRegistryAnimalPicture.Source = null;                            //Limpar imagem????????????????????????????????????????????????
             tbRegistryAnimalName.Text = String.Empty;
             //dpRegistryAnimalBirthday.Text = DatePicker.
@@ -606,13 +722,13 @@ namespace VeterinaryManagementSystem
                 this.Title = date.Value.ToShortDateString();
             }
         }
-        
+
 
 
         /******************************************************************************************
          * REGISTRY => EMPLOYEE
          ******************************************************************************************/
-          
+
         //LINQ - SEARCH ALL EMPLOYEE
         private void tbRegistryEmployeeSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -781,7 +897,7 @@ namespace VeterinaryManagementSystem
         }
 
 
-        
+
 
         private void tbRegistrySearch_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -793,7 +909,7 @@ namespace VeterinaryManagementSystem
         /******************************************************************************************
         * SECONDARY TABLES > BREEDS
         ******************************************************************************************/
-        
+        private Breed SelectedBreed = new Breed();
 
         //LINQ - SEARCH ALL BREEDS
         private void tbTablesBreedSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -811,17 +927,24 @@ namespace VeterinaryManagementSystem
             }
         }
 
-
-        //REFRESH BREEDS LIST
+        //REFRESH BREED LIST
         private void refreshBreedList()
         {
             lvTableRegisterBreeds.ItemsSource = dbBreed.GetAllBreeds();
         }
-        
 
-        private Breed SelectedBreed = new Breed ();
+        //CLEAR FIELDS AND UNSELECT LISTVIEW
+        private void TableBreeds_clearFields_UnselectListView()
+        {
+            tbTablesBreedSearch.Text = String.Empty;
+            tbTablesBreedsID.Text = String.Empty;
+            tbTablesBreedsSpecies.Text = String.Empty;
+            tbTablesBreedsName.Text = String.Empty;
+            rbTablesBreedsStatus_Active.IsChecked = true;
+            lvTableRegisterBreeds.SelectedIndex = -1;
+        }
 
-        //LOAD FIELDS FROM BREEDS LIST
+        //LOAD FIELDS FROM BREED LIST
         private void lvTableRegisterBreeds_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = lvTableRegisterBreeds.SelectedIndex;
@@ -832,7 +955,6 @@ namespace VeterinaryManagementSystem
 
             SelectedBreed = (Breed)lvTableRegisterBreeds.SelectedItem;
 
-            //Breed breed = (Breed)lvTableRegisterBreeds.Items[index];
             tbTablesBreedsID.Text = SelectedBreed.Id.ToString();
             tbTablesBreedsName.Text = SelectedBreed.Name;
             tbTablesBreedsSpecies.Text = SelectedBreed.Specie;
@@ -840,26 +962,29 @@ namespace VeterinaryManagementSystem
             if (SelectedBreed.Status)
             {
                 rbTablesBreedsStatus_Active.IsChecked = true;
-                //rbTablesBreedsStatus_Inactive.IsChecked = false;
             }
             else
             {
-                //rbTablesBreedsStatus_Active.IsChecked = false;
                 rbTablesBreedsStatus_Inactive.IsChecked = true;
             }
         }
         
-
-        //SAVE(Add/Update) BREEDS
+        //ADD NEW BREED (clear fields and unselect list)
         private void btnTablesBreedsAdd_Click(object sender, RoutedEventArgs e)
+        {
+            TableBreeds_clearFields_UnselectListView();
+        }
+
+        //SAVE(Add/Update) BREED
+        private void btnTablesBreedsSave_Click(object sender, RoutedEventArgs e)
         {
             var id = 0;
             Int32.TryParse(tbTablesBreedsID.Text, out id);
-            SelectedBreed.Id = id;
 
+            SelectedBreed.Id = id;
             SelectedBreed.Name = tbTablesBreedsName.Text;
             SelectedBreed.Specie = tbTablesBreedsSpecies.Text;
-            SelectedBreed.Status = rbTablesBreedsStatus_Active.IsChecked.Value; //(bool)gb_rb_TablesBreedsStatus.Content       //radio button group
+            SelectedBreed.Status = rbTablesBreedsStatus_Active.IsChecked.Value;
 
             try
             {
@@ -872,13 +997,9 @@ namespace VeterinaryManagementSystem
             }
             refreshBreedList();
         }
-        //SAVE(Add/Update) BREEDS
-        private void btnTablesBreedsSave_Click(object sender, RoutedEventArgs e)
-        {
-
-             }
-            //DELETE BREEDS
-            private void btnTablesBreedsDelete_Click(object sender, RoutedEventArgs e)
+        
+        //DELETE BREED
+        private void btnTablesBreedsDelete_Click(object sender, RoutedEventArgs e)
         {
             int index = lvTableRegisterBreeds.SelectedIndex;
             if (index < 0)
@@ -899,9 +1020,11 @@ namespace VeterinaryManagementSystem
 
 
 
+
         /******************************************************************************************
         * SECONDARY TABLES > VACCINES
         ******************************************************************************************/
+        private Vaccine SelectedVaccine = new Vaccine();
 
         //LINQ - SEARCH ALL VACCINES
         private void tbTablesVaccineSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -920,14 +1043,26 @@ namespace VeterinaryManagementSystem
         }
 
 
-        //REFRESH VACCINES LIST
+        //REFRESH VACCINE LIST
         private void refreshVaccineList()
         {
             lvTableRegisterVaccines.ItemsSource = dbVaccine.GetAllVaccines();
         }
 
 
-        //LOAD FIELDS FROM VACCINES LIST
+        //CLEAR FIELDS AND UNSELECT LISTVIEW
+        private void TableVaccines_clearFields_UnselectListView()
+        {
+            tbTablesVaccineSearch.Text = String.Empty;
+            tbTablesVaccinesID.Text = String.Empty;
+            tbTablesVaccinesPrice.Text = String.Empty;
+            tbTablesVaccinesName.Text = String.Empty;
+            rbTablesVaccinesStatus_Active.IsChecked = true;
+            lvTableRegisterVaccines.SelectedIndex = -1;
+        }
+
+
+        //LOAD FIELDS FROM VACCINE LIST
         private void lvTableRegisterVaccines_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = lvTableRegisterVaccines.SelectedIndex;
@@ -936,41 +1071,48 @@ namespace VeterinaryManagementSystem
                 return;
             }
 
-            Vaccine vaccine = (Vaccine)lvTableRegisterVaccines.Items[index];
-            tbTablesVaccinesID.Text = vaccine.Id.ToString();
-            tbTablesVaccinesPrice.Text = vaccine.Price.ToString();
-            tbTablesVaccinesName.Text = vaccine.Name;
+            SelectedVaccine = (Vaccine) lvTableRegisterVaccines.SelectedItem;
 
-            string verifyVaccineCkbStatus = vaccine.Status;                  //Atualizando Status radiobutton de acordo com o vaccine ????????????
-            if (verifyVaccineCkbStatus == "ACTIVE")
+            tbTablesVaccinesID.Text = SelectedVaccine.Id.ToString();
+            tbTablesVaccinesName.Text = SelectedVaccine.Name;
+            tbTablesVaccinesPrice.Text = SelectedVaccine.Price.ToString();
+
+            if (SelectedVaccine.Status)
             {
                 rbTablesVaccinesStatus_Active.IsChecked = true;
-                rbTablesVaccinesStatus_Inactive.IsChecked = false;
             }
             else
             {
-                rbTablesVaccinesStatus_Active.IsChecked = false;
                 rbTablesVaccinesStatus_Inactive.IsChecked = true;
             }
         }
 
 
-        //SAVE(Add/Update) VACCINES
+        //ADD NEW VACCINE (clear fields and unselect list)
         private void btnTablesVaccinesAdd_Click(object sender, RoutedEventArgs e)
         {
+            TableVaccines_clearFields_UnselectListView();
+        }
+
+
+        //SAVE VACCINES
+        private void btnTablesVaccinesSave_Click(object sender, RoutedEventArgs e)
+        {
+            var id = 0;
+            Int32.TryParse(tbTablesBreedsID.Text, out id);
+
             Decimal price = 0;
             Decimal.TryParse(tbTablesVaccinesPrice.Text, out price);
 
-            var vaccine = new Vaccine
-            {
-                Name = tbTablesVaccinesName.Text,
-                Price = price,
-                Status = gb_rb_TablesVaccinesStatus.Content.ToString()       //radio button group
-            };
+            SelectedVaccine.Id = id;
+            SelectedVaccine.Name = tbTablesVaccinesName.Text;
+            SelectedVaccine.Price = price;
+            SelectedVaccine.Status = rbTablesVaccinesStatus_Active.IsChecked.Value;
 
             try
             {
-                vaccineBusiness.Save(vaccine);
+                vaccineBusiness.Save(SelectedVaccine);
+                SelectedVaccine = new Vaccine();
             }
             catch (Exception ex)
             {
@@ -978,13 +1120,9 @@ namespace VeterinaryManagementSystem
             }
             refreshVaccineList();
         }
-        //SAVE VACCINES
-        private void btnTablesVaccinesSave_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
 
-        //DELETE VACCINES
+        //DELETE VACCINE
         private void btnTablesVaccinesDelete_Click(object sender, RoutedEventArgs e)
         {
             int index = lvTableRegisterVaccines.SelectedIndex;
@@ -992,10 +1130,12 @@ namespace VeterinaryManagementSystem
             {
                 return;
             }
-            Vaccine vaccine = (Vaccine)lvTableRegisterVaccines.Items[index];
+
+            SelectedVaccine = (Vaccine)lvTableRegisterVaccines.SelectedItem;
+
             try
             {
-                vaccineBusiness.Delete(vaccine);
+                vaccineBusiness.Delete(SelectedVaccine);
             }
             catch (Exception ex)
             {
@@ -1008,7 +1148,8 @@ namespace VeterinaryManagementSystem
         /******************************************************************************************
         * SECONDARY TABLES > SERVICES & PRODUCTS
         ******************************************************************************************/
-        
+        private ServicesProducts SelectedServicesProducts = new ServicesProducts();
+
         //LINQ - SEARCH ALL SERVICES & PRODUCTS
         private void tbTablesProdServSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -1024,12 +1165,22 @@ namespace VeterinaryManagementSystem
                 lvTablesRegisterServicesProducts.ItemsSource = filteredList;
             }
         }
-
-
+        
         //REFRESH SERVICES & PRODUCTS LIST
         private void refreshServicesProductsList()
         {
             lvTablesRegisterServicesProducts.ItemsSource = dbServicesProducts.GetAllServicesProducts();
+        }
+
+        //CLEAR FIELDS AND UNSELECT LISTVIEW
+        private void TableServicesProducts_clearFields_UnselectListView()
+        {
+            tbTablesProdServSearch.Text = String.Empty;
+            tbTablesServicesProductsID.Text = String.Empty;
+            tbTablesServicesProductsPrice.Text = String.Empty;
+            tbTablesServicesProductsName.Text = String.Empty;
+            rbTablesServProdStatus_Active.IsChecked = true;
+            lvTablesRegisterServicesProducts.SelectedIndex = -1;
         }
 
 
@@ -1042,51 +1193,52 @@ namespace VeterinaryManagementSystem
                 return;
             }
 
-            ServicesProducts servicesproducts = (ServicesProducts)lvTableRegisterVaccines.Items[index];
-            tbTablesServicesProductsID.Text = servicesproducts.Id.ToString();
-            tbTablesServicesProductsPrice.Text = servicesproducts.Price.ToString();
-            tbTablesServicesProductsName.Text = servicesproducts.Name;
+            SelectedServicesProducts = (ServicesProducts)lvTablesRegisterServicesProducts.SelectedItem;
 
-            string verifyVaccineCkbStatus = servicesproducts.Status;                  //Atualizando Status radiobutton de acordo com o vaccine ????????????
-            if (verifyVaccineCkbStatus == "ACTIVE")
+            tbTablesServicesProductsID.Text = SelectedServicesProducts.Id.ToString();
+            tbTablesServicesProductsName.Text = SelectedServicesProducts.Name;
+            tbTablesServicesProductsPrice.Text = SelectedServicesProducts.Price.ToString();
+
+            if (SelectedServicesProducts.Status)
             {
-                rbTablesVaccinesStatus_Active.IsChecked = true;
-                rbTablesVaccinesStatus_Inactive.IsChecked = false;
+                rbTablesServProdStatus_Active.IsChecked = true;
             }
             else
             {
-                rbTablesVaccinesStatus_Active.IsChecked = false;
-                rbTablesVaccinesStatus_Inactive.IsChecked = true;
+                rbTablesServProdStatus_Inactive.IsChecked = true;
             }
         }
 
-        //SAVE(Add/Update) SERVICES & PRODUCTS
+        //ADD NEW SERVICES & PRODUCTS (clear fields and unselect list)
         private void btnTablesServicesProductsAdd_Click(object sender, RoutedEventArgs e)
         {
+            TableServicesProducts_clearFields_UnselectListView();
+        }
+
+        //SAVE SERVICES & PRODUCTS
+        private void btnTablesServicesProductsSave_Click(object sender, RoutedEventArgs e)
+        {
+            var id = 0;
+            Int32.TryParse(tbTablesServicesProductsID.Text, out id);
+
             Decimal price = 0;
             Decimal.TryParse(tbTablesServicesProductsPrice.Text, out price);
 
-            var servicesproducts = new ServicesProducts
-            {
-                Name = tbTablesServicesProductsName.Text,
-                Price = price,
-                Status = gb_rb_TablesServProdStatus.Content.ToString()       //radio button group
-            };
+            SelectedServicesProducts.Id = id;
+            SelectedServicesProducts.Name = tbTablesServicesProductsName.Text;
+            SelectedServicesProducts.Price = price;
+            SelectedServicesProducts.Status = rbTablesServProdStatus_Active.IsChecked.Value;
 
             try
             {
-                servicesproductsBusiness.Save(servicesproducts);
+                servicesproductsBusiness.Save(SelectedServicesProducts);
+                SelectedServicesProducts = new ServicesProducts();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
             refreshServicesProductsList();
-        }
-        //SAVE SERVICES & PRODUCTS
-        private void btnTablesServicesProductsSave_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         //DELETE Tables ServicesProducts
@@ -1097,10 +1249,12 @@ namespace VeterinaryManagementSystem
             {
                 return;
             }
-            ServicesProducts servicesproducts = (ServicesProducts)lvTablesRegisterServicesProducts.Items[index];
+
+            SelectedServicesProducts = (ServicesProducts)lvTablesRegisterServicesProducts.SelectedItem;
+
             try
             {
-                servicesproductsBusiness.Delete(servicesproducts);
+                servicesproductsBusiness.Delete(SelectedServicesProducts);
             }
             catch (Exception ex)
             {
@@ -1109,17 +1263,6 @@ namespace VeterinaryManagementSystem
             refreshServicesProductsList();
         }
 
-
-        private void btnRegistryOwner1TakePicture_Click(object sender, RoutedEventArgs e)
-        {
-            var newWindow = new WebCamWindow();
-            newWindow.Show();
-        }
-        private void btnRegistryOwner2TakePicture_Click(object sender, RoutedEventArgs e)
-        {
-            var newWindow = new WebCamWindow();
-            newWindow.Show();
-        }
 
         /******************************************************************************************
         * COMMON METHODS

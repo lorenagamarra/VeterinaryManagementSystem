@@ -119,10 +119,11 @@ namespace VeterinaryManagementSystem.Business
         {
             dataAccess.Update(animal);
         }
-
+        /*
         public void Delete(Animal animal)
         {
             dataAccess.Delete(animal);
         }
+        */
     }
 }

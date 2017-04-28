@@ -82,7 +82,7 @@ namespace VeterinaryManagementSystem.DataAccess
         }
 
 
-
+        /*
         public void Delete(Animal animal)
         {
             //'using' block calls Dispose method at the end of the structure.
@@ -98,7 +98,7 @@ namespace VeterinaryManagementSystem.DataAccess
                 }
             } //close and dispose --> connection
         }
-
+        */
 
 
         public List<Animal> GetAllAnimalsActives()

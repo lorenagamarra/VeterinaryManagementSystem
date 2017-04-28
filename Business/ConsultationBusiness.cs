@@ -85,6 +85,11 @@ namespace VeterinaryManagementSystem.Business
         {
             dataAccess.Update(consultation);
         }
+
+        public void Delete(Consultation consultation)
+        {
+            dataAccess.Delete(consultation);
+        }
         */
     }
 }

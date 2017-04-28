@@ -538,14 +538,9 @@
                                                 <TabItem Header="Animal Information">
                                                     <Grid Margin="0,0,0,0">
                                                         <Label Content="SPECIES" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                                                        <ComboBox x:Name="cbRegistryAnimalSpecies" Margin="10,41,363,284" Height="22" 
-ItemsSource="{Binding Path=Breeds}"
-DisplayMemberPath="Specie"
- >
-
-                                                        </ComboBox>
+                                                        <ComboBox x:Name="cbRegistryAnimalSpecies" Margin="10,41,363,284" Height="22" ItemsSource="{Binding Path=Breeds}" DisplayMemberPath="Specie" />
                                                         <Label Content="BREEDS" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top"/>
-                                                        <ComboBox x:Name="cbRegistryAnimalBreeds" Margin="10,97,363,230" Height="22"/>
+                                                        <ComboBox x:Name="cbRegistryAnimalBreeds" Margin="10,97,363,230" Height="22" ItemsSource="{Binding Path=Breeds}" DisplayMemberPath="Name"/>
                                                         <Label Content="Identification, Color or Coat" Margin="10,132,363,0" VerticalAlignment="Top" />
                                                         <TextBox x:Name="tbRegistryAnimalIdentification" HorizontalAlignment="Left" Height="23" Margin="10,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="391"/>
                                                         <Button x:Name="btnRegistryAnimalTakePicture" Content="Take a Picture" HorizontalAlignment="Left" Margin="10,191,0,0" VerticalAlignment="Top" Width="391" Height="40"/>
@@ -767,7 +762,7 @@ DisplayMemberPath="Specie"
                                 <ListView Margin="10,86,314,10" x:Name="lvTableRegisterVaccines" SelectionChanged="lvTableRegisterVaccines_OnSelectionChanged">
                                     <ListView.View>
                                         <GridView>
-                                            <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="60" Header="ID"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Id}" Width="60" Header="ID"/>
                                             <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="300" Header="Name"/>
                                             <GridViewColumn DisplayMemberBinding="{Binding Price}" Width="70" Header="Price"/>
                                             <GridViewColumn DisplayMemberBinding="{Binding Status}" Width="70" Header="Status"/>
@@ -798,9 +793,9 @@ DisplayMemberPath="Specie"
                                 <ListView Margin="10,84,314,10" x:Name="lvTablesRegisterServicesProducts" SelectionChanged="lvTableRegisterServicesProducts_OnSelectionChanged">
                                     <ListView.View>
                                         <GridView>
-                                            <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="60" Header="ID"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Id}" Width="60" Header="ID"/>
                                             <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="320" Header="Name"/>
-                                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="70" Header="Price"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Price}" Width="70" Header="Price"/>
                                             <GridViewColumn DisplayMemberBinding="{Binding Status}" Width="70" Header="Status"/>
                                         </GridView>
                                     </ListView.View>
