@@ -327,79 +327,52 @@ namespace VeterinaryManagementSystem
         //SAVE OWNERS METHOD
         private void SavingOwnerRegistryOnDB()
         {
+            MemoryStream memStream1 = new MemoryStream();
+            JpegBitmapEncoder encoder1 = new JpegBitmapEncoder();
+            encoder1.Frames.Add(BitmapFrame.Create((BitmapSource)imgRegistryOwner1Image.Source));
+            encoder1.Save(memStream1);
 
-            MemoryStream memStream = new MemoryStream();
-            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create((BitmapSource)imgRegistryOwner1Image.Source));
-            encoder.Save(memStream);
+            MemoryStream memStream2 = new MemoryStream();
+            JpegBitmapEncoder encoder2 = new JpegBitmapEncoder();
+            encoder2.Frames.Add(BitmapFrame.Create((BitmapSource)imgRegistryOwner1Image.Source));
+            encoder2.Save(memStream2);
 
-            var owner = new Owner
-            {
-                RegistrationDate = DateTime.Now.Date,                   // Add ok. mas update.. mudar a data de registro?????????????????
-
-                //Owner 1
-                Picture_01 = memStream.ToArray(),                  //IMAGE ????????????????????????????????????????????
-                FirstName_01 = tbRegistryOwner1LName.Text,
-                MiddleName_01 = tbRegistryOwner1MName.Text,
-                LastName_01 = tbRegistryOwner1LName.Text,
-                Number_01 = tbRegistryOwner1NumberAddress.Text,
-                Address_01 = tbRegistryOwner1Address.Text,
-                Complement_01 = tbRegistryOwner1Complement.Text,
-                City_01 = tbRegistryOwner1City.Text,
-                Province_01 = cbRegistryOwner1Province.Text,            //combobox
-                PostalCode_01 = tbRegistryOwner1PostalCode.Text,
-                PhoneNumber_01 = tbRegistryOwner1Phone.Text,
-                OtherPhoneNumber_01 = tbRegistryOwner1OtherNumber.Text,
-                Email_01 = tbRegistryOwner1Email.Text,
-
-                //Owner 2
-                Picture_02 = new byte[] { },//imgRegistryOwner2Image,                  //IMAGE ????????????????????????????????????????????
-                FirstName_02 = tbRegistryOwner2LName.Text,
-                MiddleName_02 = tbRegistryOwner2MName.Text,
-                LastName_02 = tbRegistryOwner2LName.Text,
-                Number_02 = tbRegistryOwner2NumberAddress.Text,
-                Address_02 = tbRegistryOwner2Address.Text,
-                Complement_02 = tbRegistryOwner2Complement.Text,
-                City_02 = tbRegistryOwner2City.Text,
-                Province_02 = cbRegistryOwner2Province.Text,             //combobox
-                PostalCode_02 = tbRegistryOwner2PostalCode.Text,
-                PhoneNumber_02 = tbRegistryOwner2Phone.Text,
-                OtherPhoneNumber_02 = tbRegistryOwner2OtherNumber.Text,
-                Email_02 = tbRegistryOwner2Email.Text,
-
-                Status = gb_rb_OwnerStatus.Content.ToString()            //radio button group
-            };
-
-            try
-            {
-                ownerBusiness.Save(owner);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-
-            //----------------------------------------
-
-            
+                       
             var id = 0;
             Int32.TryParse(tbRegistryOwnerID.Text, out id);
 
             SelectedOwner.Id = id;
             SelectedOwner.RegistrationDate = DateTime.Now;
-            SelectedOwner.Picture_01 = null ;
+
+            SelectedOwner.Picture_01 = memStream1.ToArray();
             SelectedOwner.FirstName_01 = tbRegistryOwner1FName.Text;
+            SelectedOwner.MiddleName_01 = tbRegistryOwner1MName.Text;
+            SelectedOwner.LastName_01 = tbRegistryOwner1LName.Text;
+            SelectedOwner.Number_01 = tbRegistryOwner1NumberAddress.Text;
+            SelectedOwner.Address_01 = tbRegistryOwner1Address.Text;
+            SelectedOwner.Complement_01 = tbRegistryOwner1Complement.Text;
+            SelectedOwner.City_01 = tbRegistryOwner1City.Text;
+            SelectedOwner.Province_01 = cbRegistryOwner1Province.Text;              //combobox
+            SelectedOwner.PostalCode_01 = tbRegistryOwner1PostalCode.Text;
+            SelectedOwner.PhoneNumber_01 = tbRegistryOwner1Phone.Text;
+            SelectedOwner.OtherPhoneNumber_01 = tbRegistryOwner1OtherNumber.Text;
+            SelectedOwner.Email_01 = tbRegistryOwner1Email.Text;
 
+            SelectedOwner.Picture_02 = memStream2.ToArray();
+            SelectedOwner.FirstName_02 = tbRegistryOwner2FName.Text;
+            SelectedOwner.MiddleName_02 = tbRegistryOwner2MName.Text;
+            SelectedOwner.LastName_02 = tbRegistryOwner2LName.Text;
+            SelectedOwner.Number_02 = tbRegistryOwner2NumberAddress.Text;
+            SelectedOwner.Address_02 = tbRegistryOwner2Address.Text;
+            SelectedOwner.Complement_02 = tbRegistryOwner2Complement.Text;
+            SelectedOwner.City_02 = tbRegistryOwner2City.Text;
+            SelectedOwner.Province_02 = cbRegistryOwner2Province.Text;              //combobox
+            SelectedOwner.PostalCode_02 = tbRegistryOwner2PostalCode.Text;
+            SelectedOwner.PhoneNumber_02 = tbRegistryOwner2Phone.Text;
+            SelectedOwner.OtherPhoneNumber_02 = tbRegistryOwner2OtherNumber.Text;
+            SelectedOwner.Email_02 = tbRegistryOwner2Email.Text;
 
-
-
-
-
-
-            SelectedOwner.Name = tbTablesBreedsName.Text;
-            SelectedOwner.Specie = tbTablesBreedsSpecies.Text;
-            SelectedOwner.Status = rbTablesBreedsStatus_Active.IsChecked.Value;
+            SelectedOwner.Status = rbOwnerStatus_Active.IsChecked.Value;
 
             try
             {
@@ -412,75 +385,15 @@ namespace VeterinaryManagementSystem
             }
             refreshRegistryOwnerList();
             unsavedChanges = false;
-
-
-
-
-
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-        //SAVE OWNERS METHOD
-        //Registry -> Owner -> Text changed on TextBox around the Registration window           //e os outros elementos diferentes de TB como combobom ou radiobutton??
+        //Registry -> Owner -> Text changed on TextBox around the Registration window    ???   //e os outros elementos diferentes de TB como combobom ou radiobutton??
         private void tbOwnerTextChanged(object sender, TextChangedEventArgs e)
         {
             unsavedChanges = true;
         }
 
-
-
-
-        //Registry -> Owner -> Method to clear the fields
-        private void OwnerForm_clearFields()
-        {
-            tbRegistryOwnerDateRegistration.Text = DateTime.Now.ToString();   //Data no campo Data Registration????????????
-            tbRegistryOwnerID.Text = String.Empty;
-
-            //Owner 1
-            imgRegistryOwner1Image = null;                    //Limpar imagem????????????????????????????????????????????????
-            tbRegistryOwner1FName.Text = String.Empty;
-            tbRegistryOwner1MName.Text = String.Empty;
-            tbRegistryOwner1LName.Text = String.Empty;
-            tbRegistryOwner1NumberAddress.Text = String.Empty;
-            tbRegistryOwner1Address.Text = String.Empty;
-            tbRegistryOwner1Complement.Text = String.Empty;
-            tbRegistryOwner1City.Text = String.Empty;
-            cbRegistryOwner1Province.Items.Clear();             //ComboBOX solucao que encontrei na internert para limpar item selecionado do elemento. certo??????
-            tbRegistryOwner1PostalCode.Text = String.Empty;
-            tbRegistryOwner1Phone.Text = String.Empty;
-            tbRegistryOwner1OtherNumber.Text = String.Empty;
-            tbRegistryOwner1Email.Text = String.Empty;
-
-            //Owner 2
-            imgRegistryOwner1Image = null;                    //Limpar imagem????????????????????????????????????????????????
-            tbRegistryOwner2FName.Text = String.Empty;
-            tbRegistryOwner2MName.Text = String.Empty;
-            tbRegistryOwner2LName.Text = String.Empty;
-            tbRegistryOwner2NumberAddress.Text = String.Empty;
-            tbRegistryOwner2Address.Text = String.Empty;
-            tbRegistryOwner2Complement.Text = String.Empty;
-            tbRegistryOwner2City.Text = String.Empty;
-            cbRegistryOwner2Province.Items.Clear();             //ComboBOX solucao que encontrei na internert para limpar item selecionado do elemento. certo??????
-            tbRegistryOwner2PostalCode.Text = String.Empty;
-            tbRegistryOwner2Phone.Text = String.Empty;
-            tbRegistryOwner2OtherNumber.Text = String.Empty;
-            tbRegistryOwner2Email.Text = String.Empty;
-
-            rbOwnerStatus_Active.IsChecked = true;                   //STATUS Deixar como default o ACTIVE
-            unsavedChanges = false;
-        }
 
         //Registry -> Owner -> Button Exit Event
         private void btnRegistryOwnerExit_Click(object sender, RoutedEventArgs e)
@@ -491,7 +404,7 @@ namespace VeterinaryManagementSystem
                 switch (result)
                 {
                     case MessageBoxResult.No:
-                        OwnerForm_clearFields();
+                        RegistryOwner_clearFields_UnselectListView();
                         SwitchToTabHome();
                         break;
                     case MessageBoxResult.Cancel:
