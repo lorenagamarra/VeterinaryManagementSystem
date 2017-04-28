@@ -254,6 +254,7 @@ namespace VeterinaryManagementSystem
 
             rbOwnerStatus_Active.IsChecked = true;
             lvRegistryOwnerSearchResult.SelectedIndex = -1;
+            unsavedChanges = false;
         }
 
         //LOAD FIELDS FROM OWNERS LIST
@@ -410,7 +411,7 @@ namespace VeterinaryManagementSystem
                 MessageBox.Show(ex.Message);
             }
             refreshRegistryOwnerList();
-
+            unsavedChanges = false;
 
 
 
@@ -478,6 +479,7 @@ namespace VeterinaryManagementSystem
             tbRegistryOwner2Email.Text = String.Empty;
 
             rbOwnerStatus_Active.IsChecked = true;                   //STATUS Deixar como default o ACTIVE
+            unsavedChanges = false;
         }
 
         //Registry -> Owner -> Button Exit Event
@@ -507,11 +509,13 @@ namespace VeterinaryManagementSystem
         {
             var newWindow = new WebCamWindow();
             newWindow.Show();
+            unsavedChanges = true;
         }
         private void btnRegistryOwner2TakePicture_Click(object sender, RoutedEventArgs e)
         {
             var newWindow = new WebCamWindow();
             newWindow.Show();
+            unsavedChanges = true;
         }
 
         /******************************************************************************************
@@ -652,6 +656,7 @@ namespace VeterinaryManagementSystem
             {
                 MessageBox.Show(ex.Message);
             }
+            unsavedChanges = false;
         }
 
         private void ButtonAddNewAnimal_Click(object sender, RoutedEventArgs e)
@@ -702,6 +707,7 @@ namespace VeterinaryManagementSystem
             tbRegistryAnimalPhobias.Text = String.Empty;
             //FLAGSET.Items.Clear();                                            //CHECKBOXES FLAG SET
             tbRegistryAnimalVetHistory.Text = String.Empty;
+            unsavedChanges = false;
         }
 
         //TODO: Onde usar isso??? Verifica se o valor e nulo...
@@ -842,6 +848,7 @@ namespace VeterinaryManagementSystem
             {
                 MessageBox.Show(ex.Message);
             }
+            unsavedChanges = false;
         }
 
 
@@ -867,6 +874,7 @@ namespace VeterinaryManagementSystem
             cbRegistryEmployeePositions.Items.Clear();             //ComboBOX solucao que encontrei na internert para limpar item selecionado do elemento. certo??????
             dpRegistryEmployeeTerm.Text = null;   //Data no campo Data Registration????????????
             tbRegistryEmployeeObservations.Text = String.Empty;
+            unsavedChanges = false;
         }
 
         //Registry -> Employee -> Button Exit Event
