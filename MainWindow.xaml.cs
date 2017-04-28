@@ -66,7 +66,7 @@ namespace VeterinaryManagementSystem
         {
             InitializeComponent();
 
-            try
+           try
             {
                 dbAnimal = new AnimalDataAccess();
                 dbBreed = new BreedDataAccess();
@@ -77,10 +77,10 @@ namespace VeterinaryManagementSystem
                 dbVaccine = new VaccineDataAccess();
                 dbVaccineHistory = new VaccineHistoricDataAccess();
 
-
+                
 
                 lvRegistryOwnerSearchResult.ItemsSource = ownerList;
-
+                
                 //Add date on date fields
                 string strTODAY = Convert.ToString(DateTime.Now);
                 tbRegistryOwnerDateRegistration.Text = strTODAY;
@@ -101,7 +101,7 @@ namespace VeterinaryManagementSystem
                 servicesproductsBusiness = new ServicesProductsBusiness();
                 vaccineBusiness = new VaccineBusiness();
                 vaccinehistoricBusiness = new VaccineHistoricBusiness();
-
+                
 
                 BreedSpecieViewModel = new BreedSpecieViewModel();
                 BreedSpecieViewModel.Breeds = dbBreed.GetAllSpecieActives();
@@ -110,7 +110,7 @@ namespace VeterinaryManagementSystem
                 BreedNameViewModel = new BreedNameViewModel();
                 BreedNameViewModel.Breeds = dbBreed.GetAllBreedsActivesBySpecie();
                 cbRegistryAnimalBreeds.DataContext = BreedNameViewModel;
-
+                
 
                 //REFRESH LISTS
                 refreshBreedList();
@@ -125,7 +125,7 @@ namespace VeterinaryManagementSystem
                 MessageBox.Show("Error opening database connection: " + e.Message);
                 Environment.Exit(1);
             }
-
+            
         }
 
 
@@ -223,7 +223,7 @@ namespace VeterinaryManagementSystem
             tbRegistryOwnerDateRegistration.Text = DateTime.Now.ToString();
 
             //Owner 1
-            imgRegistryOwner1Image.Source = null;
+            imgRegistryOwner1Image.Source = null;                                 
             tbRegistryOwner1FName.Text = String.Empty;
             tbRegistryOwner1MName.Text = String.Empty;
             tbRegistryOwner1LName.Text = String.Empty;
@@ -231,7 +231,7 @@ namespace VeterinaryManagementSystem
             tbRegistryOwner1Address.Text = String.Empty;
             tbRegistryOwner1Complement.Text = String.Empty;
             tbRegistryOwner1City.Text = String.Empty;
-            cbRegistryOwner1Province.Items.Clear();
+            cbRegistryOwner1Province.Items.Clear();         
             tbRegistryOwner1PostalCode.Text = String.Empty;
             tbRegistryOwner1Phone.Text = String.Empty;
             tbRegistryOwner1OtherNumber.Text = String.Empty;
@@ -337,7 +337,7 @@ namespace VeterinaryManagementSystem
             encoder2.Frames.Add(BitmapFrame.Create((BitmapSource)imgRegistryOwner1Image.Source));
             encoder2.Save(memStream2);
 
-
+                       
             var id = 0;
             Int32.TryParse(tbRegistryOwnerID.Text, out id);
 
@@ -421,23 +421,13 @@ namespace VeterinaryManagementSystem
         private void btnRegistryOwner1TakePicture_Click(object sender, RoutedEventArgs e)
         {
             var newWindow = new WebCamWindow();
-            //newWindow.ShowDialog();
-            //unsavedChanges = true;
-
-            
-            if (newWindow.ShowDialog() == true)
-            {
-                imgRegistryOwner1Image.Source = ((WebCamWindow)Application.Current.MainWindow).imgCapture.Source;
-            }
-            
-
-
-
+            newWindow.Show();
+            unsavedChanges = true;
         }
         private void btnRegistryOwner2TakePicture_Click(object sender, RoutedEventArgs e)
         {
             var newWindow = new WebCamWindow();
-            newWindow.ShowDialog();
+            newWindow.Show();
             unsavedChanges = true;
         }
 
@@ -512,8 +502,7 @@ namespace VeterinaryManagementSystem
 
 
             //Atualizando Gender radiobutton de acordo com o Animal ????????????
-            //string verifyAnimalCkbGender = animal.Gender;
-            /*
+            string verifyAnimalCkbGender = animal.Gender;
             if (verifyAnimalCkbGender == "MALE")
             {
                 rbRegistryAnimalMale.IsChecked = true;
@@ -526,7 +515,7 @@ namespace VeterinaryManagementSystem
             }
 
             //Atualizando Status radiobutton de acordo com o Animal ????????????
-            //string verifyAnimalCkbStatus = animal.Status;
+            string verifyAnimalCkbStatus = animal.Status;
             if (verifyAnimalCkbStatus == "ACTIVE")
             {
                 rbAnimalStatus_Active.IsChecked = true;
@@ -537,7 +526,6 @@ namespace VeterinaryManagementSystem
                 rbAnimalStatus_Active.IsChecked = false;
                 rbAnimalStatus_Inactive.IsChecked = true;
             }
-            */
         }
 
 
@@ -705,7 +693,6 @@ namespace VeterinaryManagementSystem
             tbRegistryOwner1Email.Text = employee.Email;
 
 
-            /*
             string verifyOwnerCkbStatus = employee.Status;   //Atualizando Status radiobutton de acordo com o Owner ????????????
             if (verifyOwnerCkbStatus == "ACTIVE")
             {
@@ -717,7 +704,6 @@ namespace VeterinaryManagementSystem
                 rbOwnerStatus_Active.IsChecked = false;
                 rbOwnerStatus_Inactive.IsChecked = true;
             }
-            */
         }
 
         //Registry -> Owner -> Buttons Save/Add Record Event
@@ -764,7 +750,7 @@ namespace VeterinaryManagementSystem
                 OtherPhoneNumber_02 = tbRegistryOwner2OtherNumber.Text,
                 Email_02 = tbRegistryOwner2Email.Text,
 
-                //Status = gb_rb_OwnerStatus.Content.ToString()       //radio button group
+                Status = gb_rb_OwnerStatus.Content.ToString()       //radio button group
             };
 
             try
@@ -782,9 +768,6 @@ namespace VeterinaryManagementSystem
         //Registry -> Employee -> Method to clear the fields
         private void EmployeeForm_clearFields()
         {
-            //tabRegistryOwner.Chil
-
-
             tbRegistryEmployeeID.Text = String.Empty;
             imgRegistryEmployeeImage = null;                    //Limpar imagem????????????????????????????????????????????????
             tbRegistryEmployeeFName.Text = String.Empty;
@@ -906,7 +889,7 @@ namespace VeterinaryManagementSystem
                 rbTablesBreedsStatus_Inactive.IsChecked = true;
             }
         }
-
+        
         //ADD NEW BREED (clear fields and unselect list)
         private void btnTablesBreedsAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -935,7 +918,7 @@ namespace VeterinaryManagementSystem
             }
             refreshBreedList();
         }
-
+        
         //DELETE BREED
         private void btnTablesBreedsDelete_Click(object sender, RoutedEventArgs e)
         {
@@ -1009,7 +992,7 @@ namespace VeterinaryManagementSystem
                 return;
             }
 
-            SelectedVaccine = (Vaccine)lvTableRegisterVaccines.SelectedItem;
+            SelectedVaccine = (Vaccine) lvTableRegisterVaccines.SelectedItem;
 
             tbTablesVaccinesID.Text = SelectedVaccine.Id.ToString();
             tbTablesVaccinesName.Text = SelectedVaccine.Name;
@@ -1103,7 +1086,7 @@ namespace VeterinaryManagementSystem
                 lvTablesRegisterServicesProducts.ItemsSource = filteredList;
             }
         }
-
+        
         //REFRESH SERVICES & PRODUCTS LIST
         private void refreshServicesProductsList()
         {
@@ -1212,10 +1195,11 @@ namespace VeterinaryManagementSystem
             Home.IsSelected = true;
         }
 
-
+        
     }
 }
 
 
 
 
+            

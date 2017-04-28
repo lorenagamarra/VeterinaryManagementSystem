@@ -7,7 +7,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -51,7 +50,7 @@ namespace VeterinaryManagementSystem
         private void bntCapture_Click(object sender, RoutedEventArgs e)
         {
             imgCapture.Source = imgVideo.Source;
-            //((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner1Image.Source = imgVideo.Source;
+            ((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner1Image.Source = imgVideo.Source;
         }
 
         private void bntSaveImage_Click(object sender, RoutedEventArgs e)
@@ -67,9 +66,8 @@ namespace VeterinaryManagementSystem
                 ((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner2Image.Source = imgCapture.Source;
             }
             */
-            //((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner1Image.Source = imgCapture.Source;
-            DialogResult = true;
-         }
+            ((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner1Image.Source = imgCapture.Source;
+        }
 
         private void bntResolution_Click(object sender, RoutedEventArgs e)
         {
