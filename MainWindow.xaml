@@ -339,19 +339,20 @@
                                     </Grid.ColumnDefinitions>
                                     <!-- Column 0, Row 0, Cell 1-->
                                     <StackPanel Grid.Column="0" Margin="0,0,0,10">
-                                        <Grid Height="665">
+                                        <Grid Height="678">
                                             <Label Content="Search by Name or Phone Number" Margin="10,10,0,632" HorizontalAlignment="Left" Width="auto"/>
                                             <TextBox x:Name="tbRegistryOwnerSearch" Height="23" TextWrapping="Wrap" Margin="10,33,10,609" TextChanged="tbRegistryOwnerSearch_TextChanged"/>
-                                            <ListView Margin="10,61,10,10" x:Name="lvRegistryOwnerSearchResult" SelectionChanged="lvRegistryOwnerSearchResult_SelectionChanged">
+                                            <ListView Margin="10,68,10,41" x:Name="lvRegistryOwnerSearchResult" SelectionChanged="lvRegistryOwnerSearchResult_SelectionChanged">
                                                 <ListView.View>
                                                     <GridView>
                                                         <GridViewColumn DisplayMemberBinding="{Binding Path=FirstName_01}" Width="100" Header="Owner 1"/>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Path=Number_01}" Width="70" Header="Phone"/>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Path=PhoneNumber_01}" Width="70" Header="Phone"/>
                                                         <GridViewColumn DisplayMemberBinding="{Binding Path=FirstName_02}" Width="100" Header="Owner 2"/>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Path=Number_02}" Width="70" Header="Phone"/>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Path=PhoneNumber_02}" Width="70" Header="Phone"/>
                                                     </GridView>
                                                 </ListView.View>
                                             </ListView>
+                                            <Button Content="Add a new Owner" HorizontalAlignment="Left" Margin="138,648,0,0" VerticalAlignment="Top" Width="auto" Click="btnRegistryOwnerAdd_Click"/>
                                         </Grid>
                                     </StackPanel>
                                     <!-- Column 1, Row 0, Cell 1-->
@@ -406,7 +407,7 @@
                                                     <Label Content="Other Number" HorizontalAlignment="Left" Margin="112,187,0,0" VerticalAlignment="Top"/>
                                                     <TextBox TextChanged="tbOwnerTextChanged" x:Name="tbRegistryOwner1OtherNumber" HorizontalAlignment="Left" Height="23" Margin="112,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
                                                     <Border BorderBrush="Black" BorderThickness="1" Width="242" Height="182" Margin="451,10,10,0" VerticalAlignment="Top" Background="White">
-                                                        <Image x:Name="imgRegistryOwner1Image" Width="240" Height="180" Margin="0,0,0,0" VerticalAlignment="Top" Stretch="Fill"/>
+                                                        <Image x:Name="imgRegistryOwner1Image" Width="240" Height="180" Margin="0,0,0,0" VerticalAlignment="Top" Stretch="Fill" Source="Images\client2.png"/>
                                                     </Border>
                                                     <Label Content="Required Items" HorizontalAlignment="Left" Margin="11,2,0,0" VerticalAlignment="Top" FontStyle="Italic" Foreground="#FFFD0606"/>
                                                     <Label Content="*" HorizontalAlignment="Left" Margin="69,28,0,0" VerticalAlignment="Top" Foreground="#FFFD0606" FontWeight="Bold"/>
@@ -468,13 +469,12 @@
                                             <Button x:Name="btnRegistryOwnerSave" Click="btnRegistryOwnerSave_Click" Content="Save Record" HorizontalAlignment="Left" Margin="387,632,0,0" VerticalAlignment="Top" Width="162" Height="30"/>
                                             <Button x:Name="btnRegistryOwnerExit" Click="btnRegistryOwnerExit_Click" Content="Exit" HorizontalAlignment="Left" Margin="554,632,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
 
-                                            <GroupBox Name="gb_rb_OwnerStatus" Header="Status" Width="100" Margin="615,10,10,603" IsHitTestVisible="False">
+                                            <GroupBox Name="gb_rb_OwnerStatus" Header="Status" Width="100" Margin="615,10,10,603">
                                                 <StackPanel>
                                                     <RadioButton Name="rbOwnerStatus_Active" Content="Active" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusOwner" IsChecked="True"/>
                                                     <RadioButton Name="rbOwnerStatus_Inactive" Content="Inactive" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" GroupName="StatusOwner" Height="18"/>
                                                 </StackPanel>
                                             </GroupBox>
-
                                         </Grid>
                                     </StackPanel>
                                     <GridSplitter Grid.Column="1" Background="Gray" Width="2" Margin="0,0,402,0" />
@@ -622,7 +622,7 @@
                                         <Grid Height="680">
                                             <Label Content="Search for Employee Name or ID" Margin="10,10,0,642" HorizontalAlignment="Left" Width="auto"/>
                                             <TextBox  x:Name="tbRegistryEmployeeSearch" Height="23" TextWrapping="Wrap" Margin="10,38,10,619" TextChanged="tbRegistryEmployeeSearch_TextChanged"/>
-                                            <ListView Margin="10,66,10,10" x:Name="lvRegistryEmployeeSearchResult" SelectionChanged="lvRegistryEmployeeSearchResult_SelectionChanged">
+                                            <ListView Margin="10,66,10,32" x:Name="lvRegistryEmployeeSearchResult" SelectionChanged="lvRegistryEmployeeSearchResult_SelectionChanged">
                                                 <ListView.View>
                                                     <GridView>
                                                         <GridViewColumn DisplayMemberBinding="{Binding ID}" Width="45" Header="ID"/>
@@ -630,6 +630,7 @@
                                                     </GridView>
                                                 </ListView.View>
                                             </ListView>
+                                            <Button Content="Add a new Employee" HorizontalAlignment="Left" Margin="125,653,0,0" VerticalAlignment="Top" Width="auto" Click="btnRegistryEmployeeAdd_Click"/>
                                         </Grid>
                                     </StackPanel>
                                     <!-- Column 1, Row 0, Cell 1-->
