@@ -28,8 +28,6 @@ namespace VeterinaryManagementSystem.Classes
 
         public decimal Weight { get; set; }
 
-        public string Specie { get; set; }
-
         public string Identification { get; set; }
 
         public string Food { get; set; }

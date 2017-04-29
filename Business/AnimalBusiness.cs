@@ -55,11 +55,6 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Animal can not have more than 400 pounds");
             }
 
-            if (String.IsNullOrEmpty(animal.Specie))
-            {
-                throw new Exception("Animal must have an specie");
-            }
-
             if ((!String.IsNullOrEmpty(animal.Identification)))
             {
                 if (animal.Identification.Length < 2 || animal.Identification.Length > 50)

@@ -24,8 +24,8 @@ namespace VeterinaryManagementSystem.DataAccess
             using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                var sql = @"INSERT INTO TBLANIMAL (PICTURE, OWNERID, BREEDID, VACHISTID, DATEREG, NAME, GENDER, DATEOFBIRTH, WEIGHT, SPECIE, IDENTIFICATION, FOOD, PHOBIA, FLAGSET, VETHISTORIC, STATUS)
-                          VALUES (@Picture, @OwnerID, @BreedID, @VachistID, @Datereg, @Name, @Gender, @Dateofbirth, @Weight, @Specie, @Identification, @Food, @Phobia, @Flagset, @Vethistoric, @Status)";
+                var sql = @"INSERT INTO TBLANIMAL (PICTURE, OWNERID, BREEDID, VACHISTID, DATEREG, NAME, GENDER, DATEOFBIRTH, WEIGHT, IDENTIFICATION, FOOD, PHOBIA, FLAGSET, VETHISTORIC, STATUS)
+                          VALUES (@Picture, @OwnerID, @BreedID, @VachistID, @Datereg, @Name, @Gender, @Dateofbirth, @Weight, @Identification, @Food, @Phobia, @Flagset, @Vethistoric, @Status)";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -38,7 +38,6 @@ namespace VeterinaryManagementSystem.DataAccess
                     command.Parameters.Add(new SqlParameter("@Gender", animal.Gender));
                     command.Parameters.Add(new SqlParameter("@Dateofbirth", animal.Dateofbirth));
                     command.Parameters.Add(new SqlParameter("@Weight", animal.Weight));
-                    command.Parameters.Add(new SqlParameter("@Specie", animal.Specie));
                     command.Parameters.Add(new SqlParameter("@Identification", animal.Identification));
                     command.Parameters.Add(new SqlParameter("@Food", animal.Food));
                     command.Parameters.Add(new SqlParameter("@Phobia", animal.Phobia));
@@ -56,7 +55,7 @@ namespace VeterinaryManagementSystem.DataAccess
             using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                var sql = @"UPDATE TBLANIMAL SET PICTURE=@Picture, OWNERID=@OwnerID, BREEDID=@BreedID, VACHISTID=@VachistID, NAME=@Name, GENDER=@Gender, DATEOFBIRTH=@Dateofbirth, WEIGHT=@Weight, SPECIE=@Specie, IDENTIFICATION=@Identification, FOOD=@Food, PHOBIA=@Phobia, FLAGSET=@Flagset, VETHISTORIC=@Vethistoric, STATUS=@Status WHERE ID=@Id";
+                var sql = @"UPDATE TBLANIMAL SET PICTURE=@Picture, OWNERID=@OwnerID, BREEDID=@BreedID, VACHISTID=@VachistID, NAME=@Name, GENDER=@Gender, DATEOFBIRTH=@Dateofbirth, WEIGHT=@Weight, IDENTIFICATION=@Identification, FOOD=@Food, PHOBIA=@Phobia, FLAGSET=@Flagset, VETHISTORIC=@Vethistoric, STATUS=@Status WHERE ID=@Id";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -69,7 +68,6 @@ namespace VeterinaryManagementSystem.DataAccess
                     command.Parameters.Add(new SqlParameter("@Gender", animal.Gender));
                     command.Parameters.Add(new SqlParameter("@Dateofbirth", animal.Dateofbirth));
                     command.Parameters.Add(new SqlParameter("@Weight", animal.Weight));
-                    command.Parameters.Add(new SqlParameter("@Specie", animal.Specie));
                     command.Parameters.Add(new SqlParameter("@Identification", animal.Identification));
                     command.Parameters.Add(new SqlParameter("@Food", animal.Food));
                     command.Parameters.Add(new SqlParameter("@Phobia", animal.Phobia));
@@ -125,7 +123,6 @@ namespace VeterinaryManagementSystem.DataAccess
                         Boolean gender = (Boolean)reader["Gender"];
                         DateTime dateofbirth = (DateTime)reader["Dateofbirth"];
                         decimal weight = (decimal)reader["Weight"];
-                        string specie = (string)reader["Specie"];
                         string identification = (string)reader["Identification"];
                         string food = (string)reader["Food"];
                         string phobia = (string)reader["Phobia"];
@@ -145,7 +142,6 @@ namespace VeterinaryManagementSystem.DataAccess
                             Gender = gender,
                             Dateofbirth = dateofbirth,
                             Weight = weight,
-                            Specie = specie,
                             Identification = identification,
                             Food = food,
                             Phobia = phobia,
@@ -184,7 +180,6 @@ namespace VeterinaryManagementSystem.DataAccess
                         Boolean gender = (Boolean)reader["Gender"];
                         DateTime dateofbirth = (DateTime)reader["Dateofbirth"];
                         decimal weight = (decimal)reader["Weight"];
-                        string specie = (string)reader["Specie"];
                         string identification = (string)reader["Identification"];
                         string food = (string)reader["Food"];
                         string phobia = (string)reader["Phobia"];
@@ -204,7 +199,6 @@ namespace VeterinaryManagementSystem.DataAccess
                             Gender = gender,
                             Dateofbirth = dateofbirth,
                             Weight = weight,
-                            Specie = specie,
                             Identification = identification,
                             Food = food,
                             Phobia = phobia,
