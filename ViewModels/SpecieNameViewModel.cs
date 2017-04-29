@@ -7,8 +7,8 @@ using VeterinaryManagementSystem.Classes;
 
 namespace VeterinaryManagementSystem.ViewModels
 {
-    public class BreedSpecieViewModel
+    class SpecieNameViewModel
     {
-        public List<Breed> Breeds { get; set; } 
+        public List<Specie> Specie { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace VeterinaryManagementSystem.DataAccess
             using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                var sql = "INSERT INTO TBLSERVICES&PRODUCTS (NAME, PRICE, STATUS) VALUES (@Name, @Price, @Status)";
+                var sql = "INSERT INTO TBLSERVICESPRODUCTS (NAME, PRICE, STATUS) VALUES (@Name, @Price, @Status)";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -43,7 +43,7 @@ namespace VeterinaryManagementSystem.DataAccess
             using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                var sql = "UPDATE TBLSERVICES&PRODUCTS SET NAME=@Name, PRICE=@Price, STATUS=@Status WHERE ID=@Id";
+                var sql = "UPDATE TBLSERVICESPRODUCTS SET NAME=@Name, PRICE=@Price, STATUS=@Status WHERE ID=@Id";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -62,7 +62,7 @@ namespace VeterinaryManagementSystem.DataAccess
             using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                var sql = "DELETE FROM TBLSERVICES&PRODUCTS WHERE ID=@Id";
+                var sql = "DELETE FROM TBLSERVICESPRODUCTS WHERE ID=@Id";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -81,7 +81,7 @@ namespace VeterinaryManagementSystem.DataAccess
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("SELECT * FROM TBLSERVICES&PRODUCTS WHERE STATUS=1", connection))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM TBLSERVICESPRODUCTS WHERE STATUS=1", connection))
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -112,7 +112,7 @@ namespace VeterinaryManagementSystem.DataAccess
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("SELECT * FROM TBLSERVICES&PRODUCTS", connection))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM TBLSERVICESPRODUCTS", connection))
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())

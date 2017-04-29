@@ -29,6 +29,7 @@ namespace VeterinaryManagementSystem
     {
         AnimalDataAccess dbAnimal;
         BreedDataAccess dbBreed;
+        SpecieDataAccess dbSpecie;
         ConsultationDataAccess dbConsultation;
         EmployeeDataAccess dbEmployee;
         OwnerDataAccess dbOwner;
@@ -36,8 +37,11 @@ namespace VeterinaryManagementSystem
         VaccineDataAccess dbVaccine;
         VaccineHistoricDataAccess dbVaccineHistory;
 
+        private List<Specie> allSpecie;
+
         List<Animal> animalList = new List<Animal>();
         List<Breed> breedList = new List<Breed>();
+        List<Specie> specieList = new List<Specie>();
         List<Consultation> consultationList = new List<Consultation>();
         List<Employee> employeeList = new List<Employee>();
         List<Owner> ownerList = new List<Owner>();
@@ -47,9 +51,9 @@ namespace VeterinaryManagementSystem
 
         private bool unsavedChanges = false;
 
-
         private AnimalBusiness animalBusiness;
         private BreedBusiness breedBusiness;
+        private SpecieBusiness specieBusiness;
         private ConsultationBusiness consultationBusiness;
         private EmployeeBusiness employeeBusiness;
         private OwnerBusiness ownerBusiness;
@@ -57,9 +61,7 @@ namespace VeterinaryManagementSystem
         private VaccineBusiness vaccineBusiness;
         private VaccineHistoricBusiness vaccinehistoricBusiness;
 
-
-
-        private BreedSpecieViewModel BreedSpecieViewModel { get; set; }
+        private SpecieNameViewModel SpecieNameViewModel { get; set; }
         private BreedNameViewModel BreedNameViewModel { get; set; }
 
         public MainWindow()
@@ -70,6 +72,7 @@ namespace VeterinaryManagementSystem
             {
                 dbAnimal = new AnimalDataAccess();
                 dbBreed = new BreedDataAccess();
+                dbSpecie = new SpecieDataAccess();
                 dbConsultation = new ConsultationDataAccess();
                 dbEmployee = new EmployeeDataAccess();
                 dbOwner = new OwnerDataAccess();
@@ -77,7 +80,9 @@ namespace VeterinaryManagementSystem
                 dbVaccine = new VaccineDataAccess();
                 dbVaccineHistory = new VaccineHistoricDataAccess();
 
-                
+                allSpecie = dbSpecie.GetAllSpecieActives();
+
+
 
                 lvRegistryOwnerSearchResult.ItemsSource = ownerList;
                 
@@ -95,25 +100,28 @@ namespace VeterinaryManagementSystem
 
                 animalBusiness = new AnimalBusiness();
                 breedBusiness = new BreedBusiness();
+                specieBusiness = new SpecieBusiness();
                 consultationBusiness = new ConsultationBusiness();
                 employeeBusiness = new EmployeeBusiness();
                 ownerBusiness = new OwnerBusiness();
                 servicesproductsBusiness = new ServicesProductsBusiness();
                 vaccineBusiness = new VaccineBusiness();
                 vaccinehistoricBusiness = new VaccineHistoricBusiness();
-                
 
-                BreedSpecieViewModel = new BreedSpecieViewModel();
-                BreedSpecieViewModel.Breeds = dbBreed.GetAllSpecieActives();
-                cbRegistryAnimalSpecies.DataContext = BreedSpecieViewModel;
+                
+                SpecieNameViewModel = new SpecieNameViewModel();
+                SpecieNameViewModel.Specie = dbSpecie.GetAllSpecieActives();
+                cbRegistryAnimalSpecies.DataContext = SpecieNameViewModel;
+                cbTablesBreedsSpecies.DataContext = SpecieNameViewModel;
 
                 BreedNameViewModel = new BreedNameViewModel();
-                BreedNameViewModel.Breeds = dbBreed.GetAllBreedsActivesBySpecie();
+                BreedNameViewModel.Breeds = dbBreed.GetAllBreedActives();
                 cbRegistryAnimalBreeds.DataContext = BreedNameViewModel;
                 
 
                 //REFRESH LISTS
                 refreshBreedList();
+                refreshSpecieList();
                 refreshVaccineList();
                 refreshServicesProductsList();
                 refreshRegistryOwnerList();
@@ -855,6 +863,7 @@ namespace VeterinaryManagementSystem
                 var filteredList = from breed in list where breed.Name.ToLower().Contains(filter) select breed;
                 lvTableRegisterBreeds.ItemsSource = filteredList;
             }
+            refreshBreedList();
         }
 
         //REFRESH BREED LIST
@@ -868,7 +877,7 @@ namespace VeterinaryManagementSystem
         {
             tbTablesBreedSearch.Text = String.Empty;
             tbTablesBreedsID.Text = String.Empty;
-            tbTablesBreedsSpecies.Text = String.Empty;
+            cbTablesBreedsSpecies.DataContext = SpecieNameViewModel;
             tbTablesBreedsName.Text = String.Empty;
             rbTablesBreedsStatus_Active.IsChecked = true;
             lvTableRegisterBreeds.SelectedIndex = -1;
@@ -887,7 +896,7 @@ namespace VeterinaryManagementSystem
 
             tbTablesBreedsID.Text = SelectedBreed.Id.ToString();
             tbTablesBreedsName.Text = SelectedBreed.Name;
-            tbTablesBreedsSpecies.Text = SelectedBreed.Specie;
+            cbTablesBreedsSpecies.SelectedItem = allSpecie[0];       //Carregar combobox com valor salvo na tblBreed (SpecieID)
 
             if (SelectedBreed.Status)
             {
@@ -897,12 +906,14 @@ namespace VeterinaryManagementSystem
             {
                 rbTablesBreedsStatus_Inactive.IsChecked = true;
             }
+            refreshBreedList();
         }
         
         //ADD NEW BREED (clear fields and unselect list)
         private void btnTablesBreedsAdd_Click(object sender, RoutedEventArgs e)
         {
             TableBreeds_clearFields_UnselectListView();
+            refreshBreedList();
         }
 
         //SAVE(Add/Update) BREED
@@ -913,7 +924,7 @@ namespace VeterinaryManagementSystem
 
             SelectedBreed.Id = id;
             SelectedBreed.Name = tbTablesBreedsName.Text;
-            SelectedBreed.Specie = tbTablesBreedsSpecies.Text;
+            SelectedBreed.SpecieID = cbTablesBreedsSpecies.SelectedIndex;                    
             SelectedBreed.Status = rbTablesBreedsStatus_Active.IsChecked.Value;
 
             try
@@ -936,16 +947,132 @@ namespace VeterinaryManagementSystem
             {
                 return;
             }
-            Breed breed = (Breed)lvTableRegisterBreeds.Items[index];
+            SelectedBreed = (Breed)lvTableRegisterBreeds.SelectedItem;
             try
             {
-                breedBusiness.Delete(breed);
+                breedBusiness.Delete(SelectedBreed);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
             refreshBreedList();
+        }
+
+
+        /******************************************************************************************
+        * SECONDARY TABLES > SPECIES
+        ******************************************************************************************/
+        private Specie SelectedSpecie = new Specie();
+        
+        private string FindSpecieNameById(int Id)
+        {
+            var result = from specie in allSpecie where specie.Id == Id select specie.SpecieName;
+            return result.First();
+        }
+        
+        //LINQ - SEARCH ALL SPECIES
+        private void tbTablesSpecieSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string filter = tbTablesSpeciesSearch.Text.ToLower();
+            if (filter == "")
+            {
+                lvTableRegisterSpecies.ItemsSource = dbSpecie.GetAllSpecies();
+            }
+            else
+            {
+                List<Specie> list = dbSpecie.GetAllSpecies();
+                var filteredList = from specie in list where specie.SpecieName.ToLower().Contains(filter) select specie;
+                lvTableRegisterSpecies.ItemsSource = filteredList;
+            }
+        }
+
+        //REFRESH SPECIES LIST
+        private void refreshSpecieList()
+        {
+            lvTableRegisterSpecies.ItemsSource = dbSpecie.GetAllSpecies();
+        }
+
+        //CLEAR FIELDS AND UNSELECT LISTVIEW
+        private void TableSpecies_clearFields_UnselectListView()
+        {
+            tbTablesSpeciesSearch.Text = String.Empty;
+            tbTablesSpeciesID.Text = String.Empty;
+            tbTablesSpeciesName.Text = String.Empty;
+            rbTablesSpeciesStatus_Active.IsChecked = true;
+            lvTableRegisterSpecies.SelectedIndex = -1;
+        }
+
+        //LOAD FIELDS FROM SPECIES LIST
+        private void lvTableRegisterSpecies_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = lvTableRegisterSpecies.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+
+            SelectedSpecie = (Specie)lvTableRegisterSpecies.SelectedItem;
+
+            tbTablesSpeciesID.Text = SelectedSpecie.Id.ToString();
+            tbTablesSpeciesName.Text = SelectedSpecie.SpecieName;
+
+            if (SelectedSpecie.Status)
+            {
+                rbTablesSpeciesStatus_Active.IsChecked = true;
+            }
+            else
+            {
+                rbTablesSpeciesStatus_Inactive.IsChecked = true;
+            }
+        }
+
+        //ADD NEW SPECIES (clear fields and unselect list)
+        private void btnTablesSpeciesAdd_Click(object sender, RoutedEventArgs e)
+        {
+            TableSpecies_clearFields_UnselectListView();
+        }
+
+        //SAVE(Add/Update) SPECIES
+        private void btnTablesSpeciesSave_Click(object sender, RoutedEventArgs e)
+        {
+            var id = 0;
+            Int32.TryParse(tbTablesSpeciesID.Text, out id);
+
+            SelectedSpecie.Id = id;
+            SelectedSpecie.SpecieName = tbTablesSpeciesName.Text;
+            SelectedSpecie.Status = rbTablesSpeciesStatus_Active.IsChecked.Value;
+
+            try
+            {
+                specieBusiness.Save(SelectedSpecie);
+                SelectedSpecie = new Specie();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            refreshSpecieList();
+        }
+
+        //DELETE SPECIES
+        private void btnTablesSpeciesDelete_Click(object sender, RoutedEventArgs e)
+        {
+            int index = lvTableRegisterSpecies.SelectedIndex;
+            if (index < 0)
+            {
+                return;
+            }
+            SelectedSpecie = (Specie)lvTableRegisterSpecies.SelectedItem;
+            try
+            {
+                specieBusiness.Delete(SelectedSpecie);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            refreshSpecieList();
         }
 
 
@@ -1029,7 +1156,7 @@ namespace VeterinaryManagementSystem
         private void btnTablesVaccinesSave_Click(object sender, RoutedEventArgs e)
         {
             var id = 0;
-            Int32.TryParse(tbTablesBreedsID.Text, out id);
+            Int32.TryParse(tbTablesVaccinesID.Text, out id);
 
             Decimal price = 0;
             Decimal.TryParse(tbTablesVaccinesPrice.Text, out price);

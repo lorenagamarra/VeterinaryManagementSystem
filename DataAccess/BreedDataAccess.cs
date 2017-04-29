@@ -25,11 +25,11 @@ namespace VeterinaryManagementSystem.DataAccess
             using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                var sql = "INSERT INTO TBLBREED (SPECIE, NAME, STATUS) VALUES (@Specie, @Name, @Status)";
+                var sql = "INSERT INTO TBLBREED (SPECIEID, NAME, STATUS) VALUES (@SpecieID, @Name, @Status)";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
-                    command.Parameters.Add(new SqlParameter("@Specie", breed.Specie));
+                    command.Parameters.Add(new SqlParameter("@SpecieID", breed.SpecieID));
                     command.Parameters.Add(new SqlParameter("@Name", breed.Name));
                     command.Parameters.Add(new SqlParameter("@Status", breed.Status));
                     command.ExecuteNonQuery();
@@ -43,12 +43,12 @@ namespace VeterinaryManagementSystem.DataAccess
             using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                var sql = "UPDATE TBLBREED SET SPECIE=@Specie, NAME=@Name, STATUS=@Status  WHERE ID=@Id";
+                var sql = "UPDATE TBLBREED SET SPECIEID=@SpecieID, NAME=@Name, STATUS=@Status  WHERE ID=@Id";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     command.Parameters.Add(new SqlParameter("@Id", breed.Id));
-                    command.Parameters.Add(new SqlParameter("@Specie", breed.Specie));
+                    command.Parameters.Add(new SqlParameter("@SpecieID", breed.SpecieID));
                     command.Parameters.Add(new SqlParameter("@Name", breed.Name));
                     command.Parameters.Add(new SqlParameter("@Status", breed.Status));
                     command.ExecuteNonQuery();
@@ -73,7 +73,7 @@ namespace VeterinaryManagementSystem.DataAccess
             } //close and dispose --> connection
         }
 
-        public List<Breed> GetAllSpecieActives()
+        public List<Breed> GetAllBreedActives()
         {
             var result = new List<Breed>();
 
@@ -82,16 +82,16 @@ namespace VeterinaryManagementSystem.DataAccess
             {
                 connection.Open();
               
-                using (SqlCommand command = new SqlCommand("SELECT DISTINCT SPECIE FROM TBLBREED WHERE STATUS=1", connection))
+                using (SqlCommand command = new SqlCommand("SELECT DISTINCT NAME FROM TBLBREED WHERE STATUS=1", connection))
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        string specie = (string)reader["Specie"];
+                        string name = (string)reader["Name"];
 
                         var breed = new Breed
                         {
-                            Specie = specie
+                            Name = name,
                         };
                         result.Add(breed);
                     }
@@ -99,7 +99,8 @@ namespace VeterinaryManagementSystem.DataAccess
             } //close and dispose --> connection
             return result;
         }
-
+        
+        /*
         public List<Breed> GetAllBreedsActivesBySpecie()
         {
             var result = new List<Breed>();
@@ -108,12 +109,12 @@ namespace VeterinaryManagementSystem.DataAccess
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("SELECT * FROM TBLBREED WHERE STATUS=1 AND SPECIE=@Specie", connection))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM TBLBREED WHERE STATUS=1 AND SPECIEID=@SpecieID", connection))
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        string specie = (string)reader["Specie"];
+                        int specieID = (int)reader["SpecieID"];
                         string name = (string)reader["Name"];
 
                         var breed = new Breed
@@ -126,7 +127,7 @@ namespace VeterinaryManagementSystem.DataAccess
             }
             return result;
         }
-
+        */
 
         public List<Breed> GetAllBreeds()
         {
@@ -142,7 +143,7 @@ namespace VeterinaryManagementSystem.DataAccess
                     while (reader.Read())
                     {
                         int id = (int)reader["Id"];
-                        string specie = (string)reader["Specie"];
+                        int specieID = (int)reader["SpecieID"];
                         string name = (string)reader["Name"];
                         Boolean status = (Boolean)reader["Status"];
 
@@ -150,7 +151,7 @@ namespace VeterinaryManagementSystem.DataAccess
                         {
                             Id = id,
                             Name = name,
-                            Specie = specie,
+                            SpecieID = specieID,
                             Status = status
                         };
                         result.Add(breed);
@@ -159,5 +160,40 @@ namespace VeterinaryManagementSystem.DataAccess
             }
             return result;
         }
+
+        public List<Breed> FindBreedsByID()
+        {
+            var result = new List<Breed>();
+
+            using (connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("SELECT * FROM TBLBREED WHERE ID=@Id", connection))
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int id = (int)reader["Id"];
+                        int specieID = (int)reader["SpecieID"];
+                        string name = (string)reader["Name"];
+                        Boolean status = (Boolean)reader["Status"];
+
+                        var breed = new Breed
+                        {
+                            Id = id,
+                            Name = name,
+                            SpecieID = specieID,
+                            Status = status
+                        };
+                        result.Add(breed);
+                    }
+                }
+            }
+            return result;
+        }
+
+
+
     }
 }

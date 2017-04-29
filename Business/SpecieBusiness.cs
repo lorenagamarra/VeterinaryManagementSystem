@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,58 +9,53 @@ using VeterinaryManagementSystem.DataAccess;
 
 namespace VeterinaryManagementSystem.Business
 {
-    class BreedBusiness
+    class SpecieBusiness
     {
-        private BreedDataAccess dataAccess;
+        private SpecieDataAccess dataAccess;
 
-        public BreedBusiness()
+        public SpecieBusiness()
         {
-            this.dataAccess = new BreedDataAccess();
+            this.dataAccess = new SpecieDataAccess();
         }
 
 
-        public void Save(Breed breed)
+        public void Save(Specie specie)
         {
-            if (breed == null)
+            if (specie == null)
             {
-                throw new Exception("Breed is null");
+                throw new Exception("Specie is null");
             }
 
-            if (breed.SpecieID == 0)
+            if (specie.SpecieName.Length > 15)
             {
-                throw new Exception("Breed Specie must be selected");
-            }
-            
-            if (breed.Name.Length < 2 || breed.Name.Length > 20)
-            {
-                throw new Exception("Breed Name must be 2-20 characters long");
+                throw new Exception("Specie Name must be 2-15 characters long");
             }
 
-            if (breed.Id == 0)
+            if (specie.Id == 0)
             {
-                Insert(breed);
+                Insert(specie);
             }
             else
             {
-                Update(breed);
+                Update(specie);
             }
         }
 
-        public void Insert(Breed breed)
+        public void Insert(Specie specie)
         {
-            dataAccess.Add(breed);
+            dataAccess.Add(specie);
         }
 
-        public void Update(Breed breed)
+        public void Update(Specie specie)
         {
-            dataAccess.Update(breed);
+            dataAccess.Update(specie);
         }
 
-        public void Delete(Breed breed)
+        public void Delete(Specie specie)
         {
             try
             {
-                dataAccess.Delete(breed);
+                dataAccess.Delete(specie);
             }
             catch (InvalidOperationException)
             {

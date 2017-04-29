@@ -753,7 +753,7 @@
                                 <Button x:Name="btnTablesSpeciesSave" Content="Save" HorizontalAlignment="Left" Margin="908,204,0,0" VerticalAlignment="Top" Width="74" Click="btnTablesSpeciesSave_Click" RenderTransformOrigin="0.709,0.6"/>
                                 <Button x:Name="btnTablesSpeciesDelete" Content="Delete" HorizontalAlignment="Left" Margin="1014,204,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesSpeciesDelete_Click"/>
                                 <Label Content="Search for Specie Name" Margin="10,10,0,639" HorizontalAlignment="Left" Width="auto"/>
-                                <TextBox x:Name="tbTablesSpeciesSearch" Height="23" TextWrapping="Wrap" Margin="10,38,790,616" TextChanged="tbTablesSpeciesSearch_TextChanged" />
+                                <TextBox x:Name="tbTablesSpeciesSearch" Height="23" TextWrapping="Wrap" Margin="10,38,790,616" TextChanged="tbTablesSpecieSearch_TextChanged" />
                             </Grid>
                         </TabItem>
 
@@ -763,7 +763,7 @@
                                     <ListView.View>
                                         <GridView>
                                             <GridViewColumn DisplayMemberBinding="{Binding Id}" Width="60" Header="ID"/>
-                                            <GridViewColumn DisplayMemberBinding="{Binding Specie}" Width="130" Header="Specie"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding SpecieID}" Width="130" Header="Specie"/>
                                             <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="250" Header="Name"/>
                                             <GridViewColumn DisplayMemberBinding="{Binding Status}" Width="70" Header="Status"/>
                                         </GridView>
@@ -778,7 +778,7 @@
                                 <Label Content="ID" HorizontalAlignment="Left" Margin="790,86,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.614,0.865"/>
                                 <TextBox x:Name="tbTablesBreedsID" HorizontalAlignment="Left" Height="23" Margin="790,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" IsEnabled="False"/>
                                 <Label Content="Specie" HorizontalAlignment="Left" Margin="849,86,0,0" VerticalAlignment="Top"/>
-                                <ComboBox x:Name="cbTablesBreedsSpecies" HorizontalAlignment="Left" Margin="849,117,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
+                                <ComboBox x:Name="cbTablesBreedsSpecies" HorizontalAlignment="Left" Margin="849,117,0,0" VerticalAlignment="Top" Width="120" Height="23" ItemsSource="{Binding Path=Specie}" DisplayMemberPath="SpecieName"/>
                                 <Label Content="Name" HorizontalAlignment="Left" Margin="790,145,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="tbTablesBreedsName" HorizontalAlignment="Left" Height="23" Margin="790,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="299" RenderTransformOrigin="0.577,1.065"/>
                                 <Button x:Name="btnTablesBreedsAddNew" Content="Add New" HorizontalAlignment="Left" Margin="790,204,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesBreedsAdd_Click"/>

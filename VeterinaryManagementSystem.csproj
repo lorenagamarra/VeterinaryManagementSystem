@@ -72,12 +72,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Business\SpecieBusiness.cs" />
+    <Compile Include="Classes\Specie.cs" />
+    <Compile Include="DataAccess\SpecieDataAccess.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="UnitTests\ServicesProductsUnitTest.cs" />
     <Compile Include="UnitTests\VaccineHistoricUnitTest.cs" />
     <Compile Include="UnitTests\VaccineUnitTest.cs" />
     <Compile Include="ViewModels\BreedNameViewModel.cs" />
-    <Compile Include="ViewModels\BreedSpecieViewModel.cs" />
+    <Compile Include="ViewModels\SpecieNameViewModel.cs" />
     <Compile Include="WebCam.cs" />
     <Compile Include="WebCamWindow.xaml.cs">
       <DependentUpon>WebCamWindow.xaml</DependentUpon>
