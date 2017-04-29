@@ -24,7 +24,7 @@ namespace VeterinaryManagementSystem.DataAccess
             using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                var sql = "INSERT INTO TBLEMPLOYEE (PICTURE, FIRSTNAME, MIDDLETNAME, LASTNAME, NUMBER, ADDRESS, COMPLEMENT, CITY," +
+                var sql = "INSERT INTO TBLEMPLOYEE (PICTURE, FIRSTNAME, MIDDLENAME, LASTNAME, NUMBER, ADDRESS, COMPLEMENT, CITY," +
                     " PROVINCE, POSTALCODE, PHONENUMBER, OTHERPHONENUMBER, EMAIL, HIREDATE, TERMDATE, SIN, POSITION, OBSERVATIONS, STATUS)" +
                 " VALUES (@Picture, @FirstName, @MiddleName, @LastName, @Number, @Address, @Complement, @City," +
                 " @Province, @PostalCode, @PhoneNumber, @OtherPhoneNumber, @Email, @HireDate, @TermDate, @SIN, @Position, @Observations, @Status)";
@@ -33,7 +33,7 @@ namespace VeterinaryManagementSystem.DataAccess
                 {
                     command.Parameters.Add(new SqlParameter("@Picture", employee.Picture));
                     command.Parameters.Add(new SqlParameter("@FirstName", employee.FirstName));
-                    command.Parameters.Add(new SqlParameter("@MiddletName", employee.MiddleName));
+                    command.Parameters.Add(new SqlParameter("@MiddleName", employee.MiddleName));
                     command.Parameters.Add(new SqlParameter("@LastName", employee.LastName));
                     command.Parameters.Add(new SqlParameter("@Number", employee.Number));
                     command.Parameters.Add(new SqlParameter("@Address", employee.Address));
@@ -61,7 +61,7 @@ namespace VeterinaryManagementSystem.DataAccess
             using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                var sql = "UPDATE TBLEMPLOYEE SET PICTURE=@Picture, FIRSTNAME=@FirstName, MIDDLETNAME=@MiddleName, LASTNAME=@LastName," +
+                var sql = "UPDATE TBLEMPLOYEE SET PICTURE=@Picture, FIRSTNAME=@FirstName, MIDDLENAME=@MiddleName, LASTNAME=@LastName," +
                     " NUMBER=@Number, ADDRESS=@Address, COMPLEMENT=@Complement, CITY=@City, PROVINCE=@Province, POSTALCODE=@PostalCode," +
                     " PHONENUMBER=@PhoneNumber, OTHERPHONENUMBER=@OtherPhoneNumber, EMAIL=@Email, HIREDATE=@HireDate, TERMDATE=@TermDate," +
                     " SIN=@SIN, POSITION=@Position, OBSERVATIONS=@Observations, STATUS=@Status WHERE ID=@Id";
@@ -71,7 +71,7 @@ namespace VeterinaryManagementSystem.DataAccess
                     command.Parameters.Add(new SqlParameter("@Id", employee.Id));
                     command.Parameters.Add(new SqlParameter("@Picture", employee.Picture));
                     command.Parameters.Add(new SqlParameter("@FirstName", employee.FirstName));
-                    command.Parameters.Add(new SqlParameter("@MiddletName", employee.MiddleName));
+                    command.Parameters.Add(new SqlParameter("@MiddleName", employee.MiddleName));
                     command.Parameters.Add(new SqlParameter("@LastName", employee.LastName));
                     command.Parameters.Add(new SqlParameter("@Number", employee.Number));
                     command.Parameters.Add(new SqlParameter("@Address", employee.Address));

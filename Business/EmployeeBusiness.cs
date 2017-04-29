@@ -22,10 +22,9 @@ namespace VeterinaryManagementSystem.Business
         public void Save(Employee employee)
         {
             // regular expressions
-            Regex postalcode = new Regex(@"^([a-zA-Z]\d){ 3}$");
-            Regex phone = new Regex(@"^[0-9]{ 10}$");
-            Regex email = new Regex(@"^([a-zA-Z0-9_-.]{2,30})@([a-zA-Z0-9]{2,15})+\.+[a-zA-Z]{2,5}$");
-            Regex sin = new Regex(@"([0-9]{ 9}$");
+            Regex postalcode = new Regex("^[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ][0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]$");
+            Regex phone = new Regex("^[0-9]{10}$");
+            Regex sin = new Regex(@"^[0-9]{9}$");
 
             if (employee == null)
             {
@@ -96,11 +95,12 @@ namespace VeterinaryManagementSystem.Business
                 }
             }
 
+
             if (!String.IsNullOrEmpty(employee.Email))
             {
-                if (!(email.Match(employee.Email).Success))
+                if (employee.Email.Length < 5 || employee.Email.Length > 50)
                 {
-                    throw new Exception("employee E-mail invalid");
+                    throw new Exception("employee E-mail must be 5-50 characters long");
                 }
             }
 
@@ -124,7 +124,7 @@ namespace VeterinaryManagementSystem.Business
 
             if (employee.Position.Length < 2 || employee.Position.Length > 20)
             {
-                throw new Exception("Employee City must be 2-20 characters long");
+                throw new Exception("Employee Position must be 2-20 characters long");
             }
 
             if ((!String.IsNullOrEmpty(employee.Observations)))

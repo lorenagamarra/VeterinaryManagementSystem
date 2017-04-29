@@ -9,6 +9,6 @@ namespace VeterinaryManagementSystem.ViewModels
 {
     class BreedNameViewModel
     {
-        public List<Breed> Breeds { get; set; }
+        public List<Breed> Breed { get; set; }
     }
 }
