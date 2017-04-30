@@ -16,5 +16,7 @@ namespace VeterinaryManagementSystem.Classes
 
         public string Details { get; set; }
 
+        public int AnimalID { get; set; }
+
     }
 }

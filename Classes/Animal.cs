@@ -16,8 +16,6 @@ namespace VeterinaryManagementSystem.Classes
 
         public int BreedID { get; set; }
 
-        public int VachistID { get; set; }
-
         public DateTime Datereg { get; set; }
 
         public string Name { get; set; }

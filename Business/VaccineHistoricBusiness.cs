@@ -27,6 +27,12 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Vaccine Historic is null");
             }
 
+
+            if (vaccinehistoric.AnimalID == 0)
+            {
+                throw new Exception("Vaccine Historic must have an Animal ID");
+            }
+
             if (vaccinehistoric.Name != null)
             {
                 if (vaccinehistoric.Name.Length < 2 || vaccinehistoric.Name.Length > 30)

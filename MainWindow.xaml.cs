@@ -524,24 +524,17 @@ namespace VeterinaryManagementSystem
 
             SelectedAnimal = (Animal)lvRegistryAnimalSearchResult.SelectedItem;
 
-
-            tbRegistryAnimalDateRegistration.Text = SelectedAnimal.Datereg.ToString();
             tbRegistryAnimalID.Text = SelectedAnimal.Id.ToString();
+            tbRegistryAnimalDateRegistration.Text = SelectedAnimal.Datereg.ToString();
             imgRegistryAnimalPicture.Source = ConvertToBitMapImage(SelectedAnimal.Picture);
             tbRegistryAnimalName.Text = SelectedAnimal.Name;
             dpRegistryAnimalBirthday.SelectedDate = SelectedAnimal.Dateofbirth;
             tbRegistryAnimalWeight.Text = SelectedAnimal.Weight.ToString();
-
-            //cbRegistryAnimalSpecies.SelectedItem = SelectedAnimal.BreedID (breed Name) ;                 //combobox como carregar dado do database vindo de outra tabela?
-            //cbRegistryAnimalBreeds.SelectedItem = SelectedAnimal.BreedID (specie SpecieName;                  //combobox como carregar dado do database vindo de outra tabela?
-
             tbRegistryAnimalIdentification.Text = SelectedAnimal.Identification;
             tbRegistryAnimalFood.Text = SelectedAnimal.Food;
             tbRegistryAnimalPhobias.Text = SelectedAnimal.Phobia;
-            //FLAGSET.Items.Clear();                                                       //CHECKBOX FLAG SET
-            lvRegistryAnimalVaccines.Items.Clear();
-            tbRegistryAnimalVetHistory.Text = String.Empty;
-            rbAnimalStatus_Active.IsChecked = true;
+            lvRegistryAnimalVaccines.ItemsSource = dbVaccineHistory.GetAllVaccineHistoricsByAnimal(SelectedAnimal.Id);
+            tbRegistryAnimalVetHistory.Text = SelectedAnimal.Vethistoric;
 
             if (SelectedAnimal.Gender)
             {
@@ -567,6 +560,7 @@ namespace VeterinaryManagementSystem
         private void ButtonAddNewAnimal_Click(object sender, RoutedEventArgs e)
         {
             AnimalForm_clearFields();
+            unsavedChanges = false;
         }
 
         //SAVE(Add/Update) ANIMALS
@@ -587,25 +581,23 @@ namespace VeterinaryManagementSystem
             }
 
             var id = 0;
-            Int32.TryParse(tbRegistryOwnerID.Text, out id);
+            Int32.TryParse(tbRegistryAnimalID.Text, out id);
 
             Decimal weight = 0;
-            Decimal.TryParse(tbTablesVaccinesPrice.Text, out weight);
+            Decimal.TryParse(tbRegistryAnimalWeight.Text, out weight);
 
             SelectedAnimal.Id = id;
             SelectedAnimal.Datereg = DateTime.Now;
             SelectedAnimal.Picture = memStream1.ToArray();
-            //SelectedAnimal.OwnerID = SelectedOwner.Id;                                  //como pegar Owner ID????
-            //SelectedAnimal.BreedID = cbRegistryAnimalBreeds.SelectedIndex;              //pegar o ID nao Index da lista
-            //SelectedAnimal.VachistID = ????                                           //Como pegar VacHist ID associado ao animal
+            SelectedAnimal.OwnerID = SelectedOwner.Id;
+            SelectedAnimal.BreedID = ((Breed)cbRegistryAnimalBreeds.SelectedItem).Id;            
             SelectedAnimal.Name = tbRegistryAnimalName.Text;
             SelectedAnimal.Gender = rbRegistryAnimalMale.IsChecked.Value;
-            SelectedAnimal.Dateofbirth = dpRegistryAnimalBirthday.SelectedDate.Value;
+            SelectedAnimal.Dateofbirth = dpRegistryAnimalBirthday.SelectedDate;
             SelectedAnimal.Weight = weight;
             SelectedAnimal.Identification = tbRegistryAnimalIdentification.Text;
             SelectedAnimal.Food = tbRegistryAnimalFood.Text;
             SelectedAnimal.Phobia = tbRegistryAnimalPhobias.Text;
-            //SelectedAnimal.Flagset = ?????;                                           //como salvar ???
             SelectedAnimal.Vethistoric = tbRegistryAnimalVetHistory.Text;
             SelectedAnimal.Status = rbAnimalStatus_Active.IsChecked.Value;
 
@@ -670,13 +662,16 @@ namespace VeterinaryManagementSystem
                 // ... No need to display the time.
                 this.Title = date.Value.ToShortDateString();
             }
+            unsavedChanges = true;
         }
+
         private void cbRegistryAnimalSpecies_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var specie = cbRegistryAnimalSpecies.SelectedItem as Specie;
             BreedNameViewModel.Breed = dbBreed.GetAllBreedsActivesBySpecie(specie.Id);
             cbRegistryAnimalBreeds.DataContext = null;
             cbRegistryAnimalBreeds.DataContext = BreedNameViewModel;
+            unsavedChanges = true;
         }
 
         private IEnumerable<AnimalOwnerViewModel> searchAnimalOwnerByName(string name)
@@ -699,6 +694,7 @@ namespace VeterinaryManagementSystem
 
             return filteredList;
         }
+
         private void btnRegistryAnimalTakePicture_Click(object sender, RoutedEventArgs e)
         {
             var newWindow = new WebCamWindow();

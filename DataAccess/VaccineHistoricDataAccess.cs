@@ -25,13 +25,14 @@ namespace VeterinaryManagementSystem.DataAccess
             using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                var sql = "INSERT INTO TBLVACCINEHISTORIC (NAME, DATE, DETAILS) VALUES (@Name, @Date, @Details)";
+                var sql = "INSERT INTO TBLVACCINEHISTORIC (NAME, DATE, DETAILS, ANIMALID) VALUES (@Name, @Date, @Details, @AnimalID)";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     command.Parameters.Add(new SqlParameter("@Name", vaccinehistoric.Name));
                     command.Parameters.Add(new SqlParameter("@Date", vaccinehistoric.Date));
                     command.Parameters.Add(new SqlParameter("@Details", vaccinehistoric.Details));
+                    command.Parameters.Add(new SqlParameter("@AnimalID", vaccinehistoric.Details));
                     command.ExecuteNonQuery();
                 }
             } //close and dispose --> connection
@@ -43,7 +44,7 @@ namespace VeterinaryManagementSystem.DataAccess
             using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                var sql = "UPDATE TBLVACCINEHISTORIC SET NAME=@Name, DATE=@Date, DETAILS=@Details WHERE ID=@Id";
+                var sql = "UPDATE TBLVACCINEHISTORIC SET NAME=@Name, DATE=@Date, DETAILS=@Details, ANIMALID=@AnimalID WHERE ID=@Id";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -51,6 +52,7 @@ namespace VeterinaryManagementSystem.DataAccess
                     command.Parameters.Add(new SqlParameter("@Name", vaccinehistoric.Name));
                     command.Parameters.Add(new SqlParameter("@Date", vaccinehistoric.Date));
                     command.Parameters.Add(new SqlParameter("@Details", vaccinehistoric.Details));
+                    command.Parameters.Add(new SqlParameter("@AnimalID", vaccinehistoric.Details));
                     command.ExecuteNonQuery();
                 }
             } //close and dispose --> connection
@@ -90,13 +92,52 @@ namespace VeterinaryManagementSystem.DataAccess
                         string name = (string)reader["Name"];
                         DateTime date = (DateTime)reader["Date"];
                         string details = (string)reader["Details"];
+                        int animalID = (int)reader["AnimalID"];
 
                         var vaccinehistoric = new VaccineHistoric
                         {
                             Id = id,
                             Name = name,
                             Date = date,
-                            Details = details
+                            Details = details,
+                            AnimalID = animalID
+                        };
+                        result.Add(vaccinehistoric);
+                    }
+                }
+            } //close and dispose --> connection
+            return result;
+        }
+
+
+
+        public List<VaccineHistoric> GetAllVaccineHistoricsByAnimal(int AnimalID)
+        {
+            var result = new List<VaccineHistoric>();
+
+            //'using' block calls Dispose method at the end of the structure.
+            using (connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("SELECT * FROM TBLVACCINEHISTORIC WHERE ANIMALID=@AnimalID", connection))
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int id = (int)reader["Id"];
+                        string name = (string)reader["Name"];
+                        DateTime date = (DateTime)reader["Date"];
+                        string details = (string)reader["Details"];
+                        int animalID = (int)reader["AnimalID"];
+
+                        var vaccinehistoric = new VaccineHistoric
+                        {
+                            Id = id,
+                            Name = name,
+                            Date = date,
+                            Details = details,
+                            AnimalID = animalID
                         };
                         result.Add(vaccinehistoric);
                     }

@@ -565,9 +565,9 @@
                                                             <ListView.View>
                                                                 <GridView>
                                                                     <GridViewColumn DisplayMemberBinding="{Binding Id}" Width="20" Header="Id"/>
-                                                                    <GridViewColumn DisplayMemberBinding="{Binding Author}" Width="250" Header="Name"/>
-                                                                    <GridViewColumn DisplayMemberBinding="{Binding Title}" Width="80" Header="Date"/>
-                                                                    <GridViewColumn DisplayMemberBinding="{Binding Title}" Width="285" Header="Details"/>
+                                                                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="250" Header="Name"/>
+                                                                    <GridViewColumn DisplayMemberBinding="{Binding Date}" Width="80" Header="Date"/>
+                                                                    <GridViewColumn DisplayMemberBinding="{Binding Details}" Width="285" Header="Details"/>
                                                                 </GridView>
                                                             </ListView.View>
                                                         </ListView>

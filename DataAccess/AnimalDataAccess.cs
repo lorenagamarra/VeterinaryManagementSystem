@@ -24,15 +24,14 @@ namespace VeterinaryManagementSystem.DataAccess
             using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                var sql = @"INSERT INTO TBLANIMAL (PICTURE, OWNERID, BREEDID, VACHISTID, DATEREG, NAME, GENDER, DATEOFBIRTH, WEIGHT, IDENTIFICATION, FOOD, PHOBIA, VETHISTORIC, STATUS)
-                          VALUES (@Picture, @OwnerID, @BreedID, @VachistID, @Datereg, @Name, @Gender, @Dateofbirth, @Weight, @Identification, @Food, @Phobia, @Vethistoric, @Status)";
+                var sql = @"INSERT INTO TBLANIMAL (PICTURE, OWNERID, BREEDID, DATEREG, NAME, GENDER, DATEOFBIRTH, WEIGHT, IDENTIFICATION, FOOD, PHOBIA, VETHISTORIC, STATUS)
+                          VALUES (@Picture, @OwnerID, @BreedID, @Datereg, @Name, @Gender, @Dateofbirth, @Weight, @Identification, @Food, @Phobia, @Vethistoric, @Status)";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     command.Parameters.Add(new SqlParameter("@Picture", animal.Picture));
                     command.Parameters.Add(new SqlParameter("@OwnerID", animal.OwnerID));
                     command.Parameters.Add(new SqlParameter("@BreedID", animal.BreedID));
-                    command.Parameters.Add(new SqlParameter("@VachistID", animal.VachistID));
                     command.Parameters.Add(new SqlParameter("@Datereg", animal.Datereg));
                     command.Parameters.Add(new SqlParameter("@Name", animal.Name));
                     command.Parameters.Add(new SqlParameter("@Gender", animal.Gender));
@@ -54,7 +53,7 @@ namespace VeterinaryManagementSystem.DataAccess
             using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                var sql = @"UPDATE TBLANIMAL SET PICTURE=@Picture, OWNERID=@OwnerID, BREEDID=@BreedID, VACHISTID=@VachistID, NAME=@Name, GENDER=@Gender, DATEOFBIRTH=@Dateofbirth, WEIGHT=@Weight, IDENTIFICATION=@Identification, FOOD=@Food, PHOBIA=@Phobia, VETHISTORIC=@Vethistoric, STATUS=@Status WHERE ID=@Id";
+                var sql = @"UPDATE TBLANIMAL SET PICTURE=@Picture, OWNERID=@OwnerID, BREEDID=@BreedID, NAME=@Name, GENDER=@Gender, DATEOFBIRTH=@Dateofbirth, WEIGHT=@Weight, IDENTIFICATION=@Identification, FOOD=@Food, PHOBIA=@Phobia, VETHISTORIC=@Vethistoric, STATUS=@Status WHERE ID=@Id";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -62,7 +61,6 @@ namespace VeterinaryManagementSystem.DataAccess
                     command.Parameters.Add(new SqlParameter("@Picture", animal.Picture));
                     command.Parameters.Add(new SqlParameter("@OwnerID", animal.OwnerID));
                     command.Parameters.Add(new SqlParameter("@BreedID", animal.BreedID));
-                    command.Parameters.Add(new SqlParameter("@VachistID", animal.VachistID));
                     command.Parameters.Add(new SqlParameter("@Name", animal.Name));
                     command.Parameters.Add(new SqlParameter("@Gender", animal.Gender));
                     command.Parameters.Add(new SqlParameter("@Dateofbirth", animal.Dateofbirth));
@@ -115,7 +113,6 @@ namespace VeterinaryManagementSystem.DataAccess
                         Byte[] picture = (Byte[])reader["Picture"];
                         int ownerID = (int)reader["OwnerID"];
                         int breedID = (int)reader["BreedID"];
-                        int vachistID = (int)reader["VachistID"];
                         DateTime datereg = (DateTime)reader["Datereg"];
                         string name = (string)reader["Name"];
                         Boolean gender = (Boolean)reader["Gender"];
@@ -133,7 +130,6 @@ namespace VeterinaryManagementSystem.DataAccess
                             Picture = picture,
                             OwnerID = ownerID,
                             BreedID = breedID,
-                            VachistID = vachistID,
                             Datereg = datereg,
                             Name = name,
                             Gender = gender,
@@ -170,7 +166,6 @@ namespace VeterinaryManagementSystem.DataAccess
                         Byte[] picture = (Byte[])reader["Picture"];
                         int ownerID = (int)reader["OwnerID"];
                         int breedID = (int)reader["BreedID"];
-                        int vachistID = (int)reader["VachistID"];
                         DateTime datereg = (DateTime)reader["Datereg"];
                         string name = (string)reader["Name"];
                         Boolean gender = (Boolean)reader["Gender"];
@@ -188,7 +183,6 @@ namespace VeterinaryManagementSystem.DataAccess
                             Picture = picture,
                             OwnerID = ownerID,
                             BreedID = breedID,
-                            VachistID = vachistID,
                             Datereg = datereg,
                             Name = name,
                             Gender = gender,
