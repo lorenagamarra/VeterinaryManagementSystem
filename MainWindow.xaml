@@ -194,12 +194,9 @@
                                         <Label Content="Birthday" HorizontalAlignment="Left" Margin="273,10,0,0" VerticalAlignment="Top"/>
                                         <Label Content="Current Weight (kg)" HorizontalAlignment="Left" Margin="416,10,0,0" VerticalAlignment="Top"/>
                                         <Label Content="SPECIES" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top"/>
-                                        <ComboBox x:Name="cbConsultationAnimalSpecies" Margin="10,95,733,437">
-                                            <ComboBoxItem Content="Cat" IsSelected="True"/>
-                                            <ComboBoxItem Content="Dog"/>
-                                        </ComboBox>
+                                        <ComboBox x:Name="cbConsultationAnimalSpecies" Margin="10,95,733,437" ItemsSource="{Binding Path=Species}" DisplayMemberPath="SpecieName" SelectedValuePath="Id" SelectionChanged="cbConsultationAnimalSpecies_SelectionChanged"/>
                                         <Label Content="BREEDS" HorizontalAlignment="Left" Margin="152,69,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.569,0.269"/>
-                                        <ComboBox x:Name="cbConsultationAnimalBreeds" Margin="152,95,469,437"/>
+                                        <ComboBox x:Name="cbConsultationAnimalBreeds" Margin="152,95,469,437" ItemsSource="{Binding Path=Breed}" DisplayMemberPath="Name"/>
                                         <Label Content="Identification, Color or Coat" Margin="10,125,714,0" VerticalAlignment="Top" />
                                         <TextBox x:Name="tbConsultationAnimalIdentification" HorizontalAlignment="Left" Height="23" Margin="10,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="522"/>
                                         <Button x:Name="btnConsultationAnimalTakePicture" Content="Take a New Picture" HorizontalAlignment="Left" Margin="584,378,0,0" VerticalAlignment="Top" Width="252" Height="40" RenderTransformOrigin="2.215,2.05"/>
@@ -589,7 +586,7 @@
                                             <CheckBox x:Name="ckbRegistryAnimalHyperactive" Content="Hyperactive" HorizontalAlignment="Left" Margin="206,543,0,0" VerticalAlignment="Top"/>
                                             <CheckBox x:Name="ckbRegistryAnimalAntiSocial" Content="Anti Social" HorizontalAlignment="Left" Margin="206,563,0,0" VerticalAlignment="Top"/>
                                             <CheckBox x:Name="ckbRegistryAnimalObsessive" Content="Obsessive" HorizontalAlignment="Left" Margin="206,583,0,0" VerticalAlignment="Top"/>
-                                            <Button x:Name="btnRegistryAnimalSave" Content="Save Record" HorizontalAlignment="Left" Margin="426,589,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
+                                            <Button x:Name="btnRegistryAnimalSave" Content="Save Record" HorizontalAlignment="Left" Margin="426,589,0,0" VerticalAlignment="Top" Width="161" Height="30" Click="btnRegistryAnimalSave_Click"/>
                                             <Button x:Name="btnRegistryAnimalPrint" Content="Print Registry" HorizontalAlignment="Left" Margin="592,589,0,0" VerticalAlignment="Top" Width="161" Height="30"/>
                                             <Button x:Name="btnRegistryAnimalExit" Content="Exit" HorizontalAlignment="Left" Margin="592,624,0,0" VerticalAlignment="Top" Width="161" Height="30" Click="btnRegistryAnimalExit_Click"/>
                                             <TextBox x:Name="tbRegistryAnimalWeight" HorizontalAlignment="Left" Height="23" Margin="603,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110"/>

@@ -24,7 +24,7 @@ namespace VeterinaryManagementSystem.Classes
         
         public Boolean Gender { get; set; }
 
-        public DateTime Dateofbirth { get; set; }
+        public DateTime? Dateofbirth { get; set; }
 
         public decimal Weight { get; set; }
 
@@ -33,8 +33,6 @@ namespace VeterinaryManagementSystem.Classes
         public string Food { get; set; }
 
         public string Phobia { get; set; }
-
-        public string Flagset { get; set; }
 
         public string Vethistoric { get; set; }
 

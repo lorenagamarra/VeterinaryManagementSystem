@@ -32,11 +32,6 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Owner is null");
             }
 
-            //if (owner.RegistrationDate != DateTime.Now.Date)
-            //{
-            //    throw new Exception("Owner Registration Date must be the current day");
-            //}
-
             //START owner 01
             if (owner.FirstName_01.Length < 2 || owner.FirstName_01.Length > 20)
             {

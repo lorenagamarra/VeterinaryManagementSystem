@@ -35,24 +35,24 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Animal must have a Breed ID");
             }
 
-            if (animal.Datereg != DateTime.Now)
-            {
-                throw new Exception("Animal Registration Date must be the current day");
-            }
-
             if (animal.Name.Length < 2 || animal.Name.Length > 20)
             {
                 throw new Exception("Animal name must be 2-20 characters long");
             }
 
-            if ((DateTime.Now.Year - animal.Dateofbirth.Year) > 100)
+            if (!animal.Dateofbirth.HasValue)
             {
-                throw new Exception("Animal can not be more than 100 years old");
+                throw new Exception("Select a Date of birth");
             }
 
-            if (animal.Weight <= 0 || animal.Weight > 400)
+            if (animal.Dateofbirth > DateTime.Now)
             {
-                throw new Exception("Animal can not have more than 400 pounds");
+                throw new Exception("Employee Hire Date can not be greater than today");
+            }
+
+            if (animal.Weight <= 0)
+            {
+                throw new Exception("Animal can not have 0kg");
             }
 
             if ((!String.IsNullOrEmpty(animal.Identification)))
@@ -79,14 +79,6 @@ namespace VeterinaryManagementSystem.Business
                 }
             }
 
-            if ((!String.IsNullOrEmpty(animal.Flagset)))
-            {
-                if (animal.Flagset.Length < 2 || animal.Flagset.Length > 200)
-                {
-                    throw new Exception("Animal Flagset can be empty or have many itens");
-                }
-            }
-
             if ((!String.IsNullOrEmpty(animal.Vethistoric)))
             {
                 if (animal.Vethistoric.Length < 2)
@@ -94,6 +86,7 @@ namespace VeterinaryManagementSystem.Business
                     throw new Exception("Animal VetHistoric can be empty or at least be 2 characters long");
                 }
             }
+
 
             if (animal.Id == 0)
             {

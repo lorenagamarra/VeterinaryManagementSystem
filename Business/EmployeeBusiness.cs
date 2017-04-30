@@ -106,7 +106,7 @@ namespace VeterinaryManagementSystem.Business
 
             if (!employee.HireDate.HasValue)
             {
-                throw new Exception("digite uma data"); //TODO translate
+                throw new Exception("Select a Hire Date"); 
             }
 
             if (employee.HireDate < DateTime.Now)

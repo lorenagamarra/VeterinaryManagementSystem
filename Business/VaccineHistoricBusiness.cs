@@ -27,17 +27,22 @@ namespace VeterinaryManagementSystem.Business
                 throw new Exception("Vaccine Historic is null");
             }
 
-            if (vaccinehistoric.Name.Length < 2 || vaccinehistoric.Name.Length > 30)
+            if (vaccinehistoric.Name != null)
             {
-                throw new Exception("Vaccine Historic Name must be 2-30 characters long");
+                if (vaccinehistoric.Name.Length < 2 || vaccinehistoric.Name.Length > 30)
+                {
+                    throw new Exception("Vaccine Historic Name must be 2-30 characters long");
+                }
             }
-
-            if (vaccinehistoric.Date > DateTime.Now)
+            if (vaccinehistoric.Date != null)
             {
-                throw new Exception("Vaccine Historic can not have date greater than today");
+                if (vaccinehistoric.Date > DateTime.Now)
+                {
+                    throw new Exception("Vaccine Historic can not have date greater than today");
+                }
             }
-
-            if ((!String.IsNullOrEmpty(vaccinehistoric.Details)))
+            
+            if (vaccinehistoric.Details != null)
             {
                 if (vaccinehistoric.Details.Length < 2 || vaccinehistoric.Details.Length > 100)
                 {

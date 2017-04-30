@@ -104,6 +104,7 @@ namespace VeterinaryManagementSystem
                 SpecieNameViewModel.Species = dbSpecie.GetAllSpecieActives();
                 cbRegistryAnimalSpecies.DataContext = SpecieNameViewModel;
                 cbTablesBreedsSpecies.DataContext = SpecieNameViewModel;
+                cbConsultationAnimalSpecies.DataContext = SpecieNameViewModel;
 
                 BreedNameViewModel = new BreedNameViewModel();
 
@@ -280,7 +281,7 @@ namespace VeterinaryManagementSystem
             tbRegistryOwner1Address.Text = SelectedOwner.Address_01;
             tbRegistryOwner1Complement.Text = SelectedOwner.Complement_01;
             tbRegistryOwner1City.Text = SelectedOwner.City_01;
-            cbRegistryOwner1Province.SelectedIndex = cbRegistryOwner1Province.GetIndex(SelectedOwner.Province_01);    //combobox load from list
+            cbRegistryOwner1Province.SelectedIndex = cbRegistryOwner1Province.GetIndex(SelectedOwner.Province_01);
             tbRegistryOwner1PostalCode.Text = SelectedOwner.PostalCode_01;
             tbRegistryOwner1Phone.Text = SelectedOwner.PhoneNumber_01;
             tbRegistryOwner1OtherNumber.Text = SelectedOwner.OtherPhoneNumber_01;
@@ -295,7 +296,7 @@ namespace VeterinaryManagementSystem
             tbRegistryOwner2Address.Text = SelectedOwner.Address_02;
             tbRegistryOwner2Complement.Text = SelectedOwner.Complement_02;
             tbRegistryOwner2City.Text = SelectedOwner.City_02;
-            cbRegistryOwner2Province.SelectedItem = SelectedOwner.Province_02;   //combobox load from list
+            cbRegistryOwner2Province.SelectedIndex = cbRegistryOwner2Province.GetIndex(SelectedOwner.Province_02);
             tbRegistryOwner2PostalCode.Text = SelectedOwner.PostalCode_02;
             tbRegistryOwner2Phone.Text = SelectedOwner.PhoneNumber_02;
             tbRegistryOwner2OtherNumber.Text = SelectedOwner.OtherPhoneNumber_02;
@@ -369,7 +370,7 @@ namespace VeterinaryManagementSystem
             SelectedOwner.Address_01 = tbRegistryOwner1Address.Text;
             SelectedOwner.Complement_01 = tbRegistryOwner1Complement.Text;
             SelectedOwner.City_01 = tbRegistryOwner1City.Text;
-            SelectedOwner.Province_01 = cbRegistryOwner1Province.Text; ;              //combobox
+            SelectedOwner.Province_01 = cbRegistryOwner1Province.Text;
             SelectedOwner.PostalCode_01 = tbRegistryOwner1PostalCode.Text;
             SelectedOwner.PhoneNumber_01 = tbRegistryOwner1Phone.Text;
             SelectedOwner.OtherPhoneNumber_01 = tbRegistryOwner1OtherNumber.Text;
@@ -383,7 +384,7 @@ namespace VeterinaryManagementSystem
             SelectedOwner.Address_02 = tbRegistryOwner2Address.Text;
             SelectedOwner.Complement_02 = tbRegistryOwner2Complement.Text;
             SelectedOwner.City_02 = tbRegistryOwner2City.Text;
-            SelectedOwner.Province_02 = cbRegistryOwner2Province.Text;              //combobox
+            SelectedOwner.Province_02 = cbRegistryOwner2Province.Text;
             SelectedOwner.PostalCode_02 = tbRegistryOwner2PostalCode.Text;
             SelectedOwner.PhoneNumber_02 = tbRegistryOwner2Phone.Text;
             SelectedOwner.OtherPhoneNumber_02 = tbRegistryOwner2OtherNumber.Text;
@@ -474,8 +475,6 @@ namespace VeterinaryManagementSystem
             }
             else
             {
-
-
                 /*
                 //multiple words LINQ ?????????????????????????????????????????????????????????????????
                 string[] searchstrings = filter.Split(' ');
@@ -515,7 +514,6 @@ namespace VeterinaryManagementSystem
             tbRegistryAnimalIdentification.Text = String.Empty;
             tbRegistryAnimalFood.Text = String.Empty;
             tbRegistryAnimalPhobias.Text = String.Empty;
-            //FLAGSET.Items.Clear();                                            //CHECKBOX FLAG SET
             lvRegistryAnimalVaccines.Items.Clear();
             tbRegistryAnimalVetHistory.Text = String.Empty;
             rbAnimalStatus_Active.IsChecked = true;
@@ -536,18 +534,15 @@ namespace VeterinaryManagementSystem
 
             tbRegistryAnimalDateRegistration.Text = SelectedAnimal.Datereg.ToString();
             tbRegistryAnimalID.Text = SelectedAnimal.Id.ToString();
-            //imgRegistryAnimalPicture.Source = null;                                       //criar codigo de frank
+            //imgRegistryAnimalPicture.Source = null;                                     //criar codigo de frank
             tbRegistryAnimalName.Text = SelectedAnimal.Name;
             dpRegistryAnimalBirthday.SelectedDate = SelectedAnimal.Dateofbirth;
             tbRegistryAnimalWeight.Text = SelectedAnimal.Weight.ToString();
-
-            //cbRegistryAnimalSpecies.SelectedItem = SelectedAnimal.BreedID (breed Name) ;                 //combobox como carregar dado do database vindo de outra tabela?
-            //cbRegistryAnimalBreeds.SelectedItem = SelectedAnimal.BreedID (specie SpecieName;                  //combobox como carregar dado do database vindo de outra tabela?
-
+            cbRegistryAnimalSpecies.SelectedValue = SelectedBreed.SpecieID;
+            cbRegistryAnimalBreeds.SelectedValue = SelectedBreed.Name;
             tbRegistryAnimalIdentification.Text = SelectedAnimal.Identification;
             tbRegistryAnimalFood.Text = SelectedAnimal.Food;
             tbRegistryAnimalPhobias.Text = SelectedAnimal.Phobia;
-            //FLAGSET.Items.Clear();                                                       //CHECKBOX FLAG SET
             lvRegistryAnimalVaccines.Items.Clear();
             tbRegistryAnimalVetHistory.Text = String.Empty;
             rbAnimalStatus_Active.IsChecked = true;
@@ -569,7 +564,7 @@ namespace VeterinaryManagementSystem
             {
                 rbAnimalStatus_Inactive.IsChecked = true;
             }
-            refreshAnimalList();            
+          
         }
         
         //ADD NEW ANIMALS (clear fields)
@@ -587,34 +582,35 @@ namespace VeterinaryManagementSystem
         //SAVE ANIMALS METHOD
         private void SavingAnimalRegistryOnDB()
         {
-            MemoryStream memStream1 = new MemoryStream();
-            JpegBitmapEncoder encoder1 = new JpegBitmapEncoder();
+            MemoryStream memStream3 = new MemoryStream();
+            JpegBitmapEncoder encoder3 = new JpegBitmapEncoder();
             if (imgRegistryOwner1Image.Source != null)
             {
-                encoder1.Frames.Add(BitmapFrame.Create((BitmapSource)imgRegistryOwner1Image.Source));
-                encoder1.Save(memStream1);
+                encoder3.Frames.Add(BitmapFrame.Create((BitmapSource)imgRegistryAnimalPicture.Source));
+                encoder3.Save(memStream3);
             }
 
             var id = 0;
-            Int32.TryParse(tbRegistryOwnerID.Text, out id);
+            Int32.TryParse(tbRegistryAnimalID.Text, out id);
 
             Decimal weight = 0;
-            Decimal.TryParse(tbTablesVaccinesPrice.Text, out weight);
+            Decimal.TryParse(tbRegistryAnimalWeight.Text, out weight);
+
             
+
             SelectedAnimal.Id = id;
+            SelectedAnimal.BreedID = ((Breed)cbRegistryAnimalBreeds.SelectedItem).Id;
             SelectedAnimal.Datereg = DateTime.Now;
-            SelectedAnimal.Picture = memStream1.ToArray();
-            //SelectedAnimal.OwnerID = SelectedOwner.Id;                                  //como pegar Owner ID????
-            //SelectedAnimal.BreedID = cbRegistryAnimalBreeds.SelectedIndex;              //pegar o ID nao Index da lista
-            //SelectedAnimal.VachistID = ????                                           //Como pegar VacHist ID associado ao animal
+            SelectedAnimal.Picture = memStream3.ToArray();
+            SelectedAnimal.OwnerID = SelectedOwner.Id;                               //TODO: como pegar Owner ID????
+            SelectedAnimal.VachistID = id;                                           //TODO: definindo mesmo numero de ID do animal para numero de ID do VacHist do animal
             SelectedAnimal.Name = tbRegistryAnimalName.Text;
             SelectedAnimal.Gender = rbRegistryAnimalMale.IsChecked.Value;
-            SelectedAnimal.Dateofbirth = dpRegistryAnimalBirthday.SelectedDate.Value;
+            SelectedAnimal.Dateofbirth = dpRegistryAnimalBirthday.SelectedDate;
             SelectedAnimal.Weight = weight;
             SelectedAnimal.Identification = tbRegistryAnimalIdentification.Text;
             SelectedAnimal.Food = tbRegistryAnimalFood.Text;
             SelectedAnimal.Phobia = tbRegistryAnimalPhobias.Text;
-            //SelectedAnimal.Flagset = ?????;                                           //como salvar ???
             SelectedAnimal.Vethistoric = tbRegistryAnimalVetHistory.Text;
             SelectedAnimal.Status = rbAnimalStatus_Active.IsChecked.Value;
 
@@ -757,13 +753,13 @@ namespace VeterinaryManagementSystem
             tbRegistryEmployeeAddress.Text = SelectedEmployee.Address;
             tbRegistryEmployeeComplement.Text = SelectedEmployee.Complement;
             tbRegistryEmployeeCity.Text = SelectedEmployee.City;
-            cbRegistryEmployeeProvince.SelectedItem = SelectedEmployee.Province;           //combobox load from list
+            cbRegistryEmployeeProvince.SelectedIndex = cbRegistryEmployeeProvince.GetIndex(SelectedEmployee.Province);
             tbRegistryEmployeePostalCode.Text = SelectedEmployee.PostalCode;
             tbRegistryEmployeePhone.Text = SelectedEmployee.PhoneNumber;
             tbRegistryEmployeeOtherNumber.Text = SelectedEmployee.OtherPhoneNumber;
             tbRegistryEmployeeEmail.Text = SelectedEmployee.Email;
             dpRegistryEmployeeHire.SelectedDate = SelectedEmployee.HireDate;
-            cbRegistryEmployeePositions.SelectedIndex = cbRegistryEmployeePositions.GetIndex(SelectedEmployee.Position);          //combobox load from list
+            cbRegistryEmployeePositions.SelectedIndex = cbRegistryEmployeePositions.GetIndex(SelectedEmployee.Position);
             tbRegistryEmployeeSIN.Text = SelectedEmployee.SIN;
             dpRegistryEmployeeTerm.SelectedDate = SelectedEmployee.TermDate;
             tbRegistryEmployeeObservations.Text = SelectedEmployee.Observations;
@@ -815,13 +811,13 @@ namespace VeterinaryManagementSystem
             SelectedEmployee.Address = tbRegistryEmployeeAddress.Text;
             SelectedEmployee.Complement = tbRegistryEmployeeComplement.Text;
             SelectedEmployee.City = tbRegistryEmployeeCity.Text;
-            SelectedEmployee.Province = cbRegistryEmployeeProvince.Text;                  //.Text or SelectedValue.ToString()
+            SelectedEmployee.Province = cbRegistryEmployeeProvince.Text;
             SelectedEmployee.PostalCode = tbRegistryEmployeePostalCode.Text;
             SelectedEmployee.PhoneNumber = tbRegistryEmployeePhone.Text;
             SelectedEmployee.OtherPhoneNumber = tbRegistryEmployeeOtherNumber.Text;
             SelectedEmployee.Email = tbRegistryEmployeeEmail.Text;
             SelectedEmployee.HireDate = dpRegistryEmployeeHire.SelectedDate;
-            SelectedEmployee.Position = cbRegistryEmployeePositions.Text;                 //.Text or SelectedValue.ToString()
+            SelectedEmployee.Position = cbRegistryEmployeePositions.Text;
             SelectedEmployee.SIN = tbRegistryEmployeeSIN.Text;
             SelectedEmployee.TermDate = dpRegistryEmployeeTerm.SelectedDate;
             SelectedEmployee.Observations = tbRegistryEmployeeObservations.Text;
@@ -1119,9 +1115,7 @@ namespace VeterinaryManagementSystem
             }
             refreshSpecieList();
         }
-
-
-
+        
 
         /******************************************************************************************
         * SECONDARY TABLES > VACCINES
@@ -1369,6 +1363,7 @@ namespace VeterinaryManagementSystem
             Home.IsSelected = true;
         }
 
+        // ANIMAL REGISTRY - populating breed filtered by specie when selection changed
         private void cbRegistryAnimalSpecies_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var specie = cbRegistryAnimalSpecies.SelectedItem as Specie;
@@ -1377,6 +1372,15 @@ namespace VeterinaryManagementSystem
             cbRegistryAnimalBreeds.DataContext = BreedNameViewModel;
         }
 
+        // ANIMAL CONSULTATION - populating breed filtered by specie when selection changed
+        private void cbConsultationAnimalSpecies_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var specie = cbConsultationAnimalSpecies.SelectedItem as Specie;
+            BreedNameViewModel.Breed = dbBreed.GetAllBreedsActivesBySpecie(specie.Id);
+            cbConsultationAnimalBreeds.DataContext = null;
+            cbConsultationAnimalBreeds.DataContext = BreedNameViewModel;
+        }
+        
         private IEnumerable<AnimalOwnerViewModel> searchAnimalOwnerByName(string name)
         {
             List<Animal> listAnimal = dbAnimal.GetAllAnimals();
@@ -1397,6 +1401,7 @@ namespace VeterinaryManagementSystem
 
             return filteredList;
         }
+
     }
 }
 
