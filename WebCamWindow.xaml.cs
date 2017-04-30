@@ -59,7 +59,7 @@ namespace VeterinaryManagementSystem
             //Helper.SaveImageCapture((BitmapSource)imgCapture.Source);
 
             //FIXME: Don't define HERE where the picture must to go!!!!
-            ((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner1Image.Source = imgVideo.Source;
+            ((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner1Image.Source = imgCapture.Source;
            // DialogResult = true;
         }
 
