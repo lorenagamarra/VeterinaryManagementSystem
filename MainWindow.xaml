@@ -517,9 +517,8 @@
                                             <ListView Margin="10,66,10,51" x:Name="lvRegistryAnimalSearchResult" SelectionChanged="lvRegistryAnimalSearchResult_SelectionChanged">
                                                 <ListView.View>
                                                     <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Owner1}" Width="100" Header="Owner 1"/>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Owner2}" Width="100" Header="Owner 2"/>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding Animal.Name}" Width="100" Header="Animal"/>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding OwnerID}" Width="100" Header="Owner"/>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="100" Header="Animal"/>
                                                     </GridView>
                                                 </ListView.View>
                                             </ListView>

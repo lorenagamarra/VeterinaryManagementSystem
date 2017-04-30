@@ -108,6 +108,9 @@ namespace VeterinaryManagementSystem
                 cbTablesBreedsSpecies.DataContext = SpecieNameViewModel;
                 cbConsultationAnimalSpecies.DataContext = SpecieNameViewModel;
 
+                
+
+
                 BreedNameViewModel = new BreedNameViewModel();
 
                 lvRegistryAnimalSearchResult.ItemsSource = searchAnimalOwnerByName(string.Empty);
@@ -465,22 +468,9 @@ namespace VeterinaryManagementSystem
             }
             else
             {
-
-
-                /*
-                //multiple words LINQ ?????????????????????????????????????????????????????????????????
-                string[] searchstrings = filter.Split(' ');
-                var filteredList = from animal in listAnimal
-                                   join owner in listOwner
-                                   on animal.OwnerID equals owner.Id
-                                   where searchstrings.All(word => animal.Name.ToLower().Contains(word) || owner.FirstName_01.Contains(word) || owner.FirstName_02.Contains(word)
-                                   select animal;
-                */
-
-                var result = searchAnimalOwnerByName(filter);
-
-
-                lvRegistryAnimalSearchResult.ItemsSource = result;
+                List<Animal> list = dbAnimal.GetAllAnimals();
+                var filteredList = from animal in list where animal.OwnerID.ToString().ToLower().Contains(filter) || animal.Name.Contains(filter) select animal;
+                lvTableRegisterBreeds.ItemsSource = filteredList;
             }
         }
 
@@ -533,7 +523,7 @@ namespace VeterinaryManagementSystem
             tbRegistryAnimalIdentification.Text = SelectedAnimal.Identification;
             tbRegistryAnimalFood.Text = SelectedAnimal.Food;
             tbRegistryAnimalPhobias.Text = SelectedAnimal.Phobia;
-            lvRegistryAnimalVaccines.ItemsSource = dbVaccineHistory.GetAllVaccineHistoricsByAnimal(SelectedAnimal.Id);
+            //lvRegistryAnimalVaccines.ItemsSource = dbVaccineHistory.GetAllVaccineHistoricsByAnimal(SelectedAnimal.Id);
             tbRegistryAnimalVetHistory.Text = SelectedAnimal.Vethistoric;
 
             if (SelectedAnimal.Gender)
@@ -574,9 +564,9 @@ namespace VeterinaryManagementSystem
         {
             MemoryStream memStream1 = new MemoryStream();
             JpegBitmapEncoder encoder1 = new JpegBitmapEncoder();
-            if (imgRegistryOwner1Image.Source != null)
+            if (imgRegistryAnimalPicture.Source != null)
             {
-                encoder1.Frames.Add(BitmapFrame.Create((BitmapSource)imgRegistryOwner1Image.Source));
+                encoder1.Frames.Add(BitmapFrame.Create((BitmapSource)imgRegistryAnimalPicture.Source));
                 encoder1.Save(memStream1);
             }
 
@@ -690,8 +680,6 @@ namespace VeterinaryManagementSystem
                     OwnerId = x.o.Id
                 })
                     .ToList();
-
-
             return filteredList;
         }
 
