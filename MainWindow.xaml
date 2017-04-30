@@ -194,7 +194,8 @@
                                         <Label Content="Birthday" HorizontalAlignment="Left" Margin="273,10,0,0" VerticalAlignment="Top"/>
                                         <Label Content="Current Weight (kg)" HorizontalAlignment="Left" Margin="416,10,0,0" VerticalAlignment="Top"/>
                                         <Label Content="SPECIES" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top"/>
-                                        <ComboBox x:Name="cbConsultationAnimalSpecies" Margin="10,95,733,437" ItemsSource="{Binding Path=Species}" DisplayMemberPath="SpecieName" SelectedValuePath="Id" SelectionChanged="cbConsultationAnimalSpecies_SelectionChanged"/>
+                                        <!-- <ComboBox x:Name="cbConsultationAnimalSpecies" Margin="10,95,733,437" ItemsSource="{Binding Path=Species}" DisplayMemberPath="SpecieName" SelectedValuePath="Id" SelectionChanged="cbConsultationAnimalSpecies_SelectionChanged"/> -->
+                                        <ComboBox x:Name="cbConsultationAnimalSpecies" Margin="10,95,733,437" ItemsSource="{Binding Path=Species}" DisplayMemberPath="SpecieName" SelectedValuePath="Id" SelectionChanged="cbRegistryAnimalSpecies_SelectionChanged"/>
                                         <Label Content="BREEDS" HorizontalAlignment="Left" Margin="152,69,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.569,0.269"/>
                                         <ComboBox x:Name="cbConsultationAnimalBreeds" Margin="152,95,469,437" ItemsSource="{Binding Path=Breed}" DisplayMemberPath="Name"/>
                                         <Label Content="Identification, Color or Coat" Margin="10,125,714,0" VerticalAlignment="Top" />
