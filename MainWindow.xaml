@@ -18,7 +18,17 @@
     </Window.Resources>
 
     <Grid Margin="0,0,0,0">
-        <TabControl TabStripPlacement="Left" Margin="0,0,0,3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="360*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="485*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl  Grid.Column="1" Grid.Row="1" TabStripPlacement="Left" Margin="0,0,0,0">
             <TabItem Height="24" Name="Home">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -40,12 +50,14 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <!--Defining column 0-->
-                        <ColumnDefinition MinWidth="300" Width="Auto"/>
+                        <ColumnDefinition Width="5*"/>
                         <!--Defining column 1-->
-                        <ColumnDefinition MinWidth="200" Width="Auto"/>
+                        <ColumnDefinition Width="340*"/>
+                        <!--Defining column 2-->
+                        <ColumnDefinition Width="860*"/>
                     </Grid.ColumnDefinitions>
                     <!-- Column 0, Row 0, Cell 1-->
-                    <StackPanel Grid.Column="0">
+                    <StackPanel Grid.Column="1">
                         <Grid Height="680">
                             <Label Content="Search for Owner's Name, Phone or Animal Name" Margin="10,10,0,642" HorizontalAlignment="Left" Width="281"/>
                             <TextBox x:Name="tbConsultationSearch" Height="23" TextWrapping="Wrap" Margin="10,43,10,614"/>
@@ -61,24 +73,29 @@
                         </Grid>
                     </StackPanel>
                     <!-- Column 1, Row 0, Cell 1-->
-                    <StackPanel Grid.Column="1" Margin="0,0,0,0" HorizontalAlignment="Left" Width="900">
-                        <Grid Margin="0,0,0,0" Height="692" HorizontalAlignment="Left" Width="894">
-                            <TabControl x:Name="tabcConsult" Height="601" VerticalAlignment="Top" HorizontalAlignment="Left" Width="863" Margin="6,46,0,0">
+                    <StackPanel Grid.Column="2" Margin="0,0,0,0" HorizontalAlignment="Left">
+                        <Grid Margin="0,0,0,0" Height="692" HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <!--Defining column 0-->
+                                <ColumnDefinition Width="600*"/>
+                            </Grid.ColumnDefinitions>
+                            <TabControl Grid.Column="0" x:Name="tabcConsult" Height="596" VerticalAlignment="Top" Margin="10,41,10,0">
                                 <TabItem Header="Owner" HeaderTemplate="{StaticResource HeaderTemplate}">
                                     <Grid Background="#FFE5E5E5">
-                                        <Label Content="Date of Registration" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                                        <TextBox x:Name="tbConsultationOwnerDateRegistration" HorizontalAlignment="Left" Height="23" Margin="131,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                                        <Label Content="ID" HorizontalAlignment="Left" Margin="256,10,0,0" VerticalAlignment="Top"/>
-                                        <TextBox x:Name="tbConsultationOwnerID" HorizontalAlignment="Left" Height="23" Margin="283,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                                        <Label Content="Status" HorizontalAlignment="Left" Margin="666,0,0,0" VerticalAlignment="Top"/>
-                                        <RadioButton Content="Active" HorizontalAlignment="Left" Margin="666,21,0,0" VerticalAlignment="Top" IsChecked="True" GroupName="SatusConsultationOwner"/>
-                                        <RadioButton Content="Inactive" HorizontalAlignment="Left" Margin="666,36,0,0" VerticalAlignment="Top" GroupName="SatusConsultationOwner"/>
-                                        <Button x:Name="btnConsultationOwnerUpdate" Content="Update" HorizontalAlignment="Left" Margin="747,10,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
-                                        <Expander IsExpanded="True" HorizontalAlignment="Left" Height="251" Margin="0,41,0,0" VerticalAlignment="Top" Width="870">
+                                        <Label Content="Date of Registration" Margin="10,10,726,0" VerticalAlignment="Top"/>
+                                        <TextBox x:Name="tbConsultationOwnerDateRegistration" Height="23" Margin="131,10,601,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                                        <Label Content="ID" Margin="256,10,574,0" VerticalAlignment="Top"/>
+                                        <TextBox x:Name="tbConsultationOwnerID" Height="23" Margin="283,13,449,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                                        <Label Content="Status" HorizontalAlignment="Left" Margin="627,0,0,0" VerticalAlignment="Top"/>
+                                        <RadioButton Content="Active" HorizontalAlignment="Left" Margin="627,21,0,0" VerticalAlignment="Top" IsChecked="True" GroupName="SatusConsultationOwner"/>
+                                        <RadioButton Content="Inactive" HorizontalAlignment="Left" Margin="627,36,0,0" VerticalAlignment="Top" GroupName="SatusConsultationOwner"/>
+                                        <Button x:Name="btnConsultationOwnerUpdate" Content="Update" Margin="737,10,10,10" VerticalAlignment="Top" Height="30"/>
+                                        <Expander IsExpanded="True" Height="251" Margin="0,41,10,0" VerticalAlignment="Top" >
                                             <Expander.Header>
                                                 <TextBlock><Run Text="First Owner (Required)"/></TextBlock>
                                             </Expander.Header>
                                             <Grid Background="#FFE5E5E5" Margin="0,0,8,0">
+
                                                 <Label Content="First Name" HorizontalAlignment="Left" Margin="0,5,0,0" VerticalAlignment="Top"/>
                                                 <TextBox x:Name="tbConsultationOwner1FName" HorizontalAlignment="Left" Height="23" Margin="0,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                                                 <Label Content="Middle Name" HorizontalAlignment="Left" Margin="125,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.737,1.038"/>
@@ -125,7 +142,7 @@
 
                                             </Grid>
                                         </Expander>
-                                        <Expander IsExpanded="False"  Header="Second Owner (Optional)" HorizontalAlignment="Left" Height="242" Margin="0,297,0,0" VerticalAlignment="Top" Width="857">
+                                        <Expander IsExpanded="False"  Header="Second Owner (Optional)" Margin="0,297,10,10">
                                             <Grid  Background="#FFE5E5E5" Margin="0,0,-2,0" Height="227">
                                                 <Label Content="First Name" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                                                 <TextBox x:Name="tbConsultationOwner2FName" HorizontalAlignment="Left" Height="23" Margin="0,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -181,7 +198,7 @@
                                     </Grid>
                                 </TabItem>
                                 <TabItem Header="Animal" HeaderTemplate="{StaticResource HeaderTemplate}" IsSelected="True">
-                                    <Grid Background="#FFE5E5E5" Margin="0,0,0,0" HorizontalAlignment="Left" Width="880">
+                                    <Grid Background="#FFE5E5E5" Margin="0,0,0,0" HorizontalAlignment="Left">
                                         <Label Content="Status" HorizontalAlignment="Left" Margin="666,0,0,0" VerticalAlignment="Top"/>
                                         <RadioButton Content="Active" HorizontalAlignment="Left" Margin="666,21,0,0" VerticalAlignment="Top"  GroupName="SatusConsultationAnimal" IsChecked="True"/>
                                         <RadioButton Content="Inactive" HorizontalAlignment="Left" Margin="666,36,0,0" VerticalAlignment="Top" GroupName="SatusConsultationAnimal"/>
@@ -214,7 +231,7 @@
                                         <CheckBox x:Name="ckbConsultationAnimalHyperactive" Content="Hyperactive" HorizontalAlignment="Left" Margin="204,348,0,0" VerticalAlignment="Top"/>
                                         <CheckBox x:Name="ckbConsultationAnimalAntiSocial" Content="Anti Social" HorizontalAlignment="Left" Margin="204,368,0,0" VerticalAlignment="Top"/>
                                         <CheckBox x:Name="ckbConsultationAnimalObsessive" Content="Obsessive" HorizontalAlignment="Left" Margin="204,388,0,0" VerticalAlignment="Top"/>
-                                        <Button x:Name="btnConsultationAnimalUpdate" Content="Update" HorizontalAlignment="Left" Margin="765,10,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
+                                        <Button x:Name="btnConsultationAnimalUpdate" Content="Update" Margin="737,10,10,512" RenderTransformOrigin="0.024,0.55"/>
                                         <TextBox x:Name="tbConsultationAnimalWeight" HorizontalAlignment="Left" Height="23" Margin="416,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="116"/>
                                         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="252" Margin="584,95,0,0" VerticalAlignment="Top" Width="252" Background="White">
                                             <Image x:Name="imgConsultationAnimalImage" HorizontalAlignment="Left" Height="250" Margin="0,0,0,0" VerticalAlignment="Top" Width="250"/>
@@ -223,10 +240,10 @@
                                     </Grid>
                                 </TabItem>
                                 <TabItem Header="Vet Historic" HeaderTemplate="{StaticResource HeaderTemplate}">
-                                    <Grid Background="#FFE5E5E5">
-                                        <Button x:Name="btnConsultationVHPrint" Content="Print Registry" HorizontalAlignment="Left" Margin="764,10,0,0" VerticalAlignment="Top" Width="104" Height="30"/>
-                                        <Button x:Name="btnConsultationVHEmail" Content="Send an Email" HorizontalAlignment="Left" Margin="654,10,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
-                                        <ListView Margin="10,45,499,10" x:Name="lvConsultationVetHistoric">
+                                    <Grid Background="#FFE5E5E5" Width="850">
+                                        <Button x:Name="btnConsultationVHPrint" Content="Print Registry" Margin="735,10,10,512"/>
+                                        <Button x:Name="btnConsultationVHEmail" Content="Send an Email" Margin="625,10,120,512"/>
+                                        <ListView Margin="10,45,471,10" x:Name="lvConsultationVetHistoric">
                                             <ListView.View>
                                                 <GridView>
                                                     <GridViewColumn DisplayMemberBinding="{Binding Date}" Width="100" Header="Date"/>
@@ -234,24 +251,24 @@
                                                 </GridView>
                                             </ListView.View>
                                         </ListView>
-                                        <TextBox x:Name="tbConsultVetHistory" HorizontalAlignment="Left" Height="502" Margin="384,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="484" IsEnabled="False"/>
+                                        <TextBox x:Name="tbConsultVetHistory" Margin="384,45,10,10" TextWrapping="Wrap" IsEnabled="False"/>
                                     </Grid>
                                 </TabItem>
                                 <TabItem Header="Consult &amp; Prescription" HeaderTemplate="{StaticResource HeaderTemplate}">
-                                    <Grid Background="#FFE5E5E5">
-                                        <Label Content="Consult Register" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top"/>
-                                        <TextBox x:Name="tbConsultationCPConsultRegister" HorizontalAlignment="Left" Height="230" Margin="10,53,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="858" VerticalScrollBarVisibility="Visible"/>
-                                        <Label Content="Prescription" HorizontalAlignment="Left" Margin="10,288,0,0" VerticalAlignment="Top"/>
-                                        <TextBox x:Name="tbConsultationCPPrescription" HorizontalAlignment="Left" Height="230" Margin="10,319,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="858" VerticalScrollBarVisibility="Visible"/>
-                                        <Button x:Name="btnConsultationCPPrint" Content="Print Registry" HorizontalAlignment="Left" Margin="764,10,0,0" VerticalAlignment="Top" Width="104" Height="30"/>
-                                        <Button x:Name="btnConsultationCPEmail" Content="Send an Email" HorizontalAlignment="Left" Margin="654,10,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
+                                    <Grid Background="#FFE5E5E5" Width="848">
+                                        <Label Content="Consult Register" Margin="10,22,742,504"/>
+                                        <TextBox x:Name="tbConsultationCPConsultRegister" Margin="10,53,10,269" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible"/>
+                                        <Label Content="Prescription" Margin="10,288,765,238"/>
+                                        <TextBox x:Name="tbConsultationCPPrescription" Margin="10,319,10,10" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible"/>
+                                        <Button x:Name="btnConsultationCPPrint" Content="Print Registry" Margin="738,10,10,512"/>
+                                        <Button x:Name="btnConsultationCPEmail" Content="Send an Email" Margin="628,10,119,512"/>
                                     </Grid>
                                 </TabItem>
                                 <TabItem Header="Vaccines" HeaderTemplate="{StaticResource HeaderTemplate}">
-                                    <Grid Background="#FFE5E5E5">
-                                        <Button x:Name="btnConsultationVaccinesAdd" Content="Add" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="86"/>
-                                        <Button x:Name="btnConsultationVaccinesUpdate" Content="Update" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="86"/>
-                                        <Button x:Name="btnConsultationVaccinesDelete" Content="Delete" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="86"/>
+                                    <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
+                                        <Button x:Name="btnConsultationVaccinesAdd" Content="Add" Margin="10,10,746,522"/>
+                                        <Button x:Name="btnConsultationVaccinesUpdate" Content="Update" Margin="10,35,746,497"/>
+                                        <Button x:Name="btnConsultationVaccinesDelete" Content="Delete" Margin="10,60,746,472"/>
                                         <ListView Margin="101,10,10,10" x:Name="lvConsultVaccinesHistory">
                                             <ListView.View>
                                                 <GridView>
@@ -265,7 +282,7 @@
                                 </TabItem>
                                 <TabItem Header="Cost ($)" HeaderTemplate="{StaticResource HeaderTemplate}">
                                     <Grid Background="#FFE5E5E5">
-                                        <ListView Margin="10,45,318,10" x:Name="lvConsultationCost">
+                                        <ListView Margin="10,45,282,10" x:Name="lvConsultationCost">
                                             <ListView.View>
                                                 <GridView>
                                                     <GridViewColumn DisplayMemberBinding="{Binding ServiceProduct}" Width="300" Header="Service / Product"/>
@@ -275,35 +292,35 @@
                                                 </GridView>
                                             </ListView.View>
                                         </ListView>
-                                        <Button x:Name="btnConsultationCostAdd" Content="Add..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
-                                        <Button x:Name="btnConsultationCostRemove" Content="Remove..." HorizontalAlignment="Left" Margin="170,10,0,0" VerticalAlignment="Top" Width="75"/>
-                                        <Label Content="Total Parcial" HorizontalAlignment="Left" Margin="694,43,0,0" VerticalAlignment="Top"/>
-                                        <Button x:Name="btnConsultationCostUpdate" Content="Update..." HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" Width="75"/>
-                                        <TextBox x:Name="tbConsultationCostParcial" HorizontalAlignment="Left" Height="23" Margin="798,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" IsEnabled="False" RenderTransformOrigin="0.286,0.652"/>
-                                        <Label Content="Type of Discount" HorizontalAlignment="Left" Margin="694,76,0,0" VerticalAlignment="Top"/>
-                                        <Label Content="Discount" HorizontalAlignment="Left" Margin="694,113,0,0" VerticalAlignment="Top"/>
-                                        <TextBox x:Name="tbConsultationCostDiscount" HorizontalAlignment="Left" Height="23" Margin="798,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
-                                        <Label Content="GST (5%)" HorizontalAlignment="Left" Margin="694,147,0,0" VerticalAlignment="Top"/>
-                                        <TextBox x:Name="tbConsultationCostGST" HorizontalAlignment="Left" Height="23" Margin="798,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" IsEnabled="False"/>
-                                        <Label Content="QST (9.975%)" HorizontalAlignment="Left" Margin="694,180,0,0" VerticalAlignment="Top"/>
-                                        <TextBox x:Name="tbConsultationCostQST" HorizontalAlignment="Left" Height="23" Margin="798,183,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" IsEnabled="False"/>
-                                        <Label Content="TOTAL" HorizontalAlignment="Left" Margin="694,232,0,0" VerticalAlignment="Top"/>
-                                        <TextBox x:Name="tbConsultationCostTotal" HorizontalAlignment="Left" Height="23" Margin="798,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" IsEnabled="False"/>
-                                        <Separator HorizontalAlignment="Left" Height="20" Margin="694,211,0,0" VerticalAlignment="Top" Width="174"/>
-                                        <CheckBox x:Name="ckbConsultCostDiscountPercent" Content="%" HorizontalAlignment="Left" Margin="798,79,0,0" VerticalAlignment="Top"/>
-                                        <CheckBox x:Name="ckbConsultCostDiscountDolar" Content="$" HorizontalAlignment="Left" Margin="842,79,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.25,0.733"/>
+                                        <Button x:Name="btnConsultationCostAdd" Content="Add..." Margin="10,10,757,522"/>
+                                        <Button x:Name="btnConsultationCostRemove" Content="Remove..." Margin="170,10,597,522"/>
+                                        <Label Content="Total Parcial" Margin="565,45,204,481"/>
+                                        <Button x:Name="btnConsultationCostUpdate" Content="Update..." Margin="90,10,677,522"/>
+                                        <TextBox x:Name="tbConsultationCostParcial" Margin="669,45,103,484" TextWrapping="Wrap" IsEnabled="False" RenderTransformOrigin="0.286,0.652"/>
+                                        <Label Content="Type of Discount" Margin="565,76,178,450"/>
+                                        <Label Content="Discount" Margin="565,107,220,419"/>
+                                        <TextBox x:Name="tbConsultationCostDiscount" Margin="669,105,103,424" TextWrapping="Wrap"/>
+                                        <Label Content="GST (5%)" Margin="565,138,219,388"/>
+                                        <TextBox x:Name="tbConsultationCostGST" Margin="669,133,103,396" TextWrapping="Wrap" IsEnabled="False"/>
+                                        <Label Content="QST (9.975%)" Margin="565,161,196,365"/>
+                                        <TextBox x:Name="tbConsultationCostQST" Margin="669,161,103,368" TextWrapping="Wrap" IsEnabled="False"/>
+                                        <Label Content="TOTAL" Margin="565,205,234,321"/>
+                                        <TextBox x:Name="tbConsultationCostTotal" Margin="669,208,103,321" TextWrapping="Wrap" IsEnabled="False"/>
+                                        <Separator HorizontalAlignment="Left" Height="20" Margin="565,189,0,0" VerticalAlignment="Top" Width="174"/>
+                                        <CheckBox x:Name="ckbConsultCostDiscountPercent" Content="%" Margin="669,85,143,0" VerticalAlignment="Top"/>
+                                        <CheckBox x:Name="ckbConsultCostDiscountDolar" Content="$" Margin="713,85,103,452" RenderTransformOrigin="1.25,0.733"/>
                                     </Grid>
                                 </TabItem>
                             </TabControl>
-                            <Label Content="Employee" HorizontalAlignment="Left" Margin="659,10,0,0" VerticalAlignment="Top"/>
-                            <ComboBox x:Name="cbConsultationEmployeeName" HorizontalAlignment="Left" Margin="726,10,0,0" VerticalAlignment="Top" Width="143"/>
-                            <Label Content="Date" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                            <TextBox x:Name="tbConsultDateAndTime" HorizontalAlignment="Left" Height="23" Margin="50,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.417,0.609" IsEnabled="False"/>
-                            <Button x:Name="btnConsultationAnimalExit" Content="Exit" HorizontalAlignment="Left" Margin="779,652,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
-                            <Button x:Name="btnConsultationSave" Content="Save Consultation" HorizontalAlignment="Left" Margin="669,652,0,0" VerticalAlignment="Top" Width="105" Height="30"/>
+                            <Label Content="Employee" Margin="648,10,158,0" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="cbConsultationEmployeeName" Margin="715,10,10,0" VerticalAlignment="Top"/>
+                            <Label Content="Date" Margin="10,10,823,0" VerticalAlignment="Top"/>
+                            <TextBox x:Name="tbConsultDateAndTime" Height="23" Margin="50,10,698,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.417,0.609" IsEnabled="False"/>
+                            <Button x:Name="btnConsultationAnimalExit" Content="Exit" Margin="753,642,10,20"/>
+                            <Button x:Name="btnConsultationSave" Content="Save Consultation" Margin="643,642,120,20"/>
                         </Grid>
                     </StackPanel>
-                    <GridSplitter Grid.Column="1" Background="Gray" HorizontalAlignment="Left" Width="2" />
+                    <GridSplitter Grid.Column="2" Background="Gray" HorizontalAlignment="Left" Width="2" />
                 </Grid>
             </TabItem>
             <TabItem Height="24" VerticalAlignment="Top">
@@ -784,13 +801,13 @@
                                 <Label Content="ID" HorizontalAlignment="Left" Margin="790,86,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.614,0.865"/>
                                 <TextBox x:Name="tbTablesBreedsID" HorizontalAlignment="Left" Height="23" Margin="790,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" IsEnabled="False"/>
                                 <Label Content="Specie" HorizontalAlignment="Left" Margin="849,86,0,0" VerticalAlignment="Top"/>
-                                
+
                                 <ComboBox x:Name="cbTablesBreedsSpecies" HorizontalAlignment="Left" Margin="849,117,0,0" VerticalAlignment="Top" Width="120" Height="23" 
                                           ItemsSource="{Binding Path=Species}" 
                                           DisplayMemberPath="SpecieName" 
                                           SelectedValuePath="Id"
                                           />
-                                
+
                                 <Label Content="Name" HorizontalAlignment="Left" Margin="790,145,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="tbTablesBreedsName" HorizontalAlignment="Left" Height="23" Margin="790,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="299" RenderTransformOrigin="0.577,1.065"/>
                                 <Button x:Name="btnTablesBreedsAddNew" Content="Add New" HorizontalAlignment="Left" Margin="790,204,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesBreedsAdd_Click"/>
