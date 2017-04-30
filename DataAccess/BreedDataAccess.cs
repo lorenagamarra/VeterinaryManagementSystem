@@ -100,8 +100,8 @@ namespace VeterinaryManagementSystem.DataAccess
             return result;
         }
         
-        /*
-        public List<Breed> GetAllBreedsActivesBySpecie()
+        
+        public List<Breed> GetAllBreedsActivesBySpecie(int SpecieID)
         {
             var result = new List<Breed>();
 
@@ -110,24 +110,31 @@ namespace VeterinaryManagementSystem.DataAccess
                 connection.Open();
 
                 using (SqlCommand command = new SqlCommand("SELECT * FROM TBLBREED WHERE STATUS=1 AND SPECIEID=@SpecieID", connection))
-                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    while (reader.Read())
-                    {
-                        int specieID = (int)reader["SpecieID"];
-                        string name = (string)reader["Name"];
+                    command.Parameters.Add(new SqlParameter("@SpecieID", SpecieID));
 
-                        var breed = new Breed
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
                         {
-                            Name = name,
-                        };
-                        result.Add(breed);
+                            int id = (int)reader["Id"];
+                            int specieID = (int)reader["SpecieID"];
+                            string name = (string)reader["Name"];
+
+                            var breed = new Breed
+                            {
+                                Id = id,
+                                SpecieID = specieID,
+                                Name = name,
+                            };
+                            result.Add(breed);
+                        }
                     }
                 }
             }
             return result;
         }
-        */
+        
 
         public List<Breed> GetAllBreeds()
         {

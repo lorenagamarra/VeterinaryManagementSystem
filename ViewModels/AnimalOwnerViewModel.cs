@@ -7,8 +7,14 @@ using VeterinaryManagementSystem.Classes;
 
 namespace VeterinaryManagementSystem.ViewModels
 {
-    public class SpecieNameViewModel
+    class AnimalOwnerViewModel
     {
-        public List<Specie> Species { get; set; }
+        public int OwnerId { get; set; }
+
+        public string Owner1 { get; set; }
+
+        public string Owner2 { get; set; }
+
+        public Animal Animal { get; set; }
     }
 }

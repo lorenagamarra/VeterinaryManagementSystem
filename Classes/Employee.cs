@@ -36,9 +36,9 @@ namespace VeterinaryManagementSystem.Classes
 
         public String Email { get; set; }
 
-        public DateTime HireDate { get; set; }
+        public DateTime? HireDate { get; set; }
 
-        public DateTime TermDate { get; set; }
+        public DateTime? TermDate { get; set; }
 
         public String SIN { get; set; }
 

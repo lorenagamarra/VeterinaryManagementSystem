@@ -80,16 +80,20 @@ namespace VeterinaryManagementSystem.DataAccess
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("SELECT DISTINCT SPECIENAME FROM TBLSPECIE WHERE STATUS=1", connection))
+                using (SqlCommand command = new SqlCommand("SELECT ID, STATUS, SPECIENAME FROM TBLSPECIE WHERE STATUS=1", connection))
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
+                        int id = (int)reader["Id"];
                         string specieName = (string)reader["SpecieName"];
+                        Boolean status = (Boolean)reader["Status"];
 
                         var specie = new Specie
                         {
-                            SpecieName = specieName
+                            Id = id,
+                            SpecieName = specieName,
+                            Status = status
                         };
                         result.Add(specie);
                     }

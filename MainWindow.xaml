@@ -401,7 +401,7 @@
                                                     <TextBox TextChanged="tbOwnerTextChanged" x:Name="tbRegistryOwner1PostalCode" HorizontalAlignment="Left" Height="23" Margin="196,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
                                                     <Label Content="Phone Number" HorizontalAlignment="Left" Margin="11,187,0,0" VerticalAlignment="Top"/>
                                                     <TextBox TextChanged="tbOwnerTextChanged" x:Name="tbRegistryOwner1Phone" HorizontalAlignment="Left" Height="23" Margin="11,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="95"/>
-                                                    <Button x:Name="btnRegistryOwner1TakePicture" Content="Take a Picture" HorizontalAlignment="Left" Margin="536,198,0,0" VerticalAlignment="Top" Width="86" Click="btnRegistryOwner2TakePicture_Click"/>
+                                                    <Button x:Name="btnRegistryOwner1TakePicture" Content="Take a Picture" HorizontalAlignment="Left" Margin="536,198,0,0" VerticalAlignment="Top" Width="86" Click="btnRegistryOwner1TakePicture_Click"/>
                                                     <Label Content="Email" HorizontalAlignment="Left" Margin="201,187,0,0" VerticalAlignment="Top"/>
                                                     <TextBox TextChanged="tbOwnerTextChanged" x:Name="tbRegistryOwner1Email" HorizontalAlignment="Left" Height="23" Margin="207,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                                                     <Label Content="Other Number" HorizontalAlignment="Left" Margin="112,187,0,0" VerticalAlignment="Top"/>
@@ -502,9 +502,9 @@
                                             <ListView Margin="10,66,10,51" x:Name="lvRegistryAnimalSearchResult" SelectionChanged="lvRegistryAnimalSearchResult_SelectionChanged">
                                                 <ListView.View>
                                                     <GridView>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding FirstName_01}" Width="100" Header="Owner 1"/>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding FirstName_02}" Width="100" Header="Owner 2"/>
-                                                        <GridViewColumn DisplayMemberBinding="{Binding name}" Width="100" Header="Animal"/>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Owner1}" Width="100" Header="Owner 1"/>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Owner2}" Width="100" Header="Owner 2"/>
+                                                        <GridViewColumn DisplayMemberBinding="{Binding Animal.Name}" Width="100" Header="Animal"/>
                                                     </GridView>
                                                 </ListView.View>
                                             </ListView>
@@ -538,7 +538,8 @@
                                                 <TabItem Header="Animal Information">
                                                     <Grid Margin="0,0,0,0">
                                                         <Label Content="SPECIES" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                                                        <ComboBox x:Name="cbRegistryAnimalSpecies" Margin="10,41,363,284" Height="22" ItemsSource="{Binding Path=Specie}" DisplayMemberPath="SpecieName" />
+                                                        <ComboBox x:Name="cbRegistryAnimalSpecies" Margin="10,41,363,284" Height="22" ItemsSource="{Binding Path=Species}" DisplayMemberPath="SpecieName" SelectedValuePath="Id" SelectionChanged="cbRegistryAnimalSpecies_SelectionChanged" />
+
                                                         <!-- <ComboBox x:Name="cbRegistryAnimalSpecies" Margin="10,41,363,284" Height="22" ItemsSource="{Binding Path=Breeds}" DisplayMemberPath="Specie" /> -->
                                                         <Label Content="BREEDS" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top" />
                                                         <ComboBox x:Name="cbRegistryAnimalBreeds" Margin="10,97,363,230" Height="22" ItemsSource="{Binding Path=Breed}" DisplayMemberPath="Name"/>
@@ -785,7 +786,13 @@
                                 <Label Content="ID" HorizontalAlignment="Left" Margin="790,86,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.614,0.865"/>
                                 <TextBox x:Name="tbTablesBreedsID" HorizontalAlignment="Left" Height="23" Margin="790,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="54" IsEnabled="False"/>
                                 <Label Content="Specie" HorizontalAlignment="Left" Margin="849,86,0,0" VerticalAlignment="Top"/>
-                                <ComboBox x:Name="cbTablesBreedsSpecies" HorizontalAlignment="Left" Margin="849,117,0,0" VerticalAlignment="Top" Width="120" Height="23" ItemsSource="{Binding Path=Specie, Mode=TwoWay}" DisplayMemberPath="SpecieName"/>
+                                
+                                <ComboBox x:Name="cbTablesBreedsSpecies" HorizontalAlignment="Left" Margin="849,117,0,0" VerticalAlignment="Top" Width="120" Height="23" 
+                                          ItemsSource="{Binding Path=Species}" 
+                                          DisplayMemberPath="SpecieName" 
+                                          SelectedValuePath="Id"
+                                          />
+                                
                                 <Label Content="Name" HorizontalAlignment="Left" Margin="790,145,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="tbTablesBreedsName" HorizontalAlignment="Left" Height="23" Margin="790,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="299" RenderTransformOrigin="0.577,1.065"/>
                                 <Button x:Name="btnTablesBreedsAddNew" Content="Add New" HorizontalAlignment="Left" Margin="790,204,0,0" VerticalAlignment="Top" Width="75" Click="btnTablesBreedsAdd_Click"/>

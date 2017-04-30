@@ -60,7 +60,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="WebCam_Capture">
+    <Reference Include="WebCam_Capture, Version=1.0.2395.24959, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>.\WebCam_Capture.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
@@ -75,10 +76,12 @@
     <Compile Include="Business\SpecieBusiness.cs" />
     <Compile Include="Classes\Specie.cs" />
     <Compile Include="DataAccess\SpecieDataAccess.cs" />
+    <Compile Include="Extensions\MyExtensions.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="UnitTests\ServicesProductsUnitTest.cs" />
     <Compile Include="UnitTests\VaccineHistoricUnitTest.cs" />
     <Compile Include="UnitTests\VaccineUnitTest.cs" />
+    <Compile Include="ViewModels\AnimalOwnerViewModel.cs" />
     <Compile Include="ViewModels\BreedNameViewModel.cs" />
     <Compile Include="ViewModels\SpecieNameViewModel.cs" />
     <Compile Include="WebCam.cs" />

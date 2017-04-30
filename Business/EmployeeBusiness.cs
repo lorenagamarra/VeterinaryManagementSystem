@@ -104,12 +104,17 @@ namespace VeterinaryManagementSystem.Business
                 }
             }
 
+            if (!employee.HireDate.HasValue)
+            {
+                throw new Exception("digite uma data"); //TODO translate
+            }
+
             if (employee.HireDate < DateTime.Now)
             {
                 throw new Exception("Employee Hire Date can not be smaller than today");
             }
 
-            if (!(employee.TermDate == null))
+            if (employee.TermDate.HasValue)
             {
                 if (employee.TermDate < employee.HireDate)
                 {

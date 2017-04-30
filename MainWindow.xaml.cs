@@ -10,8 +10,8 @@ using System.Windows.Media.Imaging;
 using VeterinaryManagementSystem.Business;
 using VeterinaryManagementSystem.Classes;
 using VeterinaryManagementSystem.DataAccess;
+using VeterinaryManagementSystem.Extensions;
 using VeterinaryManagementSystem.ViewModels;
-
 
 namespace VeterinaryManagementSystem
 {
@@ -101,13 +101,13 @@ namespace VeterinaryManagementSystem
 
 
                 SpecieNameViewModel = new SpecieNameViewModel();
-                SpecieNameViewModel.Specie = dbSpecie.GetAllSpecieActives();
+                SpecieNameViewModel.Species = dbSpecie.GetAllSpecieActives();
                 cbRegistryAnimalSpecies.DataContext = SpecieNameViewModel;
                 cbTablesBreedsSpecies.DataContext = SpecieNameViewModel;
 
                 BreedNameViewModel = new BreedNameViewModel();
-                BreedNameViewModel.Breed = dbBreed.GetAllBreedActives();
-                cbRegistryAnimalBreeds.DataContext = BreedNameViewModel;
+
+                lvRegistryAnimalSearchResult.ItemsSource = searchAnimalOwnerByName(string.Empty);
 
 
 
@@ -265,7 +265,7 @@ namespace VeterinaryManagementSystem
             {
                 return;
             }
-            
+
             SelectedOwner = (Owner)lvRegistryOwnerSearchResult.SelectedItem;
 
             tbRegistryOwnerID.Text = SelectedOwner.Id.ToString();
@@ -280,7 +280,7 @@ namespace VeterinaryManagementSystem
             tbRegistryOwner1Address.Text = SelectedOwner.Address_01;
             tbRegistryOwner1Complement.Text = SelectedOwner.Complement_01;
             tbRegistryOwner1City.Text = SelectedOwner.City_01;
-            cbRegistryOwner1Province.SelectedItem = SelectedOwner.Province_01;    //combobox load from list
+            cbRegistryOwner1Province.SelectedIndex = cbRegistryOwner1Province.GetIndex(SelectedOwner.Province_01);    //combobox load from list
             tbRegistryOwner1PostalCode.Text = SelectedOwner.PostalCode_01;
             tbRegistryOwner1Phone.Text = SelectedOwner.PhoneNumber_01;
             tbRegistryOwner1OtherNumber.Text = SelectedOwner.OtherPhoneNumber_01;
@@ -441,10 +441,12 @@ namespace VeterinaryManagementSystem
             var newWindow = new WebCamWindow();
             newWindow.ShowDialog();
             //unsavedChanges = true;
+            /*
             if (newWindow.DialogResult.HasValue && newWindow.DialogResult.Value)
             {
                 imgRegistryOwner1Image.Source = ((WebCamWindow)Application.Current.MainWindow).imgCapture.Source;
             }
+            */
         }
 
         private void btnRegistryOwner2TakePicture_Click(object sender, RoutedEventArgs e)
@@ -472,9 +474,8 @@ namespace VeterinaryManagementSystem
             }
             else
             {
-                List<Animal> listAnimal = dbAnimal.GetAllAnimals();
-                List<Owner> listOwner = dbOwner.GetAllOwners();
-                
+
+
                 /*
                 //multiple words LINQ ?????????????????????????????????????????????????????????????????
                 string[] searchstrings = filter.Split(' ');
@@ -485,15 +486,10 @@ namespace VeterinaryManagementSystem
                                    select animal;
                 */
 
-                //one word LINQ
-                var filteredList = from animal in listAnimal
-                                   join owner in listOwner 
-                                   on animal.OwnerID equals owner.Id
-                                   where animal.Name.Contains(filter) || owner.FirstName_01.Contains(filter) || owner.FirstName_02.Contains(filter)
-                                   select animal;
-                
+                var result = searchAnimalOwnerByName(filter);
 
-                lvRegistryAnimalSearchResult.ItemsSource = filteredList;
+
+                lvRegistryAnimalSearchResult.ItemsSource = result;
             }
         }
 
@@ -767,7 +763,7 @@ namespace VeterinaryManagementSystem
             tbRegistryEmployeeOtherNumber.Text = SelectedEmployee.OtherPhoneNumber;
             tbRegistryEmployeeEmail.Text = SelectedEmployee.Email;
             dpRegistryEmployeeHire.SelectedDate = SelectedEmployee.HireDate;
-            cbRegistryEmployeePositions.SelectedItem = SelectedEmployee.Position;          //combobox load from list
+            cbRegistryEmployeePositions.SelectedIndex = cbRegistryEmployeePositions.GetIndex(SelectedEmployee.Position);          //combobox load from list
             tbRegistryEmployeeSIN.Text = SelectedEmployee.SIN;
             dpRegistryEmployeeTerm.SelectedDate = SelectedEmployee.TermDate;
             tbRegistryEmployeeObservations.Text = SelectedEmployee.Observations;
@@ -824,10 +820,10 @@ namespace VeterinaryManagementSystem
             SelectedEmployee.PhoneNumber = tbRegistryEmployeePhone.Text;
             SelectedEmployee.OtherPhoneNumber = tbRegistryEmployeeOtherNumber.Text;
             SelectedEmployee.Email = tbRegistryEmployeeEmail.Text;
-            SelectedEmployee.HireDate = dpRegistryEmployeeHire.SelectedDate.Value;
+            SelectedEmployee.HireDate = dpRegistryEmployeeHire.SelectedDate;
             SelectedEmployee.Position = cbRegistryEmployeePositions.Text;                 //.Text or SelectedValue.ToString()
             SelectedEmployee.SIN = tbRegistryEmployeeSIN.Text;
-            SelectedEmployee.TermDate = dpRegistryEmployeeTerm.SelectedDate.Value;
+            SelectedEmployee.TermDate = dpRegistryEmployeeTerm.SelectedDate;
             SelectedEmployee.Observations = tbRegistryEmployeeObservations.Text;
 
 
@@ -935,17 +931,17 @@ namespace VeterinaryManagementSystem
         //LOAD FIELDS FROM BREED LIST
         private void lvTableRegisterBreeds_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int index = lvTableRegisterBreeds.SelectedIndex;
-            if (index < 0)
+            var selected = lvTableRegisterBreeds.SelectedItem;
+            if(selected == null)
             {
                 return;
             }
 
-            SelectedBreed = (Breed)lvTableRegisterBreeds.SelectedItem;
+            SelectedBreed = (Breed)selected;
 
             tbTablesBreedsID.Text = SelectedBreed.Id.ToString();
             tbTablesBreedsName.Text = SelectedBreed.Name;
-            cbTablesBreedsSpecies.SelectedItem = SelectedBreed.SpecieID;       //Carregar combobox com valor salvo na tblBreed (SpecieID)
+            cbTablesBreedsSpecies.SelectedValue = SelectedBreed.SpecieID;       //Carregar combobox com valor salvo na tblBreed (SpecieID)
 
             if (SelectedBreed.Status)
             {
@@ -973,7 +969,7 @@ namespace VeterinaryManagementSystem
 
             SelectedBreed.Id = id;
             SelectedBreed.Name = tbTablesBreedsName.Text;
-            SelectedBreed.SpecieID = cbTablesBreedsSpecies.SelectedIndex;           //??????????? SelectedIndex??
+            SelectedBreed.SpecieID = ((Specie)cbTablesBreedsSpecies.SelectedItem).Id;
             SelectedBreed.Status = rbTablesBreedsStatus_Active.IsChecked.Value;
 
             try
@@ -1373,7 +1369,34 @@ namespace VeterinaryManagementSystem
             Home.IsSelected = true;
         }
 
+        private void cbRegistryAnimalSpecies_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var specie = cbRegistryAnimalSpecies.SelectedItem as Specie;
+            BreedNameViewModel.Breed = dbBreed.GetAllBreedsActivesBySpecie(specie.Id);
+            cbRegistryAnimalBreeds.DataContext = null;
+            cbRegistryAnimalBreeds.DataContext = BreedNameViewModel;
+        }
 
+        private IEnumerable<AnimalOwnerViewModel> searchAnimalOwnerByName(string name)
+        {
+            List<Animal> listAnimal = dbAnimal.GetAllAnimals();
+            List<Owner> listOwner = dbOwner.GetAllOwners();
+
+            var filteredList = listOwner
+                .Where(x => x.FirstName_01.Contains(name) || x.FirstName_02.Contains(name))
+                .GroupJoin(listAnimal.Where(y => y.Name.Contains(name)), o => o.Id, a => a.OwnerID, (o, a) => new { o, a = a.FirstOrDefault() })
+                .Select(x => new AnimalOwnerViewModel
+                {
+                    Owner1 = x.o.FirstName_01,
+                    Owner2 = x.o.FirstName_02,
+                    Animal = x.a,
+                    OwnerId = x.o.Id
+                })
+                    .ToList();
+
+
+            return filteredList;
+        }
     }
 }
 

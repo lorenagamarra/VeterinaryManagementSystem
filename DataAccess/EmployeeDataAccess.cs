@@ -24,10 +24,19 @@ namespace VeterinaryManagementSystem.DataAccess
             using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
+
                 var sql = "INSERT INTO TBLEMPLOYEE (PICTURE, FIRSTNAME, MIDDLENAME, LASTNAME, NUMBER, ADDRESS, COMPLEMENT, CITY," +
                     " PROVINCE, POSTALCODE, PHONENUMBER, OTHERPHONENUMBER, EMAIL, HIREDATE, TERMDATE, SIN, POSITION, OBSERVATIONS, STATUS)" +
                 " VALUES (@Picture, @FirstName, @MiddleName, @LastName, @Number, @Address, @Complement, @City," +
                 " @Province, @PostalCode, @PhoneNumber, @OtherPhoneNumber, @Email, @HireDate, @TermDate, @SIN, @Position, @Observations, @Status)";
+
+
+                if (!employee.TermDate.HasValue)
+                {
+                    sql = sql
+                        .Replace("TERMDATE,", "")
+                        .Replace("@TermDate,", "");
+                }
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -45,11 +54,14 @@ namespace VeterinaryManagementSystem.DataAccess
                     command.Parameters.Add(new SqlParameter("@OtherPhoneNumber", employee.OtherPhoneNumber));
                     command.Parameters.Add(new SqlParameter("@Email", employee.Email));
                     command.Parameters.Add(new SqlParameter("@HireDate", employee.HireDate));
-                    command.Parameters.Add(new SqlParameter("@TermDate", employee.TermDate));
                     command.Parameters.Add(new SqlParameter("@SIN", employee.SIN));
                     command.Parameters.Add(new SqlParameter("@Position", employee.Position));
                     command.Parameters.Add(new SqlParameter("@Observations", employee.Observations));
                     command.Parameters.Add(new SqlParameter("@Status", employee.Status));
+                    if (employee.TermDate.HasValue)
+                    {
+                        command.Parameters.Add(new SqlParameter("@TermDate", employee.TermDate));
+                    }
                     command.ExecuteNonQuery();
                 }
             } //close and dispose --> connection
@@ -149,8 +161,8 @@ namespace VeterinaryManagementSystem.DataAccess
                         string phoneNumber = (string)reader["PhoneNumber"];
                         string otherPhoneNumber = (string)reader["OtherPhoneNumber"];
                         string email = (string)reader["Email"];
-                        DateTime hireDate = (DateTime)reader["HireDate"];
-                        DateTime termDate = (DateTime)reader["TermDate"];
+                        DateTime? hireDate = reader["HireDate"] as DateTime?;
+                        DateTime? termDate = reader["TermDate"] as DateTime?;
                         string sin = (string)reader["SIN"];
                         string position = (string)reader["Position"];
                         string observations = (string)reader["Observations"];
