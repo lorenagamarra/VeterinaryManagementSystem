@@ -51,7 +51,7 @@ namespace VeterinaryManagementSystem
         {
             imgCapture.Source = imgVideo.Source;
             //FIXME: Don't define HERE where the picture must to go!!!!
-            ((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner1Image.Source = imgVideo.Source;
+            //((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner1Image.Source = imgVideo.Source;
         }
 
         private void bntSaveImage_Click(object sender, RoutedEventArgs e)
@@ -59,7 +59,7 @@ namespace VeterinaryManagementSystem
             //Helper.SaveImageCapture((BitmapSource)imgCapture.Source);
 
             //FIXME: Don't define HERE where the picture must to go!!!!
-            //((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner1Image.Source = imgVideo.Source;
+            ((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner1Image.Source = imgVideo.Source;
            // DialogResult = true;
         }
 
