@@ -56,7 +56,9 @@ namespace VeterinaryManagementSystem
         private void bntSaveImage_Click(object sender, RoutedEventArgs e)
         {
             //Helper.SaveImageCapture((BitmapSource)imgCapture.Source);
-            DialogResult = true;
+            //DialogResult = true;
+            //FIXME: This is not the right place to say where the picture will go!!!
+            ((MainWindow)System.Windows.Application.Current.MainWindow).imgRegistryOwner1Image.Source = imgVideo.Source;
         }
 
         private void bntResolution_Click(object sender, RoutedEventArgs e)
