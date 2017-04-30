@@ -78,6 +78,7 @@
     <Compile Include="DataAccess\SpecieDataAccess.cs" />
     <Compile Include="Extensions\MyExtensions.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="UIWebCam\CameraMessenger.cs" />
     <Compile Include="UnitTests\ServicesProductsUnitTest.cs" />
     <Compile Include="UnitTests\VaccineHistoricUnitTest.cs" />
     <Compile Include="UnitTests\VaccineUnitTest.cs" />

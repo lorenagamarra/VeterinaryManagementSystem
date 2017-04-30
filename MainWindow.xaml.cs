@@ -12,6 +12,7 @@ using VeterinaryManagementSystem.Business;
 using VeterinaryManagementSystem.Classes;
 using VeterinaryManagementSystem.DataAccess;
 using VeterinaryManagementSystem.Extensions;
+using VeterinaryManagementSystem.UIWebCam;
 using VeterinaryManagementSystem.ViewModels;
 
 namespace VeterinaryManagementSystem
@@ -436,19 +437,15 @@ namespace VeterinaryManagementSystem
         private void btnRegistryOwner1TakePicture_Click(object sender, RoutedEventArgs e)
         {
             var newWindow = new WebCamWindow();
+            CameraMessenger.Default.Send("Owner1Picture");
             newWindow.ShowDialog();
-            //unsavedChanges = true;
-            /*
-            if (newWindow.DialogResult.HasValue && newWindow.DialogResult.Value)
-            {
-                imgRegistryOwner1Image.Source = ((WebCamWindow)Application.Current.MainWindow).imgCapture.Source;
-            }
-            */
+            unsavedChanges = true;
         }
 
         private void btnRegistryOwner2TakePicture_Click(object sender, RoutedEventArgs e)
         {
             var newWindow = new WebCamWindow();
+            CameraMessenger.Default.Send("Owner2Picture");
             newWindow.Show();
             unsavedChanges = true;
         }
@@ -702,6 +699,13 @@ namespace VeterinaryManagementSystem
 
             return filteredList;
         }
+        private void btnRegistryAnimalTakePicture_Click(object sender, RoutedEventArgs e)
+        {
+            var newWindow = new WebCamWindow();
+            CameraMessenger.Default.Send("AnimalPicture");
+            newWindow.ShowDialog();
+            unsavedChanges = true;
+        }
 
         /******************************************************************************************
          * REGISTRY => EMPLOYEE
@@ -905,6 +909,13 @@ namespace VeterinaryManagementSystem
             unsavedChanges = true;
         }
 
+        private void btnRegistryEmployeeTakePicture_Click(object sender, RoutedEventArgs e)
+        {
+            var newWindow = new WebCamWindow();
+            CameraMessenger.Default.Send("EmployeePicture");
+            newWindow.ShowDialog();
+            unsavedChanges = true;
+        }
 
 
 
@@ -1404,17 +1415,42 @@ namespace VeterinaryManagementSystem
             //image.Freeze();
             return image;
         }
+
+        private void btnConsultationOwner1TakePicture_Click(object sender, RoutedEventArgs e)
+        {
+            var newWindow = new WebCamWindow();
+            CameraMessenger.Default.Send("ConsultationOwner1Picture");
+            newWindow.ShowDialog();
+            unsavedChanges = true;
+        }
+
+        private void btnConsultationOwner2TakePicture_Click(object sender, RoutedEventArgs e)
+        {
+            var newWindow = new WebCamWindow();
+            CameraMessenger.Default.Send("ConsultationOwner2Picture");
+            newWindow.ShowDialog();
+            unsavedChanges = true;
+        }
+
+        private void btnConsultationAnimalTakePicture_Click(object sender, RoutedEventArgs e)
+        {
+            var newWindow = new WebCamWindow();
+            CameraMessenger.Default.Send("ConsultationAnimalPicture");
+            newWindow.ShowDialog();
+            unsavedChanges = true;
+        }
+
         /*
         //CONVERT FROM BitmapImage TO Byte
         public static byte[] ImageToByte(BitmapImage imageSource)
         {
-            var encoder = new JpegBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(imageSource));
-            using (var ms = new MemoryStream())
-            {
-                encoder.Save(ms);
-                return ms.ToArray();
-            }
+           var encoder = new JpegBitmapEncoder();
+           encoder.Frames.Add(BitmapFrame.Create(imageSource));
+           using (var ms = new MemoryStream())
+           {
+               encoder.Save(ms);
+               return ms.ToArray();
+           }
         }
         */
 

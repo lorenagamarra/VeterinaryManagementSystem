@@ -114,7 +114,7 @@
                                                 <Label Content="Phone Number" HorizontalAlignment="Left" Margin="242,113,0,0" VerticalAlignment="Top"/>
                                                 <TextBox x:Name="tbConsultationOwner1Phone" HorizontalAlignment="Left" Height="23" Margin="241,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
 
-                                                <Button x:Name="btnConsultationOwner1TakePicture" Content="Take a New Picture" HorizontalAlignment="Left" Margin="212,193,0,0" VerticalAlignment="Top" Width="120"/>
+                                                <Button x:Name="btnConsultationOwner1TakePicture" Content="Take a New Picture" HorizontalAlignment="Left" Margin="212,193,0,0" VerticalAlignment="Top" Width="120" Click="btnConsultationOwner1TakePicture_Click"/>
                                                 <Label Content="Email" HorizontalAlignment="Left" Margin="87,167,0,0" VerticalAlignment="Top"/>
                                                 <TextBox x:Name="tbConsultationOwner1Email" HorizontalAlignment="Left" Height="23" Margin="87,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                                                 <Label Content="Other Number" HorizontalAlignment="Left" Margin="0,167,0,0" VerticalAlignment="Top"/>
@@ -162,13 +162,13 @@
                                                 <Label Content="Email" HorizontalAlignment="Left" Margin="87,162,0,0" VerticalAlignment="Top"/>
                                                 <TextBox x:Name="tbConsultationOwner2Email" HorizontalAlignment="Left" Height="23" Margin="87,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
-                                                <Button Content="Take a New Picture" HorizontalAlignment="Left" Margin="212,188,0,0" VerticalAlignment="Top" Width="120"/>
+                                                <Button  x:Name="btnConsultationOwner2TakePicture" Content="Take a New Picture" HorizontalAlignment="Left" Margin="212,188,0,0" VerticalAlignment="Top" Width="120" Click="btnConsultationOwner2TakePicture_Click"/>
                                                 <Label Content="Phone Number" HorizontalAlignment="Left" Margin="240,108,0,0" VerticalAlignment="Top"/>
                                                 <TextBox x:Name="tbConsultationOwner2Phone" HorizontalAlignment="Left" Height="23" Margin="241,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="91"/>
                                                 <Label Content="Other Number" HorizontalAlignment="Left" Margin="0,162,0,0" VerticalAlignment="Top"/>
                                                 <TextBox x:Name="tbConsultationOwner2OtherNumber" HorizontalAlignment="Left" Height="23" Margin="0,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="82"/>
                                                 <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="202" Margin="337,10,0,0" VerticalAlignment="Top" Width="202">
-                                                    <Image HorizontalAlignment="Left" Height="200" Margin="0,0,0,0" VerticalAlignment="Top" Width="200"/>
+                                                    <Image x:Name="imgConsultationOwner2Image" HorizontalAlignment="Left" Height="200" Margin="0,0,0,0" VerticalAlignment="Top" Width="200"/>
                                                 </Border>
 
                                             </Grid>
@@ -200,7 +200,7 @@
                                         <ComboBox x:Name="cbConsultationAnimalBreeds" Margin="152,95,469,437" ItemsSource="{Binding Path=Breed}" DisplayMemberPath="Name"/>
                                         <Label Content="Identification, Color or Coat" Margin="10,125,714,0" VerticalAlignment="Top" />
                                         <TextBox x:Name="tbConsultationAnimalIdentification" HorizontalAlignment="Left" Height="23" Margin="10,156,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="522"/>
-                                        <Button x:Name="btnConsultationAnimalTakePicture" Content="Take a New Picture" HorizontalAlignment="Left" Margin="584,378,0,0" VerticalAlignment="Top" Width="252" Height="40" RenderTransformOrigin="2.215,2.05"/>
+                                        <Button x:Name="btnConsultationAnimalTakePicture" Content="Take a New Picture" HorizontalAlignment="Left" Margin="584,378,0,0" VerticalAlignment="Top" Width="252" Height="40" RenderTransformOrigin="2.215,2.05" Click="btnConsultationAnimalTakePicture_Click"/>
 
                                         <Label Content="Food - Brand - Quantity - Schedules (morning, afternoon, evening, free)" HorizontalAlignment="Left" Margin="10,184,0,0" VerticalAlignment="Top"/>
                                         <TextBox x:Name="tbConsultationAnimalFood" HorizontalAlignment="Left" Height="23" Margin="10,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="522"/>
@@ -544,7 +544,7 @@
                                                         <!-- <ComboBox x:Name="cbRegistryAnimalBreeds" Margin="10,97,363,230" Height="22" ItemsSource="{Binding Path=Breeds}" DisplayMemberPath="Name"/> -->
                                                         <Label Content="Identification, Color or Coat" Margin="10,132,363,0" VerticalAlignment="Top" />
                                                         <TextBox x:Name="tbRegistryAnimalIdentification" HorizontalAlignment="Left" Height="23" Margin="10,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="391"/>
-                                                        <Button x:Name="btnRegistryAnimalTakePicture" Content="Take a Picture" HorizontalAlignment="Left" Margin="10,191,0,0" VerticalAlignment="Top" Width="391" Height="40"/>
+                                                        <Button x:Name="btnRegistryAnimalTakePicture" Content="Take a Picture" HorizontalAlignment="Left" Margin="10,191,0,0" VerticalAlignment="Top" Width="391" Height="40" Click="btnRegistryAnimalTakePicture_Click"/>
                                                         <Label Content="Food - Brand - Quantity - Schedules (morning, afternoon, evening, free)" HorizontalAlignment="Left" Margin="10,236,0,0" VerticalAlignment="Top"/>
                                                         <TextBox x:Name="tbRegistryAnimalFood" HorizontalAlignment="Left" Height="23" Margin="10,267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="715"/>
                                                         <Label Content="Phobias" HorizontalAlignment="Left" Margin="10,295,0,0" VerticalAlignment="Top"/>
@@ -679,7 +679,7 @@
                                             <TextBox x:Name="tbRegistryEmployeePostalCode" HorizontalAlignment="Left" Height="23" Margin="260,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                                             <Label Content="Phone Number" HorizontalAlignment="Left" Margin="10,231,0,0" VerticalAlignment="Top"/>
                                             <TextBox x:Name="tbRegistryEmployeePhone" HorizontalAlignment="Left" Height="23" Margin="10,257,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                                            <Button x:Name="btnRegistryEmployeeTakePicture" Content="Take a Picture" HorizontalAlignment="Left" Margin="526,310,0,0" VerticalAlignment="Top" Width="98"/>
+                                            <Button x:Name="btnRegistryEmployeeTakePicture" Content="Take a Picture" HorizontalAlignment="Left" Margin="526,310,0,0" VerticalAlignment="Top" Width="98" Click="btnRegistryEmployeeTakePicture_Click"/>
                                             <Label Content="Email" HorizontalAlignment="Left" Margin="260,231,0,0" VerticalAlignment="Top"/>
                                             <TextBox x:Name="tbRegistryEmployeeEmail" HorizontalAlignment="Left" Height="23" Margin="260,257,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                                             <Label Content="Other Number" HorizontalAlignment="Left" Margin="135,231,0,0" VerticalAlignment="Top"/>
