@@ -556,7 +556,7 @@
 
                                                         <!-- <ComboBox x:Name="cbRegistryAnimalSpecies" Margin="10,41,363,284" Height="22" ItemsSource="{Binding Path=Breeds}" DisplayMemberPath="Specie" /> -->
                                                         <Label Content="BREEDS" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top" />
-                                                        <ComboBox x:Name="cbRegistryAnimalBreeds" Margin="10,97,363,230" Height="22" ItemsSource="{Binding Path=Breed}" DisplayMemberPath="Name"/>
+                                                        <ComboBox x:Name="cbRegistryAnimalBreeds" Margin="10,97,363,230" Height="22" ItemsSource="{Binding Path=Breed}" DisplayMemberPath="Name" SelectedValuePath="Id"/>
                                                         <!-- <ComboBox x:Name="cbRegistryAnimalBreeds" Margin="10,97,363,230" Height="22" ItemsSource="{Binding Path=Breeds}" DisplayMemberPath="Name"/> -->
                                                         <Label Content="Identification, Color or Coat" Margin="10,132,363,0" VerticalAlignment="Top" />
                                                         <TextBox x:Name="tbRegistryAnimalIdentification" HorizontalAlignment="Left" Height="23" Margin="10,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="391"/>

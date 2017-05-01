@@ -107,8 +107,8 @@ namespace VeterinaryManagementSystem
                 cbRegistryAnimalSpecies.DataContext = SpecieNameViewModel;
                 cbTablesBreedsSpecies.DataContext = SpecieNameViewModel;
                 cbConsultationAnimalSpecies.DataContext = SpecieNameViewModel;
+                cbRegistryAnimalSpecies.DataContext = SpecieNameViewModel;
 
-                
 
 
                 BreedNameViewModel = new BreedNameViewModel();
@@ -526,6 +526,11 @@ namespace VeterinaryManagementSystem
             //lvRegistryAnimalVaccines.ItemsSource = dbVaccineHistory.GetAllVaccineHistoricsByAnimal(SelectedAnimal.Id);
             tbRegistryAnimalVetHistory.Text = SelectedAnimal.Vethistoric;
 
+
+            cbRegistryAnimalBreeds.SelectedValue = SelectedAnimal.BreedID;
+            //cbRegistryAnimalSpecies.SelectedValue
+
+
             if (SelectedAnimal.Gender)
             {
                 rbRegistryAnimalMale.IsChecked = true;
@@ -662,6 +667,7 @@ namespace VeterinaryManagementSystem
             cbRegistryAnimalBreeds.DataContext = null;
             cbRegistryAnimalBreeds.DataContext = BreedNameViewModel;
             unsavedChanges = true;
+
         }
 
         private IEnumerable<AnimalOwnerViewModel> searchAnimalOwnerByName(string name)
