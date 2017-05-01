@@ -354,15 +354,14 @@ namespace VeterinaryManagementSystem
                 encoder2.Frames.Add(BitmapFrame.Create((BitmapSource)imgRegistryOwner2Image.Source));
                 encoder2.Save(memStream2);
             }
+            SelectedOwner.Picture_01 = memStream1.ToArray();
 
             var id = 0;
             Int32.TryParse(tbRegistryOwnerID.Text, out id);
 
             SelectedOwner.Id = id;
             SelectedOwner.RegistrationDate = DateTime.Now;
-            //BitmapSource tempImg1 = (BitmapImage)imgRegistryOwner2Image.Source;
-            //SelectedOwner.Picture_01 = ImageToByte((BitmapImage)imgRegistryOwner1Image.Source);
-            SelectedOwner.Picture_01 = memStream1.ToArray();
+           
             SelectedOwner.FirstName_01 = tbRegistryOwner1FName.Text;
             SelectedOwner.MiddleName_01 = tbRegistryOwner1MName.Text;
             SelectedOwner.LastName_01 = tbRegistryOwner1LName.Text;
@@ -1401,8 +1400,7 @@ namespace VeterinaryManagementSystem
                 image.UriSource = null;
                 image.StreamSource = mem;
                 image.EndInit();
-            }
-            //image.Freeze();
+            }            
             return image;
         }
 
